@@ -13,6 +13,17 @@
 		F58017C72325E0560014E3C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58017C52325E0560014E3C3 /* Main.storyboard */; };
 		F58017C92325E0570014E3C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F58017C82325E0570014E3C3 /* Assets.xcassets */; };
 		F58017CC2325E0570014E3C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58017CA2325E0570014E3C3 /* LaunchScreen.storyboard */; };
+		F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017DB2325F9B70014E3C3 /* HKHomeViewController.swift */; };
+		F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017DD2325F9E00014E3C3 /* HKMineViewController.swift */; };
+		F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */; };
+		F58017E22326075B0014E3C3 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E12326075B0014E3C3 /* Const.swift */; };
+		F58017E4232607770014E3C3 /* Extension + color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E3232607770014E3C3 /* Extension + color.swift */; };
+		F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431123261D7A00107F66 /* MainNavigationController.swift */; };
+		F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431A23262E2100107F66 /* HomeSearchView.swift */; };
+		F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431C23262E4400107F66 /* RecommendCityView.swift */; };
+		F5EC431F23262E5700107F66 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431E23262E5700107F66 /* StoryView.swift */; };
+		F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC4321232633FA00107F66 /* HomeHeaderReusableView.swift */; };
+		F5EC43242326374600107F66 /* CityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC43232326374600107F66 /* CityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +36,17 @@
 		F58017C82325E0570014E3C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F58017CB2325E0570014E3C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F58017CD2325E0570014E3C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F58017DB2325F9B70014E3C3 /* HKHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHomeViewController.swift; sourceTree = "<group>"; };
+		F58017DD2325F9E00014E3C3 /* HKMineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKMineViewController.swift; sourceTree = "<group>"; };
+		F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKBaseViewController.swift; sourceTree = "<group>"; };
+		F58017E12326075B0014E3C3 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		F58017E3232607770014E3C3 /* Extension + color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + color.swift"; sourceTree = "<group>"; };
+		F5EC431123261D7A00107F66 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		F5EC431A23262E2100107F66 /* HomeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchView.swift; sourceTree = "<group>"; };
+		F5EC431C23262E4400107F66 /* RecommendCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCityView.swift; sourceTree = "<group>"; };
+		F5EC431E23262E5700107F66 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		F5EC4321232633FA00107F66 /* HomeHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderReusableView.swift; sourceTree = "<group>"; };
+		F5EC43232326374600107F66 /* CityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityView.swift; sourceTree = "<group>"; };
 		FB82EFE226787FDAE3F7E104 /* Pods-Hiker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hiker.release.xcconfig"; path = "Target Support Files/Pods-Hiker/Pods-Hiker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,9 +116,10 @@
 		F58017D42325E31A0014E3C3 /* HikerApp */ = {
 			isa = PBXGroup;
 			children = (
+				F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */,
+				F58017D82325E33C0014E3C3 /* HKHome - 首页 */,
 				F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */,
 				F58017D92325E3440014E3C3 /* HKMine - 我的 */,
-				F58017D82325E33C0014E3C3 /* HKHome - 首页 */,
 			);
 			path = HikerApp;
 			sourceTree = "<group>";
@@ -105,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				F58017C52325E0560014E3C3 /* Main.storyboard */,
+				F5EC431123261D7A00107F66 /* MainNavigationController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -112,6 +136,8 @@
 		F58017D62325E3280014E3C3 /* Extension + Const */ = {
 			isa = PBXGroup;
 			children = (
+				F58017E12326075B0014E3C3 /* Const.swift */,
+				F58017E3232607770014E3C3 /* Extension + color.swift */,
 			);
 			path = "Extension + Const";
 			sourceTree = "<group>";
@@ -126,6 +152,11 @@
 		F58017D82325E33C0014E3C3 /* HKHome - 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				F58017DB2325F9B70014E3C3 /* HKHomeViewController.swift */,
+				F5EC431623262CE600107F66 /* ViewModel */,
+				F5EC431523262CE200107F66 /* Model */,
+				F5EC431423262CD500107F66 /* View */,
+				F5EC431323262CCF00107F66 /* API */,
 			);
 			path = "HKHome - 首页";
 			sourceTree = "<group>";
@@ -133,6 +164,7 @@
 		F58017D92325E3440014E3C3 /* HKMine - 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				F58017DD2325F9E00014E3C3 /* HKMineViewController.swift */,
 			);
 			path = "HKMine - 我的";
 			sourceTree = "<group>";
@@ -142,6 +174,71 @@
 			children = (
 			);
 			path = "HKNotes - 记录";
+			sourceTree = "<group>";
+		};
+		F5EC431323262CCF00107F66 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		F5EC431423262CD500107F66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F5EC4320232633DC00107F66 /* HeaderView - 头部 */,
+				F5EC431723262D0000107F66 /* SearchView - 搜索 */,
+				F5EC431823262D1300107F66 /* RecommendCity - 推荐城市 */,
+				F5EC431923262D2500107F66 /* Story - 故事 */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F5EC431523262CE200107F66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F5EC431623262CE600107F66 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F5EC431723262D0000107F66 /* SearchView - 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				F5EC431A23262E2100107F66 /* HomeSearchView.swift */,
+			);
+			path = "SearchView - 搜索";
+			sourceTree = "<group>";
+		};
+		F5EC431823262D1300107F66 /* RecommendCity - 推荐城市 */ = {
+			isa = PBXGroup;
+			children = (
+				F5EC431C23262E4400107F66 /* RecommendCityView.swift */,
+				F5EC43232326374600107F66 /* CityView.swift */,
+			);
+			path = "RecommendCity - 推荐城市";
+			sourceTree = "<group>";
+		};
+		F5EC431923262D2500107F66 /* Story - 故事 */ = {
+			isa = PBXGroup;
+			children = (
+				F5EC431E23262E5700107F66 /* StoryView.swift */,
+			);
+			path = "Story - 故事";
+			sourceTree = "<group>";
+		};
+		F5EC4320232633DC00107F66 /* HeaderView - 头部 */ = {
+			isa = PBXGroup;
+			children = (
+				F5EC4321232633FA00107F66 /* HomeHeaderReusableView.swift */,
+			);
+			path = "HeaderView - 头部";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,8 +377,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5EC431F23262E5700107F66 /* StoryView.swift in Sources */,
+				F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */,
+				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
+				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
+				F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */,
+				F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */,
 				F58017C42325E0560014E3C3 /* ViewController.swift in Sources */,
+				F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */,
+				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
 				F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */,
+				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
+				F58017E4232607770014E3C3 /* Extension + color.swift in Sources */,
+				F5EC43242326374600107F66 /* CityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
