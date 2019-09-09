@@ -1,0 +1,50 @@
+PODS:
+  - Alamofire (4.8.2)
+  - CollectionKit (2.4.0):
+    - CollectionKit/Core (= 2.4.0)
+  - CollectionKit/Core (2.4.0)
+  - EachNavigationBar (1.12.0)
+  - ESTabBarController-swift (2.7)
+  - Hero (1.4.0)
+  - QuickLayout (3.0.0)
+  - SnapKit (4.2.0)
+  - SwiftEntryKit (1.0.2):
+    - QuickLayout (= 3.0.0)
+  - SwiftyJSON (5.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - CollectionKit
+  - EachNavigationBar
+  - ESTabBarController-swift
+  - Hero
+  - SnapKit
+  - SwiftEntryKit
+  - SwiftyJSON
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - CollectionKit
+    - EachNavigationBar
+    - ESTabBarController-swift
+    - Hero
+    - QuickLayout
+    - SnapKit
+    - SwiftEntryKit
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  CollectionKit: 8f01e7629185bb81072c4aa734d105df5c2d1c8b
+  EachNavigationBar: 6685463667ee539eb336d39194add8aba045c64c
+  ESTabBarController-swift: 4fb52ad03d94d0717ef97bc9eb09a5abfdded0a2
+  Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
+  QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SwiftEntryKit: 7bcd42b3dbff59c431d60d6513129fd3679e4aaf
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+
+PODFILE CHECKSUM: dea8772d9bad24d867207bbb7c83ac97368fe638
+
+COCOAPODS: 1.6.1
