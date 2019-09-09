@@ -46,7 +46,6 @@
 				00FAD65466EEEDB00D9768D2 /* Pods-Hiker.debug.xcconfig */,
 				FB82EFE226787FDAE3F7E104 /* Pods-Hiker.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -81,12 +80,68 @@
 			children = (
 				F58017C12325E0560014E3C3 /* AppDelegate.swift */,
 				F58017C32325E0560014E3C3 /* ViewController.swift */,
-				F58017C52325E0560014E3C3 /* Main.storyboard */,
+				F58017D72325E3340014E3C3 /* Third */,
+				F58017D62325E3280014E3C3 /* Extension + Const */,
+				F58017D52325E3220014E3C3 /* Main */,
+				F58017D42325E31A0014E3C3 /* HikerApp */,
 				F58017C82325E0570014E3C3 /* Assets.xcassets */,
 				F58017CA2325E0570014E3C3 /* LaunchScreen.storyboard */,
 				F58017CD2325E0570014E3C3 /* Info.plist */,
 			);
 			path = Hiker;
+			sourceTree = "<group>";
+		};
+		F58017D42325E31A0014E3C3 /* HikerApp */ = {
+			isa = PBXGroup;
+			children = (
+				F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */,
+				F58017D92325E3440014E3C3 /* HKMine - 我的 */,
+				F58017D82325E33C0014E3C3 /* HKHome - 首页 */,
+			);
+			path = HikerApp;
+			sourceTree = "<group>";
+		};
+		F58017D52325E3220014E3C3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F58017C52325E0560014E3C3 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		F58017D62325E3280014E3C3 /* Extension + Const */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Extension + Const";
+			sourceTree = "<group>";
+		};
+		F58017D72325E3340014E3C3 /* Third */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Third;
+			sourceTree = "<group>";
+		};
+		F58017D82325E33C0014E3C3 /* HKHome - 首页 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "HKHome - 首页";
+			sourceTree = "<group>";
+		};
+		F58017D92325E3440014E3C3 /* HKMine - 我的 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "HKMine - 我的";
+			sourceTree = "<group>";
+		};
+		F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "HKNotes - 记录";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
