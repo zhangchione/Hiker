@@ -42,6 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         homeNav.navigation.configuration.barTintColor = backColor
         homeNav.navigation.configuration.tintColor = backColor
         
+        mineNav.navigation.configuration.isEnabled = true
+        mineNav.navigation.configuration.barTintColor = .white
+        mineNav.navigation.configuration.tintColor = .white
+        
+        
+        
         if #available(iOS 11.0, *) {
             homeNav.navigation.prefersLargeTitles()
         }

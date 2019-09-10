@@ -18,6 +18,10 @@
 		F50155F32327743200FD201C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155F22327743200FD201C /* SearchViewController.swift */; };
 		F50155F5232774AC00FD201C /* SubClassBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155F4232774AC00FD201C /* SubClassBaseViewController.swift */; };
 		F50155F8232775A700FD201C /* TipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155F7232775A700FD201C /* TipsViewController.swift */; };
+		F50155FA2327842F00FD201C /* MineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155F92327842F00FD201C /* MineHeaderView.swift */; };
+		F50155FC2327865300FD201C /* LTAdvancedTestOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */; };
+		F5015600232799D900FD201C /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155FE232799D900FD201C /* SetViewController.swift */; };
+		F5015601232799D900FD201C /* SetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F50155FF232799D900FD201C /* SetViewController.xib */; };
 		F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C12325E0560014E3C3 /* AppDelegate.swift */; };
 		F58017C42325E0560014E3C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C32325E0560014E3C3 /* ViewController.swift */; };
 		F58017C72325E0560014E3C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58017C52325E0560014E3C3 /* Main.storyboard */; };
@@ -49,6 +53,10 @@
 		F50155F22327743200FD201C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F50155F4232774AC00FD201C /* SubClassBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubClassBaseViewController.swift; sourceTree = "<group>"; };
 		F50155F7232775A700FD201C /* TipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsViewController.swift; sourceTree = "<group>"; };
+		F50155F92327842F00FD201C /* MineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineHeaderView.swift; sourceTree = "<group>"; };
+		F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTAdvancedTestOneVC.swift; sourceTree = "<group>"; };
+		F50155FE232799D900FD201C /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
+		F50155FF232799D900FD201C /* SetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetViewController.xib; sourceTree = "<group>"; };
 		F58017BE2325E0560014E3C3 /* Hiker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hiker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58017C12325E0560014E3C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F58017C32325E0560014E3C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +156,15 @@
 			path = "Tips - 消息";
 			sourceTree = "<group>";
 		};
+		F50155FD232799BE00FD201C /* Set - 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				F50155FE232799D900FD201C /* SetViewController.swift */,
+				F50155FF232799D900FD201C /* SetViewController.xib */,
+			);
+			path = "Set - 设置";
+			sourceTree = "<group>";
+		};
 		F58017B52325E0560014E3C3 = {
 			isa = PBXGroup;
 			children = (
@@ -234,7 +251,10 @@
 		F58017D92325E3440014E3C3 /* HKMine - 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				F50155FD232799BE00FD201C /* Set - 设置 */,
+				F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */,
 				F58017DD2325F9E00014E3C3 /* HKMineViewController.swift */,
+				F50155F92327842F00FD201C /* MineHeaderView.swift */,
 			);
 			path = "HKMine - 我的";
 			sourceTree = "<group>";
@@ -372,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F58017CC2325E0570014E3C3 /* LaunchScreen.storyboard in Resources */,
+				F5015601232799D900FD201C /* SetViewController.xib in Resources */,
 				F58017C92325E0570014E3C3 /* Assets.xcassets in Resources */,
 				F58017C72325E0560014E3C3 /* Main.storyboard in Resources */,
 			);
@@ -456,6 +477,7 @@
 				F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
 				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
+				F5015600232799D900FD201C /* SetViewController.swift in Sources */,
 				F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */,
 				F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */,
 				F58017C42325E0560014E3C3 /* ViewController.swift in Sources */,
@@ -463,9 +485,11 @@
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
 				F50155F02327684A00FD201C /* StorySementCell.swift in Sources */,
 				F50155E7232744A400FD201C /* StoryBannerModel.swift in Sources */,
+				F50155FA2327842F00FD201C /* MineHeaderView.swift in Sources */,
 				F50155E52327445C00FD201C /* StoryBannerViewModel.swift in Sources */,
 				F50155E92327454800FD201C /* StoryBannerView.swift in Sources */,
 				F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */,
+				F50155FC2327865300FD201C /* LTAdvancedTestOneVC.swift in Sources */,
 				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
 				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,
 				F50155F8232775A700FD201C /* TipsViewController.swift in Sources */,
