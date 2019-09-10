@@ -48,7 +48,7 @@ class HKHomeViewController: HKBaseViewController {
         let collection = UICollectionView.init(frame:.zero, collectionViewLayout: layout)
         collection.delegate = self
         collection.dataSource = self
-        collection.backgroundColor = UIColor.white
+        collection.backgroundColor = backColor
         
         // 注册头部视图
         collection.register(HomeHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewID)
@@ -56,7 +56,8 @@ class HKHomeViewController: HKBaseViewController {
         collection.register(HomeSearchView.self, forCellWithReuseIdentifier: HKHomeSearchViewID)
         collection.register(RecommendCityView.self, forCellWithReuseIdentifier: HKRecommendCityID)
         collection.register(StoryView.self, forCellWithReuseIdentifier: HKStoryID)
-        
+        collection.showsHorizontalScrollIndicator  = false
+        collection.showsVerticalScrollIndicator = false
         return collection
     }()
     
@@ -123,7 +124,7 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         if section <= 1 {
             return 1
         }else {
-            return 4
+            return 2
         }
     }
     
@@ -132,8 +133,11 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKHomeSearchViewID, for: indexPath) as! HomeSearchView
         return cell
         }
-        else {
+        else if indexPath.section == 1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKRecommendCityID, for: indexPath) as! RecommendCityView
+            return cell
+        }else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKStoryID, for: indexPath) as! StoryView
             return cell
         }
     }
@@ -143,16 +147,27 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         if section == 0 {
             return  UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
         }
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        if section == 1 {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
-
+    //最小行间距
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if section == 2 {
+            return 30
+        }
+        return 0
+    }
     
     //item 的尺寸
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
             return CGSize(width: 374, height: 50)
-        }else {
+        }else if indexPath.section == 1{
             return CGSize(width: 414, height: 220)
+        }else {
+            return CGSize(width: 374, height: 350)
         }
     }
     
@@ -174,6 +189,13 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
             return CGSize(width: 414, height: 30)
         }
         return CGSize(width: 0, height: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var model = StoryBannerModel()
+        model.title = "魔都上海两日"
+        let vc = StoryViewController(model: model)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
