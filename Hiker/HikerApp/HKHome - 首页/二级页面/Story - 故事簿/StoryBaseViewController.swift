@@ -41,7 +41,6 @@ class StoryBaseViewController: UIViewController {
             make.top.left.equalTo(view)
             make.width.equalTo(TKWidth)
             make.height.equalTo(TKHeight-30)
-            
         }
 
 

@@ -74,12 +74,14 @@ class HKHomeViewController: HKBaseViewController {
             make.height.equalTo(AdaptW(70))
             make.width.equalTo(AdaptH(110))
         }
+        
         print("中间按钮加载")
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigation.bar.prefersLargeTitles = true
         configNav()
         configUI()
     }
@@ -94,11 +96,13 @@ class HKHomeViewController: HKBaseViewController {
 
     func configNav(){
         if #available(iOS 11.0, *) {
-            navigation.bar.prefersLargeTitles = true
+            self.navigation.bar.prefersLargeTitles = true
+            self.navigation.item.largeTitleDisplayMode = .automatic
         }
-        navigation.item.title = "发现"
-        navigation.bar.isShadowHidden = true
-        navigation.bar.addSubview(rightBarButton)
+
+        self.navigation.item.title = "发现"
+        self.navigation.bar.isShadowHidden = true
+        self.navigation.bar.addSubview(rightBarButton)
         rightBarButton.snp.makeConstraints { (make) in
             make.right.equalTo(navigation.bar.snp.right).offset(-15)
             make.bottom.equalTo(navigation.bar.snp.bottom).offset(-10)
@@ -110,7 +114,8 @@ class HKHomeViewController: HKBaseViewController {
         print("中间按钮")
     }
     @objc func tip(){
-        print("右边按钮")
+        let tipsVC = TipsViewController()
+        self.navigationController?.pushViewController(tipsVC, animated: true)
     }
 }
 
@@ -192,10 +197,15 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let searchVC = SearchViewController()
+            self.navigationController?.pushViewController(searchVC, animated: true)
+        }else {
         var model = StoryBannerModel()
         model.title = "魔都上海两日"
         let vc = StoryViewController(model: model)
         self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
 }

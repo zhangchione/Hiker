@@ -15,6 +15,9 @@
 		F50155EB2327494B00FD201C /* StoryBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155EA2327494B00FD201C /* StoryBaseViewController.swift */; };
 		F50155EE2327682D00FD201C /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155ED2327682D00FD201C /* MapCell.swift */; };
 		F50155F02327684A00FD201C /* StorySementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155EF2327684A00FD201C /* StorySementCell.swift */; };
+		F50155F32327743200FD201C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155F22327743200FD201C /* SearchViewController.swift */; };
+		F50155F5232774AC00FD201C /* SubClassBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155F4232774AC00FD201C /* SubClassBaseViewController.swift */; };
+		F50155F8232775A700FD201C /* TipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155F7232775A700FD201C /* TipsViewController.swift */; };
 		F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C12325E0560014E3C3 /* AppDelegate.swift */; };
 		F58017C42325E0560014E3C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C32325E0560014E3C3 /* ViewController.swift */; };
 		F58017C72325E0560014E3C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58017C52325E0560014E3C3 /* Main.storyboard */; };
@@ -43,6 +46,9 @@
 		F50155EA2327494B00FD201C /* StoryBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBaseViewController.swift; sourceTree = "<group>"; };
 		F50155ED2327682D00FD201C /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		F50155EF2327684A00FD201C /* StorySementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorySementCell.swift; sourceTree = "<group>"; };
+		F50155F22327743200FD201C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		F50155F4232774AC00FD201C /* SubClassBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubClassBaseViewController.swift; sourceTree = "<group>"; };
+		F50155F7232775A700FD201C /* TipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsViewController.swift; sourceTree = "<group>"; };
 		F58017BE2325E0560014E3C3 /* Hiker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hiker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58017C12325E0560014E3C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F58017C32325E0560014E3C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,9 +102,9 @@
 		F50155E023273CA200FD201C /* 二级页面 */ = {
 			isa = PBXGroup;
 			children = (
-				F50155EA2327494B00FD201C /* StoryBaseViewController.swift */,
-				F50155E123273CC500FD201C /* StoryViewController.swift */,
-				F50155EC232767DB00FD201C /* BaseView */,
+				F50155F4232774AC00FD201C /* SubClassBaseViewController.swift */,
+				F50155F62327759500FD201C /* Tips - 消息 */,
+				F50155F12327740000FD201C /* Search - 搜索 */,
 				F50155E32327402300FD201C /* Story - 故事簿 */,
 			);
 			path = "二级页面";
@@ -107,6 +113,9 @@
 		F50155E32327402300FD201C /* Story - 故事簿 */ = {
 			isa = PBXGroup;
 			children = (
+				F50155EA2327494B00FD201C /* StoryBaseViewController.swift */,
+				F50155E123273CC500FD201C /* StoryViewController.swift */,
+				F50155EC232767DB00FD201C /* BaseView */,
 				F50155E42327445C00FD201C /* StoryBannerViewModel.swift */,
 				F50155E6232744A400FD201C /* StoryBannerModel.swift */,
 				F50155E82327454800FD201C /* StoryBannerView.swift */,
@@ -121,6 +130,22 @@
 				F50155EF2327684A00FD201C /* StorySementCell.swift */,
 			);
 			path = BaseView;
+			sourceTree = "<group>";
+		};
+		F50155F12327740000FD201C /* Search - 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+				F50155F22327743200FD201C /* SearchViewController.swift */,
+			);
+			path = "Search - 搜索";
+			sourceTree = "<group>";
+		};
+		F50155F62327759500FD201C /* Tips - 消息 */ = {
+			isa = PBXGroup;
+			children = (
+				F50155F7232775A700FD201C /* TipsViewController.swift */,
+			);
+			path = "Tips - 消息";
 			sourceTree = "<group>";
 		};
 		F58017B52325E0560014E3C3 = {
@@ -391,6 +416,8 @@
 				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/EachNavigationBar/EachNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/LTScrollView/LTScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework",
@@ -405,6 +432,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EachNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEntryKit.framework",
@@ -422,6 +451,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F50155F5232774AC00FD201C /* SubClassBaseViewController.swift in Sources */,
 				F5EC431F23262E5700107F66 /* StoryView.swift in Sources */,
 				F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
@@ -437,6 +467,8 @@
 				F50155E92327454800FD201C /* StoryBannerView.swift in Sources */,
 				F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */,
 				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
+				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,
+				F50155F8232775A700FD201C /* TipsViewController.swift in Sources */,
 				F58017E4232607770014E3C3 /* Extension + color.swift in Sources */,
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
 				F50155EE2327682D00FD201C /* MapCell.swift in Sources */,

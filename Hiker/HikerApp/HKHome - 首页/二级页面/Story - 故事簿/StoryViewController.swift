@@ -53,7 +53,7 @@ class StoryViewController: StoryBaseViewController {
         button.frame = CGRect(x:10, y:0, width:30, height: 30)
         button.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
         button.addTarget(self, action: #selector(back), for: .touchUpInside)
-    
+
         return button
     }()
     
@@ -68,10 +68,16 @@ class StoryViewController: StoryBaseViewController {
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.alpha = 0
         self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)
-        self.navigation.bar.prefersLargeTitles = false
+        if #available(iOS 11.0, *) {
+            self.navigation.bar.prefersLargeTitles = true
+            self.navigation.item.largeTitleDisplayMode = .automatic
+        }
+        
+       
     }
     
 
+    
     func setUI(){
         
         //获取导航栏背景视图

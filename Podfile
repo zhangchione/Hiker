@@ -17,6 +17,9 @@ target 'Hiker' do
   pod 'SwiftyJSON'
   pod 'Alamofire'
 
+  # 我的
+  pod 'MJRefresh'
+  pod 'LTScrollView'
   # Pods for Hiker
 
 end

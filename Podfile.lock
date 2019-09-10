@@ -6,6 +6,8 @@ PODS:
   - EachNavigationBar (1.12.0)
   - ESTabBarController-swift (2.7)
   - Hero (1.4.0)
+  - LTScrollView (0.2.1)
+  - MJRefresh (3.2.0)
   - QuickLayout (3.0.0)
   - SnapKit (4.2.0)
   - SwiftEntryKit (1.0.2):
@@ -18,6 +20,8 @@ DEPENDENCIES:
   - EachNavigationBar
   - ESTabBarController-swift
   - Hero
+  - LTScrollView
+  - MJRefresh
   - SnapKit
   - SwiftEntryKit
   - SwiftyJSON
@@ -29,6 +33,8 @@ SPEC REPOS:
     - EachNavigationBar
     - ESTabBarController-swift
     - Hero
+    - LTScrollView
+    - MJRefresh
     - QuickLayout
     - SnapKit
     - SwiftEntryKit
@@ -40,11 +46,13 @@ SPEC CHECKSUMS:
   EachNavigationBar: 6685463667ee539eb336d39194add8aba045c64c
   ESTabBarController-swift: 4fb52ad03d94d0717ef97bc9eb09a5abfdded0a2
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
+  LTScrollView: 93fff4aed9f9545f541a99b320b27808f5307c12
+  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftEntryKit: 7bcd42b3dbff59c431d60d6513129fd3679e4aaf
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: dea8772d9bad24d867207bbb7c83ac97368fe638
+PODFILE CHECKSUM: d897f2962e5ed31a3580c96b122b90b9a9e405af
 
 COCOAPODS: 1.6.1
