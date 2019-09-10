@@ -13,6 +13,8 @@
 		F50155E7232744A400FD201C /* StoryBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155E6232744A400FD201C /* StoryBannerModel.swift */; };
 		F50155E92327454800FD201C /* StoryBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155E82327454800FD201C /* StoryBannerView.swift */; };
 		F50155EB2327494B00FD201C /* StoryBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155EA2327494B00FD201C /* StoryBaseViewController.swift */; };
+		F50155EE2327682D00FD201C /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155ED2327682D00FD201C /* MapCell.swift */; };
+		F50155F02327684A00FD201C /* StorySementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155EF2327684A00FD201C /* StorySementCell.swift */; };
 		F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C12325E0560014E3C3 /* AppDelegate.swift */; };
 		F58017C42325E0560014E3C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C32325E0560014E3C3 /* ViewController.swift */; };
 		F58017C72325E0560014E3C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58017C52325E0560014E3C3 /* Main.storyboard */; };
@@ -39,6 +41,8 @@
 		F50155E6232744A400FD201C /* StoryBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBannerModel.swift; sourceTree = "<group>"; };
 		F50155E82327454800FD201C /* StoryBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBannerView.swift; sourceTree = "<group>"; };
 		F50155EA2327494B00FD201C /* StoryBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBaseViewController.swift; sourceTree = "<group>"; };
+		F50155ED2327682D00FD201C /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
+		F50155EF2327684A00FD201C /* StorySementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorySementCell.swift; sourceTree = "<group>"; };
 		F58017BE2325E0560014E3C3 /* Hiker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hiker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58017C12325E0560014E3C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F58017C32325E0560014E3C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,9 +96,10 @@
 		F50155E023273CA200FD201C /* 二级页面 */ = {
 			isa = PBXGroup;
 			children = (
-				F50155E123273CC500FD201C /* StoryViewController.swift */,
-				F50155E32327402300FD201C /* Story - 故事簿 */,
 				F50155EA2327494B00FD201C /* StoryBaseViewController.swift */,
+				F50155E123273CC500FD201C /* StoryViewController.swift */,
+				F50155EC232767DB00FD201C /* BaseView */,
+				F50155E32327402300FD201C /* Story - 故事簿 */,
 			);
 			path = "二级页面";
 			sourceTree = "<group>";
@@ -107,6 +112,15 @@
 				F50155E82327454800FD201C /* StoryBannerView.swift */,
 			);
 			path = "Story - 故事簿";
+			sourceTree = "<group>";
+		};
+		F50155EC232767DB00FD201C /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				F50155ED2327682D00FD201C /* MapCell.swift */,
+				F50155EF2327684A00FD201C /* StorySementCell.swift */,
+			);
+			path = BaseView;
 			sourceTree = "<group>";
 		};
 		F58017B52325E0560014E3C3 = {
@@ -417,6 +431,7 @@
 				F58017C42325E0560014E3C3 /* ViewController.swift in Sources */,
 				F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */,
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
+				F50155F02327684A00FD201C /* StorySementCell.swift in Sources */,
 				F50155E7232744A400FD201C /* StoryBannerModel.swift in Sources */,
 				F50155E52327445C00FD201C /* StoryBannerViewModel.swift in Sources */,
 				F50155E92327454800FD201C /* StoryBannerView.swift in Sources */,
@@ -424,6 +439,7 @@
 				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
 				F58017E4232607770014E3C3 /* Extension + color.swift in Sources */,
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
+				F50155EE2327682D00FD201C /* MapCell.swift in Sources */,
 				F5EC43242326374600107F66 /* CityView.swift in Sources */,
 				F50155EB2327494B00FD201C /* StoryBaseViewController.swift in Sources */,
 			);

@@ -23,7 +23,8 @@ class StoryViewController: StoryBaseViewController {
             print("点击用户")
         }
         storyBannerViewModel.backCallBack = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            print("11")
+            
         }
         storyBannerView.viewModel = storyBannerViewModel
         setupBanner()
@@ -44,27 +45,13 @@ class StoryViewController: StoryBaseViewController {
     var barImageView: UIView?
     var imageView: UIImageView! // 图片视图
     let imageViewHeight: CGFloat = 300 // 图片默认高度
-    lazy var tableView: UITableView = {
-        //创建表视图
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0,
-                                                   width: TKWidth, height: CGFloat(rowNumber) * rowHeight), style:.plain)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = CGFloat(rowHeight)
-        //self.tableView.isScrollEnabled = false
-        //创建一个重用的单元格
-        tableView.register(UITableViewCell.self,
-                                 forCellReuseIdentifier: "SwiftCell")
-        return tableView
-    }()
-    let rowNumber = 6 // 表格数据条目数
-    let rowHeight: CGFloat = 200 // 表格行高
+
     
     // 左边返回按钮
     private lazy var leftBarButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x:10, y:0, width:30, height: 30)
-        button.setImage(UIImage(named: "home_icon_back"), for: .normal)
+        button.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
         button.addTarget(self, action: #selector(back), for: .touchUpInside)
     
         return button
@@ -81,6 +68,7 @@ class StoryViewController: StoryBaseViewController {
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.alpha = 0
         self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)
+        self.navigation.bar.prefersLargeTitles = false
     }
     
 
@@ -96,8 +84,7 @@ class StoryViewController: StoryBaseViewController {
 
         
        
-        //scrollView.addSubview(self.tableView!)
-        view.addSubview(self.tableView)
+
         
     }
     
@@ -108,7 +95,7 @@ class StoryViewController: StoryBaseViewController {
 
 }
 
-extension StoryViewController: UIScrollViewDelegate {
+extension StoryViewController{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         
@@ -124,37 +111,17 @@ extension StoryViewController: UIScrollViewDelegate {
 //            self.imageView.frame = CGRect(x: 0, y: offset, width: TKWidth,
 //                                          height: imageViewHeight - offset)
 //        }
+        if offset > 90 {
+                self.navigation.bar.alpha = 1
+                navigation.item.title = "魔都上海两日"
+            leftBarButton.setImage(UIImage(named: "home_icon_back"), for: .normal)
+        }else {
+            self.navigation.bar.alpha = 0
+            navigation.item.title = ""
+            leftBarButton.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
+        }
         
-        // 导航栏背景透明度改变
-        var delta =  offset / (imageViewHeight - 64)
-        delta = CGFloat.maximum(delta, 0)
-        self.barImageView?.alpha = CGFloat.minimum(delta, 1)
-        
-        // 根据偏移量决定是否显示导航栏标题（上方图片快完全移出时才显示）
-        self.title =  delta > 0.9 ? "上海之旅" : ""
-    }
-}
-extension StoryViewController: UITableViewDelegate, UITableViewDataSource {
-    //在本例中，有1个分区
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    //返回表格行数（也就是返回控件数）
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
-        -> Int {
-            return rowNumber
-    }
-    
-    //创建各单元显示内容(创建参数indexPath指定的单元）
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
-        -> UITableViewCell {
-            //为了提供表格显示性能，已创建完成的单元需重复使用
-            let identify:String = "SwiftCell"
-            //同一形式的单元格重复使用，在声明时已注册
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: identify, for: indexPath)
-            cell.textLabel?.text = "数据条目：\(indexPath.row + 1)"
-            return cell
+        print(offset,scrollView.contentOffset.y)
+
     }
 }
