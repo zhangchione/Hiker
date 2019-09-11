@@ -20,7 +20,7 @@ class SetViewController: SubClassBaseViewController {
 
     func configUI(){
         self.view.backgroundColor = UIColor.init(r: 247, g: 247, b: 247)
-        self.navigation.item.title = "设置"
+        self.navigation.item.title = "更多"
         self.navigation.bar.backgroundColor = UIColor.init(r: 247, g: 247, b: 247)
         self.scrollView.isScrollEnabled = true
         scrollView.delegate = self

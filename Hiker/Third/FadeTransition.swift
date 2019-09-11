@@ -1,9 +1,9 @@
 //
-//  FadeTransition.swift
-//  TransitionButton
+//  FadeTransition
+//  Hiker
 //
-//  Created by Alaeddine M. on 11/1/15.
-//  Copyright (c) 2015 Alaeddine M. All rights reserved.
+//  Created by 张驰 on 2019/9/11.
+//  Copyright © 2019 张驰. All rights reserved.
 //
 
 import UIKit

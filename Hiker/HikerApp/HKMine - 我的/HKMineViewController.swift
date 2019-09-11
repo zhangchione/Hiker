@@ -137,10 +137,12 @@ extension HKMineViewController: LTAdvancedScrollViewDelegate {
         if offsetY >= 260 {
             self.navigation.bar.alpha = 1
             self.navigation.item.title = "王一一"
+            self.rightBarButton.setImage(UIImage(named: "mine_icon_setblack"), for: .normal)
         }
         else {
             self.navigation.bar.alpha = 0
             self.navigation.item.title = ""
+            self.rightBarButton.setImage(UIImage(named: "mine_icon_set"), for: .normal)
         }
     }
 }
