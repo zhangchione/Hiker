@@ -24,8 +24,8 @@ class StoryViewController: StoryBaseViewController {
         }
         storyBannerViewModel.backCallBack = { [weak self] in
             print("11")
-            
         }
+        
         storyBannerView.viewModel = storyBannerViewModel
         setupBanner()
     }
@@ -53,7 +53,6 @@ class StoryViewController: StoryBaseViewController {
         button.frame = CGRect(x:10, y:0, width:30, height: 30)
         button.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
         button.addTarget(self, action: #selector(back), for: .touchUpInside)
-
         return button
     }()
     
@@ -85,13 +84,7 @@ class StoryViewController: StoryBaseViewController {
         //修改导航栏背景色
         self.navigationController?.navigationBar.barStyle = .black
         self.navigationController?.navigationBar.barTintColor = .white
-        
-        
-
-        
-       
-
-        
+    
     }
     
     @objc func back(){
@@ -118,6 +111,7 @@ extension StoryViewController{
 //                                          height: imageViewHeight - offset)
 //        }
         
+        
         if offset > 90 {
                 self.navigation.bar.alpha = 1
                 navigation.item.title = "魔都上海两日"
@@ -128,7 +122,8 @@ extension StoryViewController{
             leftBarButton.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
         }
         
-        print(offset,scrollView.contentOffset.y)
+        
+       
 
     }
 }

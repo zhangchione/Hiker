@@ -19,9 +19,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let mainTabVar = mainTabBar()
-        window?.rootViewController = mainTabVar
-        window?.makeKeyAndVisible()
+//
+//        let rootVc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
+//        UIApplication.shared.keyWindow?.rootViewController = rootVc
+//        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+
+        let rootViewController = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateInitialViewController()!
+        self.window!.rootViewController = UINavigationController(rootViewController:
+            rootViewController)
+        
+        print("初始化")
+        
+//        UIApplication.shared.keyWindow?.rootViewController = rootVc
+//        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+
+//         window?.rootViewController = rootVc
+//         window?.makeKeyAndVisible()
+//        let mainTabVar = mainTabBar()
+//        window?.rootViewController = mainTabVar
+//        window?.makeKeyAndVisible()
         // Override point for customization after application launch.
         return true
     }

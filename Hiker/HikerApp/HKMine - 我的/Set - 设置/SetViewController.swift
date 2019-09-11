@@ -9,7 +9,13 @@
 import UIKit
 
 class SetViewController: SubClassBaseViewController {
-
+    @IBAction func Logout(_ sender: Any) {
+        let rootViewController = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateInitialViewController()!
+        UIApplication.shared.keyWindow?.rootViewController = rootViewController
+        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+    }
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
