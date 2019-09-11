@@ -20,6 +20,7 @@ class HKBaseViewController: UIViewController {
 
     func setUI(){
         view.backgroundColor = backColor
+        
     }
 
 }

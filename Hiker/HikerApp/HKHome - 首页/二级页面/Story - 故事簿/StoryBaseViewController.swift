@@ -23,8 +23,8 @@ class StoryBaseViewController: UIViewController {
 
         return tableView
     }()
-    let rowNumber = 6 // 表格数据条目数
-    let rowHeight: CGFloat = 200 // 表格行高
+    let rowNumber = 6
+    let rowHeight: CGFloat = 200
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -42,6 +42,10 @@ class StoryBaseViewController: UIViewController {
             make.width.equalTo(TKWidth)
             make.height.equalTo(TKHeight-30)
         }
+        if #available(iOS 11.0, *) {
+            self.navigation.bar.prefersLargeTitles = true
+           // self.navigation.item.largeTitleDisplayMode = .automatic
+        }
 
 
     }
@@ -50,18 +54,15 @@ class StoryBaseViewController: UIViewController {
 }
 
 extension StoryBaseViewController: UITableViewDelegate, UITableViewDataSource {
-    //在本例中，有1个分区
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    //返回表格行数（也就是返回控件数）
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
         -> Int {
             return rowNumber
     }
     
-    //创建各单元显示内容(创建参数indexPath指定的单元）
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: StorySementCellID , for: indexPath) as! StorySementCell

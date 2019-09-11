@@ -9,12 +9,15 @@
 import UIKit
 import EachNavigationBar
 
+import ESTabBarController_swift
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let mainTabVar = mainTabBar()
         window?.rootViewController = mainTabVar
@@ -28,15 +31,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let noteVC = UIViewController()
         let mineVC = HKMineViewController()
         
-        homeVC.tabBarItem.image = UIImage(named: "home_tab_unselected")
-        homeVC.tabBarItem.selectedImage = UIImage(named: "home_tab_selected")
-        noteVC.tabBarItem.image = UIImage()
-        mineVC.tabBarItem.image = UIImage(named: "mine_tab_unselected")
-        mineVC.tabBarItem.selectedImage = UIImage(named: "mine_tab_selected")
+        homeVC.tabBarItem = UITabBarItem.init(title: "", image: UIImage(named: "home_tab_unselected"), selectedImage: UIImage(named: "home_tab_selected"))
+        
+
+        mineVC.tabBarItem = UITabBarItem.init(title: "", image: UIImage(named: "mine_tab_unselected"), selectedImage: UIImage(named: "mine_tab_selected"))
+        
+        noteVC.tabBarItem = ESTabBarItem.init(CenterTabBarItem(), title: nil, image: UIImage(named: "add_tab"), selectedImage: UIImage(named: "add_tab"))
+       
 
         let homeNav = MainNavigationController.init(rootViewController: homeVC)
         let mineNav = MainNavigationController.init(rootViewController: mineVC)
         let noteNav = MainNavigationController.init(rootViewController: noteVC)
+        
         
         homeNav.navigation.configuration.isEnabled = true
         homeNav.navigation.configuration.barTintColor = backColor
@@ -51,19 +57,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 11.0, *) {
             homeNav.navigation.prefersLargeTitles()
         }
-        
-        let tabBar = UITabBarController()
-        tabBar.viewControllers = [homeNav,noteNav,mineNav]
-        
-        tabBar.viewControllers?.first?.tabBarItem.imageInsets =  UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
-        tabBar.viewControllers?.last?.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
 
-        tabBar.tabBar.backgroundImage = UIImage(named: "tabColor")
-        tabBar.tabBar.shadowImage = UIImage(named: "tabbarColor")
+
+         let tabBarController = ESTabBarController()
+        tabBarController.tabBar.shadowImage = UIImage(named: "tabbarColor")
+        tabBarController.tabBar.backgroundImage = UIImage(named: "tabColor")
+        tabBarController.tabBar.backgroundColor = .white
         
-        tabBar.tabBar.backgroundColor = .white
-                return tabBar
+
+        
+        tabBarController.shouldHijackHandler = {
+            tabbarController, viewController, index in
+            if index == 1 {
+                return true
+            }
+            return false
+        }
+        tabBarController.didHijackHandler = {
+            [weak tabBarController] tabbarController, viewController, index in
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+                let takePhotoAction = UIAlertAction(title: "Take a photo", style: .default, handler: nil)
+                alertController.addAction(takePhotoAction)
+                let selectFromAlbumAction = UIAlertAction(title: "Select from album", style: .default, handler: nil)
+                alertController.addAction(selectFromAlbumAction)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                tabBarController?.present(alertController, animated: true, completion: nil)
+            }
+        }
+        tabBarController.viewControllers = [homeNav,noteNav,mineNav]
+        tabBarController.viewControllers?.first?.tabBarItem.imageInsets =  UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
+        tabBarController.viewControllers?.last?.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
+        
+        return tabBarController
     }
     
+
 }
 

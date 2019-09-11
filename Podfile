@@ -20,6 +20,9 @@ target 'Hiker' do
   # 我的
   pod 'MJRefresh'
   pod 'LTScrollView'
+  
+  #动画
+  pod 'pop'
   # Pods for Hiker
 
 end

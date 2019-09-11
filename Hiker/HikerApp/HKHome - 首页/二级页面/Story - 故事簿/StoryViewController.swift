@@ -117,6 +117,7 @@ extension StoryViewController{
 //            self.imageView.frame = CGRect(x: 0, y: offset, width: TKWidth,
 //                                          height: imageViewHeight - offset)
 //        }
+        
         if offset > 90 {
                 self.navigation.bar.alpha = 1
                 navigation.item.title = "魔都上海两日"

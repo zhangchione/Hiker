@@ -32,6 +32,11 @@ class SubClassBaseViewController: UIViewController {
         self.navigation.bar.backgroundColor = .white
         view.backgroundColor = .white
         self.navigation.bar.isShadowHidden = true
+                if #available(iOS 11.0, *) {
+                    self.navigation.bar.prefersLargeTitles = true
+                    self.navigation.item.largeTitleDisplayMode = .automatic
+                }
+        print("SubClassBaseControler setUI方法调用")
     }
     
     @objc func back(){

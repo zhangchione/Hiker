@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class HKHomeViewController: HKBaseViewController {
+class HKHomeViewController: UIViewController {
     
     // 标签栏中间
     lazy var centerView:UIView = {
@@ -58,32 +58,20 @@ class HKHomeViewController: HKBaseViewController {
         collection.register(StoryView.self, forCellWithReuseIdentifier: HKStoryID)
         collection.showsHorizontalScrollIndicator  = false
         collection.showsVerticalScrollIndicator = false
+        
         return collection
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.addSubview(centerView)
-        // 设置按钮的位置
-        let rect = self.tabBarController?.tabBar.frame
-        let width = rect!.width / CGFloat(3)
-        centerView.frame = CGRect(x:  width, y: 0, width: width, height: rect!.height)
-        centerView.addSubview(notesBtn)
-        notesBtn.snp.makeConstraints { (make) in
-            make.centerX.equalTo(centerView.snp.centerX)
-            make.centerY.equalTo((tabBarController?.tabBar.snp.centerY)!)
-            make.height.equalTo(AdaptW(70))
-            make.width.equalTo(AdaptH(110))
-        }
-        
-        print("中间按钮加载")
+
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigation.bar.prefersLargeTitles = true
-        configNav()
         configUI()
+        configNav()
+
     }
     
     func configUI(){
@@ -92,14 +80,21 @@ class HKHomeViewController: HKBaseViewController {
             make.width.height.equalToSuperview()
             make.center.equalToSuperview()
         }
+         view.backgroundColor = backColor
+        
     }
 
     func configNav(){
         if #available(iOS 11.0, *) {
+//            navigation.bar.largeTitleTextAttributes = [
+//                .font: UIFont.systemFont(ofSize: 50),
+//                .foregroundColor: UIColor.orange]
             self.navigation.bar.prefersLargeTitles = true
-            self.navigation.item.largeTitleDisplayMode = .automatic
+            
         }
-
+        // if you want change navigation bar position
+        navigation.bar.automaticallyAdjustsPosition = false
+        
         self.navigation.item.title = "发现"
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.addSubview(rightBarButton)
@@ -114,11 +109,34 @@ class HKHomeViewController: HKBaseViewController {
         print("中间按钮")
     }
     @objc func tip(){
-        let tipsVC = TipsViewController()
-        self.navigationController?.pushViewController(tipsVC, animated: true)
+        let tipsVC = NextViewController()
+        navigationController?.pushViewController(tipsVC, animated: true)
     }
 }
 
+
+extension HKHomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let statusBarMaxY = UIApplication.shared.statusBarFrame.maxY
+//        let originY = -scrollView.contentOffset.y + statusBarMaxY
+//        let alpha = 1 - (scrollView.contentOffset.y) / navigation.bar.frame.height
+//        navigation.bar.setTintAlpha(alpha)
+//        navigation.bar.setTitleAlpha(alpha)
+//        if #available(iOS 11.0, *) {
+//            navigation.bar.setLargeTitleAlpha(alpha)
+//        }
+//        if originY <= statusBarMaxY {
+//            let minY = statusBarMaxY - navigation.bar.frame.height
+//            navigation.bar.frame.origin.y = originY > minY ? originY : minY
+//        } else {
+//            if #available(iOS 11.0, *) { navigation.bar.setLargeTitleAlpha(1) }
+//            navigation.bar.setTitleAlpha(1)
+//            navigation.bar.setTintAlpha(1)
+//            navigation.bar.frame.origin.y = statusBarMaxY
+//        }
+    }
+
+}
 extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -198,8 +216,8 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            let searchVC = SearchViewController()
-            self.navigationController?.pushViewController(searchVC, animated: true)
+//            let searchVC = SearchViewController()
+//            self.navigationController?.pushViewController(searchVC, animated: true)
         }else {
         var model = StoryBannerModel()
         model.title = "魔都上海两日"

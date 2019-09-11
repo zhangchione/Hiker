@@ -32,6 +32,8 @@
 		F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */; };
 		F58017E22326075B0014E3C3 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E12326075B0014E3C3 /* Const.swift */; };
 		F58017E4232607770014E3C3 /* Extension + color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E3232607770014E3C3 /* Extension + color.swift */; };
+		F5D2C3CF232892AD00DE60D2 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3CE232892AD00DE60D2 /* NextViewController.swift */; };
+		F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */; };
 		F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431123261D7A00107F66 /* MainNavigationController.swift */; };
 		F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431A23262E2100107F66 /* HomeSearchView.swift */; };
 		F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431C23262E4400107F66 /* RecommendCityView.swift */; };
@@ -69,6 +71,8 @@
 		F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKBaseViewController.swift; sourceTree = "<group>"; };
 		F58017E12326075B0014E3C3 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		F58017E3232607770014E3C3 /* Extension + color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + color.swift"; sourceTree = "<group>"; };
+		F5D2C3CE232892AD00DE60D2 /* NextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
+		F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		F5EC431123261D7A00107F66 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F5EC431A23262E2100107F66 /* HomeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchView.swift; sourceTree = "<group>"; };
 		F5EC431C23262E4400107F66 /* RecommendCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCityView.swift; sourceTree = "<group>"; };
@@ -213,8 +217,10 @@
 		F58017D52325E3220014E3C3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F5D2C3CE232892AD00DE60D2 /* NextViewController.swift */,
 				F58017C52325E0560014E3C3 /* Main.storyboard */,
 				F5EC431123261D7A00107F66 /* MainNavigationController.swift */,
+				F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -443,6 +449,7 @@
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -459,6 +466,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEntryKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -488,7 +496,9 @@
 				F50155FA2327842F00FD201C /* MineHeaderView.swift in Sources */,
 				F50155E52327445C00FD201C /* StoryBannerViewModel.swift in Sources */,
 				F50155E92327454800FD201C /* StoryBannerView.swift in Sources */,
+				F5D2C3CF232892AD00DE60D2 /* NextViewController.swift in Sources */,
 				F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */,
+				F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */,
 				F50155FC2327865300FD201C /* LTAdvancedTestOneVC.swift in Sources */,
 				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
 				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,

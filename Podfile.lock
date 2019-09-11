@@ -8,6 +8,7 @@ PODS:
   - Hero (1.4.0)
   - LTScrollView (0.2.1)
   - MJRefresh (3.2.0)
+  - pop (1.0.12)
   - QuickLayout (3.0.0)
   - SnapKit (4.2.0)
   - SwiftEntryKit (1.0.2):
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - Hero
   - LTScrollView
   - MJRefresh
+  - pop
   - SnapKit
   - SwiftEntryKit
   - SwiftyJSON
@@ -35,6 +37,7 @@ SPEC REPOS:
     - Hero
     - LTScrollView
     - MJRefresh
+    - pop
     - QuickLayout
     - SnapKit
     - SwiftEntryKit
@@ -48,11 +51,12 @@ SPEC CHECKSUMS:
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   LTScrollView: 93fff4aed9f9545f541a99b320b27808f5307c12
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftEntryKit: 7bcd42b3dbff59c431d60d6513129fd3679e4aaf
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: d897f2962e5ed31a3580c96b122b90b9a9e405af
+PODFILE CHECKSUM: 0941e267494c8a710f0c6ec7b8466986ecae2cbc
 
 COCOAPODS: 1.6.1
