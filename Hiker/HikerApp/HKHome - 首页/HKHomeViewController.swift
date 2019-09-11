@@ -86,13 +86,11 @@ class HKHomeViewController: UIViewController {
 
     func configNav(){
         if #available(iOS 11.0, *) {
-//            navigation.bar.largeTitleTextAttributes = [
-//                .font: UIFont.systemFont(ofSize: 50),
-//                .foregroundColor: UIColor.orange]
+
             self.navigation.bar.prefersLargeTitles = true
             
         }
-        // if you want change navigation bar position
+        
         navigation.bar.automaticallyAdjustsPosition = false
         
         self.navigation.item.title = "发现"
@@ -109,7 +107,7 @@ class HKHomeViewController: UIViewController {
         print("中间按钮")
     }
     @objc func tip(){
-        let tipsVC = NextViewController()
+        let tipsVC = TipsViewController()
         navigationController?.pushViewController(tipsVC, animated: true)
     }
 }
@@ -216,8 +214,8 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-//            let searchVC = SearchViewController()
-//            self.navigationController?.pushViewController(searchVC, animated: true)
+            let searchVC = SearchViewController()
+            self.navigationController?.pushViewController(searchVC, animated: true)
         }else {
         var model = StoryBannerModel()
         model.title = "魔都上海两日"

@@ -80,3 +80,88 @@ extension UIScreen {
     }
     
 }
+extension UIView{
+    @IBInspectable
+    var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+        }
+    }
+    @IBInspectable
+    var shadowRadius: CGFloat {
+        get {
+            return layer.shadowRadius
+        }
+        set {
+            layer.shadowRadius = newValue
+        }
+    }
+    @IBInspectable
+    var shadowOpacity:Float{
+        get{
+            return layer.shadowOpacity
+        }
+        set{
+            layer.shadowOpacity = newValue
+        }
+    }
+    @IBInspectable
+    var shadowColor:UIColor{
+        get{
+            return (layer.shadowColor != nil ? UIColor(cgColor: layer.shadowColor!) :nil)!
+        }
+        set{
+            layer.shadowColor = newValue.cgColor
+        }
+    }
+    
+    @IBInspectable
+    var shadowOffset: CGSize {
+        get {
+            return layer.shadowOffset
+        }
+        set {
+            layer.shadowOffset = newValue
+        }
+    }
+}
+
+extension UIView {
+    
+    /// 部分圆角
+    ///
+    /// - Parameters:
+    ///   - corners: 需要实现为圆角的角，可传入多个
+    ///   - radii: 圆角半径
+    func corner(byRoundingCorners corners: UIRectCorner, radii: CGFloat) {
+        let maskPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radii, height: radii))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = self.bounds
+        maskLayer.path = maskPath.cgPath
+        self.layer.mask = maskLayer
+    }
+}
+extension UIImage
+{
+    /**
+     根据传入的宽度生成一张图片
+     按照图片的宽高比来压缩以前的图片
+     :param: width 制定宽度
+     */
+    func imageWithScale(width: CGFloat) -> UIImage
+    {
+        // 1.根据宽度计算高度
+        let height = width *  size.height / size.width
+        // 2.按照宽高比绘制一张新的图片
+        let currentSize = CGSize(width: width, height: height)
+        UIGraphicsBeginImageContext(currentSize)
+        draw(in: CGRect(origin: CGPoint.zero, size: currentSize))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+}

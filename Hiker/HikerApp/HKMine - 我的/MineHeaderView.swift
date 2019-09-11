@@ -47,33 +47,43 @@ class MineHeaderView: UIView {
     lazy var storyLabel: UILabel = {
        let label = UILabel()
         label.backgroundColor = .red
+        label.text = "17"
+        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
         return label
     }()
     lazy var storyBtn: UIButton = {
         let btn = UIButton()
-         btn.backgroundColor = .red
+        btn.setTitle("游记", for: .normal)
+        btn.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
+        btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         return btn
     }()
     
     lazy var fanLabel: UILabel = {
         let label = UILabel()
-                label.backgroundColor = .red
+                label.text = "2w"
+                label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
         return label
     }()
     lazy var fanBtn: UIButton = {
         let btn = UIButton()
-         btn.backgroundColor = .red
+        btn.setTitle("粉丝", for: .normal)
+                btn.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
+                btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         return btn
     }()
     
     lazy var concernLabel: UILabel = {
         let label = UILabel()
-                label.backgroundColor = .red
+                label.text = "170"
+                label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
         return label
     }()
     lazy var concernBtn: UIButton = {
         let btn = UIButton()
-                btn.backgroundColor = .red
+        btn.setTitle("关注", for: .normal)
+                btn.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
+                btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         return btn
     }()
     
@@ -128,37 +138,37 @@ class MineHeaderView: UIView {
             make.left.equalTo(self).offset(20)
             make.bottom.equalTo(self).offset(-20)
             make.height.equalTo(25)
-            make.width.equalTo(20)
+            make.width.equalTo(30)
         }
         storyBtn.snp.makeConstraints { (make) in
             make.left.equalTo(storyLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(25)
-            make.width.equalTo(40)
+            make.width.equalTo(50)
         }
         fanLabel.snp.makeConstraints { (make) in
             make.left.equalTo(storyBtn.snp.right).offset(30)
             make.bottom.equalTo(self).offset(-20)
             make.height.equalTo(25)
-            make.width.equalTo(20)
+            make.width.equalTo(40)
         }
         fanBtn.snp.makeConstraints { (make) in
             make.left.equalTo(fanLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(25)
-            make.width.equalTo(40)
+            make.width.equalTo(50)
         }
         concernLabel.snp.makeConstraints { (make) in
             make.left.equalTo(fanBtn.snp.right).offset(30)
             make.bottom.equalTo(self).offset(-20)
             make.height.equalTo(25)
-            make.width.equalTo(20)
+            make.width.equalTo(40)
         }
         concernBtn.snp.makeConstraints { (make) in
             make.left.equalTo(concernLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(25)
-            make.width.equalTo(40)
+            make.width.equalTo(50)
         }
         
         

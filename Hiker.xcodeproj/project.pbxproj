@@ -34,6 +34,12 @@
 		F58017E4232607770014E3C3 /* Extension + color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E3232607770014E3C3 /* Extension + color.swift */; };
 		F5D2C3CF232892AD00DE60D2 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3CE232892AD00DE60D2 /* NextViewController.swift */; };
 		F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */; };
+		F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */; };
+		F5D2C3D62328C97700DE60D2 /* MineSotryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D42328C97700DE60D2 /* MineSotryCell.swift */; };
+		F5D2C3D72328C97700DE60D2 /* MineSotryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5D2C3D52328C97700DE60D2 /* MineSotryCell.xib */; };
+		F5D2C3DA2328D0A200DE60D2 /* CustomTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D82328D0A200DE60D2 /* CustomTransitionViewController.swift */; };
+		F5D2C3DB2328D0A200DE60D2 /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D92328D0A200DE60D2 /* FadeTransition.swift */; };
+		F5D2C3DD2328D0D000DE60D2 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */; };
 		F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431123261D7A00107F66 /* MainNavigationController.swift */; };
 		F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431A23262E2100107F66 /* HomeSearchView.swift */; };
 		F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431C23262E4400107F66 /* RecommendCityView.swift */; };
@@ -73,6 +79,12 @@
 		F58017E3232607770014E3C3 /* Extension + color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + color.swift"; sourceTree = "<group>"; };
 		F5D2C3CE232892AD00DE60D2 /* NextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineStoryViewController.swift; sourceTree = "<group>"; };
+		F5D2C3D42328C97700DE60D2 /* MineSotryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineSotryCell.swift; sourceTree = "<group>"; };
+		F5D2C3D52328C97700DE60D2 /* MineSotryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineSotryCell.xib; sourceTree = "<group>"; };
+		F5D2C3D82328D0A200DE60D2 /* CustomTransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitionViewController.swift; sourceTree = "<group>"; };
+		F5D2C3D92328D0A200DE60D2 /* FadeTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
+		F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		F5EC431123261D7A00107F66 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F5EC431A23262E2100107F66 /* HomeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchView.swift; sourceTree = "<group>"; };
 		F5EC431C23262E4400107F66 /* RecommendCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCityView.swift; sourceTree = "<group>"; };
@@ -237,6 +249,8 @@
 		F58017D72325E3340014E3C3 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				F5D2C3D82328D0A200DE60D2 /* CustomTransitionViewController.swift */,
+				F5D2C3D92328D0A200DE60D2 /* FadeTransition.swift */,
 			);
 			path = Third;
 			sourceTree = "<group>";
@@ -261,6 +275,9 @@
 				F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */,
 				F58017DD2325F9E00014E3C3 /* HKMineViewController.swift */,
 				F50155F92327842F00FD201C /* MineHeaderView.swift */,
+				F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */,
+				F5D2C3D42328C97700DE60D2 /* MineSotryCell.swift */,
+				F5D2C3D52328C97700DE60D2 /* MineSotryCell.xib */,
 			);
 			path = "HKMine - 我的";
 			sourceTree = "<group>";
@@ -268,6 +285,7 @@
 		F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */ = {
 			isa = PBXGroup;
 			children = (
+				F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */,
 			);
 			path = "HKNotes - 记录";
 			sourceTree = "<group>";
@@ -399,6 +417,7 @@
 			files = (
 				F58017CC2325E0570014E3C3 /* LaunchScreen.storyboard in Resources */,
 				F5015601232799D900FD201C /* SetViewController.xib in Resources */,
+				F5D2C3D72328C97700DE60D2 /* MineSotryCell.xib in Resources */,
 				F58017C92325E0570014E3C3 /* Assets.xcassets in Resources */,
 				F58017C72325E0560014E3C3 /* Main.storyboard in Resources */,
 			);
@@ -482,6 +501,7 @@
 			files = (
 				F50155F5232774AC00FD201C /* SubClassBaseViewController.swift in Sources */,
 				F5EC431F23262E5700107F66 /* StoryView.swift in Sources */,
+				F5D2C3DD2328D0D000DE60D2 /* NotesViewController.swift in Sources */,
 				F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
 				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
@@ -490,6 +510,7 @@
 				F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */,
 				F58017C42325E0560014E3C3 /* ViewController.swift in Sources */,
 				F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */,
+				F5D2C3DB2328D0A200DE60D2 /* FadeTransition.swift in Sources */,
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
 				F50155F02327684A00FD201C /* StorySementCell.swift in Sources */,
 				F50155E7232744A400FD201C /* StoryBannerModel.swift in Sources */,
@@ -499,10 +520,13 @@
 				F5D2C3CF232892AD00DE60D2 /* NextViewController.swift in Sources */,
 				F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */,
 				F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */,
+				F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */,
+				F5D2C3DA2328D0A200DE60D2 /* CustomTransitionViewController.swift in Sources */,
 				F50155FC2327865300FD201C /* LTAdvancedTestOneVC.swift in Sources */,
 				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
 				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,
 				F50155F8232775A700FD201C /* TipsViewController.swift in Sources */,
+				F5D2C3D62328C97700DE60D2 /* MineSotryCell.swift in Sources */,
 				F58017E4232607770014E3C3 /* Extension + color.swift in Sources */,
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
 				F50155EE2327682D00FD201C /* MapCell.swift in Sources */,

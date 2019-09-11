@@ -8,21 +8,29 @@
 
 import UIKit
 
-class SetViewController: UIViewController {
+class SetViewController: SubClassBaseViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configUI()
     }
 
 
     func configUI(){
+        self.view.backgroundColor = UIColor.init(r: 247, g: 247, b: 247)
         self.navigation.item.title = "设置"
-        if #available(iOS 11.0, *) {
-            self.navigation.bar.prefersLargeTitles = true
-            self.navigation.item.largeTitleDisplayMode = .automatic
-        }
+        self.navigation.bar.backgroundColor = UIColor.init(r: 247, g: 247, b: 247)
+        self.scrollView.isScrollEnabled = true
+        scrollView.delegate = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.scrollView.contentSize = CGSize(width: TKWidth, height: 1000)
     }
 
+}
+extension SetViewController : UIScrollViewDelegate {
+    
 }

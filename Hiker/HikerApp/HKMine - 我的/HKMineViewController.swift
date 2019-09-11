@@ -13,11 +13,13 @@ private let glt_iphoneX = (UIScreen.main.bounds.height >= 812.0)
 class HKMineViewController: UIViewController {
 
     private lazy var viewControllers: [UIViewController] = {
-        let oneVc = LTAdvancedTestOneVC()
-        let twoVc = LTAdvancedTestOneVC()
+        let oneVc = MineStoryViewController()
+        let twoVc = MineStoryViewController()
         twoVc.count = 5
-        let threeVc = LTAdvancedTestOneVC()
-        let fourVc = LTAdvancedTestOneVC()
+        let threeVc = MineStoryViewController()
+        threeVc.count = 6
+        let fourVc = MineStoryViewController()
+                fourVc.count = 3
         return [oneVc, twoVc, threeVc, fourVc]
     }()
     
@@ -96,6 +98,9 @@ class HKMineViewController: UIViewController {
     }()
     
     func configUI(){
+        if #available(iOS 11.0, *) {
+            self.navigation.bar.prefersLargeTitles = false
+        }
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.alpha = 0
         self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)

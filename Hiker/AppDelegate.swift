@@ -57,6 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 11.0, *) {
             homeNav.navigation.prefersLargeTitles()
         }
+        if #available(iOS 11.0, *) {
+            mineNav.navigation.prefersLargeTitles()
+        }
 
 
          let tabBarController = ESTabBarController()
@@ -84,7 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 alertController.addAction(selectFromAlbumAction)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 alertController.addAction(cancelAction)
-                tabBarController?.present(alertController, animated: true, completion: nil)
+                
+                let notesVC = NotesViewController()
+                tabBarController?.present(notesVC, animated: true, completion: nil)
             }
         }
         tabBarController.viewControllers = [homeNav,noteNav,mineNav]
