@@ -20,6 +20,7 @@ class NotesViewController: CustomTransitionViewController {
     }()
     
     let StorySementCellID = "WriteCell"
+    let storyID = "WriteStoryCell"
     // tableView
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -27,8 +28,10 @@ class NotesViewController: CustomTransitionViewController {
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: StorySementCellID, bundle: nil), forCellReuseIdentifier: StorySementCellID)
-        //tableView.register(WriteCell.self, forCellReuseIdentifier: StorySementCellID)
+        
+        tableView.register(WriteStoryCell.self, forCellReuseIdentifier: storyID)
         tableView.separatorStyle = .none
+        //tableView.backgroundColor = .white
         
         return tableView
     }()
@@ -45,6 +48,8 @@ class NotesViewController: CustomTransitionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cellIsPhoto.append(false)
+        //cellIsPhoto[0] = false
         dismissKetboardTap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         self.view.addGestureRecognizer(dismissKetboardTap)
         
@@ -57,7 +62,7 @@ class NotesViewController: CustomTransitionViewController {
             make.left.equalTo(view)
             make.top.equalTo(view).offset(100)
             make.width.equalTo(TKWidth)
-            make.height.equalTo(TKHeight)
+            make.height.equalTo(TKHeight-88)
         }
 
         
@@ -79,6 +84,8 @@ class NotesViewController: CustomTransitionViewController {
     public var topColor = UIColor.white
     var content1 = "快记录一下吧~"
     var count  = 1;
+    var cellDectionary = [Dictionary<Int, Bool>]()
+    var cellIsPhoto = [Bool]()
 }
 
 extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
@@ -93,18 +100,26 @@ extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: StorySementCellID , for: indexPath) as! WriteCell
-            cell.selectionStyle = .none;
-            if indexPath.row % 2 == 0 {
-                cell.backgroundColor = .red
-            }
-            cell.delegate = self
+            
+            var cells = tableView.cellForRow(at: indexPath) as? WriteStoryCell
+            
+            cells = WriteStoryCell(style: .default, reuseIdentifier: storyID)
+            
+            //let cell = tableView.dequeueReusableCell(withIdentifier: storyID , for: indexPath) as! WriteStoryCell
+            cells?.selectionStyle = .none;
+            cells?.delegate = self
             //cell.next1.addTarget(self, action: #selector(add), for: .touchUpInside)
-            return cell
+            if indexPath.row != count-1 {
+                cells?.nextBtn.isHidden = true
+            }
+            return cells!
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        return  300
+        if cellIsPhoto[indexPath.row] {
+            return 400
+        }
+        return  250
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -121,7 +136,7 @@ extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension NotesViewController: StoryWriteDelegate{
+extension NotesViewController: WriteStoryDelegate{
     
     func storyWriteClick(content: String, location: String, time: String) {
         print(content,location,time)
@@ -132,7 +147,10 @@ extension NotesViewController: StoryWriteDelegate{
     
     @objc func add(){
         print("11")
+        
+        self.cellIsPhoto[count - 1] = true
         self.count += 1
+        self.cellIsPhoto.append(false)
         
         self.tableView.reloadData()
     }

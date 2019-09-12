@@ -43,6 +43,8 @@
 		F5D8DD652329E58400B7EADF /* WriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D8DD632329E58400B7EADF /* WriteCell.swift */; };
 		F5D8DD662329E58400B7EADF /* WriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5D8DD642329E58400B7EADF /* WriteCell.xib */; };
 		F5D8DD682329FDED00B7EADF /* WriteHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D8DD672329FDED00B7EADF /* WriteHeaderReusableView.swift */; };
+		F5D8DD6A232A0E2200B7EADF /* WriteStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D8DD69232A0E2200B7EADF /* WriteStoryCell.swift */; };
+		F5D8DD6D232A1CA500B7EADF /* OnePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */; };
 		F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431123261D7A00107F66 /* MainNavigationController.swift */; };
 		F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431A23262E2100107F66 /* HomeSearchView.swift */; };
 		F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431C23262E4400107F66 /* RecommendCityView.swift */; };
@@ -91,6 +93,8 @@
 		F5D8DD632329E58400B7EADF /* WriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCell.swift; sourceTree = "<group>"; };
 		F5D8DD642329E58400B7EADF /* WriteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteCell.xib; sourceTree = "<group>"; };
 		F5D8DD672329FDED00B7EADF /* WriteHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteHeaderReusableView.swift; sourceTree = "<group>"; };
+		F5D8DD69232A0E2200B7EADF /* WriteStoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteStoryCell.swift; sourceTree = "<group>"; };
+		F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePhotoCell.swift; sourceTree = "<group>"; };
 		F5EC431123261D7A00107F66 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F5EC431A23262E2100107F66 /* HomeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchView.swift; sourceTree = "<group>"; };
 		F5EC431C23262E4400107F66 /* RecommendCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCityView.swift; sourceTree = "<group>"; };
@@ -291,12 +295,22 @@
 		F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */ = {
 			isa = PBXGroup;
 			children = (
+				F5D8DD6B232A0E4C00B7EADF /* Trash */,
 				F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */,
-				F5D8DD632329E58400B7EADF /* WriteCell.swift */,
-				F5D8DD642329E58400B7EADF /* WriteCell.xib */,
 				F5D8DD672329FDED00B7EADF /* WriteHeaderReusableView.swift */,
+				F5D8DD69232A0E2200B7EADF /* WriteStoryCell.swift */,
+				F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */,
 			);
 			path = "HKNotes - 记录";
+			sourceTree = "<group>";
+		};
+		F5D8DD6B232A0E4C00B7EADF /* Trash */ = {
+			isa = PBXGroup;
+			children = (
+				F5D8DD632329E58400B7EADF /* WriteCell.swift */,
+				F5D8DD642329E58400B7EADF /* WriteCell.xib */,
+			);
+			path = Trash;
 			sourceTree = "<group>";
 		};
 		F5EC431323262CCF00107F66 /* API */ = {
@@ -509,6 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5D8DD6D232A1CA500B7EADF /* OnePhotoCell.swift in Sources */,
 				F50155F5232774AC00FD201C /* SubClassBaseViewController.swift in Sources */,
 				F5D8DD652329E58400B7EADF /* WriteCell.swift in Sources */,
 				F5EC431F23262E5700107F66 /* StoryView.swift in Sources */,
@@ -536,6 +551,7 @@
 				F5D8DD682329FDED00B7EADF /* WriteHeaderReusableView.swift in Sources */,
 				F50155FC2327865300FD201C /* LTAdvancedTestOneVC.swift in Sources */,
 				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
+				F5D8DD6A232A0E2200B7EADF /* WriteStoryCell.swift in Sources */,
 				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,
 				F50155F8232775A700FD201C /* TipsViewController.swift in Sources */,
 				F5D2C3D62328C97700DE60D2 /* MineSotryCell.swift in Sources */,

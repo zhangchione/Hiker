@@ -113,7 +113,7 @@ class HKMineViewController: UIViewController {
     }
 
     private func testLabel() -> MineHeaderView {
-        return MineHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 350))
+        return MineHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 320))
     }
     @objc func set() {
         print("右边按钮")

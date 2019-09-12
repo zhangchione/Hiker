@@ -29,8 +29,7 @@ class MineHeaderView: UIView {
     lazy var userName: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 20)
-        
+        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 16)
         label.text = "王依依"
         return label
     }()
@@ -38,8 +37,7 @@ class MineHeaderView: UIView {
     lazy var userSign: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 14)
-        
+              label.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
         label.text = "爱旅行、爱p旅拍的小王同学👥"
         return label
     }()
@@ -114,41 +112,41 @@ class MineHeaderView: UIView {
         backgroundImageView.snp.makeConstraints { (make) in
             make.left.right.equalTo(self)
             make.top.equalTo(self).offset(-44)
-            make.height.equalTo(AdaptH(250))
+            make.height.equalTo(AdaptH(225))
         }
         userImg.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(AdaptW(30))
-            make.bottom.equalTo(backgroundImageView.snp.bottom).offset(AdaptH(-20))
+            make.left.equalTo(self).offset(AdaptW(22))
+            make.bottom.equalTo(backgroundImageView.snp.bottom).offset(AdaptH(-16))
             make.width.height.equalTo(AdaptW(100))
         }
         userName.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(AdaptW(20))
-            make.top.equalTo(backgroundImageView.snp.bottom).offset(AdaptH(15))
-            make.height.equalTo(AdaptH(25))
+            make.left.equalTo(self).offset(AdaptW(16))
+            make.top.equalTo(backgroundImageView.snp.bottom).offset(AdaptH(8))
+            make.height.equalTo(AdaptH(22))
             make.width.equalTo(AdaptW(100))
         }
         userSign.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(AdaptW(20))
-            make.top.equalTo(userName.snp.bottom).offset(AdaptH(10))
+            make.left.equalTo(self).offset(AdaptW(16))
+            make.top.equalTo(userName.snp.bottom).offset(AdaptH(6))
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(AdaptW(200))
+            make.width.equalTo(AdaptW(220))
         }
         
         storyLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(20)
-            make.bottom.equalTo(self).offset(-20)
-            make.height.equalTo(25)
-            make.width.equalTo(30)
+            make.left.equalTo(self).offset(16)
+            make.top.equalTo(userSign.snp.bottom).offset(Adapt(28))
+            make.height.equalTo(20)
+            make.width.equalTo(20)
         }
         storyBtn.snp.makeConstraints { (make) in
             make.left.equalTo(storyLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(25)
-            make.width.equalTo(50)
+            make.width.equalTo(30)
         }
         fanLabel.snp.makeConstraints { (make) in
             make.left.equalTo(storyBtn.snp.right).offset(30)
-            make.bottom.equalTo(self).offset(-20)
+            make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(25)
             make.width.equalTo(40)
         }
@@ -160,7 +158,7 @@ class MineHeaderView: UIView {
         }
         concernLabel.snp.makeConstraints { (make) in
             make.left.equalTo(fanBtn.snp.right).offset(30)
-            make.bottom.equalTo(self).offset(-20)
+            make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(25)
             make.width.equalTo(40)
         }
