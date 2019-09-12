@@ -8,16 +8,29 @@
 
 import UIKit
 
-
+// 添加按钮点击代理方法
+protocol StoryWriteDelegate:NSObjectProtocol {
+    func storyWriteClick(content:String,location:String,time:String)
+}
 
 class WriteCell: UITableViewCell {
 
+    
+    weak var delegate: StoryWriteDelegate?
+    
+    
     @IBOutlet weak var content: UITextView!
-    @IBOutlet weak var next1: UIButton!
+    
+    @IBAction func save(_ sender: Any) {
+        print(content.text,1)
+        delegate?.storyWriteClick(content: content.text, location: "上海", time: "2019-9-1")
+        print(content)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.content.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,6 +41,7 @@ class WriteCell: UITableViewCell {
         public var topColor = UIColor.white
         var content1 = "快记录一下吧~"
     
+    
 }
 
 extension WriteCell: UITextViewDelegate {
@@ -36,9 +50,9 @@ extension WriteCell: UITextViewDelegate {
             content.text = ""
         }
         if self.topColor == .black {
-            content.textColor = UIColor.black
+            content.textColor = UIColor.green
         }else {
-            content.textColor = UIColor.white
+            content.textColor = UIColor.black
         }
         return true
         

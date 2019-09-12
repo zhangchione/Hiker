@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="298.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="快记录一下吧~" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dbo-gy-53B">
-                        <rect key="frame" x="20" y="31" width="374" height="150"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dbo-gy-53B">
+                        <rect key="frame" x="20" y="10" width="374" height="206"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -28,25 +28,20 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0T-em-0la">
-                        <rect key="frame" x="295" y="189" width="100" height="30"/>
+                        <rect key="frame" x="294" y="224" width="100" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" title="保存"/>
+                        <connections>
+                            <action selector="save:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="htH-Jl-7Ro"/>
+                        </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1by-0j-8aR">
-                        <rect key="frame" x="141" y="233" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="content" destination="Dbo-gy-53B" id="ZKv-bh-Q0r"/>
-                <outlet property="next1" destination="q0T-em-0la" id="o9X-yE-g8p"/>
             </connections>
-            <point key="canvasLocation" x="-1161" y="-12"/>
+            <point key="canvasLocation" x="-1162.3188405797102" y="-12.388392857142856"/>
         </tableViewCell>
     </objects>
 </document>

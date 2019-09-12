@@ -22,7 +22,7 @@ class NotesViewController: CustomTransitionViewController {
     let StorySementCellID = "WriteCell"
     // tableView
     lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -45,6 +45,9 @@ class NotesViewController: CustomTransitionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dismissKetboardTap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        self.view.addGestureRecognizer(dismissKetboardTap)
+        
         view.backgroundColor = .white
         view.addSubview(leftBarButton)
         
@@ -54,10 +57,18 @@ class NotesViewController: CustomTransitionViewController {
             make.left.equalTo(view)
             make.top.equalTo(view).offset(100)
             make.width.equalTo(TKWidth)
-            make.height.equalTo(count * 300)
+            make.height.equalTo(TKHeight)
         }
 
         
+    }
+    
+    var dismissKetboardTap = UITapGestureRecognizer()
+    
+    
+    @objc func dismissKeyboard(){
+        print("键盘成功关闭")
+        self.view.endEditing(false)
     }
     
 
@@ -87,7 +98,8 @@ extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
             if indexPath.row % 2 == 0 {
                 cell.backgroundColor = .red
             }
-            cell.next1.addTarget(self, action: #selector(add), for: .touchUpInside)
+            cell.delegate = self
+            //cell.next1.addTarget(self, action: #selector(add), for: .touchUpInside)
             return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -98,13 +110,29 @@ extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = WriteHeaderReusableView()
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 80
+    }
 }
 
-extension NotesViewController{
+extension NotesViewController: StoryWriteDelegate{
+    
+    func storyWriteClick(content: String, location: String, time: String) {
+        print(content,location,time)
+        add()
+    }
+    
+    
+    
     @objc func add(){
         print("11")
         self.count += 1
-        
         
         self.tableView.reloadData()
     }
