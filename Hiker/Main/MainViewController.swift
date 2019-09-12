@@ -12,18 +12,37 @@ import EachNavigationBar
 import ESTabBarController_swift
 
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     @IBAction func Login(_ sender: Any) {
             let mainTabVar = mainTabBar()
             UIApplication.shared.keyWindow?.rootViewController = mainTabVar
             UIApplication.shared.keyWindow?.makeKeyAndVisible()
     }
     
+    @IBAction func RegisterBtn(_ sender: Any) {
+//        let registerVC = RegisterViewController()
+//        self.navigationController?.pushViewController(registerVC, animated: true)
+        
+    }
+    
+    @IBAction func WeichatBtn(_ sender: Any) {
+        
+    }
+    
+    @IBAction func QQBtn(_ sender: Any) {
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+       configUI()
     }
 
+    
+    func configUI(){
+        self.navigation.bar.isShadowHidden = true
+        self.navigation.bar.alpha = 0
+    }
+    
     func mainTabBar() -> UITabBarController {
         let homeVC = HKHomeViewController()
         let noteVC = UIViewController()

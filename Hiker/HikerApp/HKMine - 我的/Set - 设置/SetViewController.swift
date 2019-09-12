@@ -10,9 +10,12 @@ import UIKit
 
 class SetViewController: SubClassBaseViewController {
     @IBAction func Logout(_ sender: Any) {
+
         let rootViewController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateInitialViewController()!
-        UIApplication.shared.keyWindow?.rootViewController = rootViewController
+        let loginVC = MainNavigationController.init(rootViewController: rootViewController)
+        loginVC.navigation.configuration.isEnabled = true
+        UIApplication.shared.keyWindow?.rootViewController = loginVC
         UIApplication.shared.keyWindow?.makeKeyAndVisible()
     }
     

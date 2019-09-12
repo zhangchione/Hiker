@@ -23,7 +23,7 @@
 		F5015600232799D900FD201C /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155FE232799D900FD201C /* SetViewController.swift */; };
 		F5015601232799D900FD201C /* SetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F50155FF232799D900FD201C /* SetViewController.xib */; };
 		F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C12325E0560014E3C3 /* AppDelegate.swift */; };
-		F58017C42325E0560014E3C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C32325E0560014E3C3 /* ViewController.swift */; };
+		F58017C42325E0560014E3C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C32325E0560014E3C3 /* MainViewController.swift */; };
 		F58017C72325E0560014E3C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58017C52325E0560014E3C3 /* Main.storyboard */; };
 		F58017C92325E0570014E3C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F58017C82325E0570014E3C3 /* Assets.xcassets */; };
 		F58017CC2325E0570014E3C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58017CA2325E0570014E3C3 /* LaunchScreen.storyboard */; };
@@ -32,7 +32,7 @@
 		F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */; };
 		F58017E22326075B0014E3C3 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E12326075B0014E3C3 /* Const.swift */; };
 		F58017E4232607770014E3C3 /* Extension + color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E3232607770014E3C3 /* Extension + color.swift */; };
-		F5D2C3CF232892AD00DE60D2 /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3CE232892AD00DE60D2 /* NextViewController.swift */; };
+		F5D2C3CF232892AD00DE60D2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */; };
 		F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */; };
 		F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */; };
 		F5D2C3D62328C97700DE60D2 /* MineSotryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D42328C97700DE60D2 /* MineSotryCell.swift */; };
@@ -40,6 +40,8 @@
 		F5D2C3DA2328D0A200DE60D2 /* CustomTransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D82328D0A200DE60D2 /* CustomTransitionViewController.swift */; };
 		F5D2C3DB2328D0A200DE60D2 /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D92328D0A200DE60D2 /* FadeTransition.swift */; };
 		F5D2C3DD2328D0D000DE60D2 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */; };
+		F5D8DD652329E58400B7EADF /* WriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D8DD632329E58400B7EADF /* WriteCell.swift */; };
+		F5D8DD662329E58400B7EADF /* WriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5D8DD642329E58400B7EADF /* WriteCell.xib */; };
 		F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431123261D7A00107F66 /* MainNavigationController.swift */; };
 		F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431A23262E2100107F66 /* HomeSearchView.swift */; };
 		F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431C23262E4400107F66 /* RecommendCityView.swift */; };
@@ -67,7 +69,7 @@
 		F50155FF232799D900FD201C /* SetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetViewController.xib; sourceTree = "<group>"; };
 		F58017BE2325E0560014E3C3 /* Hiker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hiker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58017C12325E0560014E3C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F58017C32325E0560014E3C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F58017C32325E0560014E3C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F58017C62325E0560014E3C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F58017C82325E0570014E3C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F58017CB2325E0570014E3C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -77,7 +79,7 @@
 		F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKBaseViewController.swift; sourceTree = "<group>"; };
 		F58017E12326075B0014E3C3 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		F58017E3232607770014E3C3 /* Extension + color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + color.swift"; sourceTree = "<group>"; };
-		F5D2C3CE232892AD00DE60D2 /* NextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
+		F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineStoryViewController.swift; sourceTree = "<group>"; };
 		F5D2C3D42328C97700DE60D2 /* MineSotryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineSotryCell.swift; sourceTree = "<group>"; };
@@ -85,6 +87,8 @@
 		F5D2C3D82328D0A200DE60D2 /* CustomTransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitionViewController.swift; sourceTree = "<group>"; };
 		F5D2C3D92328D0A200DE60D2 /* FadeTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
 		F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		F5D8DD632329E58400B7EADF /* WriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCell.swift; sourceTree = "<group>"; };
+		F5D8DD642329E58400B7EADF /* WriteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteCell.xib; sourceTree = "<group>"; };
 		F5EC431123261D7A00107F66 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F5EC431A23262E2100107F66 /* HomeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchView.swift; sourceTree = "<group>"; };
 		F5EC431C23262E4400107F66 /* RecommendCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCityView.swift; sourceTree = "<group>"; };
@@ -203,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				F58017C12325E0560014E3C3 /* AppDelegate.swift */,
-				F58017C32325E0560014E3C3 /* ViewController.swift */,
 				F58017D72325E3340014E3C3 /* Third */,
 				F58017D62325E3280014E3C3 /* Extension + Const */,
 				F58017D52325E3220014E3C3 /* Main */,
@@ -229,7 +232,8 @@
 		F58017D52325E3220014E3C3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				F5D2C3CE232892AD00DE60D2 /* NextViewController.swift */,
+				F58017C32325E0560014E3C3 /* MainViewController.swift */,
+				F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */,
 				F58017C52325E0560014E3C3 /* Main.storyboard */,
 				F5EC431123261D7A00107F66 /* MainNavigationController.swift */,
 				F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */,
@@ -286,6 +290,8 @@
 			isa = PBXGroup;
 			children = (
 				F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */,
+				F5D8DD632329E58400B7EADF /* WriteCell.swift */,
+				F5D8DD642329E58400B7EADF /* WriteCell.xib */,
 			);
 			path = "HKNotes - 记录";
 			sourceTree = "<group>";
@@ -420,6 +426,7 @@
 				F5D2C3D72328C97700DE60D2 /* MineSotryCell.xib in Resources */,
 				F58017C92325E0570014E3C3 /* Assets.xcassets in Resources */,
 				F58017C72325E0560014E3C3 /* Main.storyboard in Resources */,
+				F5D8DD662329E58400B7EADF /* WriteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F50155F5232774AC00FD201C /* SubClassBaseViewController.swift in Sources */,
+				F5D8DD652329E58400B7EADF /* WriteCell.swift in Sources */,
 				F5EC431F23262E5700107F66 /* StoryView.swift in Sources */,
 				F5D2C3DD2328D0D000DE60D2 /* NotesViewController.swift in Sources */,
 				F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */,
@@ -508,7 +516,7 @@
 				F5015600232799D900FD201C /* SetViewController.swift in Sources */,
 				F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */,
 				F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */,
-				F58017C42325E0560014E3C3 /* ViewController.swift in Sources */,
+				F58017C42325E0560014E3C3 /* MainViewController.swift in Sources */,
 				F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */,
 				F5D2C3DB2328D0A200DE60D2 /* FadeTransition.swift in Sources */,
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
@@ -517,7 +525,7 @@
 				F50155FA2327842F00FD201C /* MineHeaderView.swift in Sources */,
 				F50155E52327445C00FD201C /* StoryBannerViewModel.swift in Sources */,
 				F50155E92327454800FD201C /* StoryBannerView.swift in Sources */,
-				F5D2C3CF232892AD00DE60D2 /* NextViewController.swift in Sources */,
+				F5D2C3CF232892AD00DE60D2 /* RegisterViewController.swift in Sources */,
 				F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */,
 				F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */,
 				F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */,

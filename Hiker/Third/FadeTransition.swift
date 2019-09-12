@@ -11,7 +11,7 @@ import UIKit
 
 open class FadeTransition: NSObject, UIViewControllerAnimatedTransitioning {
     var transitionDuration: TimeInterval = 1
-    var startingAlpha: CGFloat = 0.0
+    var startingAlpha: CGFloat = 0.5
 
     public convenience init(transitionDuration: TimeInterval, startingAlpha: CGFloat){
         self.init()

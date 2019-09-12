@@ -26,8 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let rootViewController = UIStoryboard(name: "Main", bundle: nil)
             .instantiateInitialViewController()!
-        self.window!.rootViewController = UINavigationController(rootViewController:
-            rootViewController)
+        let loginVC = MainNavigationController.init(rootViewController: rootViewController)
+        loginVC.navigation.configuration.isEnabled = true
+        self.window!.rootViewController = loginVC
         
         print("初始化")
         
