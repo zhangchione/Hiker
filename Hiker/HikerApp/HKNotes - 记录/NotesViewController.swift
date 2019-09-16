@@ -100,19 +100,19 @@ extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
+            print(cellIsPhoto)
+              
             
-            var cells = tableView.cellForRow(at: indexPath) as? WriteStoryCell
+            let identifier = "story\(indexPath.section)\(indexPath.row)"
+            self.tableView.register(WriteStoryCell.self, forCellReuseIdentifier: identifier)
             
-            cells = WriteStoryCell(style: .default, reuseIdentifier: storyID)
-            
-            //let cell = tableView.dequeueReusableCell(withIdentifier: storyID , for: indexPath) as! WriteStoryCell
-            cells?.selectionStyle = .none;
-            cells?.delegate = self
-            //cell.next1.addTarget(self, action: #selector(add), for: .touchUpInside)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WriteStoryCell
+            cell.delegate = self
             if indexPath.row != count-1 {
-                cells?.nextBtn.isHidden = true
+                cell.nextBtn.isHidden = true
             }
-            return cells!
+            cell.selectionStyle = .none
+            return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
@@ -139,7 +139,7 @@ extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
 extension NotesViewController: WriteStoryDelegate{
     
     func storyWriteClick(content: String, location: String, time: String) {
-        print(content,location,time)
+        //print(content,location,time)
         add()
     }
     
