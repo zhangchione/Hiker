@@ -10,12 +10,12 @@ import UIKit
 
 class OnePhotoCell: UIView {
 
-    
+    public var imgUrl = ""
     
     // 图片
-    lazy var img: UIImageView = {
+    private lazy var img: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "矩形")
+        //imageView.image = UIImage(named: "矩形")
         return imageView
     }()
     
@@ -43,5 +43,15 @@ class OnePhotoCell: UIView {
     @objc func add(){
         
     }
+    
+    var photoDatas:String? {
+        didSet{
+            guard let photo = photoDatas else {
+                return
+            }
+            self.img.image = UIImage(named: photo)
+        }
+    }
+    
     
 }

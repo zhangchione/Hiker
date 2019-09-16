@@ -23,6 +23,8 @@ target 'Hiker' do
   
   #动画
   pod 'pop'
+  pod 'NVActivityIndicatorView'
   # Pods for Hiker
+
 
 end

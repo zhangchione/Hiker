@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 // 添加按钮点击代理方法
 protocol WriteStoryDelegate:NSObjectProtocol {
@@ -190,6 +191,15 @@ class WriteStoryCell: UITableViewCell {
 //            make.width.equalTo(100)
 //            make.height.equalTo(40)
 //        }
+    }
+    
+    var cellPhotoDatas:String? {
+        didSet{
+            guard let photo = cellPhotoDatas else {
+                return
+            }
+            self.onePhoto.photoDatas = photo
+        }
     }
     
 }

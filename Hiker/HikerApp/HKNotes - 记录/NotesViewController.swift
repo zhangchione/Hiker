@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
-class NotesViewController: CustomTransitionViewController {
+class NotesViewController: CustomTransitionViewController, NVActivityIndicatorViewable {
 
     // 左边返回按钮
     private lazy var leftBarButton: UIButton = {
@@ -31,7 +32,7 @@ class NotesViewController: CustomTransitionViewController {
         
         tableView.register(WriteStoryCell.self, forCellReuseIdentifier: storyID)
         tableView.separatorStyle = .none
-        //tableView.backgroundColor = .white
+        tableView.backgroundColor = .white
         
         return tableView
     }()
@@ -110,6 +111,7 @@ extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             if indexPath.row != count-1 {
                 cell.nextBtn.isHidden = true
+                cell.cellPhotoDatas = "矩形"
             }
             cell.selectionStyle = .none
             return cell
@@ -134,6 +136,14 @@ extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 80
     }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 300
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let vi = UIView()
+        vi.backgroundColor = .white
+        return vi
+    }
 }
 
 extension NotesViewController: WriteStoryDelegate{
@@ -148,11 +158,31 @@ extension NotesViewController: WriteStoryDelegate{
     @objc func add(){
         print("11")
         
-        self.cellIsPhoto[count - 1] = true
-        self.count += 1
-        self.cellIsPhoto.append(false)
+        let size = CGSize(width: 30, height: 30)
+        //let selectedIndicatorIndex = sender.tag
+//        let activityIndicatorView = NVActivityIndicatorView(frame: frame,
+//                                                            type: .ballPulse)
+        //let indicatorType = presentingIndicatorTypes["ballPulse"]
         
-        self.tableView.reloadData()
+        startAnimating(size, message: "智能配图中...", type: .ballPulse, fadeInAnimation: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            NVActivityIndicatorPresenter.sharedInstance.setMessage("配图完成...")
+
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+            self.stopAnimating(nil)
+            // 此处智能配图
+            self.cellIsPhoto[self.count - 1] = true
+            self.count += 1
+            self.cellIsPhoto.append(false)
+            
+            self.tableView.reloadData()
+        }
+        
+        
+
     }
 }
 

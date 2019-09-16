@@ -45,6 +45,7 @@
 		F5D8DD682329FDED00B7EADF /* WriteHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D8DD672329FDED00B7EADF /* WriteHeaderReusableView.swift */; };
 		F5D8DD6A232A0E2200B7EADF /* WriteStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D8DD69232A0E2200B7EADF /* WriteStoryCell.swift */; };
 		F5D8DD6D232A1CA500B7EADF /* OnePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */; };
+		F5E375C1232F735B00C7C351 /* FivePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E375C0232F735B00C7C351 /* FivePhotoCell.swift */; };
 		F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431123261D7A00107F66 /* MainNavigationController.swift */; };
 		F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431A23262E2100107F66 /* HomeSearchView.swift */; };
 		F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EC431C23262E4400107F66 /* RecommendCityView.swift */; };
@@ -95,6 +96,7 @@
 		F5D8DD672329FDED00B7EADF /* WriteHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteHeaderReusableView.swift; sourceTree = "<group>"; };
 		F5D8DD69232A0E2200B7EADF /* WriteStoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteStoryCell.swift; sourceTree = "<group>"; };
 		F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePhotoCell.swift; sourceTree = "<group>"; };
+		F5E375C0232F735B00C7C351 /* FivePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FivePhotoCell.swift; sourceTree = "<group>"; };
 		F5EC431123261D7A00107F66 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F5EC431A23262E2100107F66 /* HomeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchView.swift; sourceTree = "<group>"; };
 		F5EC431C23262E4400107F66 /* RecommendCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCityView.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				F5D8DD672329FDED00B7EADF /* WriteHeaderReusableView.swift */,
 				F5D8DD69232A0E2200B7EADF /* WriteStoryCell.swift */,
 				F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */,
+				F5E375C0232F735B00C7C351 /* FivePhotoCell.swift */,
 			);
 			path = "HKNotes - 记录";
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/LTScrollView/LTScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework",
@@ -505,6 +509,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEntryKit.framework",
@@ -559,6 +564,7 @@
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
 				F50155EE2327682D00FD201C /* MapCell.swift in Sources */,
 				F5EC43242326374600107F66 /* CityView.swift in Sources */,
+				F5E375C1232F735B00C7C351 /* FivePhotoCell.swift in Sources */,
 				F50155EB2327494B00FD201C /* StoryBaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
