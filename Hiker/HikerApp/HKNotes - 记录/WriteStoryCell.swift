@@ -225,6 +225,10 @@ extension WriteStoryCell: UITextViewDelegate {
         
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("结束编辑")
+    }
+    
 }
 extension WriteStoryCell {
     // 获取 content 高度

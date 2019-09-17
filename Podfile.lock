@@ -11,12 +11,17 @@ PODS:
   - NVActivityIndicatorView (4.7.0):
     - NVActivityIndicatorView/Presenter (= 4.7.0)
   - NVActivityIndicatorView/Presenter (4.7.0)
+  - ObjectMapper (3.5.1)
   - pop (1.0.12)
   - QuickLayout (3.0.0)
+  - RxCocoa (4.5.0):
+    - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxSwift (4.5.0)
   - SnapKit (4.2.0)
   - SwiftEntryKit (1.0.2):
     - QuickLayout (= 3.0.0)
   - SwiftyJSON (5.0.0)
+  - SwiftyUserDefaults (4.0.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -27,10 +32,14 @@ DEPENDENCIES:
   - LTScrollView
   - MJRefresh
   - NVActivityIndicatorView
+  - ObjectMapper (~> 3.4)
   - pop
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
   - SnapKit
   - SwiftEntryKit
   - SwiftyJSON
+  - SwiftyUserDefaults (~> 4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -42,11 +51,15 @@ SPEC REPOS:
     - LTScrollView
     - MJRefresh
     - NVActivityIndicatorView
+    - ObjectMapper
     - pop
     - QuickLayout
+    - RxCocoa
+    - RxSwift
     - SnapKit
     - SwiftEntryKit
     - SwiftyJSON
+    - SwiftyUserDefaults
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -57,12 +70,16 @@ SPEC CHECKSUMS:
   LTScrollView: 93fff4aed9f9545f541a99b320b27808f5307c12
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
+  ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftEntryKit: 7bcd42b3dbff59c431d60d6513129fd3679e4aaf
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
-PODFILE CHECKSUM: e58ff768b1eca76d8c0f23007f83ed7ce9f92ec7
+PODFILE CHECKSUM: 063fa378c02bebdb37de6d02ac79af34ff8da626
 
 COCOAPODS: 1.6.1

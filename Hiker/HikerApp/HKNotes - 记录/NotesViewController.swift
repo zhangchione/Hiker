@@ -171,9 +171,12 @@ extension NotesViewController: WriteStoryDelegate{
 
         }
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
             self.stopAnimating(nil)
             // 此处智能配图
+            
+            
+            
             self.cellIsPhoto[self.count - 1] = true
             self.count += 1
             self.cellIsPhoto.append(false)

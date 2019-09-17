@@ -13,6 +13,13 @@ target 'Hiker' do
   pod 'Hero'
   pod 'SwiftEntryKit'
 
+  # 数据流
+  pod 'RxSwift',    '~> 4.0'
+  pod 'RxCocoa',    '~> 4.0'
+  pod 'ObjectMapper', '~> 3.4'
+  # UserDefault
+  pod 'SwiftyUserDefaults', '~> 4.0'
+  
   # 网络请求json
   pod 'SwiftyJSON'
   pod 'Alamofire'

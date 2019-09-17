@@ -8,11 +8,10 @@
 
 import UIKit
 
+
 class RegisterViewController: UIViewController {
     
-    
-    
-    
+
     @IBAction func SendCodeBtn(_ sender: Any) {
         
     }

@@ -19,10 +19,10 @@ class StoryViewController: StoryBaseViewController {
         storyBannerView = StoryBannerView(with: storyBannerViewModel)
         super.init()
         
-        storyBannerViewModel.userCallBack = { [weak self] in
+        storyBannerViewModel.userCallBack = { [unowned self] in
             print("点击用户")
         }
-        storyBannerViewModel.backCallBack = { [weak self] in
+        storyBannerViewModel.backCallBack = { [unowned self] in
             print("11")
         }
         

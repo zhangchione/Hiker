@@ -14,6 +14,8 @@ class StoryBannerViewModel{
     init(with model:StoryBannerModel) {
         self.model = model
     }
-    var backCallBack: (() -> Void)?
-    var userCallBack: (() -> Void)?
+    
+    typealias call = () -> Void
+    var backCallBack: call?
+    var userCallBack: call?
 }

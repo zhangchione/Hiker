@@ -32,6 +32,8 @@
 		F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */; };
 		F58017E22326075B0014E3C3 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E12326075B0014E3C3 /* Const.swift */; };
 		F58017E4232607770014E3C3 /* Extension + color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E3232607770014E3C3 /* Extension + color.swift */; };
+		F5AED64A2330C40200B5B824 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED6492330C40200B5B824 /* Photo.swift */; };
+		F5AED64C2330C69C00B5B824 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED64B2330C69C00B5B824 /* Album.swift */; };
 		F5D2C3CF232892AD00DE60D2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */; };
 		F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */; };
 		F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */; };
@@ -83,6 +85,8 @@
 		F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKBaseViewController.swift; sourceTree = "<group>"; };
 		F58017E12326075B0014E3C3 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		F58017E3232607770014E3C3 /* Extension + color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + color.swift"; sourceTree = "<group>"; };
+		F5AED6492330C40200B5B824 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		F5AED64B2330C69C00B5B824 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineStoryViewController.swift; sourceTree = "<group>"; };
@@ -240,6 +244,7 @@
 		F58017D52325E3220014E3C3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F5AED6482330C3EB00B5B824 /* PhotoManage */,
 				F58017C32325E0560014E3C3 /* MainViewController.swift */,
 				F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */,
 				F58017C52325E0560014E3C3 /* Main.storyboard */,
@@ -305,6 +310,15 @@
 				F5E375C0232F735B00C7C351 /* FivePhotoCell.swift */,
 			);
 			path = "HKNotes - 记录";
+			sourceTree = "<group>";
+		};
+		F5AED6482330C3EB00B5B824 /* PhotoManage */ = {
+			isa = PBXGroup;
+			children = (
+				F5AED6492330C40200B5B824 /* Photo.swift */,
+				F5AED64B2330C69C00B5B824 /* Album.swift */,
+			);
+			path = PhotoManage;
 			sourceTree = "<group>";
 		};
 		F5D8DD6B232A0E4C00B7EADF /* Trash */ = {
@@ -492,10 +506,14 @@
 				"${BUILT_PRODUCTS_DIR}/LTScrollView/LTScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
 				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -510,10 +528,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEntryKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,6 +556,7 @@
 				F5EC431F23262E5700107F66 /* StoryView.swift in Sources */,
 				F5D2C3DD2328D0D000DE60D2 /* NotesViewController.swift in Sources */,
 				F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */,
+				F5AED64A2330C40200B5B824 /* Photo.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
 				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
 				F5015600232799D900FD201C /* SetViewController.swift in Sources */,
@@ -566,6 +589,7 @@
 				F5EC43242326374600107F66 /* CityView.swift in Sources */,
 				F5E375C1232F735B00C7C351 /* FivePhotoCell.swift in Sources */,
 				F50155EB2327494B00FD201C /* StoryBaseViewController.swift in Sources */,
+				F5AED64C2330C69C00B5B824 /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
