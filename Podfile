@@ -14,6 +14,7 @@ target 'Hiker' do
   pod 'SwiftEntryKit'
 
   # 数据流
+  pod 'SQLite.swift'
   pod 'RxSwift',    '~> 4.0'
   pod 'RxCocoa',    '~> 4.0'
   pod 'ObjectMapper', '~> 3.4'

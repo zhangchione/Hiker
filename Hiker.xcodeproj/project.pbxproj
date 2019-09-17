@@ -34,6 +34,16 @@
 		F58017E4232607770014E3C3 /* Extension + color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E3232607770014E3C3 /* Extension + color.swift */; };
 		F5AED64A2330C40200B5B824 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED6492330C40200B5B824 /* Photo.swift */; };
 		F5AED64C2330C69C00B5B824 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED64B2330C69C00B5B824 /* Album.swift */; };
+		F5AED6522330C7FB00B5B824 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED6512330C7FB00B5B824 /* DataBase.swift */; };
+		F5AED6602330C8AA00B5B824 /* UserStateTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED6562330C8A800B5B824 /* UserStateTable.swift */; };
+		F5AED6612330C8AA00B5B824 /* LocationIndexTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED6582330C8A900B5B824 /* LocationIndexTable.swift */; };
+		F5AED6622330C8AA00B5B824 /* ThingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED6592330C8A900B5B824 /* ThingTable.swift */; };
+		F5AED6632330C8AA00B5B824 /* ThingIndexTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65A2330C8A900B5B824 /* ThingIndexTable.swift */; };
+		F5AED6642330C8AA00B5B824 /* CustomAlbumTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65B2330C8A900B5B824 /* CustomAlbumTable.swift */; };
+		F5AED6652330C8AA00B5B824 /* LocationTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65C2330C8AA00B5B824 /* LocationTable.swift */; };
+		F5AED6662330C8AA00B5B824 /* DelectTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65D2330C8AA00B5B824 /* DelectTable.swift */; };
+		F5AED6672330C8AA00B5B824 /* LocalAlbumTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65E2330C8AA00B5B824 /* LocalAlbumTable.swift */; };
+		F5AED6682330C8AA00B5B824 /* DiaryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65F2330C8AA00B5B824 /* DiaryTable.swift */; };
 		F5D2C3CF232892AD00DE60D2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */; };
 		F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */; };
 		F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */; };
@@ -87,6 +97,18 @@
 		F58017E3232607770014E3C3 /* Extension + color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + color.swift"; sourceTree = "<group>"; };
 		F5AED6492330C40200B5B824 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		F5AED64B2330C69C00B5B824 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		F5AED6512330C7FB00B5B824 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
+		F5AED6532330C88B00B5B824 /* Hiker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hiker-Bridging-Header.h"; sourceTree = "<group>"; };
+		F5AED6562330C8A800B5B824 /* UserStateTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStateTable.swift; sourceTree = "<group>"; };
+		F5AED6572330C8A800B5B824 /* Tracks-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tracks-Bridging-Header.h"; sourceTree = "<group>"; };
+		F5AED6582330C8A900B5B824 /* LocationIndexTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationIndexTable.swift; sourceTree = "<group>"; };
+		F5AED6592330C8A900B5B824 /* ThingTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThingTable.swift; sourceTree = "<group>"; };
+		F5AED65A2330C8A900B5B824 /* ThingIndexTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThingIndexTable.swift; sourceTree = "<group>"; };
+		F5AED65B2330C8A900B5B824 /* CustomAlbumTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlbumTable.swift; sourceTree = "<group>"; };
+		F5AED65C2330C8AA00B5B824 /* LocationTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTable.swift; sourceTree = "<group>"; };
+		F5AED65D2330C8AA00B5B824 /* DelectTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelectTable.swift; sourceTree = "<group>"; };
+		F5AED65E2330C8AA00B5B824 /* LocalAlbumTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumTable.swift; sourceTree = "<group>"; };
+		F5AED65F2330C8AA00B5B824 /* DiaryTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTable.swift; sourceTree = "<group>"; };
 		F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineStoryViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				F58017C12325E0560014E3C3 /* AppDelegate.swift */,
+				F5AED64F2330C7D100B5B824 /* DataBase */,
 				F58017D72325E3340014E3C3 /* Third */,
 				F58017D62325E3280014E3C3 /* Extension + Const */,
 				F58017D52325E3220014E3C3 /* Main */,
@@ -226,6 +249,7 @@
 				F58017C82325E0570014E3C3 /* Assets.xcassets */,
 				F58017CA2325E0570014E3C3 /* LaunchScreen.storyboard */,
 				F58017CD2325E0570014E3C3 /* Info.plist */,
+				F5AED6532330C88B00B5B824 /* Hiker-Bridging-Header.h */,
 			);
 			path = Hiker;
 			sourceTree = "<group>";
@@ -315,10 +339,44 @@
 		F5AED6482330C3EB00B5B824 /* PhotoManage */ = {
 			isa = PBXGroup;
 			children = (
+				F5AED64E2330C7B000B5B824 /* Model */,
+			);
+			path = PhotoManage;
+			sourceTree = "<group>";
+		};
+		F5AED64E2330C7B000B5B824 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				F5AED6492330C40200B5B824 /* Photo.swift */,
 				F5AED64B2330C69C00B5B824 /* Album.swift */,
 			);
-			path = PhotoManage;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F5AED64F2330C7D100B5B824 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				F5AED6512330C7FB00B5B824 /* DataBase.swift */,
+				F5AED6502330C7E900B5B824 /* Table */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		F5AED6502330C7E900B5B824 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				F5AED65B2330C8A900B5B824 /* CustomAlbumTable.swift */,
+				F5AED65D2330C8AA00B5B824 /* DelectTable.swift */,
+				F5AED65E2330C8AA00B5B824 /* LocalAlbumTable.swift */,
+				F5AED6582330C8A900B5B824 /* LocationIndexTable.swift */,
+				F5AED65A2330C8A900B5B824 /* ThingIndexTable.swift */,
+				F5AED6592330C8A900B5B824 /* ThingTable.swift */,
+				F5AED65C2330C8AA00B5B824 /* LocationTable.swift */,
+				F5AED65F2330C8AA00B5B824 /* DiaryTable.swift */,
+				F5AED6562330C8A800B5B824 /* UserStateTable.swift */,
+				F5AED6572330C8A800B5B824 /* Tracks-Bridging-Header.h */,
+			);
+			path = Table;
 			sourceTree = "<group>";
 		};
 		F5D8DD6B232A0E4C00B7EADF /* Trash */ = {
@@ -429,6 +487,7 @@
 				TargetAttributes = {
 					F58017BD2325E0560014E3C3 = {
 						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -510,6 +569,7 @@
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -532,6 +592,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEntryKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -553,10 +614,13 @@
 				F5D8DD6D232A1CA500B7EADF /* OnePhotoCell.swift in Sources */,
 				F50155F5232774AC00FD201C /* SubClassBaseViewController.swift in Sources */,
 				F5D8DD652329E58400B7EADF /* WriteCell.swift in Sources */,
+				F5AED6632330C8AA00B5B824 /* ThingIndexTable.swift in Sources */,
 				F5EC431F23262E5700107F66 /* StoryView.swift in Sources */,
 				F5D2C3DD2328D0D000DE60D2 /* NotesViewController.swift in Sources */,
 				F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */,
+				F5AED6642330C8AA00B5B824 /* CustomAlbumTable.swift in Sources */,
 				F5AED64A2330C40200B5B824 /* Photo.swift in Sources */,
+				F5AED6522330C7FB00B5B824 /* DataBase.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
 				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
 				F5015600232799D900FD201C /* SetViewController.swift in Sources */,
@@ -564,14 +628,20 @@
 				F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */,
 				F58017C42325E0560014E3C3 /* MainViewController.swift in Sources */,
 				F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */,
+				F5AED6602330C8AA00B5B824 /* UserStateTable.swift in Sources */,
 				F5D2C3DB2328D0A200DE60D2 /* FadeTransition.swift in Sources */,
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
 				F50155F02327684A00FD201C /* StorySementCell.swift in Sources */,
+				F5AED6672330C8AA00B5B824 /* LocalAlbumTable.swift in Sources */,
+				F5AED6662330C8AA00B5B824 /* DelectTable.swift in Sources */,
+				F5AED6612330C8AA00B5B824 /* LocationIndexTable.swift in Sources */,
 				F50155E7232744A400FD201C /* StoryBannerModel.swift in Sources */,
 				F50155FA2327842F00FD201C /* MineHeaderView.swift in Sources */,
 				F50155E52327445C00FD201C /* StoryBannerViewModel.swift in Sources */,
 				F50155E92327454800FD201C /* StoryBannerView.swift in Sources */,
 				F5D2C3CF232892AD00DE60D2 /* RegisterViewController.swift in Sources */,
+				F5AED6622330C8AA00B5B824 /* ThingTable.swift in Sources */,
+				F5AED6682330C8AA00B5B824 /* DiaryTable.swift in Sources */,
 				F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */,
 				F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */,
 				F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */,
@@ -582,6 +652,7 @@
 				F5D8DD6A232A0E2200B7EADF /* WriteStoryCell.swift in Sources */,
 				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,
 				F50155F8232775A700FD201C /* TipsViewController.swift in Sources */,
+				F5AED6652330C8AA00B5B824 /* LocationTable.swift in Sources */,
 				F5D2C3D62328C97700DE60D2 /* MineSotryCell.swift in Sources */,
 				F58017E4232607770014E3C3 /* Extension + color.swift in Sources */,
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
@@ -736,6 +807,7 @@
 			baseConfigurationReference = 00FAD65466EEEDB00D9768D2 /* Pods-Hiker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YAJ74PJU3F;
 				INFOPLIST_FILE = Hiker/Info.plist;
@@ -745,6 +817,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cone.cc.Hiker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hiker/Hiker-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -755,6 +829,7 @@
 			baseConfigurationReference = FB82EFE226787FDAE3F7E104 /* Pods-Hiker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YAJ74PJU3F;
 				INFOPLIST_FILE = Hiker/Info.plist;
@@ -764,6 +839,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cone.cc.Hiker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hiker/Hiker-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

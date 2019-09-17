@@ -18,6 +18,9 @@ PODS:
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxSwift (4.5.0)
   - SnapKit (4.2.0)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
   - SwiftEntryKit (1.0.2):
     - QuickLayout (= 3.0.0)
   - SwiftyJSON (5.0.0)
@@ -37,6 +40,7 @@ DEPENDENCIES:
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - SnapKit
+  - SQLite.swift
   - SwiftEntryKit
   - SwiftyJSON
   - SwiftyUserDefaults (~> 4.0)
@@ -57,6 +61,7 @@ SPEC REPOS:
     - RxCocoa
     - RxSwift
     - SnapKit
+    - SQLite.swift
     - SwiftEntryKit
     - SwiftyJSON
     - SwiftyUserDefaults
@@ -76,10 +81,11 @@ SPEC CHECKSUMS:
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwiftEntryKit: 7bcd42b3dbff59c431d60d6513129fd3679e4aaf
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
-PODFILE CHECKSUM: 063fa378c02bebdb37de6d02ac79af34ff8da626
+PODFILE CHECKSUM: 4f7dcff5fb0d7bcdae024b626b088d7a86a905aa
 
 COCOAPODS: 1.6.1
