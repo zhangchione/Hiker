@@ -8,10 +8,19 @@
 
 import UIKit
 import LTScrollView
+import PopMenu
+import AudioToolbox
+
 private let glt_iphoneX = (UIScreen.main.bounds.height >= 812.0)
 
 class HKMineViewController: UIViewController {
 
+    lazy var addStoryBtn: UIButton = {
+       let btn = UIButton()
+        btn.backgroundColor = .cyan
+        return btn
+    }()
+    
     private lazy var viewControllers: [UIViewController] = {
         let oneVc = MineStoryViewController()
         let twoVc = MineStoryViewController()
@@ -51,7 +60,7 @@ class HKMineViewController: UIViewController {
     private lazy var advancedManager: LTAdvancedManager = {
         let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in
             guard let strongSelf = self else { return UIView() }
-            let headerView = strongSelf.testLabel()
+            let headerView = strongSelf.headerView
             return headerView
         })
         /* 设置代理 监听滚动 */
@@ -110,16 +119,35 @@ class HKMineViewController: UIViewController {
         self.navigation.bar.backgroundColor = .white
         self.view.backgroundColor = .white
         advancedManagerConfig()
+        
+//        self.view.addSubview(addStoryBtn)
+//        addStoryBtn.snp.makeConstraints { (make) in
+//            make.right.equalTo(view.snp.right).offset(20)
+//            make.width.equalTo(50)
+//            make.top.equalTo(headerView.snp.bottom).offset(8)
+//            make.height.equalTo(30)
+//        }
+//        addStoryBtn.addTarget(self, action: #selector(addStory), for: .touchUpInside)
     }
 
-    private func testLabel() -> MineHeaderView {
-        return MineHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 320))
-    }
-    @objc func set() {
-        print("右边按钮")
-        let setVC = SetViewController()
-        self.navigationController?.pushViewController(setVC, animated: true)
-    }
+    lazy var headerView:MineHeaderView = {
+        let headerView = MineHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: AdaptH(320)))
+        
+        let alterBackImgTap = UILongPressGestureRecognizer(target: self, action: #selector(alterBackImg))
+        //headerView.backgroundImageView
+        headerView.backgroundImageView.addGestureRecognizer(alterBackImgTap)
+        headerView.alterBtn.addTarget(self, action: #selector(alterUserSign), for: .touchUpInside)
+        headerView.storyBtn.addTarget(self, action: #selector(story), for: .touchUpInside)
+        headerView.fanBtn.addTarget(self, action: #selector(fan), for: .touchUpInside)
+        headerView.concernBtn.addTarget(self, action: #selector(concern), for: .touchUpInside)
+        
+        return headerView
+    }()
+    
+    
+        var imgPricker:UIImagePickerController!
+    
+
 }
 extension HKMineViewController: LTAdvancedScrollViewDelegate {
     
@@ -145,4 +173,94 @@ extension HKMineViewController: LTAdvancedScrollViewDelegate {
             self.rightBarButton.setImage(UIImage(named: "mine_icon_set"), for: .normal)
         }
     }
+}
+
+// - MARK: 事件
+extension HKMineViewController {
+    @objc func alterBackImg() {
+        print("改背景")
+        
+        let feedback = UIImpactFeedbackGenerator(style: .medium)
+        feedback.prepare()
+        feedback.impactOccurred()
+        
+        let action = UIAlertController.init(title: "修改背景", message: "您是否确定要修改背景图片？", preferredStyle: .actionSheet)
+        let alertY = UIAlertAction.init(title: "修改", style: .destructive) { (yes) in
+            print("确定修改")
+            self.imgPricker = UIImagePickerController()
+            self.imgPricker.delegate = self
+            self.imgPricker.allowsEditing = true
+            self.imgPricker.sourceType = .photoLibrary
+            
+            self.imgPricker.navigationBar.barTintColor = UIColor.gray
+            self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+            
+            self.imgPricker.navigationBar.tintColor = UIColor.white
+            
+            self.present(self.imgPricker, animated: true, completion: nil)
+            
+        }
+        let alertN = UIAlertAction.init(title: "取消", style: .cancel) { (no) in
+            print("取消")
+        }
+        
+        action.addAction(alertY)
+        action.addAction(alertN)
+        
+        self.present(action,animated: true,completion: nil)
+        
+        
+        
+    }
+
+    @objc func alterUserSign() {
+        
+        print("改签名")
+    }
+    @objc func story() {
+        
+        print("我的游记")
+    }
+    @objc func fan() {
+        
+        print("我的粉丝")
+        let fanVC = FanViewController()
+        self.navigationController?.pushViewController(fanVC, animated: true)
+    }
+    @objc func concern() {
+        
+        print("我的关注")
+        let concernVC = ConcernViewController()
+        self.navigationController?.pushViewController(concernVC, animated: true)
+    }
+    
+    @objc func set() {
+        print("右边按钮")
+        let setVC = SetViewController()
+        self.navigationController?.pushViewController(setVC, animated: true)
+    }
+    
+    @objc func addStory(){
+        print("添加故事簿")
+    }
+}
+extension HKMineViewController :UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("图片选取成功")
+        let img = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        
+        let imageURL = info[UIImagePickerController.InfoKey.imageURL]!
+        let imageData1 = try! Data(contentsOf: imageURL as! URL)
+        //self.img.image = img
+        
+       self.headerView.backgroundImageView.image = UIImage(data: imageData1)
+
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }

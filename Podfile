@@ -36,6 +36,8 @@ target 'Hiker' do
   pod 'NVActivityIndicatorView'
   #消息提示
   pod 'SwiftMessages'
+    #弹框
+    pod 'NewPopMenu', '~> 2.0'
   
   # Pods for Hiker
 

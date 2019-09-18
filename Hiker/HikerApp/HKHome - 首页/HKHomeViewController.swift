@@ -97,9 +97,9 @@ class HKHomeViewController: UIViewController {
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.addSubview(rightBarButton)
         rightBarButton.snp.makeConstraints { (make) in
-            make.right.equalTo(navigation.bar.snp.right).offset(-15)
-            make.bottom.equalTo(navigation.bar.snp.bottom).offset(-10)
-            make.width.height.equalTo(40)
+            make.right.equalTo(navigation.bar.snp.right).offset(-25)
+            make.bottom.equalTo(navigation.bar.snp.bottom).offset(-20)
+            make.width.height.equalTo(30)
         }
     }
 
@@ -115,6 +115,23 @@ class HKHomeViewController: UIViewController {
 
 extension HKHomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        print(scrollView.contentOffset.y)
+        let offsetY = scrollView.contentOffset.y
+        if offsetY < -94.0 {
+            rightBarButton.snp.remakeConstraints { (make) in
+                make.right.equalTo(navigation.bar.snp.right).offset(-25)
+                make.bottom.equalTo(navigation.bar.snp.bottom).offset(-20)
+                make.width.height.equalTo(30)
+            }
+        } else {
+            rightBarButton.snp.remakeConstraints { (make) in
+                make.right.equalTo(navigation.bar.snp.right).offset(-25)
+                make.bottom.equalTo(navigation.bar.snp.bottom).offset(-10)
+                make.width.height.equalTo(30)
+            }
+        }
+        
 //        let statusBarMaxY = UIApplication.shared.statusBarFrame.maxY
 //        let originY = -scrollView.contentOffset.y + statusBarMaxY
 //        let alpha = 1 - (scrollView.contentOffset.y) / navigation.bar.frame.height

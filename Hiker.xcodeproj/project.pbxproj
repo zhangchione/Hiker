@@ -46,6 +46,8 @@
 		F5AED6682330C8AA00B5B824 /* DiaryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65F2330C8AA00B5B824 /* DiaryTable.swift */; };
 		F5C872522331C4B60094DD7A /* GSCaptchaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */; };
 		F5C872542331C8480094DD7A /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872532331C8470094DD7A /* TimerButton.swift */; };
+		F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8725A233203CF0094DD7A /* FanViewController.swift */; };
+		F5C8725D233203D90094DD7A /* ConcernViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8725C233203D90094DD7A /* ConcernViewController.swift */; };
 		F5D2C3CF232892AD00DE60D2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */; };
 		F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */; };
 		F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */; };
@@ -113,6 +115,8 @@
 		F5AED65F2330C8AA00B5B824 /* DiaryTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTable.swift; sourceTree = "<group>"; };
 		F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCaptchaButton.swift; sourceTree = "<group>"; };
 		F5C872532331C8470094DD7A /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
+		F5C8725A233203CF0094DD7A /* FanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
+		F5C8725C233203D90094DD7A /* ConcernViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcernViewController.swift; sourceTree = "<group>"; };
 		F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineStoryViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +322,9 @@
 		F58017D92325E3440014E3C3 /* HKMine - 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				F5C872592332038E0094DD7A /* Concern - 关注 */,
+				F5C87258233203880094DD7A /* Fan - 粉丝 */,
+				F5C872572332037B0094DD7A /* Story - 游记 */,
 				F50155FD232799BE00FD201C /* Set - 设置 */,
 				F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */,
 				F58017DD2325F9E00014E3C3 /* HKMineViewController.swift */,
@@ -383,6 +390,29 @@
 				F5AED6572330C8A800B5B824 /* Tracks-Bridging-Header.h */,
 			);
 			path = Table;
+			sourceTree = "<group>";
+		};
+		F5C872572332037B0094DD7A /* Story - 游记 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Story - 游记";
+			sourceTree = "<group>";
+		};
+		F5C87258233203880094DD7A /* Fan - 粉丝 */ = {
+			isa = PBXGroup;
+			children = (
+				F5C8725A233203CF0094DD7A /* FanViewController.swift */,
+			);
+			path = "Fan - 粉丝";
+			sourceTree = "<group>";
+		};
+		F5C872592332038E0094DD7A /* Concern - 关注 */ = {
+			isa = PBXGroup;
+			children = (
+				F5C8725C233203D90094DD7A /* ConcernViewController.swift */,
+			);
+			path = "Concern - 关注";
 			sourceTree = "<group>";
 		};
 		F5D8DD6B232A0E4C00B7EADF /* Trash */ = {
@@ -571,6 +601,7 @@
 				"${BUILT_PRODUCTS_DIR}/LTScrollView/LTScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/NewPopMenu/PopMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ProgressHUD/ProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
@@ -596,6 +627,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
@@ -630,9 +662,11 @@
 				F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */,
 				F5AED6642330C8AA00B5B824 /* CustomAlbumTable.swift in Sources */,
 				F5AED64A2330C40200B5B824 /* Photo.swift in Sources */,
+				F5C8725D233203D90094DD7A /* ConcernViewController.swift in Sources */,
 				F5AED6522330C7FB00B5B824 /* DataBase.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
 				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
+				F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */,
 				F5015600232799D900FD201C /* SetViewController.swift in Sources */,
 				F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */,
 				F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */,

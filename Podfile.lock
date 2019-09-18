@@ -8,6 +8,7 @@ PODS:
   - Hero (1.4.0)
   - LTScrollView (0.2.1)
   - MJRefresh (3.2.0)
+  - NewPopMenu (2.1.2)
   - NVActivityIndicatorView (4.7.0):
     - NVActivityIndicatorView/Presenter (= 4.7.0)
   - NVActivityIndicatorView/Presenter (4.7.0)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - Hero
   - LTScrollView
   - MJRefresh
+  - NewPopMenu (~> 2.0)
   - NVActivityIndicatorView
   - ObjectMapper (~> 3.4)
   - pop
@@ -60,6 +62,7 @@ SPEC REPOS:
     - Hero
     - LTScrollView
     - MJRefresh
+    - NewPopMenu
     - NVActivityIndicatorView
     - ObjectMapper
     - pop
@@ -82,6 +85,7 @@ SPEC CHECKSUMS:
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   LTScrollView: 93fff4aed9f9545f541a99b320b27808f5307c12
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  NewPopMenu: c6129e08e8192f6257ceb5f9a4357e1b59c6e2e7
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
@@ -96,6 +100,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
-PODFILE CHECKSUM: f7bd8910bec5306b66ef2293c407bcce13ce3c8c
+PODFILE CHECKSUM: d345311bfca8d4433e4b4e8161ee165bcdcdb898
 
 COCOAPODS: 1.6.1
