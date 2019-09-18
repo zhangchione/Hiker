@@ -12,7 +12,9 @@ target 'Hiker' do
   pod 'EachNavigationBar'
   pod 'Hero'
   pod 'SwiftEntryKit'
-
+  # 缓存圆
+  pod 'ProgressHUD'
+  
   # 数据流
   pod 'SQLite.swift'
   pod 'RxSwift',    '~> 4.0'
@@ -32,6 +34,9 @@ target 'Hiker' do
   #动画
   pod 'pop'
   pod 'NVActivityIndicatorView'
+  #消息提示
+  pod 'SwiftMessages'
+  
   # Pods for Hiker
 
 

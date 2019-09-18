@@ -12,10 +12,11 @@ import UIKit
 class RegisterViewController: UIViewController {
     
 
-    @IBAction func SendCodeBtn(_ sender: Any) {
-        
-    }
+    @IBOutlet weak var sendCodes: TimerButton!
     
+
+    
+
     
     @IBAction func RegisterBtn(_ sender: Any) {
         
@@ -39,13 +40,27 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+//        sendCode.addTarget(self, action: #selector(send), for: .touchUpInside)
 
         configUI()
 
     }
     
+
+    
     func configUI(){
+        sendCodes.setup("获取验证码", timeTitlePrefix: "剩余")
+        sendCodes.clickBtnEvent = {
+            () -> Void in
+            
+            if !self.sendCodes.isWorking {
+                print("正在获取验证码")
+                
+                self.sendCodes.isWorking = true
+            }
+        }
+        sendCodes.setTitleColor(UIColor.blue, for: .normal)
+        
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.alpha = 0
         self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)

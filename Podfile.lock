@@ -13,6 +13,7 @@ PODS:
   - NVActivityIndicatorView/Presenter (4.7.0)
   - ObjectMapper (3.5.1)
   - pop (1.0.12)
+  - ProgressHUD (2.51)
   - QuickLayout (3.0.0)
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
@@ -23,6 +24,9 @@ PODS:
   - SQLite.swift/standard (0.12.2)
   - SwiftEntryKit (1.0.2):
     - QuickLayout (= 3.0.0)
+  - SwiftMessages (7.0.0):
+    - SwiftMessages/App (= 7.0.0)
+  - SwiftMessages/App (7.0.0)
   - SwiftyJSON (5.0.0)
   - SwiftyUserDefaults (4.0.0)
 
@@ -37,11 +41,13 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - ObjectMapper (~> 3.4)
   - pop
+  - ProgressHUD
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - SnapKit
   - SQLite.swift
   - SwiftEntryKit
+  - SwiftMessages
   - SwiftyJSON
   - SwiftyUserDefaults (~> 4.0)
 
@@ -57,12 +63,14 @@ SPEC REPOS:
     - NVActivityIndicatorView
     - ObjectMapper
     - pop
+    - ProgressHUD
     - QuickLayout
     - RxCocoa
     - RxSwift
     - SnapKit
     - SQLite.swift
     - SwiftEntryKit
+    - SwiftMessages
     - SwiftyJSON
     - SwiftyUserDefaults
 
@@ -77,15 +85,17 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  ProgressHUD: 54b4c2fa202bf3da7dddc1c698ae4e6376333bd9
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwiftEntryKit: 7bcd42b3dbff59c431d60d6513129fd3679e4aaf
+  SwiftMessages: a952f7a9103d9aeab93730a2861d2d8fcdd8758f
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
-PODFILE CHECKSUM: 4f7dcff5fb0d7bcdae024b626b088d7a86a905aa
+PODFILE CHECKSUM: f7bd8910bec5306b66ef2293c407bcce13ce3c8c
 
 COCOAPODS: 1.6.1

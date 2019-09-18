@@ -8,12 +8,22 @@
 
 import UIKit
 import EachNavigationBar
-
+import SwiftMessages
 import ESTabBarController_swift
-
+import ProgressHUD
 
 class MainViewController: UIViewController {
+    
+    var dissmissKeyboredTap = UITapGestureRecognizer()
+    
+    @IBOutlet weak var userID: UITextField!
+    @IBOutlet weak var userPwd: UITextField!
+    
     @IBAction func Login(_ sender: Any) {
+        
+        ProgressHUD.show("登陆中")
+        print("登陆信息为：",userID.text!,userPwd.text!)
+        ProgressHUD.showSuccess("登陆成功")
             let mainTabVar = mainTabBar()
             UIApplication.shared.keyWindow?.rootViewController = mainTabVar
             UIApplication.shared.keyWindow?.makeKeyAndVisible()
@@ -30,13 +40,26 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func QQBtn(_ sender: Any) {
-        
+        let warning = MessageView.viewFromNib(layout: .cardView)
+        warning.configureTheme(.warning)
+        warning.configureDropShadow()
+        let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
+        warning.configureContent(title: "不好意思啦", body: "QQ登陆目前还未没有开放噢", iconText: iconText)
+        warning.button?.isHidden = true
+        var warningConfig = SwiftMessages.defaultConfig
+        warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+        SwiftMessages.show(config: warningConfig, view: warning)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-       configUI()
+        dissmissKeyboredTap = UITapGestureRecognizer(target: self, action: #selector(dismissKey))
+        view.addGestureRecognizer(dissmissKeyboredTap)
+        configUI()
     }
 
+    @objc func dismissKey(){
+        self.view.endEditing(true)
+    }
     
     func configUI(){
         self.navigation.bar.isShadowHidden = true
