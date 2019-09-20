@@ -26,7 +26,8 @@ target 'Hiker' do
   # 网络请求json
   pod 'SwiftyJSON'
   pod 'Alamofire'
-
+  pod 'HandyJSON', :git => 'https://github.com/alibaba/HandyJSON.git', :branch => 'dev_for_swift5.0'
+  
   # 我的
   pod 'MJRefresh'
   pod 'LTScrollView'

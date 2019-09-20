@@ -11,6 +11,9 @@ import EachNavigationBar
 import SwiftMessages
 import ESTabBarController_swift
 import ProgressHUD
+import Alamofire
+import HandyJSON
+import SwiftyJSON
 
 class MainViewController: UIViewController {
     
@@ -21,12 +24,31 @@ class MainViewController: UIViewController {
     
     @IBAction func Login(_ sender: Any) {
         
+        let url = "http://120.77.151.36:8080/login?username=" + userID.text! + "&password=" + userPwd.text!
+        
         ProgressHUD.show("登陆中")
-        print("登陆信息为：",userID.text!,userPwd.text!)
-        ProgressHUD.showSuccess("登陆成功")
-            let mainTabVar = mainTabBar()
-            UIApplication.shared.keyWindow?.rootViewController = mainTabVar
-            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        
+        Alamofire.request(url).responseJSON { (response) in
+
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                guard json["msg"] == "token获取成功，有效期30天" else {
+                    ProgressHUD.showError("用户名或密码错误");  return
+                }
+                saveToken(token: json["data"].string!)
+                ProgressHUD.showSuccess("登陆成功")
+                
+                self.goToApp()
+                print("token为:",getToken()!)
+            }
+        }
+//        print("登陆信息为：",userID.text!,userPwd.text!)
+
+        
+        
     }
     
     @IBAction func RegisterBtn(_ sender: Any) {
@@ -64,6 +86,12 @@ class MainViewController: UIViewController {
     func configUI(){
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.alpha = 0
+    }
+    
+    func goToApp(){
+        let mainTabVar = self.mainTabBar()
+        UIApplication.shared.keyWindow?.rootViewController = mainTabVar
+        UIApplication.shared.keyWindow?.makeKeyAndVisible()
     }
     
     func mainTabBar() -> UITabBarController {
@@ -128,8 +156,12 @@ class MainViewController: UIViewController {
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 alertController.addAction(cancelAction)
                 
-                let notesVC = NotesViewController()
-                tabBarController?.present(notesVC, animated: true, completion: nil)
+                let notesVC = TitleViewController()
+                let noteNav = MainNavigationController.init(rootViewController: notesVC)
+                noteNav.navigation.configuration.isEnabled = true
+                noteNav.navigation.configuration.barTintColor = .white
+                noteNav.navigation.configuration.tintColor = .white
+                tabBarController?.present(noteNav, animated: true, completion: nil)
             }
         }
         tabBarController.viewControllers = [homeNav,noteNav,mineNav]

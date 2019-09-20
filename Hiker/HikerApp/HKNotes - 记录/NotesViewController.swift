@@ -11,6 +11,8 @@ import NVActivityIndicatorView
 
 class NotesViewController: CustomTransitionViewController, NVActivityIndicatorViewable {
 
+    var imgPricker:UIImagePickerController!
+    
     // 左边返回按钮
     private lazy var leftBarButton: UIButton = {
         let button = UIButton.init(type: .custom)
@@ -147,6 +149,20 @@ extension NotesViewController : UITableViewDelegate, UITableViewDataSource {
 }
 
 extension NotesViewController: WriteStoryDelegate{
+    func addPhoto() {
+        self.imgPricker = UIImagePickerController()
+        self.imgPricker.delegate = self
+        self.imgPricker.allowsEditing = true
+        self.imgPricker.sourceType = .photoLibrary
+        
+        self.imgPricker.navigationBar.barTintColor = UIColor.gray
+        self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        
+        self.imgPricker.navigationBar.tintColor = UIColor.white
+        
+        self.present(self.imgPricker, animated: true, completion: nil)
+    }
+    
     
     func storyWriteClick(content: String, location: String, time: String) {
         //print(content,location,time)
@@ -188,5 +204,21 @@ extension NotesViewController: WriteStoryDelegate{
 
     }
 }
-
+extension NotesViewController :UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("图片选取成功")
+        let img = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        
+        let imageURL = info[UIImagePickerController.InfoKey.imageURL]!
+        let imageData1 = try! Data(contentsOf: imageURL as! URL)
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+}
 

@@ -22,6 +22,9 @@
 		F50155FC2327865300FD201C /* LTAdvancedTestOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */; };
 		F5015600232799D900FD201C /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155FE232799D900FD201C /* SetViewController.swift */; };
 		F5015601232799D900FD201C /* SetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F50155FF232799D900FD201C /* SetViewController.xib */; };
+		F57C320A23349F1600B6E7A0 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57C320923349F1600B6E7A0 /* UserDefaults.swift */; };
+		F57C320C2334A90500B6E7A0 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57C320B2334A90500B6E7A0 /* NoteViewController.swift */; };
+		F57C320E2334AD8900B6E7A0 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57C320D2334AD8900B6E7A0 /* TitleViewController.swift */; };
 		F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C12325E0560014E3C3 /* AppDelegate.swift */; };
 		F58017C42325E0560014E3C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017C32325E0560014E3C3 /* MainViewController.swift */; };
 		F58017C72325E0560014E3C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58017C52325E0560014E3C3 /* Main.storyboard */; };
@@ -48,6 +51,7 @@
 		F5C872542331C8480094DD7A /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872532331C8470094DD7A /* TimerButton.swift */; };
 		F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8725A233203CF0094DD7A /* FanViewController.swift */; };
 		F5C8725D233203D90094DD7A /* ConcernViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8725C233203D90094DD7A /* ConcernViewController.swift */; };
+		F5C8725F2332211C0094DD7A /* VegaScrollFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8725E2332211C0094DD7A /* VegaScrollFlowLayout.swift */; };
 		F5D2C3CF232892AD00DE60D2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */; };
 		F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */; };
 		F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */; };
@@ -87,6 +91,9 @@
 		F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTAdvancedTestOneVC.swift; sourceTree = "<group>"; };
 		F50155FE232799D900FD201C /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
 		F50155FF232799D900FD201C /* SetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetViewController.xib; sourceTree = "<group>"; };
+		F57C320923349F1600B6E7A0 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		F57C320B2334A90500B6E7A0 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		F57C320D2334AD8900B6E7A0 /* TitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TitleViewController.swift; path = Trash/TitleViewController.swift; sourceTree = "<group>"; };
 		F58017BE2325E0560014E3C3 /* Hiker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hiker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58017C12325E0560014E3C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F58017C32325E0560014E3C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +124,7 @@
 		F5C872532331C8470094DD7A /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		F5C8725A233203CF0094DD7A /* FanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
 		F5C8725C233203D90094DD7A /* ConcernViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcernViewController.swift; sourceTree = "<group>"; };
+		F5C8725E2332211C0094DD7A /* VegaScrollFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VegaScrollFlowLayout.swift; sourceTree = "<group>"; };
 		F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineStoryViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +306,7 @@
 		F58017D72325E3340014E3C3 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				F5C8725E2332211C0094DD7A /* VegaScrollFlowLayout.swift */,
 				F5C872532331C8470094DD7A /* TimerButton.swift */,
 				F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */,
 				F5D2C3D82328D0A200DE60D2 /* CustomTransitionViewController.swift */,
@@ -339,12 +348,14 @@
 		F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */ = {
 			isa = PBXGroup;
 			children = (
+				F57C320D2334AD8900B6E7A0 /* TitleViewController.swift */,
 				F5D8DD6B232A0E4C00B7EADF /* Trash */,
 				F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */,
 				F5D8DD672329FDED00B7EADF /* WriteHeaderReusableView.swift */,
 				F5D8DD69232A0E2200B7EADF /* WriteStoryCell.swift */,
 				F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */,
 				F5E375C0232F735B00C7C351 /* FivePhotoCell.swift */,
+				F57C320B2334A90500B6E7A0 /* NoteViewController.swift */,
 			);
 			path = "HKNotes - 记录";
 			sourceTree = "<group>";
@@ -371,6 +382,7 @@
 			children = (
 				F5AED6512330C7FB00B5B824 /* DataBase.swift */,
 				F5AED6502330C7E900B5B824 /* Table */,
+				F57C320923349F1600B6E7A0 /* UserDefaults.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -597,6 +609,7 @@
 				"${BUILT_PRODUCTS_DIR}/CollectionKit/CollectionKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/EachNavigationBar/EachNavigationBar.framework",
+				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/LTScrollView/LTScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -623,6 +636,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CollectionKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EachNavigationBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -653,6 +667,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C8725F2332211C0094DD7A /* VegaScrollFlowLayout.swift in Sources */,
 				F5D8DD6D232A1CA500B7EADF /* OnePhotoCell.swift in Sources */,
 				F50155F5232774AC00FD201C /* SubClassBaseViewController.swift in Sources */,
 				F5D8DD652329E58400B7EADF /* WriteCell.swift in Sources */,
@@ -664,9 +679,11 @@
 				F5AED64A2330C40200B5B824 /* Photo.swift in Sources */,
 				F5C8725D233203D90094DD7A /* ConcernViewController.swift in Sources */,
 				F5AED6522330C7FB00B5B824 /* DataBase.swift in Sources */,
+				F57C320A23349F1600B6E7A0 /* UserDefaults.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
 				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
 				F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */,
+				F57C320C2334A90500B6E7A0 /* NoteViewController.swift in Sources */,
 				F5015600232799D900FD201C /* SetViewController.swift in Sources */,
 				F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */,
 				F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */,
@@ -675,6 +692,7 @@
 				F5AED6602330C8AA00B5B824 /* UserStateTable.swift in Sources */,
 				F5D2C3DB2328D0A200DE60D2 /* FadeTransition.swift in Sources */,
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
+				F57C320E2334AD8900B6E7A0 /* TitleViewController.swift in Sources */,
 				F50155F02327684A00FD201C /* StorySementCell.swift in Sources */,
 				F5AED6672330C8AA00B5B824 /* LocalAlbumTable.swift in Sources */,
 				F5AED6662330C8AA00B5B824 /* DelectTable.swift in Sources */,

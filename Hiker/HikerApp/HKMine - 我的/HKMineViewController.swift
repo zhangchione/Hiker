@@ -145,7 +145,7 @@ class HKMineViewController: UIViewController {
     }()
     
     
-        var imgPricker:UIImagePickerController!
+    var imgPricker:UIImagePickerController!
     
 
 }

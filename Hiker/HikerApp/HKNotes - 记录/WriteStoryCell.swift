@@ -12,6 +12,7 @@ import NVActivityIndicatorView
 // 添加按钮点击代理方法
 protocol WriteStoryDelegate:NSObjectProtocol {
     func storyWriteClick(content:String,location:String,time:String)
+    func addPhoto()
 }
 
 
@@ -64,6 +65,20 @@ class WriteStoryCell: UITableViewCell {
         btn.addTarget(self, action: #selector(nextClick), for: .touchUpInside)
         return btn
     }()
+    lazy var addPhotoBtn:UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "note_icon_location"), for: .normal)
+        btn.setTitle("添加照片", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        btn.backgroundColor = UIColor.white
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        btn.layer.cornerRadius = 20
+        btn.layer.borderWidth = 0.8
+        btn.addTarget(self, action: #selector(add), for: .touchUpInside)
+        return btn
+    }()
+    
     
     
     lazy var onePhoto:OnePhotoCell = {
@@ -98,12 +113,14 @@ class WriteStoryCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+
     
     func setUpUI(){
         
         addSubview(writeTextView)
         addSubview(locationBtn)
         addSubview(timeBtn)
+        addSubview(addPhotoBtn)
         addSubview(nextBtn)
         
         writeTextView.snp.makeConstraints { (make) in
@@ -124,8 +141,15 @@ class WriteStoryCell: UITableViewCell {
             make.height.equalTo(30)
             make.width.equalTo(120)
         }
+        addPhotoBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(timeBtn.snp.bottom).offset(AdaptH(10))
+            make.height.equalTo(AdaptH(40))
+            make.left.equalTo(self).offset(30)
+            make.right.equalTo(self).offset(-30)
+        }
+        
         nextBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(timeBtn.snp.bottom).offset(25)
+            make.top.equalTo(addPhotoBtn.snp.bottom).offset(25)
             make.right.equalTo(self).offset(-20)
             make.width.equalTo(100)
             make.height.equalTo(40)
@@ -133,6 +157,9 @@ class WriteStoryCell: UITableViewCell {
 
     }
     
+    @objc func add(){
+        delegate?.addPhoto()
+    }
     
     
     override func awakeFromNib() {
@@ -214,7 +241,6 @@ extension WriteStoryCell: UITextViewDelegate {
             content.textColor = UIColor.black
         }
         return true
-        
     }
     func textViewDidChange(_ textView: UITextView) {
        // self.content1 = textView.text
@@ -246,3 +272,5 @@ extension WriteStoryCell {
         print("下一段点击")
     }
 }
+
+

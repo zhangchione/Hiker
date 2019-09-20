@@ -23,12 +23,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let rootVc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
 //        UIApplication.shared.keyWindow?.rootViewController = rootVc
 //        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        
+        if getToken() != nil {
+            let mainTabVar = self.mainTabBar()
+            UIApplication.shared.keyWindow?.rootViewController = mainTabVar
+            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+        }else {
+        
+            let rootViewController = UIStoryboard(name: "Main", bundle: nil)
+                .instantiateInitialViewController()!
+            let loginVC = MainNavigationController.init(rootViewController: rootViewController)
+            loginVC.navigation.configuration.isEnabled = true
+            self.window!.rootViewController = loginVC
+        }
+        
+        
 
-        let rootViewController = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateInitialViewController()!
-        let loginVC = MainNavigationController.init(rootViewController: rootViewController)
-        loginVC.navigation.configuration.isEnabled = true
-        self.window!.rootViewController = loginVC
         
         print("初始化")
         
@@ -107,7 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 alertController.addAction(cancelAction)
                 
                 let notesVC = NotesViewController()
-                tabBarController?.present(notesVC, animated: true, completion: nil)
+                let noteNav = MainNavigationController.init(rootViewController: notesVC)
+                tabBarController?.present(noteNav, animated: true, completion: nil)
             }
         }
         tabBarController.viewControllers = [homeNav,noteNav,mineNav]

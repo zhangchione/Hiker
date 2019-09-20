@@ -62,6 +62,9 @@ class HKHomeViewController: UIViewController {
         return collection
     }()
     
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
 
     }
