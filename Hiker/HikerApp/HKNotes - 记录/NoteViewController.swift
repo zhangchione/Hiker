@@ -180,30 +180,24 @@ class NoteViewController: UIViewController {
     @objc func nextClick(){
         noteData.content = writeTextView.text
         
-        var notesData = getNotes()
-        
-        if notesData != nil {
-            notesData!.append(noteData)
-            saveNotes(notes: notesData!)
-            print("第",notesData!.count,"保存成功")
+        var contents = [String]()
+        let locaCon = getContent()
+        if  locaCon == nil {
+            contents.append(writeTextView.text!)
+            print(writeTextView.text!)
         }else {
-            notesData = [Notes]()
-            notesData!.append(noteData)
-            saveNotes(notes: notesData!)
-            print(noteData)
-            print("第一段保存成功")
+            contents = locaCon!
+            contents.append(writeTextView.text!)
         }
+        saveContent(content: contents)
+        
+        
         let noteVC = NoteViewController()
         self.navigationController?.pushViewController(noteVC, animated: true)
     }
     @objc func headclick(){
-        let notes = getNotes()
-    
-        if notes != nil {
-            for note in notes! {
-                print(note)
-            }
-        }
+        UserDefaults.standard.removeObject(forKey: "content")
+        
     }
     @objc func addPhoto(){
         self.imgPricker = UIImagePickerController()

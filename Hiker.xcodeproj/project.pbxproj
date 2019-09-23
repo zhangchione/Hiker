@@ -277,6 +277,8 @@
 		F58017D42325E31A0014E3C3 /* HikerApp */ = {
 			isa = PBXGroup;
 			children = (
+				F5EBB55423386FD1006DAAC8 /* NotesModel.swift */,
+				F5EBB5592338AD71006DAAC8 /* HKSer - 搜索 */,
 				F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */,
 				F5EBB5562338976A006DAAC8 /* PhotoCell.swift */,
 				F58017D82325E33C0014E3C3 /* HKHome - 首页 */,
@@ -353,7 +355,6 @@
 		F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */ = {
 			isa = PBXGroup;
 			children = (
-				F5EBB55423386FD1006DAAC8 /* NotesModel.swift */,
 				F57C320D2334AD8900B6E7A0 /* TitleViewController.swift */,
 				F5D8DD6B232A0E4C00B7EADF /* Trash */,
 				F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */,
@@ -440,6 +441,13 @@
 				F5D8DD642329E58400B7EADF /* WriteCell.xib */,
 			);
 			path = Trash;
+			sourceTree = "<group>";
+		};
+		F5EBB5592338AD71006DAAC8 /* HKSer - 搜索 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "HKSer - 搜索";
 			sourceTree = "<group>";
 		};
 		F5EC431323262CCF00107F66 /* API */ = {

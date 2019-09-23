@@ -40,8 +40,49 @@ struct note {
 }
 
 
+
+func saveContent(content:[String]) {
+    print("存储内容为:",content)
+    defaults.set(content,forKey: "content")
+    defaults.synchronize()
+}
+func getContent() -> [String]? {
+    let content = defaults.object(forKey: "content") as? [String]
+    return content
+}
+
+func saveLocation(content:[String]) {
+    defaults.set(content,forKey: "location")
+    defaults.synchronize()
+}
+func getLocation() -> [String]? {
+    
+    return defaults.object(forKey: "location") as? [String]
+}
+
+func saveTime(content:[String]) {
+    defaults.set(content,forKey: "time")
+    defaults.synchronize()
+}
+func getTime() -> [String]? {
+    
+    return defaults.object(forKey: "time") as? [String]
+}
+
+func savePic(content:[String]) {
+    defaults.set(content,forKey: "pic")
+    defaults.synchronize()
+}
+func getPic() -> [String]? {
+    
+    return defaults.object(forKey: "pic") as? [String]
+}
+
+
+
+
 func saveNotes(notes:[Notes]) {
-    var notesArray = Array<Any>()
+    var notesArray = Array<Data>()
     
     for note in notes {
         let data = NSKeyedArchiver.archivedData(withRootObject: note)
@@ -53,11 +94,12 @@ func saveNotes(notes:[Notes]) {
     print("存储成功")
 }
 func getNotes() -> [Notes]? {
-    let notes  = defaults.array(forKey: "notes")
+    let notes  = defaults.object(forKey: "notes") as? [Data]
     var arrays: [Notes]?
     if notes != nil {
         for note in notes! {
             let array = NSKeyedUnarchiver.unarchiveObject(with: note as! Data) as! Notes
+            
             arrays?.append(array)
             print(array)
         }

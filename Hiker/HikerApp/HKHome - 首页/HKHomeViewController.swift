@@ -164,7 +164,10 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKRecommendCityID, for: indexPath) as! RecommendCityView
             return cell
         }else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKStoryID, for: indexPath) as! StoryView
+            let identifier = "story\(indexPath.section)\(indexPath.row)"
+            self.collectionView.register(StoryView.self, forCellWithReuseIdentifier: identifier)
+
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! StoryView
             cell.favBtn.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
             cell.photoCell.imgData = data[indexPath.row]
             
