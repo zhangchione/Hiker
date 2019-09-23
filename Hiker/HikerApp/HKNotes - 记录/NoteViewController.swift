@@ -12,7 +12,7 @@ import ProgressHUD
 
 class NoteViewController: UIViewController {
     var imgPricker:UIImagePickerController!
-    var noteData = note()
+    var noteData = Notes()
     
     // 左边返回按钮
     private lazy var leftBarButton: UIButton = {
@@ -179,13 +179,15 @@ class NoteViewController: UIViewController {
     
     @objc func nextClick(){
         noteData.content = writeTextView.text
+        
         var notesData = getNotes()
+        
         if notesData != nil {
             notesData!.append(noteData)
             saveNotes(notes: notesData!)
             print("第",notesData!.count,"保存成功")
         }else {
-            notesData = [note]()
+            notesData = [Notes]()
             notesData!.append(noteData)
             saveNotes(notes: notesData!)
             print(noteData)
@@ -275,8 +277,9 @@ extension NoteViewController :UIImagePickerControllerDelegate,UINavigationContro
         let imageData1 = try! Data(contentsOf: imageURL as! URL)
 
         let imgUrl = (imageURL as! URL).path
+        self.noteData.pic = imgUrl
         
-        self.noteData.pic.append(imgUrl)
+       // self.noteData.pic.append(imgUrl)
         
         self.dismiss(animated: true, completion: nil)
     }

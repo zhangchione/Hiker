@@ -11,21 +11,7 @@ import SnapKit
 
 class HKHomeViewController: UIViewController {
     
-    // 标签栏中间
-    lazy var centerView:UIView = {
-        let vi = UIView()
-        vi.backgroundColor = UIColor.clear
-        return vi
-    }()
-    // 标签栏中间按钮
-    lazy var notesBtn : UIButton = {
-        let btn = UIButton()
-        //btn.setImage(UIImage(named: "add_tab"), for: .normal)
-        btn.setBackgroundImage(UIImage(named: "add_tab"), for: .normal)
-        //btn.imageView?.image = UIImage(named: "add_tab")
-        btn.addTarget(self, action: #selector(add), for: .touchUpInside)
-        return btn
-    }()
+    var data = [1,2,3,4,5,1,2,3,4,5]
     
     // MARK - 右边功能按钮
     private lazy var rightBarButton:UIButton = {
@@ -165,7 +151,7 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         if section <= 1 {
             return 1
         }else {
-            return 2
+            return data.count
         }
     }
     
@@ -179,10 +165,32 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
             return cell
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKStoryID, for: indexPath) as! StoryView
+            cell.favBtn.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
+            cell.photoCell.imgData = data[indexPath.row]
+            
             return cell
         }
     }
     
+    @objc func fav(_ sender:UIButton){
+        
+        let btn = sender
+        let cell = btn.superView(of: StoryView.self)!
+        let indexPath = collectionView.indexPath(for: cell)
+
+        if data[(indexPath?.row)!] == 1 {
+            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+            cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
+            data[(indexPath?.row)!] = 0
+        }else {
+            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+            cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
+            data[(indexPath?.row)!] = 1
+        }
+        //sum = sum + (label.text! as NSString).integerValue
+       // self.title = "总数：\(sum)"
+        
+    }
     //每个分区的内边距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section == 0 {

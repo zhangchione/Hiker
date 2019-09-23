@@ -10,75 +10,90 @@ import UIKit
 
 class StoryView: UICollectionViewCell {
     
+    
+    lazy var photoCell:PhotoCell = {
+       let photoCell = PhotoCell()
+        return photoCell
+    }()
+    
     // 图片
-    private var imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(named: "home_story_back")
         return imageView
     }()
     
     // 图片
-    private var userIcon: UIImageView = {
+    lazy var userIcon: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .red
+//        imageView.backgroundColor = .red
         imageView.image = UIImage(named: "椭圆形")
         return imageView
     }()
     // 用户名
-    private var userName: UILabel = {
+    lazy var userName: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 14)
+        label.textColor = UIColor.init(r: 146, g: 146, b: 146)
         label.text = "王一一"
         return label
     }()
     
     // 地点
-    private var trackLocation: UILabel = {
+    lazy var trackLocation: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.init(name: "PingFangSC-Regular", size: 14)
+        label.textColor = UIColor.init(r: 64, g: 102, b: 214)
         label.text = "#上海、广州、深圳"
+        label.textAlignment = .right
         return label
     }()
     
     // 标题
-    private var title: UILabel = {
+    lazy var title: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
         label.text = "魔都上海两日"
+        label.textAlignment = .left
         return label
     }()
     // 时间
-    private var time: UILabel = {
+    lazy var time: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.init(name: "PingFangSC-Regular", size: 14)
+        label.textColor = UIColor.init(r: 146, g: 146, b: 146)
         label.text = "2019.8.30"
+        label.textAlignment = .right
         return label
     }()
     
     //分割线
-    private var line: UIView = {
+    lazy var line: UIView = {
        let vi = UIView()
         vi.backgroundColor = UIColor.init(r: 238, g: 238, b: 238)
         return vi
     }()
     
     // 被喜欢数量
-    private var favLabel: UILabel = {
+    lazy var favLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 14)
+        label.textColor = UIColor.init(r: 214, g: 64, b: 64)
         label.text = "1234"
         
         return label
     }()
     // 被喜欢icon
-    private var favIcon: UIImageView = {
+    lazy var favIcon: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "home_story_love")
         return img
     }()
     // 收藏按钮
-    private var favBtn: UIButton = {
+    lazy var favBtn: UIButton = {
         let Btn = UIButton()
         Btn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+        //Btn.addTarget(self, action: #selector(fav), for: .touchUpInside)
         return Btn
     }()
     
@@ -104,6 +119,14 @@ class StoryView: UICollectionViewCell {
         addSubview(trackLocation)
         addSubview(userIcon)
         addSubview(userName)
+        addSubview(photoCell)
+        
+        photoCell.snp.makeConstraints { (make) in
+            make.right.equalTo(self)
+            make.left.equalTo(self)
+            make.height.equalTo(AdaptH(190))
+            make.top.equalTo(self)
+        }
         
         favBtn.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(AdaptW(-15))
@@ -132,13 +155,13 @@ class StoryView: UICollectionViewCell {
         time.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(AdaptW(-15))
             make.bottom.equalTo(line.snp.top).offset(AdaptH(-20))
-            make.width.equalTo(AdaptW(60))
+            make.width.equalTo(AdaptW(100))
             make.height.equalTo(AdaptH(20))
         }
         title.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(AdaptW(15))
             make.centerY.equalTo(time.snp.centerY)
-            make.width.equalTo(AdaptW(100))
+            make.width.equalTo(AdaptW(180))
             make.height.equalTo(AdaptH(30))
         }
         userIcon.snp.makeConstraints { (make) in
@@ -150,22 +173,30 @@ class StoryView: UICollectionViewCell {
         userName.snp.makeConstraints { (make) in
             make.left.equalTo(userIcon.snp.right).offset(AdaptW(5))
             make.centerY.equalTo(userIcon.snp.centerY)
-            make.width.equalTo(AdaptW(60))
+            make.width.equalTo(AdaptW(100))
             make.height.equalTo(AdaptH(20))
         }
         
         trackLocation.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(AdaptW(-15))
             make.centerY.equalTo(userIcon.snp.centerY)
-            make.width.equalTo(AdaptW(120))
+            make.width.equalTo(AdaptW(200))
             make.height.equalTo(AdaptH(20))
         }
         
         
         
+        
     }
+    
+    
     func configShadow(){
         self.backgroundColor = .white
         self.layer.cornerRadius = 10
+    }
+    
+    @objc func fav(){
+        favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+        self.favLabel.text = "\(Int(favLabel.text!)! + 1)"
     }
 }
