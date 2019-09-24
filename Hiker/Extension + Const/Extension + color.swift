@@ -127,6 +127,26 @@ extension UIView{
             layer.shadowOffset = newValue
         }
     }
+    
+    @IBInspectable
+    var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    @IBInspectable
+    var borderColor: UIColor {
+        get {
+            return (layer.borderColor != nil ? UIColor(cgColor: layer.borderColor!) :nil)!
+        }
+        set {
+            layer.borderColor = newValue.cgColor
+        }
+    }
+    
 }
 
 extension UIView {
@@ -142,6 +162,7 @@ extension UIView {
         maskLayer.frame = self.bounds
         maskLayer.path = maskPath.cgPath
         self.layer.mask = maskLayer
+
     }
 }
 extension UIImage

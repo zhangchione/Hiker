@@ -33,6 +33,8 @@ let TKHeight = UIScreen.main.bounds.height
 
 // 背景色
 let backColor = UIColor.init(r: 247, g: 247, b: 247)
+// 文字色
+let textColor = UIColor.init(r: 146, g: 146, b: 146)
 // 底部状态栏背景色
 let tabBarColor = UIColor.init(r: 151, g: 151, b: 151, alpha: 0.2)
 

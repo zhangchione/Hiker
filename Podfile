@@ -40,7 +40,7 @@ target 'Hiker' do
   #弹框
   pod 'NewPopMenu', '~> 2.0'
   #卡片滑动
-  pod 'expanding-collection'
+  #pod 'expanding-collection'
   
   # Pods for Hiker
 
