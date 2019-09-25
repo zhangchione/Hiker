@@ -293,10 +293,9 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
             let searchVC = SearchViewController()
             self.navigationController?.pushViewController(searchVC, animated: true)
         }else {
-        var model = NotesModel()
-        model.title = "魔都上海两日"
-        let vc = StoryViewController(model: model)
-        self.navigationController?.pushViewController(vc, animated: true)
+            let model = notesDatas[indexPath.row]
+            let vc = StoryViewController(model: model)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 

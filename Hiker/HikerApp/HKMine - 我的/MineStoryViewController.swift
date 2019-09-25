@@ -65,6 +65,9 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         print("111")
+        let model = datas?.story![indexPath.row]
+        let vc = StoryViewController(model: model!)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

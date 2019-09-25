@@ -52,8 +52,9 @@ class StoryBannerView: UIView {
     
     func updateUI(){
         print("更新UI")
-        nameLabel.text = "王一一"
-        titleLabel.text = "魔都上海两日"
+        nameLabel.text = viewModel.model?.user?.username
+        titleLabel.text = viewModel.model?.title
+        userButton.setImage(UIImage(named: (viewModel.model?.user!.headPic)!), for: .normal)
     }
     
     func configUI(){

@@ -13,6 +13,8 @@ class StoryBaseViewController: UIViewController {
     let str = "下了飞机第一件事是去地铁的人工窗口办一张三日卡，只需要45元，72小时内可以无限制乘坐地铁，能大大节约每次购票的时间和金钱，非常划算，毕竟，上海绝大部分地方，都是可以通过地铁达到的。另外，推荐下载“上海地铁”APP，能够方便查询线路等信息，便于高效换乘。"
     private let StorySementCellID = "StorySementCell"
     
+    public var paras: [NoteParas]?
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -60,18 +62,21 @@ extension StoryBaseViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
         -> Int {
-            return rowNumber
+            return paras!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: StorySementCellID , for: indexPath) as! StorySementCell
                 cell.selectionStyle = .none;
+            if let para = paras {
+                configCell(cell, with: paras![indexPath.row])
+            }
+                cell.num.text = "\(indexPath.row + 1)"
             return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var cellHeight =  CGFloat(self.getTextHeigh(textStr: str, font: UIFont.boldSystemFont(ofSize: 15), width: 374))
-        print("高度为",cellHeight)
         return cellHeight + 300
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -87,5 +92,15 @@ extension StoryBaseViewController {
         let dic = NSDictionary(object: font, forKey: NSAttributedString.Key.font as NSCopying)
         let stringSize = normalText.boundingRect(with: size,options: .usesLineFragmentOrigin, attributes: dic as! [NSAttributedString.Key : Any] , context:nil).size
         return stringSize.height
+    }
+}
+
+extension StoryBaseViewController {
+    func configCell(_ cell:StorySementCell,with data:NoteParas) {
+        cell.content.text = data.content
+        cell.location.text = data.place
+        cell.time.text = data.date
+        cell.photoCell.imgDatas = data.pics
+        print(data.pics)
     }
 }

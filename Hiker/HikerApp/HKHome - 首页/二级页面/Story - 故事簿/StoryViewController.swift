@@ -17,13 +17,14 @@ class StoryViewController: StoryBaseViewController {
     init(model:NotesModel) {
         storyBannerViewModel = StoryBannerViewModel(with: model)
         storyBannerView = StoryBannerView(with: storyBannerViewModel)
+        print(model)
         super.init()
-        
+        self.paras = model.noteParas
         storyBannerViewModel.userCallBack = { [unowned self] in
             print("点击用户")
         }
         storyBannerViewModel.backCallBack = { [unowned self] in
-            print("11")
+            print("收藏")
         }
         
         storyBannerView.viewModel = storyBannerViewModel
@@ -38,7 +39,6 @@ class StoryViewController: StoryBaseViewController {
         tableView.contentInset =
             UIEdgeInsets(top: bannerHeight, left: 0, bottom: 0, right: 0)
         self.tableView.addSubview(storyBannerView)
-        
     }
     
     //导航栏背景视图

@@ -48,6 +48,11 @@ class StorySementCell: UITableViewCell {
         return label
     }()
     
+    lazy var photoCell:PhotoCell = {
+        let photoCell = PhotoCell()
+        return photoCell
+    }()
+    
     lazy var img: UIImageView = {
        let img = UIImageView()
         img.image = UIImage(named: "矩形备份 2")
@@ -81,6 +86,7 @@ class StorySementCell: UITableViewCell {
         addSubview(location)
         addSubview(content)
         addSubview(img)
+        addSubview(photoCell)
         addSubview(line)
         num.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
@@ -105,12 +111,13 @@ class StorySementCell: UITableViewCell {
             make.top.equalTo(time.snp.bottom).offset(10)
             make.width.equalTo(374)
         }
-        img.snp.makeConstraints { (make) in
+        photoCell.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
             make.bottom.equalTo(self).offset(-20)
             make.width.equalTo(374)
             make.height.equalTo(190)
         }
+        
         line.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
             make.right.equalTo(self).offset(-20)

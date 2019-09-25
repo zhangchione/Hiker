@@ -38,7 +38,7 @@ struct NotesModel:HandyJSON {
     var likes = 0
     var like = false
     var collected = false
-    var notePares:[NoteParas]?
+    var noteParas:[NoteParas]?
 }
 struct User:HandyJSON {
     var id = ""
@@ -56,7 +56,7 @@ struct Comments:HandyJSON {
 struct NoteParas:HandyJSON {
     var id = ""
     var content = ""
-    var pic = ""
+    var pics:[String]?
     var place = ""
     var date = ""
     var noteid = ""
