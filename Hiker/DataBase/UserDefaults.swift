@@ -51,8 +51,9 @@ func getContent() -> [String]? {
     return content
 }
 
-func saveLocation(content:[String]) {
-    defaults.set(content,forKey: "location")
+func saveLocation(location:[String]) {
+    print("地点为：",location)
+    defaults.set(location,forKey: "location")
     defaults.synchronize()
 }
 func getLocation() -> [String]? {

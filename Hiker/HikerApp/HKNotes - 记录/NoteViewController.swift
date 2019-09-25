@@ -22,6 +22,16 @@ class NoteViewController: UIViewController {
         button.addTarget(self, action: #selector(back), for: .touchUpInside)
         return button
     }()
+    /// 右边完成按钮
+    private lazy var rightBarButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x:-10, y:0, width:30, height: 30)
+        button.setTitle("放弃", for: .normal)
+        button.setTitleColor(UIColor.red, for: .normal)
+        button.addTarget(self, action: #selector(headclick), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var writeTextView : UITextView = {
         let tv = UITextView()
         tv.backgroundColor = UIColor.clear
@@ -75,7 +85,7 @@ class NoteViewController: UIViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
         btn.layer.cornerRadius = 20
-        btn.addTarget(self, action: #selector(headclick), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(save), for: .touchUpInside)
         return btn
     }()
     
@@ -84,7 +94,7 @@ class NoteViewController: UIViewController {
         btn.setImage(UIImage(named: "note_icon_location"), for: .normal)
         btn.setTitle("添加照片", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        btn.backgroundColor = UIColor.white
+        btn.backgroundColor = UIColor.black
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         btn.layer.cornerRadius = 20
@@ -168,14 +178,26 @@ class NoteViewController: UIViewController {
         self.navigation.item.title = "写故事"
         self.navigation.bar.isShadowHidden = true
         self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)
+        self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
     }
     
     @objc func save(){
+        let c1 = getContent()
+        let c2 = getLocation()
+        let c3 = getTime()
+        let c4 = getPic()
+        print(c1)
+        print(c2)
+        print(c3)
+        print(c4)
         
     }
     @objc func back(){
         self.dismiss(animated: true, completion: nil)
     }
+    var location = ""
+    var time = ""
+    var img = ""
     
     @objc func nextClick(){
         noteData.content = writeTextView.text
@@ -191,13 +213,45 @@ class NoteViewController: UIViewController {
         }
         saveContent(content: contents)
         
+        var locations = [String]()
+        let locLoc = getLocation()
+        if locLoc == nil {
+            locations.append(self.location)
+        }else {
+            locations = locLoc!
+            locations.append(self.location)
+        }
+        saveLocation(location: locations)
+        
+        var times = [String]()
+        let locTime = getTime()
+        if locTime == nil {
+            times.append(self.time)
+        }else {
+            times = locTime!
+            times.append(self.time)
+        }
+        saveTime(content: times)
+        
+        var imgs = [String]()
+        let locImg = getPic()
+        if locImg == nil {
+            imgs.append(self.img)
+        }else {
+            imgs = locImg!
+            imgs.append(self.img)
+        }
+        savePic(content: imgs)
         
         let noteVC = NoteViewController()
         self.navigationController?.pushViewController(noteVC, animated: true)
     }
     @objc func headclick(){
         UserDefaults.standard.removeObject(forKey: "content")
-        
+        UserDefaults.standard.removeObject(forKey: "time")
+        UserDefaults.standard.removeObject(forKey: "pic")
+        UserDefaults.standard.removeObject(forKey: "location")
+        self.navigationController?.popToRootViewController(animated: true)
     }
     @objc func addPhoto(){
         self.imgPricker = UIImagePickerController()
@@ -222,28 +276,31 @@ class NoteViewController: UIViewController {
         timeForMatter.dateFormat = "yyyy-MM-dd"
         let id = timeForMatter.string(from: now)
         
-        print(id)
-        noteData.time = id
+        self.time = id
         self.timeBtn.setTitle(id, for: .normal)
         ProgressHUD.showSuccess("时间添加成功")
     }
     
     @objc func addlocation(){
-        let alert = UIAlertController.init(title: "提示", message: "请您添加游记地点", preferredStyle: .alert)
-        
-        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
-            let location = (alert.textFields?.first!.text)!
-            self.noteData.location = location
-            self.locationBtn.setTitle(location, for: .normal)
-            ProgressHUD.showSuccess("地点添加成功")
-        }
-        let noAction = UIAlertAction.init(title: "取消", style: .cancel) { (no) in
-        }
-        alert.addAction(yesAction)
-        alert.addAction(noAction)
-        alert.addTextField { (text) in
-        }
-        self.present(alert, animated: true, completion: nil)
+        self.location = "上海"
+        self.locationBtn.setTitle("上海", for: .normal)
+                ProgressHUD.showSuccess("地点添加成功")
+//        let alert = UIAlertController.init(title: "提示", message: "请您添加游记地点", preferredStyle: .alert)
+//
+//        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
+//            let location = (alert.textFields?.first!.text)!
+//            self.noteData.location = location
+//            self.locationBtn.setTitle(location, for: .normal)
+//            self.location = location
+//            ProgressHUD.showSuccess("地点添加成功")
+//        }
+//        let noAction = UIAlertAction.init(title: "取消", style: .cancel) { (no) in
+//        }
+//        alert.addAction(yesAction)
+//        alert.addAction(noAction)
+//        alert.addTextField { (text) in
+//        }
+//        self.present(alert, animated: true, completion: nil)
     }
     
     var topColor = UIColor.black
@@ -271,6 +328,7 @@ extension NoteViewController :UIImagePickerControllerDelegate,UINavigationContro
         let imageData1 = try! Data(contentsOf: imageURL as! URL)
 
         let imgUrl = (imageURL as! URL).path
+        self.img = imgUrl
         self.noteData.pic = imgUrl
         
        // self.noteData.pic.append(imgUrl)

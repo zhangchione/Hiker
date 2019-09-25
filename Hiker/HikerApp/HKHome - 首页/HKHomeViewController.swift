@@ -8,8 +8,16 @@
 
 import UIKit
 import SnapKit
+import Alamofire
+import HandyJSON
+import SwiftyJSON
+import ProgressHUD
+import MJRefresh
 
 class HKHomeViewController: UIViewController {
+    
+    
+    let storyAPI = "http://120.77.151.36:8080/note/1?token=" + getToken()!
     
     var data = [1,2,3,4,5,1,2,3,4,5]
     
@@ -52,14 +60,67 @@ class HKHomeViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-
+        
     }
     
+    var notesDatas = [NotesModel]()
+    
+    func configLocationJsonData(){
+        let path = Bundle.main.path(forResource: "HKHomejson", ofType: "json")
+        let jsonData = NSData(contentsOfFile: path!)
+        
+        let json = JSON(jsonData!)
+        
+        if let obj = JSONDeserializer<HomeModel>.deserializeFrom(json: json.description) {
+            
+            for data in obj.data! {
+                self.notesDatas.append(data)
+            }
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func refresh(){
+        collectionView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                print("上拉加载更多数据")
+                self?.configLocationJsonData()
+                self?.collectionView.mj_footer.endRefreshing()
+            })
+        }
+        collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                print("下拉刷新 --- 1")
+                self?.collectionView.mj_header.endRefreshing()
+            })
+        }
+    }
+    
+    func configData() {
+        Alamofire.request(storyAPI).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                    let json = JSON(value)
+                if let obj = JSONDeserializer<HomeModel>.deserializeFrom(json: json.debugDescription){
+                    print(obj)
+                    for data in obj.data! {
+                        self.notesDatas.append(data)
+                    }
+                    print(obj.data!.count)
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configLocationJsonData()
         configUI()
         configNav()
+        refresh()
 
     }
     
@@ -96,8 +157,9 @@ class HKHomeViewController: UIViewController {
         print("中间按钮")
     }
     @objc func tip(){
-        let tipsVC = TipsViewController()
-        navigationController?.pushViewController(tipsVC, animated: true)
+          configLocationJsonData()
+//        let tipsVC = TipsViewController()
+//        navigationController?.pushViewController(tipsVC, animated: true)
     }
 }
 
@@ -105,7 +167,6 @@ class HKHomeViewController: UIViewController {
 extension HKHomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        print(scrollView.contentOffset.y)
         let offsetY = scrollView.contentOffset.y
         if offsetY < -94.0 {
             rightBarButton.snp.remakeConstraints { (make) in
@@ -120,24 +181,7 @@ extension HKHomeViewController: UIScrollViewDelegate {
                 make.width.height.equalTo(30)
             }
         }
-        
-//        let statusBarMaxY = UIApplication.shared.statusBarFrame.maxY
-//        let originY = -scrollView.contentOffset.y + statusBarMaxY
-//        let alpha = 1 - (scrollView.contentOffset.y) / navigation.bar.frame.height
-//        navigation.bar.setTintAlpha(alpha)
-//        navigation.bar.setTitleAlpha(alpha)
-//        if #available(iOS 11.0, *) {
-//            navigation.bar.setLargeTitleAlpha(alpha)
-//        }
-//        if originY <= statusBarMaxY {
-//            let minY = statusBarMaxY - navigation.bar.frame.height
-//            navigation.bar.frame.origin.y = originY > minY ? originY : minY
-//        } else {
-//            if #available(iOS 11.0, *) { navigation.bar.setLargeTitleAlpha(1) }
-//            navigation.bar.setTitleAlpha(1)
-//            navigation.bar.setTintAlpha(1)
-//            navigation.bar.frame.origin.y = statusBarMaxY
-//        }
+    
     }
 
 }
@@ -151,7 +195,7 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         if section <= 1 {
             return 1
         }else {
-            return data.count
+            return notesDatas.count
         }
     }
     
@@ -169,8 +213,8 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! StoryView
             cell.favBtn.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
-            cell.photoCell.imgData = data[indexPath.row]
-            
+            //cell.photoCell.imgData = data[indexPath.row]
+            config(cell, with: notesDatas[indexPath.row])
             return cell
         }
     }
@@ -189,6 +233,7 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
             cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
             data[(indexPath?.row)!] = 1
+            
         }
         //sum = sum + (label.text! as NSString).integerValue
        // self.title = "总数：\(sum)"
@@ -248,11 +293,34 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
             let searchVC = SearchViewController()
             self.navigationController?.pushViewController(searchVC, animated: true)
         }else {
-        var model = StoryBannerModel()
+        var model = NotesModel()
         model.title = "魔都上海两日"
         let vc = StoryViewController(model: model)
         self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 
+}
+
+extension HKHomeViewController {
+    func config(_ cell:StoryView,with data:NotesModel) {
+        cell.userName.text = data.user?.username
+        cell.title.text = data.title
+        var locations = ""
+        if let locas = data.locations {
+            locations = locas.joined(separator: "、")
+        }
+        cell.trackLocation.text = "#" + locations
+        cell.userIcon.image = UIImage(named: data.user!.headPic)
+        cell.favLabel.text = "\(data.likes)"
+        cell.time.text = data.time
+        cell.liked = data.like
+        if data.like {
+            cell.favIcon.image = UIImage(named: "home_story_love")
+        }else {
+            cell.favIcon.image = UIImage(named: "home_stroy_unlove")
+        }
+        cell.photoCell.imgDatas = data.pics
+        //cell.userIcon.image = UIImage(named: "1")
+    }
 }

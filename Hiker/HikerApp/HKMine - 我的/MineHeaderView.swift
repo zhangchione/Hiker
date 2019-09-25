@@ -136,13 +136,13 @@ class MineHeaderView: UIView {
             make.left.equalTo(self).offset(AdaptW(16))
             make.top.equalTo(backgroundImageView.snp.bottom).offset(AdaptH(8))
             make.height.equalTo(AdaptH(22))
-            make.width.equalTo(AdaptW(100))
+            make.width.equalTo(AdaptW(200))
         }
         userSign.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(AdaptW(16))
             make.top.equalTo(userName.snp.bottom).offset(AdaptH(6))
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(AdaptW(220))
+            make.width.equalTo(AdaptW(260))
         }
         alterBtn.snp.makeConstraints { (make) in
             make.left.equalTo(userSign.snp.right).offset(AdaptW(16))
@@ -156,7 +156,7 @@ class MineHeaderView: UIView {
             make.left.equalTo(self).offset(16)
             make.top.equalTo(userSign.snp.bottom).offset(Adapt(28))
             make.height.equalTo(AdaptH(20))
-            make.width.equalTo(AdaptW(20))
+            make.width.equalTo(AdaptW(30))
         }
         storyBtn.snp.makeConstraints { (make) in
             make.left.equalTo(storyLabel.snp.right).offset(0)
@@ -168,7 +168,7 @@ class MineHeaderView: UIView {
             make.left.equalTo(storyBtn.snp.right).offset(30)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(20))
-            make.width.equalTo(AdaptW(20))
+            make.width.equalTo(AdaptW(30))
         }
         fanBtn.snp.makeConstraints { (make) in
             make.left.equalTo(fanLabel.snp.right).offset(0)
@@ -180,7 +180,7 @@ class MineHeaderView: UIView {
             make.left.equalTo(fanBtn.snp.right).offset(30)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(20))
-            make.width.equalTo(AdaptW(20))
+            make.width.equalTo(AdaptW(30))
         }
         concernBtn.snp.makeConstraints { (make) in
             make.left.equalTo(concernLabel.snp.right).offset(0)

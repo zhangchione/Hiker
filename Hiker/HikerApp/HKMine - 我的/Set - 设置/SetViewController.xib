@@ -240,6 +240,9 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <gestureRecognizers/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="UbV-CN-8Fb" appends="YES" id="KTz-jJ-h2x"/>
+                                    </connections>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="切换账号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fb3-Vf-E3t">
                                     <rect key="frame" x="22" y="18" width="82" height="40"/>
@@ -318,6 +321,11 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="540.57971014492762" y="87.723214285714278"/>
         </view>
+        <tapGestureRecognizer id="UbV-CN-8Fb">
+            <connections>
+                <action selector="Logout:" destination="-1" id="HYN-Jv-dYv"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="mine_set_head" width="14" height="14"/>

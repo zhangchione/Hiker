@@ -24,28 +24,28 @@ class MainViewController: UIViewController {
     
     @IBAction func Login(_ sender: Any) {
         
-        self.goToApp()
-//        let url = "http://120.77.151.36:8080/login?username=" + userID.text! + "&password=" + userPwd.text!
-//
-//        ProgressHUD.show("登陆中")
-//
-//        Alamofire.request(url).responseJSON { (response) in
-//
-//            guard response.result.isSuccess else {
-//                ProgressHUD.showError("网络请求错误"); return
-//            }
-//            if let value = response.result.value {
-//                let json = JSON(value)
-//                guard json["msg"] == "token获取成功，有效期30天" else {
-//                    ProgressHUD.showError("用户名或密码错误");  return
-//                }
-//                saveToken(token: json["data"].string!)
-//                ProgressHUD.showSuccess("登陆成功")
-//
-//
-//                print("token为:",getToken()!)
-//            }
-//        }
+
+        let url = "http://120.77.151.36:8080/login?username=" + userID.text! + "&password=" + userPwd.text!
+
+        ProgressHUD.show("登陆中")
+
+        Alamofire.request(url).responseJSON { (response) in
+
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                guard json["msg"] == "token获取成功，有效期30天" else {
+                    ProgressHUD.showError("用户名或密码错误");  return
+                }
+                saveToken(token: json["data"].string!)
+                ProgressHUD.showSuccess("登陆成功")
+
+                self.goToApp()
+                print("token为:",getToken()!)
+            }
+        }
 //        print("登陆信息为：",userID.text!,userPwd.text!)
 
         

@@ -26,8 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if getToken() != nil {
             let mainTabVar = self.mainTabBar()
-            UIApplication.shared.keyWindow?.rootViewController = mainTabVar
-            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+            window?.rootViewController = mainTabVar
+            window?.makeKeyAndVisible()
+            print("已经拥有账号")
         }else {
         
             let rootViewController = UIStoryboard(name: "Main", bundle: nil)
@@ -35,12 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let loginVC = MainNavigationController.init(rootViewController: rootViewController)
             loginVC.navigation.configuration.isEnabled = true
             self.window!.rootViewController = loginVC
+            
+            print("没有,进入登录界面初始化")
         }
         
         
 
-        
-        print("初始化")
+
         
 //        UIApplication.shared.keyWindow?.rootViewController = rootVc
 //        UIApplication.shared.keyWindow?.makeKeyAndVisible()
@@ -116,8 +118,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 alertController.addAction(cancelAction)
                 
-                let notesVC = NotesViewController()
+                let notesVC = TitleController()
                 let noteNav = MainNavigationController.init(rootViewController: notesVC)
+                noteNav.navigation.configuration.isEnabled = true
+                noteNav.navigation.configuration.barTintColor = .white
+                noteNav.navigation.configuration.tintColor = .white
                 tabBarController?.present(noteNav, animated: true, completion: nil)
             }
         }

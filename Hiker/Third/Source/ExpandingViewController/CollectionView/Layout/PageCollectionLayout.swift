@@ -34,7 +34,6 @@ extension PageCollectionLayout {
     fileprivate func commonInit(_ itemSize: CGSize) {
         scrollDirection = .horizontal
         minimumLineSpacing = -10
-        print("min",minimumLineSpacing)
         self.itemSize = itemSize
     }
 }

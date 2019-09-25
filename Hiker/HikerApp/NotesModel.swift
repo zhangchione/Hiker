@@ -7,31 +7,53 @@
 //
 
 import Foundation
+import HandyJSON
 
-struct NotesModel {
-    var id = ""
-    var title = ""
-    var pics = ""
-    var likes = 0
-    var liked = false
-    var collected = false
+struct HKStory:HandyJSON {
+    var msg:String?
+    var code:String?
+    var data:[StoryModel]?
+}
+struct StoryModel:HandyJSON {
+    var bookname = ""
+    var story:[NotesModel]?
+}
+
+struct HomeModel: HandyJSON {
+    var msg:String?
+    var code:String?
+    var data:[NotesModel]?
+}
+
+struct NotesModel:HandyJSON {
+    var id = 0
+    var content = ""
     var user:User?
-    var comments:Comments?
-    var notePares:NoteParas?
+    var type = 0
+    var pics: [String]?
+    var time = ""
+    var locations: [String]?
+    var comments:[Comments]?
+    var title = ""
+    var likes = 0
+    var like = false
+    var collected = false
+    var notePares:[NoteParas]?
 }
-struct User {
-    var user_img = ""
-    var user_name = ""
-    var user_id = ""
+struct User:HandyJSON {
+    var id = ""
+    var username = ""
+    var password = ""
+    var headPic = ""
 }
-struct Comments {
+struct Comments:HandyJSON {
     var id = ""
     var content = ""
     var user:User?
     var type = ""
     var pics = ""
 }
-struct NoteParas {
+struct NoteParas:HandyJSON {
     var id = ""
     var content = ""
     var pic = ""

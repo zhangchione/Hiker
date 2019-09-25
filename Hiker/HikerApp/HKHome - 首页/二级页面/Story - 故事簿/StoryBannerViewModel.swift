@@ -9,9 +9,9 @@
 import Foundation
 
 class StoryBannerViewModel{
-    var model:StoryBannerModel?
+    var model:NotesModel?
     
-    init(with model:StoryBannerModel) {
+    init(with model:NotesModel) {
         self.model = model
     }
     

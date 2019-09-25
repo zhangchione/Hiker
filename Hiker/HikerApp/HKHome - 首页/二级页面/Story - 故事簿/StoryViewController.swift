@@ -14,7 +14,7 @@ class StoryViewController: StoryBaseViewController {
     let storyBannerViewModel:StoryBannerViewModel
     let bannerHeight: CGFloat = 86+44+UIScreen().titleY
     
-    init(model:StoryBannerModel) {
+    init(model:NotesModel) {
         storyBannerViewModel = StoryBannerViewModel(with: model)
         storyBannerView = StoryBannerView(with: storyBannerViewModel)
         super.init()

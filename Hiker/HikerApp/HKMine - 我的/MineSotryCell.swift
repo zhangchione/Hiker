@@ -10,6 +10,13 @@ import UIKit
 
 class MineSotryCell: UITableViewCell {
 
+    
+    @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var personal: UILabel!
+    @IBOutlet weak var locations: UILabel!
+    @IBOutlet weak var title: UILabel!
+    
+    @IBOutlet weak var img: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

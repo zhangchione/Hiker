@@ -183,10 +183,7 @@ class StoryView: UICollectionViewCell {
             make.width.equalTo(AdaptW(200))
             make.height.equalTo(AdaptH(20))
         }
-        
-        
-        
-        
+    
     }
     
     
@@ -194,6 +191,37 @@ class StoryView: UICollectionViewCell {
         self.backgroundColor = .white
         self.layer.cornerRadius = 10
     }
+    
+    var liked = false {
+        willSet{
+            guard newValue != liked else { return }
+            update(isliked:newValue)
+            
+        }
+    }
+    var collected = false {
+        willSet{
+            guard newValue != collected else { return }
+            //updateCollected(iscollected:newValue)
+        }
+    }
+    
+    func update(isliked:Bool) {
+        guard isliked else {
+            self.favIcon.image = UIImage(named: "home_story_love")
+            return
+        }
+         self.favIcon.image = UIImage(named: "home_stroy_unlove")
+    }
+    
+//    func updateCollected(iscollected:Bool) {
+//        guard iscollected else {
+//            self.favB
+//            self.favIcon.image = UIImage(named: "home_story_love")
+//            return
+//        }
+//        self.favIcon.image = UIImage(named: "home_stroy_unlove")
+//    }
     
     @objc func fav(){
         favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)

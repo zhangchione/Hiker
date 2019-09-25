@@ -1,0 +1,15 @@
+{
+    "code": 200,
+    "data": {
+        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+        "userid" : "15274737502",
+        "password": "zc123...",
+        "username": "不会写程序的Cone",
+        "sgin": "爱旅行，爱旅拍的小张同学",
+        "notes": 17,
+        "fans": 20,
+        "concern": 4,
+        "headPic": "head1"
+    },
+    "msg": null
+}

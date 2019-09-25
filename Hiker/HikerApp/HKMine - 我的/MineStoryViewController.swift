@@ -11,6 +11,7 @@ import UIKit
 
 class MineStoryViewController: UIViewController {
     public var count = 10
+    public var datas:StoryModel?
     
     private let storyID = "MineSotryCell"
     
@@ -45,12 +46,15 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
         -> Int {
-            return count
+            return (datas?.story!.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: storyID , for: indexPath) as! MineSotryCell
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: storyID, for: indexPath) as! MineSotryCell
+            
+            configCell(cell, with: (datas?.story![indexPath.row])!)
             cell.selectionStyle = .none;
             return cell
     }
@@ -60,5 +64,20 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        print("111")
+    }
+}
+
+extension MineStoryViewController{
+    
+    func configCell(_ cell:MineSotryCell,with data:NotesModel){
+        cell.img.image = UIImage(named: data.pics![0])
+        cell.time.text = data.time
+        cell.title.text = data.title
+        cell.locations.text = "#" + (data.locations?.joined(separator: "、"))!
+        if data.type == 2 {
+            cell.personal.isHidden = true
+        }
+        print(data)
     }
 }

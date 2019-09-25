@@ -10,6 +10,9 @@ import UIKit
 import LTScrollView
 import PopMenu
 import AudioToolbox
+import HandyJSON
+import SwiftyJSON
+import Alamofire
 
 private let glt_iphoneX = (UIScreen.main.bounds.height >= 812.0)
 
@@ -21,20 +24,9 @@ class HKMineViewController: UIViewController {
         return btn
     }()
     
-    private lazy var viewControllers: [UIViewController] = {
-        let oneVc = MineStoryViewController()
-        let twoVc = MineStoryViewController()
-        twoVc.count = 5
-        let threeVc = MineStoryViewController()
-        threeVc.count = 6
-        let fourVc = MineStoryViewController()
-                fourVc.count = 3
-        return [oneVc, twoVc, threeVc, fourVc]
-    }()
+    private  var viewControllers = [UIViewController]()
     
-    private lazy var titles: [String] = {
-        return ["全部", "暑假之旅", "澳洲", "上海"]
-    }()
+    private  var titles = [String]()
     
     private lazy var layout: LTLayout = {
         let layout = LTLayout()
@@ -57,44 +49,6 @@ class HKMineViewController: UIViewController {
     }
     
     
-    private lazy var advancedManager: LTAdvancedManager = {
-        let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in
-            guard let strongSelf = self else { return UIView() }
-            let headerView = strongSelf.headerView
-            return headerView
-        })
-        /* 设置代理 监听滚动 */
-        advancedManager.delegate = self
-        
-         //设置悬停位置
-         advancedManager.hoverY = 44
-        
-        /* 点击切换滚动过程动画 */
-                advancedManager.isClickScrollAnimation = true
-        
-        /* 代码设置滚动到第几个位置 */
-        //        advancedManager.scrollToIndex(index: viewControllers.count - 1)
-        
-        return advancedManager
-    }()
-    
-    
-    // MARK - 右边功能按钮
-    private lazy var rightBarButton:UIButton = {
-        let button = UIButton.init(type: .custom)
-         button.frame = CGRect(x:10, y:0, width:40, height: 40)
-        button.addTarget(self, action: #selector(set), for: UIControl.Event.touchUpInside)
-        button.setImage(UIImage(named: "mine_icon_set"), for: .normal)
-        //button.backgroundColor = UIColor.red
-        return button
-    }()
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configUI()
-    }
-    
     // MARK - 右边功能按钮
     private lazy var addBtn:UIButton = {
         let button = UIButton.init(type: .custom)
@@ -105,6 +59,80 @@ class HKMineViewController: UIViewController {
         //button.backgroundColor = UIColor.red
         return button
     }()
+    // MARK - 右边功能按钮
+    private lazy var rightBarButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+         button.frame = CGRect(x:10, y:0, width:40, height: 40)
+        button.addTarget(self, action: #selector(set), for: UIControl.Event.touchUpInside)
+        button.setImage(UIImage(named: "mine_icon_set"), for: .normal)
+        //button.backgroundColor = UIColor.red
+        return button
+    }()
+    
+    var mineData:UserModel?
+    
+    var storyData:[StoryModel]?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configUI()
+        configData()
+    }
+    
+    func configData(){
+        let path = Bundle.main.path(forResource: "HKMinejson", ofType: "json")
+        let jsonData = NSData(contentsOfFile: path!)
+        
+        let json = JSON(jsonData!)
+        
+        if let obj = JSONDeserializer<MineModel>.deserializeFrom(json: json.description) {
+                mineData = obj.data
+        }
+        headerView.concernLabel.text = "\(mineData?.concern ?? 0)"
+        headerView.fanLabel.text = "\(mineData?.fans ?? 3)"
+        headerView.userSign.text = mineData?.sgin
+        headerView.userName.text = mineData?.username
+        headerView.userImg.image = UIImage(named: mineData!.headPic)
+        
+        let path1 = Bundle.main.path(forResource: "HKStoryjson", ofType: "json")
+        let jsonData1 = NSData(contentsOfFile: path1!)
+        
+        let json1 = JSON(jsonData1!)
+        
+        if let obj1 = JSONDeserializer<HKStory>.deserializeFrom(json: json1.description) {
+            storyData = obj1.data
+        }
+        
+        if let datas = storyData {
+            for data in datas {
+                titles.append(data.bookname)
+                let vc = MineStoryViewController()
+                vc.datas = data
+                viewControllers.append(vc)
+                print(data.bookname)
+            }
+        }
+        let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in
+            guard let strongSelf = self else { return UIView() }
+            let headerView = strongSelf.headerView
+            return headerView
+        })
+        /* 设置代理 监听滚动 */
+        advancedManager.delegate = self
+        
+        //设置悬停位置
+        advancedManager.hoverY = 44
+        
+        /* 点击切换滚动过程动画 */
+        advancedManager.isClickScrollAnimation = true
+        
+        /* 代码设置滚动到第几个位置 */
+        //        advancedManager.scrollToIndex(index: viewControllers.count - 1)
+            view.addSubview(advancedManager)
+        
+    }
+    
+
     
     func configUI(){
         if #available(iOS 11.0, *) {
@@ -115,19 +143,11 @@ class HKMineViewController: UIViewController {
         self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
         //self.navigation.item.title = "王一一"
         //advancedManager.backgroundColor = .red
-        view.addSubview(advancedManager)
+
         self.navigation.bar.backgroundColor = .white
         self.view.backgroundColor = .white
         advancedManagerConfig()
-        
-//        self.view.addSubview(addStoryBtn)
-//        addStoryBtn.snp.makeConstraints { (make) in
-//            make.right.equalTo(view.snp.right).offset(20)
-//            make.width.equalTo(50)
-//            make.top.equalTo(headerView.snp.bottom).offset(8)
-//            make.height.equalTo(30)
-//        }
-//        addStoryBtn.addTarget(self, action: #selector(addStory), for: .touchUpInside)
+    
     }
 
     lazy var headerView:MineHeaderView = {
@@ -154,17 +174,16 @@ extension HKMineViewController: LTAdvancedScrollViewDelegate {
     //MARK: 具体使用请参考以下
     private func advancedManagerConfig() {
         //MARK: 选中事件
-        advancedManager.advancedDidSelectIndexHandle = {
-            print("选中了 -> \($0)")
-        }
+//        advancedManager.advancedDidSelectIndexHandle = {
+//            print("选中了 -> \($0)")
+//        }
         
     }
     
     func glt_scrollViewOffsetY(_ offsetY: CGFloat) {
-        print("offset --> ", offsetY)
         if offsetY >= 260 {
             self.navigation.bar.alpha = 1
-            self.navigation.item.title = "王一一"
+            self.navigation.item.title = mineData?.username
             self.rightBarButton.setImage(UIImage(named: "mine_icon_setblack"), for: .normal)
         }
         else {

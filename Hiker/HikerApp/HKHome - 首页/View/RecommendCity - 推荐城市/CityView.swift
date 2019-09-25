@@ -12,7 +12,7 @@ class CityView: UICollectionViewCell {
     // 图片
     private var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "矩形备份 3")
+        imageView.image = UIImage(named: "矩形(2)")
         return imageView
     }()
     // 标题

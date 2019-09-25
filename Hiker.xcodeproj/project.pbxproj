@@ -70,6 +70,10 @@
 		F5AED6662330C8AA00B5B824 /* DelectTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65D2330C8AA00B5B824 /* DelectTable.swift */; };
 		F5AED6672330C8AA00B5B824 /* LocalAlbumTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65E2330C8AA00B5B824 /* LocalAlbumTable.swift */; };
 		F5AED6682330C8AA00B5B824 /* DiaryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED65F2330C8AA00B5B824 /* DiaryTable.swift */; };
+		F5BD54E2233B064300357670 /* HKHomejson.json in Resources */ = {isa = PBXBuildFile; fileRef = F5BD54E1233B064300357670 /* HKHomejson.json */; };
+		F5BD54E5233B2DF100357670 /* HKMinejson.json in Resources */ = {isa = PBXBuildFile; fileRef = F5BD54E4233B2DF100357670 /* HKMinejson.json */; };
+		F5BD54E7233B2E0600357670 /* MineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD54E6233B2E0600357670 /* MineModel.swift */; };
+		F5BD54E9233B38D000357670 /* HKStoryjson.json in Resources */ = {isa = PBXBuildFile; fileRef = F5BD54E8233B38D000357670 /* HKStoryjson.json */; };
 		F5C872522331C4B60094DD7A /* GSCaptchaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */; };
 		F5C872542331C8480094DD7A /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872532331C8470094DD7A /* TimerButton.swift */; };
 		F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8725A233203CF0094DD7A /* FanViewController.swift */; };
@@ -168,6 +172,10 @@
 		F5AED65D2330C8AA00B5B824 /* DelectTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelectTable.swift; sourceTree = "<group>"; };
 		F5AED65E2330C8AA00B5B824 /* LocalAlbumTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAlbumTable.swift; sourceTree = "<group>"; };
 		F5AED65F2330C8AA00B5B824 /* DiaryTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTable.swift; sourceTree = "<group>"; };
+		F5BD54E1233B064300357670 /* HKHomejson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HKHomejson.json; sourceTree = "<group>"; };
+		F5BD54E4233B2DF100357670 /* HKMinejson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HKMinejson.json; sourceTree = "<group>"; };
+		F5BD54E6233B2E0600357670 /* MineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineModel.swift; sourceTree = "<group>"; };
+		F5BD54E8233B38D000357670 /* HKStoryjson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HKStoryjson.json; sourceTree = "<group>"; };
 		F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCaptchaButton.swift; sourceTree = "<group>"; };
 		F5C872532331C8470094DD7A /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		F5C8725A233203CF0094DD7A /* FanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -187,7 +195,7 @@
 		F5D8DD69232A0E2200B7EADF /* WriteStoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteStoryCell.swift; sourceTree = "<group>"; };
 		F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePhotoCell.swift; sourceTree = "<group>"; };
 		F5E375C0232F735B00C7C351 /* FivePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FivePhotoCell.swift; sourceTree = "<group>"; };
-		F5EBB55423386FD1006DAAC8 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
+		F5EBB55423386FD1006DAAC8 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesModel.swift; path = ../NotesModel.swift; sourceTree = "<group>"; };
 		F5EBB5562338976A006DAAC8 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		F5EC431123261D7A00107F66 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		F5EC431A23262E2100107F66 /* HomeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchView.swift; sourceTree = "<group>"; };
@@ -450,7 +458,6 @@
 		F58017D42325E31A0014E3C3 /* HikerApp */ = {
 			isa = PBXGroup;
 			children = (
-				F5EBB55423386FD1006DAAC8 /* NotesModel.swift */,
 				F5EBB5592338AD71006DAAC8 /* HKSer - 搜索 */,
 				F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */,
 				F5EBB5562338976A006DAAC8 /* PhotoCell.swift */,
@@ -499,6 +506,7 @@
 		F58017D82325E33C0014E3C3 /* HKHome - 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				F5EBB55423386FD1006DAAC8 /* NotesModel.swift */,
 				F58017DB2325F9B70014E3C3 /* HKHomeViewController.swift */,
 				F50155E023273CA200FD201C /* 二级页面 */,
 				F5EC431623262CE600107F66 /* ViewModel */,
@@ -512,6 +520,7 @@
 		F58017D92325E3440014E3C3 /* HKMine - 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				F5BD54E3233B2DD700357670 /* API */,
 				F5C872592332038E0094DD7A /* Concern - 关注 */,
 				F5C87258233203880094DD7A /* Fan - 粉丝 */,
 				F5C872572332037B0094DD7A /* Story - 游记 */,
@@ -522,6 +531,7 @@
 				F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */,
 				F5D2C3D42328C97700DE60D2 /* MineSotryCell.swift */,
 				F5D2C3D52328C97700DE60D2 /* MineSotryCell.xib */,
+				F5BD54E6233B2E0600357670 /* MineModel.swift */,
 			);
 			path = "HKMine - 我的";
 			sourceTree = "<group>";
@@ -529,21 +539,21 @@
 		F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */ = {
 			isa = PBXGroup;
 			children = (
+				F57C320B2334A90500B6E7A0 /* NoteViewController.swift */,
+				F558F62C2339B5200013EBAC /* TitleController.swift */,
+				F558F62D2339B5200013EBAC /* TitleController.xib */,
 				F558F63C2339FAD60013EBAC /* NotesCell.swift */,
 				F558F63D2339FAD60013EBAC /* NotesCell.xib */,
 				F558F6382339DA350013EBAC /* DemoCollectionViewCell.swift */,
 				F558F6392339DA350013EBAC /* DemoCollectionViewCell.xib */,
 				F558F6302339D9150013EBAC /* NotesController.swift */,
-				F57C320D2334AD8900B6E7A0 /* TitleViewController.swift */,
 				F5D8DD6B232A0E4C00B7EADF /* Trash */,
 				F5D2C3DC2328D0D000DE60D2 /* NotesViewController.swift */,
 				F5D8DD672329FDED00B7EADF /* WriteHeaderReusableView.swift */,
 				F5D8DD69232A0E2200B7EADF /* WriteStoryCell.swift */,
 				F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */,
 				F5E375C0232F735B00C7C351 /* FivePhotoCell.swift */,
-				F57C320B2334A90500B6E7A0 /* NoteViewController.swift */,
-				F558F62C2339B5200013EBAC /* TitleController.swift */,
-				F558F62D2339B5200013EBAC /* TitleController.xib */,
+				F57C320D2334AD8900B6E7A0 /* TitleViewController.swift */,
 			);
 			path = "HKNotes - 记录";
 			sourceTree = "<group>";
@@ -592,6 +602,15 @@
 			path = Table;
 			sourceTree = "<group>";
 		};
+		F5BD54E3233B2DD700357670 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				F5BD54E8233B38D000357670 /* HKStoryjson.json */,
+				F5BD54E4233B2DF100357670 /* HKMinejson.json */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		F5C872572332037B0094DD7A /* Story - 游记 */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,6 +653,7 @@
 		F5EC431323262CCF00107F66 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				F5BD54E1233B064300357670 /* HKHomejson.json */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -758,7 +778,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F558F62F2339B5200013EBAC /* TitleController.xib in Resources */,
+				F5BD54E2233B064300357670 /* HKHomejson.json in Resources */,
+				F5BD54E9233B38D000357670 /* HKStoryjson.json in Resources */,
 				F58017CC2325E0570014E3C3 /* LaunchScreen.storyboard in Resources */,
+				F5BD54E5233B2DF100357670 /* HKMinejson.json in Resources */,
 				F5015601232799D900FD201C /* SetViewController.xib in Resources */,
 				F5D2C3D72328C97700DE60D2 /* MineSotryCell.xib in Resources */,
 				F58017C92325E0570014E3C3 /* Assets.xcassets in Resources */,
@@ -930,6 +953,7 @@
 				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
 				F5D8DD6A232A0E2200B7EADF /* WriteStoryCell.swift in Sources */,
 				F558F668233A03270013EBAC /* StoryboardHelper.swift in Sources */,
+				F5BD54E7233B2E0600357670 /* MineModel.swift in Sources */,
 				F558F63E2339FAD60013EBAC /* NotesCell.swift in Sources */,
 				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,
 				F50155F8232775A700FD201C /* TipsViewController.swift in Sources */,

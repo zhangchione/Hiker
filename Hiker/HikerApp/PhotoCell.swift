@@ -63,18 +63,26 @@ class PhotoCell: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var imgData:Int? {
-        didSet {
-            guard let imgdata = imgData else { return }
-            self.updateUI(with: imgdata)
+    var imgDatas:[String]? {
+        didSet{
+            guard let imgdatas = imgDatas else { return }
+            self.updateUI(imgdatas.count,with: imgdatas)
         }
     }
     
-    func updateUI(with data:Int) {
-        switch data {
+    var imgData:Int? {
+        didSet {
+            guard let imgdata = imgData else { return }
+            //self.updateUI(with: imgdata)
+        }
+    }
+    
+    func updateUI(_ count:Int,with data:[String]) {
+        switch count {
         case 1:
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: [.topLeft , .topRight], radii: 10)
+                self.img1.image = UIImage(named: data[0])
                 
             }
             img1.snp.makeConstraints { (make) in
@@ -87,6 +95,8 @@ class PhotoCell: UIView {
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+                self.img1.image = UIImage(named: data[0])
+                self.img2.image = UIImage(named: data[1])
             }
             img1.snp.makeConstraints { (make) in
                 make.top.equalTo(self)
@@ -99,10 +109,14 @@ class PhotoCell: UIView {
                 make.bottom.equalTo(self)
                 make.left.equalTo(self.snp.centerX).offset(2.5)
             }
+
         case 3:
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+                self.img1.image = UIImage(named: data[0])
+                self.img2.image = UIImage(named: data[1])
+                self.img3.image = UIImage(named: data[2])
             }
             img1.snp.makeConstraints { (make) in
                 make.top.equalTo(self)
@@ -120,10 +134,16 @@ class PhotoCell: UIView {
                 make.top.equalTo(img1.snp.centerY).offset(2.5)
                 make.left.equalTo(self.snp.centerX).offset(2.5)
             }
+            
+
         case 4:
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+                self.img1.image = UIImage(named: data[0])
+                self.img2.image = UIImage(named: data[1])
+                self.img3.image = UIImage(named: data[2])
+                self.img4.image = UIImage(named: data[3])
             }
             img1.snp.makeConstraints { (make) in
                 make.top.equalTo(self)
@@ -148,6 +168,7 @@ class PhotoCell: UIView {
                 make.top.equalTo(img1.snp.centerY).offset(5)
                 make.right.equalTo(self)
             }
+            
         default:
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
