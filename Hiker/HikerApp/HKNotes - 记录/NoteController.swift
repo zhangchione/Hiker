@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class NoteController: UIViewController {
-
+    /// 照片选择
+    var imgPricker:UIImagePickerController!
+    var imgs: String = ""
+    var time: String = ""
+    var location: String = ""
+    
     // 左边返回按钮
     private lazy var leftBarButton: UIButton = {
         let button = UIButton.init(type: .custom)
@@ -173,22 +179,113 @@ extension NoteController {
 
 extension NoteController {
     @objc func back(){
+        UserDefaults.standard.removeObject(forKey: "content")
+        UserDefaults.standard.removeObject(forKey: "time")
+        UserDefaults.standard.removeObject(forKey: "pic")
+        UserDefaults.standard.removeObject(forKey: "location")
+        
+        let c1 = getContent()
+        let c2 = getLocation()
+        let c3 = getTime()
+        let c4 = getPic()
+        print(c1)
+        print(c2)
+        print(c3)
+        print(c4)
         
     }
     @objc func addLocation(){
-    
+        self.location = "上海"
+        self.locationBtn.setTitle("上海", for: .normal)
+        ProgressHUD.showSuccess("地点添加成功")
     }
     @objc func addTime(){
+        let now = Date()
+        let timeForMatter = DateFormatter()
         
+        
+        timeForMatter.dateFormat = "yyyy-MM-dd"
+        let id = timeForMatter.string(from: now)
+        
+        self.time = id
+        self.timeBtn.setTitle(id, for: .normal)
+        ProgressHUD.showSuccess("时间添加成功")
     }
     @objc func save(){
-    
+        var contents = [String]()
+        let locaCon = getContent()
+        if  locaCon == nil {
+            contents.append(writeTextView.text!)
+            print(writeTextView.text!)
+        }else {
+            contents = locaCon!
+            contents.append(writeTextView.text!)
+        }
+        saveContent(content: contents)
+        
+        var locations = [String]()
+        let locLoc = getLocation()
+        if locLoc == nil {
+            locations.append(self.location)
+        }else {
+            locations = locLoc!
+            locations.append(self.location)
+        }
+        saveLocation(location: locations)
+        
+        var times = [String]()
+        let locTime = getTime()
+        if locTime == nil {
+            times.append(self.time)
+        }else {
+            times = locTime!
+            times.append(self.time)
+        }
+        saveTime(content: times)
+        
+        var imgs = [String]()
+        let locImg = getPic()
+        if locImg == nil {
+            imgs.append(self.imgs)
+        }else {
+            imgs = locImg!
+            imgs.append(self.imgs)
+        }
+        savePic(content: imgs)
+        
+        var datas = NotesModel()
+        
+        let c1 = getContent()
+        let c2 = getLocation()
+        let c3 = getTime()
+        let c4 = getPic()
+        var paras = NoteParas()
+        
+        for index in 0 ..< c1!.count {
+            paras.content = c1![index]
+            paras.date = c3![index]
+            paras.pics = ["img1","img2"]
+            paras.place = c2![index]
+            datas.noteParas?.append(paras)
+        }
+        let noteVC = NotesController(data: datas)
+        self.navigationController?.pushViewController(noteVC, animated: true)
     }
     @objc func nextNote(){
         
     }
     @objc func addPhoto(){
+        self.imgPricker = UIImagePickerController()
+        self.imgPricker.delegate = self
+        self.imgPricker.allowsEditing = true
+        self.imgPricker.sourceType = .photoLibrary
         
+        self.imgPricker.navigationBar.barTintColor = UIColor.gray
+        self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        
+        self.imgPricker.navigationBar.tintColor = UIColor.white
+        
+        self.present(self.imgPricker, animated: true, completion: nil)
     }
 }
 
@@ -204,4 +301,26 @@ extension NoteController: UITextViewDelegate {
         }
         return true
     }
+}
+// MARK - 照片调用
+extension NoteController :UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("图片选取成功")
+        let img = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        
+        let imageURL = info[UIImagePickerController.InfoKey.imageURL]!
+        let imageData1 = try! Data(contentsOf: imageURL as! URL)
+        
+        let imgUrl = (imageURL as! URL).path
+        
+        self.imgs = imgUrl
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }

@@ -80,7 +80,11 @@
             <size key="customSize" width="371" height="577"/>
             <connections>
                 <outlet property="backContainerView" destination="7wn-tB-5fx" id="2Di-xw-NZj"/>
+                <outlet property="content" destination="oFZ-E5-oqO" id="qnG-vz-ak1"/>
                 <outlet property="frontContainerView" destination="1SQ-lj-Qbf" id="OhM-SL-I8R"/>
+                <outlet property="location" destination="HDT-hS-GxJ" id="re1-zo-zCx"/>
+                <outlet property="photoView" destination="TKR-kI-g0s" id="VvF-Ne-sHD"/>
+                <outlet property="time" destination="Hxj-fL-PJT" id="Ire-zb-f4A"/>
             </connections>
             <point key="canvasLocation" x="115.94202898550725" y="-30.803571428571427"/>
         </collectionViewCell>

@@ -10,6 +10,13 @@ import UIKit
 
 class NotesController: ExpandingViewController {
 
+    public var data:NotesModel?
+    
+    convenience init(data:NotesModel) {
+        self.init()
+        self.data = data
+    }
+    
     // 标题
     lazy var storyTitle: UILabel = {
         let label = UILabel()
@@ -73,7 +80,7 @@ class NotesController: ExpandingViewController {
 extension NotesController {
     
     func scrollViewDidScroll(_: UIScrollView) {
-        print("\(currentIndex + 1)/\(items.count)")
+        
         //pageLabel.text = "\(currentIndex + 1)/\(items.count)"
     }
 }
@@ -84,6 +91,10 @@ extension NotesController {
         
         let nib = UINib(nibName: String(describing: NotesCell.self), bundle: nil)
         collectionView?.register(nib, forCellWithReuseIdentifier: String(describing: NotesCell.self))
+        
+        let nib1 = UINib(nibName: String(describing: DemoCollectionViewCell.self), bundle: nil)
+        collectionView?.register(nib1, forCellWithReuseIdentifier: String(describing: DemoCollectionViewCell.self))
+        
         //collectionView?.backgroundColor = .green
         view.addSubview(storyTitle)
         storyTitle.snp.makeConstraints { (make) in
@@ -103,31 +114,46 @@ extension NotesController {
 }
 
 extension NotesController {
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
-        guard let cell = cell as? NotesCell else { return }
-        
-        let index = indexPath.row % items.count
-        let info = items[index]
-//        cell.backgroundImageView?.image = UIImage(named: info.imageName)
-//        cell.customTitle.text = info.title
-        cell.cellIsOpen(cellsIsOpen[index], animated: false)
-        //cell.btn.addTarget(self, action: #selector(add), for: .touchUpInside)
-    }
+//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
+//        guard let cell = cell as? NotesCell else { return }
+//
+//        let index = indexPath.row % items.count
+//        let info = items[index]
+////        cell.backgroundImageView?.image = UIImage(named: info.imageName)
+////        cell.customTitle.text = info.title
+//        cell.cellIsOpen(cellsIsOpen[index], animated: false)
+//        //cell.btn.addTarget(self, action: #selector(add), for: .touchUpInside)
+//    }
 }
 extension NotesController {
     
     override func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return items.count
-    }
+        return (data?.noteParas!.count)!
+    } 
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: NotesCell.self), for: indexPath)
-       // cell.backgroundColor = .red
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: NotesCell.self), for: indexPath) as! NotesCell
+        let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: DemoCollectionViewCell.self), for: indexPath)
+        let cellData = data?.noteParas![indexPath.row]
+        if indexPath.row == (data?.noteParas!.count)! - 1 {
+            
+            return cell1
+        }else {
+            configCell(cell, with: cellData!)
+            return cell
+        }
     }
 //    //最小 item 间距
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 //        return viewModel.minimumInteritemSpacingForSectionAt(section: section)
 //    }
+}
+
+extension NotesController {
+    func configCell(_ cell:NotesCell,with data:NoteParas) {
+        cell.time.text = data.date
+        cell.location.text = data.place
+        cell.content.text = data.content
+    }
 }

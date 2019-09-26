@@ -9,11 +9,26 @@
 import UIKit
 
 class NotesCell: BasePageCollectionCell {
-
+    @IBOutlet weak var time: UILabel!
+    
+    @IBOutlet weak var content: UILabel!
+    @IBOutlet weak var location: UILabel!
+    
+    lazy var photoCell:PhotoCell = {
+        let photoCell = PhotoCell()
+        return photoCell
+    }()
+    
+    @IBOutlet weak var photoView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        photoView.addSubview(photoCell)
+        photoCell.snp.makeConstraints { (make) in
+            make.left.right.bottom.top.equalTo(photoView)
+        }
+        photoCell.imgDatas = ["img1","img2","img3","img3"]
     }
 
 }

@@ -54,6 +54,11 @@ class PhotoCell: UIView {
         return imageView
     }()
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setUI()
+    }
+    
     init() {
         super.init(frame: .zero)
         setUI()
