@@ -18,7 +18,7 @@ class HomeSearchView: UICollectionViewCell {
     // 标题
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.init(name: "PingFangSC-Regular", size: 14)
         label.textColor = UIColor.init(r: 204, g: 204, b: 204)
         
         return label
@@ -37,24 +37,24 @@ class HomeSearchView: UICollectionViewCell {
         self.imageView.image = UIImage(named: "home_icon_ser")
         self.imageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snp.centerY)
-            make.left.equalTo(self).offset(10)
-            make.height.width.equalTo(20)
+            make.left.equalTo(self).offset(AdaptW(10))
+            make.height.width.equalTo(AdaptH(20))
         }
         self.addSubview(self.titleLabel)
         self.titleLabel.text = "找到你想了解的故事"
         self.titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.imageView.snp.right).offset(10)
+            make.left.equalTo(self.imageView.snp.right).offset(AdaptW(15))
             make.right.equalToSuperview()
             make.centerY.equalTo(self.snp.centerY)
-            make.height.equalTo(20)
+            make.height.equalTo(AdaptH(20))
         }
     }
     func configShadow(){
         self.backgroundColor = .white
         self.layer.shadowColor = UIColor(red: 0.01, green: 0.01, blue: 0.01, alpha: 0.12).cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 8)
+        self.layer.shadowOffset = CGSize(width: 0, height: AdaptH(8))
         self.layer.shadowOpacity = 1
-        self.layer.shadowRadius = 19
+        self.layer.shadowRadius = 9
         self.layer.cornerRadius = 10
     }
 }

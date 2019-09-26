@@ -10,14 +10,7 @@ import UIKit
 
 class SetViewController: SubClassBaseViewController {
     @IBAction func Logout(_ sender: Any) {
-
-        UserDefaults.standard.removeObject(forKey: "token")
-        let rootViewController = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateInitialViewController()!
-        let loginVC = MainNavigationController.init(rootViewController: rootViewController)
-        loginVC.navigation.configuration.isEnabled = true
-        UIApplication.shared.keyWindow?.rootViewController = loginVC
-        UIApplication.shared.keyWindow?.makeKeyAndVisible()
+                logOutApp()
     }
     
     @IBOutlet weak var scrollView: UIScrollView!

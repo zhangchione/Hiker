@@ -14,10 +14,6 @@ class RegisterViewController: UIViewController {
 
     @IBOutlet weak var sendCodes: TimerButton!
     
-
-    
-
-    
     @IBAction func RegisterBtn(_ sender: Any) {
         
     }

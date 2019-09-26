@@ -77,6 +77,8 @@
 		F5BD54EB233B52DB00357670 /* NoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD54EA233B52DB00357670 /* NoteController.swift */; };
 		F5C27E1B233C4AF500B5131F /* CityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C27E1A233C4AF500B5131F /* CityViewController.swift */; };
 		F5C27E1D233C4BB700B5131F /* HKCityjson.json in Resources */ = {isa = PBXBuildFile; fileRef = F5C27E1C233C4BB700B5131F /* HKCityjson.json */; };
+		F5C27E1F233C89E200B5131F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C27E1E233C89E200B5131F /* API.swift */; };
+		F5C27E21233C8C2100B5131F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C27E20233C8C2100B5131F /* MainTabBarController.swift */; };
 		F5C872522331C4B60094DD7A /* GSCaptchaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */; };
 		F5C872542331C8480094DD7A /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872532331C8470094DD7A /* TimerButton.swift */; };
 		F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8725A233203CF0094DD7A /* FanViewController.swift */; };
@@ -182,6 +184,8 @@
 		F5BD54EA233B52DB00357670 /* NoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteController.swift; sourceTree = "<group>"; };
 		F5C27E1A233C4AF500B5131F /* CityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewController.swift; sourceTree = "<group>"; };
 		F5C27E1C233C4BB700B5131F /* HKCityjson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HKCityjson.json; sourceTree = "<group>"; };
+		F5C27E1E233C89E200B5131F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		F5C27E20233C8C2100B5131F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCaptchaButton.swift; sourceTree = "<group>"; };
 		F5C872532331C8470094DD7A /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		F5C8725A233203CF0094DD7A /* FanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -465,9 +469,9 @@
 		F58017D42325E31A0014E3C3 /* HikerApp */ = {
 			isa = PBXGroup;
 			children = (
-				F5EBB5592338AD71006DAAC8 /* HKSer - 搜索 */,
 				F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */,
 				F5EBB5562338976A006DAAC8 /* PhotoCell.swift */,
+				F5EBB5592338AD71006DAAC8 /* HKSer - 搜索 */,
 				F58017D82325E33C0014E3C3 /* HKHome - 首页 */,
 				F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */,
 				F58017D92325E3440014E3C3 /* HKMine - 我的 */,
@@ -484,6 +488,7 @@
 				F58017C52325E0560014E3C3 /* Main.storyboard */,
 				F5EC431123261D7A00107F66 /* MainNavigationController.swift */,
 				F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */,
+				F5C27E20233C8C2100B5131F /* MainTabBarController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -493,6 +498,7 @@
 			children = (
 				F58017E12326075B0014E3C3 /* Const.swift */,
 				F58017E3232607770014E3C3 /* Extension + color.swift */,
+				F5C27E1E233C89E200B5131F /* API.swift */,
 			);
 			path = "Extension + Const";
 			sourceTree = "<group>";
@@ -940,6 +946,7 @@
 				F57C320E2334AD8900B6E7A0 /* TitleViewController.swift in Sources */,
 				F50155F02327684A00FD201C /* StorySementCell.swift in Sources */,
 				F558F65B233A030D0013EBAC /* PageCollectionView.swift in Sources */,
+				F5C27E1F233C89E200B5131F /* API.swift in Sources */,
 				F5AED6672330C8AA00B5B824 /* LocalAlbumTable.swift in Sources */,
 				F5AED6662330C8AA00B5B824 /* DelectTable.swift in Sources */,
 				F558F65F233A030D0013EBAC /* ConstraintsHelper.swift in Sources */,
@@ -972,6 +979,7 @@
 				F5D8DD6A232A0E2200B7EADF /* WriteStoryCell.swift in Sources */,
 				F558F668233A03270013EBAC /* StoryboardHelper.swift in Sources */,
 				F5BD54E7233B2E0600357670 /* MineModel.swift in Sources */,
+				F5C27E21233C8C2100B5131F /* MainTabBarController.swift in Sources */,
 				F558F63E2339FAD60013EBAC /* NotesCell.swift in Sources */,
 				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,
 				F50155F8232775A700FD201C /* TipsViewController.swift in Sources */,

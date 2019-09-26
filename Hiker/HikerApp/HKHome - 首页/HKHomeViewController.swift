@@ -14,14 +14,21 @@ import SwiftyJSON
 import ProgressHUD
 import MJRefresh
 
+private let HKHomeSearchViewID = "HomeSearchView"
+private let HKRecommendCityID = "RecommendCityView"
+private let HKStoryID = "StoryView"
+private let HeaderViewID = "HomeHeaderReusableView"
+
 class HKHomeViewController: UIViewController {
     
     
-    let storyAPI = "http://120.77.151.36:8080/note/1?token=" + getToken()!
+
     
     var data = [1,2,3,4,5,1,2,3,4,5]
+    var notesDatas = [NotesModel]()
+    var cityDatas = [CityModel]()
     
-    // MARK - 右边功能按钮
+    /// 右边功能按钮
     private lazy var rightBarButton:UIButton = {
         let button = UIButton.init(type: .custom)
        // button.frame = CGRect(x:10, y:100, width:40, height: 40)
@@ -31,12 +38,7 @@ class HKHomeViewController: UIViewController {
         return button
     }()
     
-    
-    private let HKHomeSearchViewID = "HomeSearchView"
-    private let HKRecommendCityID = "RecommendCityView"
-    private let HKStoryID = "StoryView"
-    private let HeaderViewID = "HomeHeaderReusableView"
-    
+    /// 主界面View
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
         let collection = UICollectionView.init(frame:.zero, collectionViewLayout: layout)
@@ -56,16 +58,59 @@ class HKHomeViewController: UIViewController {
         return collection
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configLocationJsonData()
+        configUI()
+        configNav()
+        refresh()
+
+    }
+
+    @objc func add() {
+        print("中间按钮")
+    }
+    @objc func tip(){
+
+        let tipsVC = TipsViewController()
+        navigationController?.pushViewController(tipsVC, animated: true)
+    }
+}
+
+// MARK - 配置UI
+
+extension HKHomeViewController {
     
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
+    func configUI(){
+        view.addSubview(self.collectionView)
+        self.collectionView.snp.makeConstraints { (make) in
+            make.width.height.equalToSuperview()
+            make.center.equalToSuperview()
+        }
+        view.backgroundColor = backColor
     }
     
-    var notesDatas = [NotesModel]()
-    var cityDatas = [CityModel]()
+    func configNav(){
+        if #available(iOS 11.0, *) {
+            self.navigation.bar.prefersLargeTitles = true
+        }
+        navigation.bar.automaticallyAdjustsPosition = false
+        self.navigation.item.title = "发现"
+        self.navigation.bar.isShadowHidden = true
+        self.navigation.bar.addSubview(rightBarButton)
+        rightBarButton.snp.makeConstraints { (make) in
+            make.right.equalTo(navigation.bar.snp.right).offset(-25)
+            make.bottom.equalTo(navigation.bar.snp.bottom).offset(-20)
+            make.width.height.equalTo(30)
+        }
+    }
+}
+
+// MARK - 加载数据
+
+extension HKHomeViewController {
     
+    /// 加载本地json
     func configLocationJsonData(){
         let path = Bundle.main.path(forResource: "HKHomejson", ofType: "json")
         let jsonData = NSData(contentsOfFile: path!)
@@ -77,9 +122,8 @@ class HKHomeViewController: UIViewController {
             for data in obj.data! {
                 self.notesDatas.append(data)
             }
-
+            
         }
-        
         let cityPath = Bundle.main.path(forResource: "HKCityjson", ofType: "json")
         let cityData = NSData(contentsOfFile: cityPath!)
         let cityJson = JSON(cityData!)
@@ -89,9 +133,9 @@ class HKHomeViewController: UIViewController {
             cityDatas = cityObj.data!
         }
         
-            self.collectionView.reloadData()
+        self.collectionView.reloadData()
     }
-    
+    /// 刷新
     func refresh(){
         collectionView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
@@ -107,14 +151,16 @@ class HKHomeViewController: UIViewController {
             })
         }
     }
-    
+    /// 网络加载数据
     func configData() {
+        let storyAPI = "http://120.77.151.36:8080/note/1?token=" + getToken()!
+        
         Alamofire.request(storyAPI).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }
             if let value = response.result.value {
-                    let json = JSON(value)
+                let json = JSON(value)
                 if let obj = JSONDeserializer<HomeModel>.deserializeFrom(json: json.debugDescription){
                     print(obj)
                     for data in obj.data! {
@@ -127,53 +173,9 @@ class HKHomeViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configLocationJsonData()
-        configUI()
-        configNav()
-        refresh()
-
-    }
-    
-    func configUI(){
-        view.addSubview(self.collectionView)
-        self.collectionView.snp.makeConstraints { (make) in
-            make.width.height.equalToSuperview()
-            make.center.equalToSuperview()
-        }
-         view.backgroundColor = backColor 
-    }
-
-    func configNav(){
-        if #available(iOS 11.0, *) {
-
-            self.navigation.bar.prefersLargeTitles = true
-            
-        }
-        
-        navigation.bar.automaticallyAdjustsPosition = false
-        
-        self.navigation.item.title = "发现"
-        self.navigation.bar.isShadowHidden = true
-        self.navigation.bar.addSubview(rightBarButton)
-        rightBarButton.snp.makeConstraints { (make) in
-            make.right.equalTo(navigation.bar.snp.right).offset(-25)
-            make.bottom.equalTo(navigation.bar.snp.bottom).offset(-20)
-            make.width.height.equalTo(30)
-        }
-    }
-
-    @objc func add() {
-        print("中间按钮")
-    }
-    @objc func tip(){
-
-        let tipsVC = TipsViewController()
-        navigationController?.pushViewController(tipsVC, animated: true)
-    }
 }
 
+// MARK - ScrollView滚动代理
 
 extension HKHomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -192,12 +194,13 @@ extension HKHomeViewController: UIScrollViewDelegate {
                 make.width.height.equalTo(30)
             }
         }
-    
     }
 
 }
-extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
-    
+
+// MARK - 数据源
+
+extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
@@ -212,8 +215,8 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKHomeSearchViewID, for: indexPath) as! HomeSearchView
-        return cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKHomeSearchViewID, for: indexPath) as! HomeSearchView
+            return cell
         }
         else if indexPath.section == 1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKRecommendCityID, for: indexPath) as! RecommendCityView
@@ -223,7 +226,7 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         }else {
             let identifier = "story\(indexPath.section)\(indexPath.row)"
             self.collectionView.register(StoryView.self, forCellWithReuseIdentifier: identifier)
-
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! StoryView
             cell.favBtn.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
             //cell.photoCell.imgData = data[indexPath.row]
@@ -232,26 +235,22 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
     }
     
-    @objc func fav(_ sender:UIButton){
-        
-        let btn = sender
-        let cell = btn.superView(of: StoryView.self)!
-        let indexPath = collectionView.indexPath(for: cell)
-
-        if data[(indexPath?.row)!] == 1 {
-            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
-            cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
-            data[(indexPath?.row)!] = 0
-        }else {
-            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
-            cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
-            data[(indexPath?.row)!] = 1
-            
+    // 头部
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewID, for: indexPath) as? HomeHeaderReusableView else {
+            return UICollectionReusableView()
         }
-        //sum = sum + (label.text! as NSString).integerValue
-       // self.title = "总数：\(sum)"
-        
+        if indexPath.section == 2{
+            headerView.titleLabel.text = "故事"
+        }
+        return headerView
     }
+}
+
+// MARK - 代理
+
+extension HKHomeViewController:  UICollectionViewDelegate {
+    
     //每个分区的内边距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if section == 0 {
@@ -273,30 +272,21 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
     //item 的尺寸
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            return CGSize(width: 374, height: 50)
+            return CGSize(width: AdaptW(374), height: AdaptH(50))
         }else if indexPath.section == 1{
-            return CGSize(width: 414, height: 220)
+            return CGSize(width: TKWidth, height: AdaptH(220))
         }else {
-            return CGSize(width: 374, height: 350)
+            return CGSize(width: AdaptW(374), height: AdaptH(350))
         }
     }
     
-    // 头部
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewID, for: indexPath) as? HomeHeaderReusableView else {
-            return UICollectionReusableView()
-        }
-        if indexPath.section == 2{
-            headerView.titleLabel.text = "故事"
-        }
-        return headerView
-    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 1 {
-        return CGSize(width: 414, height: 30)
+        return CGSize(width: TKWidth, height: AdaptH(30))
         }
         if section == 2 {
-            return CGSize(width: 414, height: 30)
+            return CGSize(width: TKWidth, height: AdaptH(30))
         }
         return CGSize(width: 0, height: 0)
     }
@@ -312,6 +302,33 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
     }
 
+}
+
+// MARK - @objc 方法
+
+extension HKHomeViewController {
+    
+    @objc func fav(_ sender:UIButton){
+        
+        let btn = sender
+        let cell = btn.superView(of: StoryView.self)!
+        let indexPath = collectionView.indexPath(for: cell)
+        
+        if data[(indexPath?.row)!] == 1 {
+            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+            cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
+            data[(indexPath?.row)!] = 0
+        }else {
+            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+            cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
+            data[(indexPath?.row)!] = 1
+            
+        }
+        //sum = sum + (label.text! as NSString).integerValue
+        // self.title = "总数：\(sum)"
+        
+    }
+    
 }
 
 // MARK - 配置cell
