@@ -33,7 +33,7 @@ class HomeHeaderReusableView: UICollectionReusableView {
         self.titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.left.equalTo(20)
-            make.width.equalTo(150)
+            make.width.equalTo(300)
             make.height.equalTo(30)
         }
     }

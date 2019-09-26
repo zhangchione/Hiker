@@ -9,6 +9,7 @@
 import Foundation
 import HandyJSON
 
+// 我的故事簿
 struct HKStory:HandyJSON {
     var msg:String?
     var code:String?
@@ -16,6 +17,20 @@ struct HKStory:HandyJSON {
 }
 struct StoryModel:HandyJSON {
     var bookname = ""
+    var story:[NotesModel]?
+}
+
+// city
+
+struct HKCity:HandyJSON {
+    var msg:String?
+    var code:String?
+    var data:[CityModel]?
+}
+
+struct CityModel:HandyJSON {
+    var citypic = ""
+    var cityname = ""
     var story:[NotesModel]?
 }
 

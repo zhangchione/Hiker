@@ -193,7 +193,7 @@ class NoteViewController: UIViewController {
         
     }
     @objc func back(){
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     var location = ""
     var time = ""

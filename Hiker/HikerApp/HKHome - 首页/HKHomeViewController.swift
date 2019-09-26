@@ -64,6 +64,7 @@ class HKHomeViewController: UIViewController {
     }
     
     var notesDatas = [NotesModel]()
+    var cityDatas = [CityModel]()
     
     func configLocationJsonData(){
         let path = Bundle.main.path(forResource: "HKHomejson", ofType: "json")
@@ -76,8 +77,19 @@ class HKHomeViewController: UIViewController {
             for data in obj.data! {
                 self.notesDatas.append(data)
             }
-            self.collectionView.reloadData()
+
         }
+        
+        let cityPath = Bundle.main.path(forResource: "HKCityjson", ofType: "json")
+        let cityData = NSData(contentsOfFile: cityPath!)
+        let cityJson = JSON(cityData!)
+        
+        if let cityObj = JSONDeserializer<HKCity>.deserializeFrom(json: cityJson.description) {
+            
+            cityDatas = cityObj.data!
+        }
+        
+            self.collectionView.reloadData()
     }
     
     func refresh(){
@@ -130,8 +142,7 @@ class HKHomeViewController: UIViewController {
             make.width.height.equalToSuperview()
             make.center.equalToSuperview()
         }
-         view.backgroundColor = backColor
-        
+         view.backgroundColor = backColor 
     }
 
     func configNav(){
@@ -157,9 +168,9 @@ class HKHomeViewController: UIViewController {
         print("中间按钮")
     }
     @objc func tip(){
-          configLocationJsonData()
-//        let tipsVC = TipsViewController()
-//        navigationController?.pushViewController(tipsVC, animated: true)
+
+        let tipsVC = TipsViewController()
+        navigationController?.pushViewController(tipsVC, animated: true)
     }
 }
 
@@ -206,6 +217,8 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
         else if indexPath.section == 1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKRecommendCityID, for: indexPath) as! RecommendCityView
+            cell.datas = self.cityDatas
+            cell.delegate = self
             return cell
         }else {
             let identifier = "story\(indexPath.section)\(indexPath.row)"
@@ -301,6 +314,8 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
 
 }
 
+// MARK - 配置cell
+
 extension HKHomeViewController {
     func config(_ cell:StoryView,with data:NotesModel) {
         cell.userName.text = data.user?.username
@@ -321,5 +336,14 @@ extension HKHomeViewController {
         }
         cell.photoCell.imgDatas = data.pics
         //cell.userIcon.image = UIImage(named: "1")
+    }
+}
+
+// MARK -  点击代理事件
+
+extension HKHomeViewController: CityDelegate {
+    func cityClick(with data: CityModel) {
+        let vc = CityViewController(data: data)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

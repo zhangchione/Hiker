@@ -10,13 +10,13 @@ import UIKit
 
 class CityView: UICollectionViewCell {
     // 图片
-    private var imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "矩形(2)")
         return imageView
     }()
     // 标题
-    private var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.text = "上海"

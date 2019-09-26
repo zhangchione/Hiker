@@ -55,7 +55,7 @@ class TitleController: UIViewController {
     
     @IBAction func addStory(_ sender: UIButton) {
         saveTitle(title: textView.text)
-        let noteVC = NoteViewController()
+        let noteVC = NoteController()
         self.navigationController?.pushViewController(noteVC, animated: true)
     }
     

@@ -8,7 +8,17 @@
 
 import UIKit
 
+// 图片按钮点击代理方法
+protocol CityDelegate:NSObjectProtocol {
+    func cityClick(with data:CityModel)
+}
+
 class RecommendCityView: UICollectionViewCell {
+    
+    weak var delegate: CityDelegate?
+    
+    public var datas = [CityModel]()
+    
     private let CityCellID = "CityView"
     
     private lazy var collectionView : UICollectionView = {
@@ -53,14 +63,23 @@ class RecommendCityView: UICollectionViewCell {
 
 extension RecommendCityView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return datas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CityCellID, for: indexPath) as! CityView
+    
+        let data = datas[indexPath.row]
+        
+        cell.imageView.image = UIImage(named: data.citypic )
+        cell.titleLabel.text = data.cityname
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = datas[indexPath.row]
+        delegate?.cityClick(with: data)
+    }
     
 
 }

@@ -74,6 +74,9 @@
 		F5BD54E5233B2DF100357670 /* HKMinejson.json in Resources */ = {isa = PBXBuildFile; fileRef = F5BD54E4233B2DF100357670 /* HKMinejson.json */; };
 		F5BD54E7233B2E0600357670 /* MineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD54E6233B2E0600357670 /* MineModel.swift */; };
 		F5BD54E9233B38D000357670 /* HKStoryjson.json in Resources */ = {isa = PBXBuildFile; fileRef = F5BD54E8233B38D000357670 /* HKStoryjson.json */; };
+		F5BD54EB233B52DB00357670 /* NoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD54EA233B52DB00357670 /* NoteController.swift */; };
+		F5C27E1B233C4AF500B5131F /* CityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C27E1A233C4AF500B5131F /* CityViewController.swift */; };
+		F5C27E1D233C4BB700B5131F /* HKCityjson.json in Resources */ = {isa = PBXBuildFile; fileRef = F5C27E1C233C4BB700B5131F /* HKCityjson.json */; };
 		F5C872522331C4B60094DD7A /* GSCaptchaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */; };
 		F5C872542331C8480094DD7A /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872532331C8470094DD7A /* TimerButton.swift */; };
 		F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8725A233203CF0094DD7A /* FanViewController.swift */; };
@@ -176,6 +179,9 @@
 		F5BD54E4233B2DF100357670 /* HKMinejson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HKMinejson.json; sourceTree = "<group>"; };
 		F5BD54E6233B2E0600357670 /* MineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineModel.swift; sourceTree = "<group>"; };
 		F5BD54E8233B38D000357670 /* HKStoryjson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HKStoryjson.json; sourceTree = "<group>"; };
+		F5BD54EA233B52DB00357670 /* NoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteController.swift; sourceTree = "<group>"; };
+		F5C27E1A233C4AF500B5131F /* CityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewController.swift; sourceTree = "<group>"; };
+		F5C27E1C233C4BB700B5131F /* HKCityjson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HKCityjson.json; sourceTree = "<group>"; };
 		F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCaptchaButton.swift; sourceTree = "<group>"; };
 		F5C872532331C8470094DD7A /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		F5C8725A233203CF0094DD7A /* FanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 		F50155E023273CA200FD201C /* 二级页面 */ = {
 			isa = PBXGroup;
 			children = (
+				F5C27E19233C4AE400B5131F /* City - 推荐城市 */,
 				F50155F4232774AC00FD201C /* SubClassBaseViewController.swift */,
 				F50155F62327759500FD201C /* Tips - 消息 */,
 				F50155F12327740000FD201C /* Search - 搜索 */,
@@ -554,6 +561,7 @@
 				F5D8DD6C232A1CA500B7EADF /* OnePhotoCell.swift */,
 				F5E375C0232F735B00C7C351 /* FivePhotoCell.swift */,
 				F57C320D2334AD8900B6E7A0 /* TitleViewController.swift */,
+				F5BD54EA233B52DB00357670 /* NoteController.swift */,
 			);
 			path = "HKNotes - 记录";
 			sourceTree = "<group>";
@@ -611,6 +619,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		F5C27E19233C4AE400B5131F /* City - 推荐城市 */ = {
+			isa = PBXGroup;
+			children = (
+				F5C27E1A233C4AF500B5131F /* CityViewController.swift */,
+			);
+			path = "City - 推荐城市";
+			sourceTree = "<group>";
+		};
 		F5C872572332037B0094DD7A /* Story - 游记 */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +669,7 @@
 		F5EC431323262CCF00107F66 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				F5C27E1C233C4BB700B5131F /* HKCityjson.json */,
 				F5BD54E1233B064300357670 /* HKHomejson.json */,
 			);
 			path = API;
@@ -785,6 +802,7 @@
 				F5015601232799D900FD201C /* SetViewController.xib in Resources */,
 				F5D2C3D72328C97700DE60D2 /* MineSotryCell.xib in Resources */,
 				F58017C92325E0570014E3C3 /* Assets.xcassets in Resources */,
+				F5C27E1D233C4BB700B5131F /* HKCityjson.json in Resources */,
 				F58017C72325E0560014E3C3 /* Main.storyboard in Resources */,
 				F5D8DD662329E58400B7EADF /* WriteCell.xib in Resources */,
 				F558F63B2339DA350013EBAC /* DemoCollectionViewCell.xib in Resources */,
@@ -957,9 +975,11 @@
 				F558F63E2339FAD60013EBAC /* NotesCell.swift in Sources */,
 				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,
 				F50155F8232775A700FD201C /* TipsViewController.swift in Sources */,
+				F5BD54EB233B52DB00357670 /* NoteController.swift in Sources */,
 				F5AED6652330C8AA00B5B824 /* LocationTable.swift in Sources */,
 				F5D2C3D62328C97700DE60D2 /* MineSotryCell.swift in Sources */,
 				F58017E4232607770014E3C3 /* Extension + color.swift in Sources */,
+				F5C27E1B233C4AF500B5131F /* CityViewController.swift in Sources */,
 				F558F663233A030D0013EBAC /* TransitionDriver.swift in Sources */,
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
 				F558F65C233A030D0013EBAC /* ExpandingViewController.swift in Sources */,

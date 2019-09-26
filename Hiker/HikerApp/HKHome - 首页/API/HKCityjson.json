@@ -1,0 +1,344 @@
+{
+    "code": 200,
+    "data": [
+        {
+            "cityname": "上海",
+            "citypic": "img1",
+            "story": [
+                {
+                    "id": 4,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "zhangchione",
+                        "password": "zc123...",
+                        "headPic": "head1"
+                    },
+                    "type": 1,
+                    "pics": ["img1","img2","img3","img2"],
+                    "comments": [],
+                    "title": "苏州南京之行",
+                    "likes": 99,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.26",
+                    "locations": ["南京","苏州"],
+                    "noteParas": []
+                    
+                },
+                {
+                    "id": 3,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "zhangchione",
+                        "password": "zc123...",
+                        "headPic": "head2"
+                    },
+                    "type": 1,
+                    "pics": ["img1","img3","img2"],
+                    "comments": [],
+                    "title": "上海之旅",
+                    "likes": 0,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.20",
+                    "locations": ["长沙","上海"],
+                    "noteParas": []
+                },
+                {
+                    "id": 2,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "wangyiyi",
+                        "password": "zc123...",
+                        "headPic": "head1"
+                    },
+                    "type": 2,
+                    "pics": ["img2"],
+                    "comments": [],
+                    "title": "武汉之行",
+                    "likes": 0,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.20",
+                    "locations": ["长沙","武汉","株洲"],
+                    "noteParas": [
+                        {
+                            "id": 2,
+                            "content": "2222",
+                            "pics": "",
+                            "place": "a",
+                            "date": "02",
+                            "noteId": 2
+                        },
+                        {
+                            "id": 4,
+                            "content": "测试",
+                            "pics": " 2",
+                            "place": "2",
+                            "date": "2",
+                            "noteId": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "cityname": "澳洲",
+            "citypic": "img2",
+            "story": [
+                {
+                    "id": 4,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "zhangchione",
+                        "password": "zc123...",
+                        "headPic": "head1"
+                    },
+                    "type": 1,
+                    "pics": ["img1","img2","img3","img2"],
+                    "comments": [],
+                    "title": "苏州南京之行",
+                    "likes": 99,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.26",
+                    "locations": ["南京","苏州"],
+                    "noteParas": []
+                    
+                },
+                {
+                    "id": 3,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "zhangchione",
+                        "password": "zc123...",
+                        "headPic": "head2"
+                    },
+                    "type": 2,
+                    "pics": ["img1","img3","img2"],
+                    "comments": [],
+                    "title": "上海之旅",
+                    "likes": 0,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.20",
+                    "locations": ["长沙","上海"],
+                    "noteParas": []
+                },
+                {
+                    "id": 2,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "wangyiyi",
+                        "password": "zc123...",
+                        "headPic": "head1"
+                    },
+                    "type": 2,
+                    "pics": ["img2"],
+                    "comments": [],
+                    "title": "武汉之行",
+                    "likes": 0,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.20",
+                    "locations": ["长沙","武汉","株洲"],
+                    "noteParas": [
+                        {
+                            "id": 2,
+                            "content": "2222",
+                            "pics": "",
+                            "place": "a",
+                            "date": "02",
+                            "noteId": 2
+                        },
+                        {
+                            "id": 4,
+                            "content": "测试",
+                            "pics": " 2",
+                            "place": "2",
+                            "date": "2",
+                            "noteId": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "cityname": "上海",
+            "citypic": "img1",
+            "story": [
+                {
+                    "id": 4,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "zhangchione",
+                        "password": "zc123...",
+                        "headPic": "head1"
+                    },
+                    "type": 1,
+                    "pics": ["img1","img2","img3","img2"],
+                    "comments": [],
+                    "title": "苏州南京之行",
+                    "likes": 99,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.26",
+                    "locations": ["南京","苏州"],
+                    "noteParas": []
+                    
+                },
+                {
+                    "id": 3,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "zhangchione",
+                        "password": "zc123...",
+                        "headPic": "head2"
+                    },
+                    "type": 1,
+                    "pics": ["img1","img3","img2"],
+                    "comments": [],
+                    "title": "上海之旅",
+                    "likes": 0,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.20",
+                    "locations": ["长沙","上海"],
+                    "noteParas": []
+                },
+                {
+                    "id": 2,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "wangyiyi",
+                        "password": "zc123...",
+                        "headPic": "head1"
+                    },
+                    "type": 2,
+                    "pics": ["img2"],
+                    "comments": [],
+                    "title": "武汉之行",
+                    "likes": 0,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.20",
+                    "locations": ["长沙","武汉","株洲"],
+                    "noteParas": [
+                        {
+                            "id": 2,
+                            "content": "2222",
+                            "pics": "",
+                            "place": "a",
+                            "date": "02",
+                            "noteId": 2
+                        },
+                        {
+                            "id": 4,
+                            "content": "测试",
+                            "pics": " 2",
+                            "place": "2",
+                            "date": "2",
+                            "noteId": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "cityname": "澳洲",
+            "citypic": "img2",
+            "story": [
+                {
+                    "id": 4,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "zhangchione",
+                        "password": "zc123...",
+                        "headPic": "head1"
+                    },
+                    "type": 1,
+                    "pics": ["img1","img2","img3","img2"],
+                    "comments": [],
+                    "title": "苏州南京之行",
+                    "likes": 99,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.26",
+                    "locations": ["南京","苏州"],
+                    "noteParas": []
+                    
+                },
+                {
+                    "id": 3,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "zhangchione",
+                        "password": "zc123...",
+                        "headPic": "head2"
+                    },
+                    "type": 2,
+                    "pics": ["img1","img3","img2"],
+                    "comments": [],
+                    "title": "上海之旅",
+                    "likes": 0,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.20",
+                    "locations": ["长沙","上海"],
+                    "noteParas": []
+                },
+                {
+                    "id": 2,
+                    "content": null,
+                    "user": {
+                        "id": "ac1eb56b-7513-4918-b69f-a85d962e987e",
+                        "username": "wangyiyi",
+                        "password": "zc123...",
+                        "headPic": "head1"
+                    },
+                    "type": 2,
+                    "pics": ["img2"],
+                    "comments": [],
+                    "title": "武汉之行",
+                    "likes": 0,
+                    "like": false,
+                    "collected": false,
+                    "time": "2019.9.20",
+                    "locations": ["长沙","武汉","株洲"],
+                    "noteParas": [
+                        {
+                            "id": 2,
+                            "content": "2222",
+                            "pics": "",
+                            "place": "a",
+                            "date": "02",
+                            "noteId": 2
+                        },
+                        {
+                            "id": 4,
+                            "content": "测试",
+                            "pics": " 2",
+                            "place": "2",
+                            "date": "2",
+                            "noteId": 2
+                        }
+                    ]
+                }
+            ]
+        }
+        
+        
+    ],
+    "msg": null
+}
