@@ -15,6 +15,9 @@ class NoteController: UIViewController {
     var imgs: String = ""
     var time: String = ""
     var location: String = ""
+    var images = [String]()
+    // 数据
+    var datas = NotesModel()
     
     // 左边返回按钮
     private lazy var leftBarButton: UIButton = {
@@ -81,10 +84,10 @@ class NoteController: UIViewController {
         return btn
     }()
     
-    lazy var photoView:UIView = {
-       let vi = UIView()
-        return vi
-    }()
+//    lazy var photoView:UIView = {
+//       let vi = UIView()
+//        return vi
+//    }()
     lazy var addPhotoBtn:UIButton = {
         let btn = UIButton()
         btn.setTitleColor(UIColor.white, for: .normal)
@@ -128,9 +131,10 @@ extension NoteController {
         view.addSubview(locationBtn)
         view.addSubview(timeBtn)
         view.addSubview(nextBtn)
-        view.addSubview(photoView)
-        photoView.addSubview(addPhotoBtn)
-        photoView.addSubview(photoCell)
+        //view.addSubview(photoView)
+        
+        view.addSubview(addPhotoBtn)
+        view.addSubview(photoCell)
         
         writeTextView.snp.makeConstraints { (make) in
             make.top.equalTo(self.navigation.bar.snp.bottom)
@@ -157,20 +161,21 @@ extension NoteController {
             make.height.equalTo(40)
         }
         
-        photoView.snp.makeConstraints { (make) in
+//        photoView.snp.makeConstraints { (make) in
+//            make.height.equalTo(200)
+//        }
+        
+        addPhotoBtn.snp.makeConstraints { (make) in
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
             make.bottom.equalTo(view).offset(-40)
-            make.height.equalTo(200)
-        }
-        
-        addPhotoBtn.snp.makeConstraints { (make) in
-            make.left.bottom.right.equalTo(photoView)
             make.height.equalTo(40)
         }
         photoCell.snp.makeConstraints { (make) in
-            make.top.right.left.equalTo(photoView)
-            make.bottom.equalTo(addPhotoBtn)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+            make.bottom.equalTo(addPhotoBtn.snp.top)
+            make.height.equalTo(200)
         }
     }
 }
@@ -216,7 +221,6 @@ extension NoteController {
         let locaCon = getContent()
         if  locaCon == nil {
             contents.append(writeTextView.text!)
-            print(writeTextView.text!)
         }else {
             contents = locaCon!
             contents.append(writeTextView.text!)
@@ -253,21 +257,23 @@ extension NoteController {
         }
         savePic(content: imgs)
         
-        var datas = NotesModel()
-        
         let c1 = getContent()
         let c2 = getLocation()
         let c3 = getTime()
         let c4 = getPic()
-        var paras = NoteParas()
-        
+        var paras = [NoteParas]()
+        var para = NoteParas()
         for index in 0 ..< c1!.count {
-            paras.content = c1![index]
-            paras.date = c3![index]
-            paras.pics = ["img1","img2"]
-            paras.place = c2![index]
-            datas.noteParas?.append(paras)
+            para.content = c1![index]
+            para.date = c3![index]
+            para.pics = self.images
+            para.place = c2![index]
+            paras.append(para)
+
         }
+        print("paras",paras)
+        datas.noteParas = paras
+        print(datas.noteParas)
         let noteVC = NotesController(data: datas)
         self.navigationController?.pushViewController(noteVC, animated: true)
     }
@@ -275,6 +281,7 @@ extension NoteController {
         
     }
     @objc func addPhoto(){
+        print("本地相册打开")
         self.imgPricker = UIImagePickerController()
         self.imgPricker.delegate = self
         self.imgPricker.allowsEditing = true
@@ -315,7 +322,18 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
         let imgUrl = (imageURL as! URL).path
         
         self.imgs = imgUrl
+        self.images.append(imgUrl)
         
+        self.photoCell.imgDatas = images
+        self.photoCell.snp.makeConstraints { (make) in
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+            make.bottom.equalTo(addPhotoBtn.snp.top)
+            make.height.equalTo(200)
+        }
+        DispatchQueue.main.async {
+            self.addPhotoBtn.corner(byRoundingCorners: [.bottomLeft,.bottomRight], radii: 10)
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

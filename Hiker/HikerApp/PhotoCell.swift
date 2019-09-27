@@ -75,19 +75,18 @@ class PhotoCell: UIView {
         }
     }
     
-    var imgData:Int? {
-        didSet {
-            guard let imgdata = imgData else { return }
-            //self.updateUI(with: imgdata)
-        }
-    }
+    var isLocalImage = false
     
     func updateUI(_ count:Int,with data:[String]) {
         switch count {
         case 1:
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: [.topLeft , .topRight], radii: 10)
-                self.img1.image = UIImage(named: data[0])
+                if self.isLocalImage {
+                    self.img1.image = UIImage(contentsOfFile: data[0])
+                }else {
+                    self.img1.image = UIImage(named: data[0])
+                }
                 
             }
             img1.snp.makeConstraints { (make) in
@@ -100,8 +99,15 @@ class PhotoCell: UIView {
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
-                self.img1.image = UIImage(named: data[0])
-                self.img2.image = UIImage(named: data[1])
+                if self.isLocalImage {
+                    self.img1.image = UIImage(contentsOfFile: data[0])
+                    self.img2.image = UIImage(contentsOfFile: data[1])
+                }else {
+                    self.img1.image = UIImage(named: data[0])
+                    self.img2.image = UIImage(named: data[1])
+                }
+                
+                
             }
             img1.snp.makeConstraints { (make) in
                 make.top.equalTo(self)
@@ -119,9 +125,17 @@ class PhotoCell: UIView {
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
-                self.img1.image = UIImage(named: data[0])
-                self.img2.image = UIImage(named: data[1])
-                self.img3.image = UIImage(named: data[2])
+                if self.isLocalImage {
+                    self.img1.image = UIImage(contentsOfFile: data[0])
+                    self.img2.image = UIImage(contentsOfFile: data[1])
+                    self.img3.image = UIImage(contentsOfFile: data[2])
+                }else {
+                    self.img1.image = UIImage(named: data[0])
+                    self.img2.image = UIImage(named: data[1])
+                    self.img3.image = UIImage(named: data[2])
+                }
+                
+
             }
             img1.snp.makeConstraints { (make) in
                 make.top.equalTo(self)
@@ -145,10 +159,19 @@ class PhotoCell: UIView {
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
-                self.img1.image = UIImage(named: data[0])
-                self.img2.image = UIImage(named: data[1])
-                self.img3.image = UIImage(named: data[2])
-                self.img4.image = UIImage(named: data[3])
+                if self.isLocalImage {
+                    self.img1.image = UIImage(contentsOfFile: data[0])
+                    self.img2.image = UIImage(contentsOfFile: data[1])
+                    self.img3.image = UIImage(contentsOfFile: data[2])
+                    self.img4.image = UIImage(contentsOfFile: data[3])
+                }else {
+                    self.img1.image = UIImage(named: data[0])
+                    self.img2.image = UIImage(named: data[1])
+                    self.img3.image = UIImage(named: data[2])
+                    self.img4.image = UIImage(named: data[3])
+                }
+                
+
             }
             img1.snp.makeConstraints { (make) in
                 make.top.equalTo(self)

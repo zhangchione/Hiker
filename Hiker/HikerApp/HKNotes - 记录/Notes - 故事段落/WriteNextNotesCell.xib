@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PQw-5l-Se9" customClass="WriteNextNotesCell" customModule="Hiker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="374" height="550"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="374" height="550"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2j-kL-zOz" userLabel="Back Container View">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="550"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="550" id="V4Q-Dv-4sU"/>
+                            <constraint firstAttribute="width" constant="374" id="dwE-C6-Hed"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blT-x6-mFE" userLabel="Front Container View">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="550"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rv5-XF-lTr">
+                                <rect key="frame" x="8" y="462" width="358" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dyv-NC-dgI">
+                                        <rect key="frame" x="83" y="23" width="200" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <inset key="titleEdgeInsets" minX="9" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="-12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="开启第一段故事" image="notes_title_add">
+                                            <color key="titleColor" red="0.24313725489999999" green="0.40000000000000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.24313725489999999" green="0.40000000000000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="路径 3 + 路径 3蒙版备份" translatesAutoresizingMaskIntoConstraints="NO" id="RPe-Ow-Fsn">
+                                <rect key="frame" x="184" y="0.0" width="190" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="路径 3 + 路径 3蒙版" translatesAutoresizingMaskIntoConstraints="NO" id="sg5-HI-3FT">
+                                <rect key="frame" x="0.0" y="0.0" width="176" height="199"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="路径 3 + 路径 3蒙版备份 2" translatesAutoresizingMaskIntoConstraints="NO" id="Rw6-UJ-Lxr">
+                                <rect key="frame" x="184" y="108" width="91" height="91"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="路径 3 + 路径 3蒙版备份 2" translatesAutoresizingMaskIntoConstraints="NO" id="Xrl-SZ-Y7N">
+                                <rect key="frame" x="283" y="108" width="91" height="91"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="374" id="5Ps-vj-pKr"/>
+                            <constraint firstAttribute="height" constant="550" id="kg9-WU-gST"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="blT-x6-mFE" firstAttribute="top" secondItem="PQw-5l-Se9" secondAttribute="top" id="5Jl-g0-0kg"/>
+                <constraint firstItem="W2j-kL-zOz" firstAttribute="leading" secondItem="PQw-5l-Se9" secondAttribute="leading" id="DOP-g6-fgf"/>
+                <constraint firstItem="W2j-kL-zOz" firstAttribute="top" secondItem="PQw-5l-Se9" secondAttribute="top" id="Hcc-ri-DdO"/>
+                <constraint firstItem="blT-x6-mFE" firstAttribute="leading" secondItem="PQw-5l-Se9" secondAttribute="leading" id="SjY-Ct-CtA"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="WRZ-tx-ZsD"/>
+            <size key="customSize" width="371" height="577"/>
+            <connections>
+                <outlet property="backContainerView" destination="W2j-kL-zOz" id="Azg-2K-uhd"/>
+                <outlet property="frontContainerView" destination="blT-x6-mFE" id="zlE-HD-PHd"/>
+            </connections>
+            <point key="canvasLocation" x="115.94202898550725" y="-30.803571428571427"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="notes_title_add" width="20" height="20"/>
+        <image name="路径 3 + 路径 3蒙版" width="159" height="180"/>
+        <image name="路径 3 + 路径 3蒙版备份" width="180" height="88"/>
+        <image name="路径 3 + 路径 3蒙版备份 2" width="88" height="88"/>
+    </resources>
+</document>

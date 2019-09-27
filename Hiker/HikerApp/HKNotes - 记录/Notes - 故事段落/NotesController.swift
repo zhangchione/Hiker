@@ -36,6 +36,7 @@ class NotesController: ExpandingViewController {
         button.addTarget(self, action: #selector(back), for: .touchUpInside)
         return button
     }()
+    
     /// 右边预览按钮
     private lazy var rightBarButton: UIButton = {
         let button = UIButton.init(type: .custom)
@@ -81,7 +82,7 @@ extension NotesController {
     
     func scrollViewDidScroll(_: UIScrollView) {
         
-        //pageLabel.text = "\(currentIndex + 1)/\(items.count)"
+        self.navigation.item.title = "第" + "\(currentIndex + 1)" + "段故事"
     }
 }
 
@@ -92,8 +93,8 @@ extension NotesController {
         let nib = UINib(nibName: String(describing: NotesCell.self), bundle: nil)
         collectionView?.register(nib, forCellWithReuseIdentifier: String(describing: NotesCell.self))
         
-        let nib1 = UINib(nibName: String(describing: DemoCollectionViewCell.self), bundle: nil)
-        collectionView?.register(nib1, forCellWithReuseIdentifier: String(describing: DemoCollectionViewCell.self))
+        let nib1 = UINib(nibName: String(describing: WriteNextNotesCell.self), bundle: nil)
+        collectionView?.register(nib1, forCellWithReuseIdentifier: String(describing: WriteNextNotesCell.self))
         
         //collectionView?.backgroundColor = .green
         view.addSubview(storyTitle)
@@ -134,7 +135,7 @@ extension NotesController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: NotesCell.self), for: indexPath) as! NotesCell
-        let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: DemoCollectionViewCell.self), for: indexPath)
+        let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WriteNextNotesCell.self), for: indexPath)
         let cellData = data?.noteParas![indexPath.row]
         if indexPath.row == (data?.noteParas!.count)! - 1 {
             
@@ -155,5 +156,6 @@ extension NotesController {
         cell.time.text = data.date
         cell.location.text = data.place
         cell.content.text = data.content
+        cell.photoCell.imgDatas = data.pics
     }
 }

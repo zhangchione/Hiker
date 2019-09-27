@@ -38,6 +38,7 @@ class TitleController: UIViewController {
     
     
     func configNav(){
+        
         self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)
         self.navigation.bar.backgroundColor = backColor
         self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
@@ -62,7 +63,6 @@ class TitleController: UIViewController {
 }
 extension TitleController:UITextViewDelegate {
     
-    func textViewDidChange(_ textView: UITextView) {
         func textViewShouldBeginEditing(_ content: UITextView) -> Bool {
             if (content.text == "故事标题") {
                 content.text = ""
@@ -72,8 +72,10 @@ extension TitleController:UITextViewDelegate {
             }
             return true
         }
-    }
     func textViewDidEndEditing(_ textView: UITextView) {
-        
+        if textView.text == "" {
+            textView.text = "故事标题"
+            textView.textColor = .gray
+        }
     }
 }

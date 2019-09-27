@@ -28,7 +28,7 @@ class NotesCell: BasePageCollectionCell {
         photoCell.snp.makeConstraints { (make) in
             make.left.right.bottom.top.equalTo(photoView)
         }
-        photoCell.imgDatas = ["img1","img2","img3","img3"]
+        //photoCell.imgDatas = ["img1","img2","img3","img3"]
     }
 
 }

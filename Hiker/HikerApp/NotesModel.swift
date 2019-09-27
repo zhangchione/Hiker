@@ -9,7 +9,7 @@
 import Foundation
 import HandyJSON
 
-// 我的故事簿
+/// 故事簿
 struct HKStory:HandyJSON {
     var msg:String?
     var code:String?
@@ -20,7 +20,7 @@ struct StoryModel:HandyJSON {
     var story:[NotesModel]?
 }
 
-// city
+/// City
 
 struct HKCity:HandyJSON {
     var msg:String?
