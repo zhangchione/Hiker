@@ -41,8 +41,9 @@ class NotesController: ExpandingViewController {
     private lazy var rightBarButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x:-10, y:0, width:30, height: 30)
-        button.setTitle("预览", for: .normal)
+        button.setTitle("完成", for: .normal)
         button.setTitleColor(textColor, for: .normal)
+        button.addTarget(self, action: #selector(achieve), for: .touchUpInside)
         return button
     }()
     
@@ -72,6 +73,11 @@ class NotesController: ExpandingViewController {
     }
     @objc func back(){
         //self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func achieve(){
+        self.navigationController?.popToRootViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
@@ -130,19 +136,28 @@ extension NotesController {
 extension NotesController {
     
     override func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return (data?.noteParas!.count)!
+        return (data?.noteParas!.count)! + 1
     } 
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: NotesCell.self), for: indexPath) as! NotesCell
         let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WriteNextNotesCell.self), for: indexPath)
-        let cellData = data?.noteParas![indexPath.row]
-        if indexPath.row == (data?.noteParas!.count)! - 1 {
+        if indexPath.row == (data?.noteParas!.count)!   {
             
             return cell1
+            
         }else {
+            let cellData = data?.noteParas![indexPath.row]
             configCell(cell, with: cellData!)
             return cell
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row ==  (data?.noteParas!.count)! {
+            self.navigationController?.popToRootViewController(animated: true)
+            let noteVC = NoteController()
+            self.navigationController?.pushViewController(noteVC, animated: true)
         }
     }
 //    //最小 item 间距
@@ -157,5 +172,6 @@ extension NotesController {
         cell.location.text = data.place
         cell.content.text = data.content
         cell.photoCell.imgDatas = data.pics
+        
     }
 }

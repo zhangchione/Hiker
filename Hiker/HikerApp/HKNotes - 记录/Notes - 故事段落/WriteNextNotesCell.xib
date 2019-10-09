@@ -93,9 +93,10 @@
             <size key="customSize" width="371" height="577"/>
             <connections>
                 <outlet property="backContainerView" destination="W2j-kL-zOz" id="Azg-2K-uhd"/>
+                <outlet property="btn" destination="Dyv-NC-dgI" id="hyw-se-5rq"/>
                 <outlet property="frontContainerView" destination="blT-x6-mFE" id="zlE-HD-PHd"/>
             </connections>
-            <point key="canvasLocation" x="115.94202898550725" y="-30.803571428571427"/>
+            <point key="canvasLocation" x="-159" y="-20"/>
         </collectionViewCell>
     </objects>
     <resources>

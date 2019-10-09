@@ -85,7 +85,7 @@ func mainTabBar() -> UITabBarController {
             alertController.addAction(cancelAction)
             
             let notesVC = TitleController()
-            let noteNav = MainNavigationController.init(rootViewController: notesVC)
+            let noteNav = NotesNavigationController.init(rootViewController: notesVC)
             noteNav.navigation.configuration.isEnabled = true
             noteNav.navigation.configuration.barTintColor = .white
             noteNav.navigation.configuration.tintColor = .white

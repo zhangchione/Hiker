@@ -47,7 +47,24 @@ class CityViewController: SubClassBaseViewController {
         configUI()
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //        key1: reload Data here
+        collectionView.reloadData()
+        //        key2: do the animation in ViewwillApear,not in delegate "willDisplay", that will case reuse cell problem!
+        let cells = collectionView.visibleCells
+        let tableHeight: CGFloat = collectionView.bounds.size.height
+        
+        for (index, cell) in cells.enumerated() {
+            //            use origin.y or CGAffineTransform and set y has same effect!
+            //            cell.transform = CGAffineTransform(translationX: 0, y: tableHeight)
+            cell.frame.origin.y = tableHeight
+            UIView.animate(withDuration: 1.0, delay: 0.04 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
+                //                cell.transform = CGAffineTransform(translationX: 0, y: 0);
+                cell.frame.origin.y = 0
+            }, completion: nil)
+        }
+    }
     func configNav(){
        self.navigation.item.title =  "“" + data!.cityname + "”"
        self.navigation.bar.backgroundColor = backColor

@@ -88,6 +88,10 @@
                             <rect key="frame" x="283" y="108" width="91" height="91"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title_back_img" translatesAutoresizingMaskIntoConstraints="NO" id="08N-GN-N6Q">
+                            <rect key="frame" x="0.0" y="221" width="366" height="265"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <userDefinedRuntimeAttributes>
@@ -109,6 +113,7 @@
     </objects>
     <resources>
         <image name="notes_title_add" width="20" height="20"/>
+        <image name="title_back_img" width="616" height="296"/>
         <image name="路径 3 + 路径 3蒙版" width="159" height="180"/>
         <image name="路径 3 + 路径 3蒙版备份" width="180" height="88"/>
         <image name="路径 3 + 路径 3蒙版备份 2" width="88" height="88"/>

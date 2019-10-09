@@ -8,6 +8,8 @@
 
 import UIKit
 
+import ProgressHUD
+
 class TitleController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
@@ -25,9 +27,21 @@ class TitleController: UIViewController {
         button.frame = CGRect(x:-10, y:0, width:30, height: 30)
         button.setTitle("预览", for: .normal)
         button.setTitleColor(textColor, for: .normal)
+        button.addTarget(self, action: #selector(look), for: .touchUpInside)
         return button
     }()
     
+    var dismissKetboardTap = UITapGestureRecognizer()
+    
+    let c1 = getContent()
+    let c2 = getLocation()
+    let c3 = getTime()
+    let c4 = getPic()
+    
+    @objc func dismissKeyboard(){
+        print("键盘成功关闭")
+        self.view.endEditing(false)
+    }
     
     
     override func viewDidLoad() {
@@ -45,13 +59,42 @@ class TitleController: UIViewController {
         view.backgroundColor = backColor
         self.navigation.bar.isShadowHidden = true
         self.navigation.item.title = "写故事"
+        
+        
+        
     }
+    
     func configCV(){
         self.textView.delegate = self
+        dismissKetboardTap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        self.view.addGestureRecognizer(dismissKetboardTap)
     }
     
     @objc func back(){
        self.dismiss(animated: true, completion: nil)
+    }
+    // 数据
+    var datas = NotesModel()
+    
+    @objc func look() {
+
+        if c1 == nil {
+            ProgressHUD.showError("暂无段落")
+        }else {
+        var paras = [NoteParas]()
+        var para = NoteParas()
+        for index in 0 ..< c1!.count {
+            para.content = c1![index]
+            para.date = c3![index]
+            para.pics = c4![index]
+            para.place = c2![index]
+            paras.append(para)
+            
+        }
+        datas.noteParas = paras
+        let noteVC = NotesController(data: datas)
+        self.navigationController?.pushViewController(noteVC, animated: true)
+        }
     }
     
     @IBAction func addStory(_ sender: UIButton) {

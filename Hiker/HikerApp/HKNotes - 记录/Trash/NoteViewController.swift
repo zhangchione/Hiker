@@ -233,16 +233,16 @@ class NoteViewController: UIViewController {
         }
         saveTime(content: times)
         
-        var imgs = [String]()
-        let locImg = getPic()
-        if locImg == nil {
-            imgs.append(self.img)
-        }else {
-            imgs = locImg!
-            imgs.append(self.img)
-        }
-        savePic(content: imgs)
-        
+//        var imgs = [String]()
+//        let locImg = getPic()
+//        if locImg == nil {
+//            imgs.append(self.img)
+//        }else {
+//            imgs = locImg!
+//            imgs.append(self.img)
+//        }
+//        savePic(content: imgs)
+//        
         let noteVC = NoteViewController()
         self.navigationController?.pushViewController(noteVC, animated: true)
     }

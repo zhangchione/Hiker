@@ -94,7 +94,7 @@ class NoteController: UIViewController {
         btn.setTitle("添加图片", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
-        btn.layer.cornerRadius = 20
+        //btn.layer.cornerRadius = 20
         btn.addTarget(self, action: #selector(addPhoto), for: .touchUpInside)
         return btn
     }()
@@ -108,7 +108,10 @@ class NoteController: UIViewController {
         configNav()
         configUI()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+    }
 
 }
 
@@ -154,12 +157,12 @@ extension NoteController {
             make.height.equalTo(30)
             make.width.equalTo(120)
         }
-        nextBtn.snp.makeConstraints { (make) in
-            make.top.equalTo(timeBtn.snp.bottom).offset(25)
-            make.right.equalTo(view).offset(-20)
-            make.width.equalTo(100)
-            make.height.equalTo(40)
-        }
+//        nextBtn.snp.makeConstraints { (make) in
+//            make.top.equalTo(timeBtn.snp.bottom).offset(25)
+//            make.right.equalTo(view).offset(-20)
+//            make.width.equalTo(100)
+//            make.height.equalTo(40)
+//        }
         
 //        photoView.snp.makeConstraints { (make) in
 //            make.height.equalTo(200)
@@ -176,6 +179,9 @@ extension NoteController {
             make.right.equalTo(view).offset(-20)
             make.bottom.equalTo(addPhotoBtn.snp.top)
             make.height.equalTo(200)
+        }
+        DispatchQueue.main.async {
+            self.addPhotoBtn.corner(byRoundingCorners: [.bottomLeft,.bottomRight], radii: 10)
         }
     }
 }
@@ -200,21 +206,39 @@ extension NoteController {
         
     }
     @objc func addLocation(){
-        self.location = "上海"
-        self.locationBtn.setTitle("上海", for: .normal)
-        ProgressHUD.showSuccess("地点添加成功")
+        
+        let alert = UIAlertController.init(title: "消息", message: "请添加地点信息", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
+            self.location =  (alert.textFields?.first?.text!)!
+                    self.locationBtn.setTitle( (alert.textFields?.first?.text!)!, for: .normal)
+            ProgressHUD.showSuccess("地点添加成功")
+        }
+        let noAction = UIAlertAction.init(title: "取消", style: .destructive) { (no) in
+            print("地点信息取消",no.style)
+        }
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        alert.addTextField { (text) in
+            print(text.text,11)
+            
+        }
+
+        self.present(alert, animated: true, completion: nil)
+
+
     }
     @objc func addTime(){
-        let now = Date()
-        let timeForMatter = DateFormatter()
+        let picker = QDatePicker { (date: Date) in
+            self.timeBtn.setTitle("\(date.formatterDate(formatter: "yyyy-MM-dd"))", for: .normal)
+            self.time = date.formatterDate(formatter: "yyyy-MM-dd")
+        }
+        picker.datePickerStyle = .YMD
+        picker.themeColor = UIColor.init(r: 55, g: 194, b: 207)
+        picker.pickerStyle = .datePicker
+        picker.animationStyle = .styleDefault
+        picker.show()
         
-        
-        timeForMatter.dateFormat = "yyyy-MM-dd"
-        let id = timeForMatter.string(from: now)
-        
-        self.time = id
-        self.timeBtn.setTitle(id, for: .normal)
-        ProgressHUD.showSuccess("时间添加成功")
     }
     @objc func save(){
         var contents = [String]()
@@ -247,35 +271,18 @@ extension NoteController {
         }
         saveTime(content: times)
         
-        var imgs = [String]()
+        var imgs = [[String]]()
         let locImg = getPic()
         if locImg == nil {
-            imgs.append(self.imgs)
+            imgs.append(self.images)
         }else {
             imgs = locImg!
-            imgs.append(self.imgs)
+            imgs.append(self.images)
         }
         savePic(content: imgs)
         
-        let c1 = getContent()
-        let c2 = getLocation()
-        let c3 = getTime()
-        let c4 = getPic()
-        var paras = [NoteParas]()
-        var para = NoteParas()
-        for index in 0 ..< c1!.count {
-            para.content = c1![index]
-            para.date = c3![index]
-            para.pics = self.images
-            para.place = c2![index]
-            paras.append(para)
-
-        }
-        print("paras",paras)
-        datas.noteParas = paras
-        print(datas.noteParas)
-        let noteVC = NotesController(data: datas)
-        self.navigationController?.pushViewController(noteVC, animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
+        //self.navigationController?.popToViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
     }
     @objc func nextNote(){
         
@@ -322,18 +329,17 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
         let imgUrl = (imageURL as! URL).path
         
         self.imgs = imgUrl
+        
         self.images.append(imgUrl)
         
-        self.photoCell.imgDatas = images
         self.photoCell.snp.makeConstraints { (make) in
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
             make.bottom.equalTo(addPhotoBtn.snp.top)
             make.height.equalTo(200)
         }
-        DispatchQueue.main.async {
-            self.addPhotoBtn.corner(byRoundingCorners: [.bottomLeft,.bottomRight], radii: 10)
-        }
+        self.photoCell.imgDatas = images
+        
         self.dismiss(animated: true, completion: nil)
     }
     
