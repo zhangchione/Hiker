@@ -76,8 +76,9 @@ class NotesController: ExpandingViewController {
     }
     
     @objc func achieve(){
+        saveFlag(flag: "001")
         self.navigationController?.popToRootViewController(animated: true)
-        self.dismiss(animated: true, completion: nil)
+
     }
     
 }
@@ -155,7 +156,7 @@ extension NotesController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row ==  (data?.noteParas!.count)! {
-            self.navigationController?.popToRootViewController(animated: true)
+           // self.navigationController?.popToRootViewController(animated: true)
             let noteVC = NoteController()
             self.navigationController?.pushViewController(noteVC, animated: true)
         }

@@ -46,6 +46,7 @@ func mainTabBar() -> UITabBarController {
     homeNav.navigation.configuration.barTintColor = backColor
     homeNav.navigation.configuration.tintColor = backColor
     
+    
     mineNav.navigation.configuration.isEnabled = true
     mineNav.navigation.configuration.barTintColor = .white
     mineNav.navigation.configuration.tintColor = .white
@@ -58,6 +59,7 @@ func mainTabBar() -> UITabBarController {
     if #available(iOS 11.0, *) {
         mineNav.navigation.prefersLargeTitles()
     }
+    
     
     
     let tabBarController = ESTabBarController()

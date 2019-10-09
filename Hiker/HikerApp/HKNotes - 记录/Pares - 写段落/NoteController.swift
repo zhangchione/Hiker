@@ -103,6 +103,14 @@ class NoteController: UIViewController {
         return photoCell
     }()
     
+    var dismissKetboardTap = UITapGestureRecognizer()
+    
+    let c1 = getContent()
+    let c2 = getLocation()
+    let c3 = getTime()
+    let c4 = getPic()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configNav()
@@ -129,6 +137,9 @@ extension NoteController {
     }
     
     func configUI(){
+        dismissKetboardTap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        self.view.addGestureRecognizer(dismissKetboardTap)
+        
         view.backgroundColor = .white
         view.addSubview(writeTextView)
         view.addSubview(locationBtn)
@@ -189,6 +200,8 @@ extension NoteController {
 // MRAK - @objc function
 
 extension NoteController {
+    
+    
     @objc func back(){
         UserDefaults.standard.removeObject(forKey: "content")
         UserDefaults.standard.removeObject(forKey: "time")
@@ -281,9 +294,37 @@ extension NoteController {
         }
         savePic(content: imgs)
         
-        self.navigationController?.popToRootViewController(animated: true)
-        //self.navigationController?.popToViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
+        let c1 = getContent()
+        let c2 = getLocation()
+        let c3 = getTime()
+        let c4 = getPic()
+        
+        if c1 == nil {
+            ProgressHUD.showError("暂无段落")
+        }else {
+            var paras = [NoteParas]()
+            var para = NoteParas()
+            for index in 0 ..< c1!.count {
+                para.content = c1![index]
+                para.date = c3![index]
+                para.pics = c4![index]
+                para.place = c2![index]
+                paras.append(para)
+                
+            }
+            datas.noteParas = paras
+            let noteVC = NotesController(data: datas)
+            self.navigationController?.pushViewController(noteVC, animated: true)
+        }
+        
+    
     }
+    
+    @objc func dismissKeyboard(){
+        print("键盘成功关闭")
+        self.view.endEditing(false)
+    }
+    
     @objc func nextNote(){
         
     }

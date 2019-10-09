@@ -27,16 +27,12 @@ class TitleController: UIViewController {
         button.frame = CGRect(x:-10, y:0, width:30, height: 30)
         button.setTitle("预览", for: .normal)
         button.setTitleColor(textColor, for: .normal)
-        button.addTarget(self, action: #selector(look), for: .touchUpInside)
         return button
     }()
     
     var dismissKetboardTap = UITapGestureRecognizer()
     
-    let c1 = getContent()
-    let c2 = getLocation()
-    let c3 = getTime()
-    let c4 = getPic()
+
     
     @objc func dismissKeyboard(){
         print("键盘成功关闭")
@@ -46,10 +42,32 @@ class TitleController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configNav()
         configCV()
+        
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if getFlag() == "001" {
+            self.dismiss(animated: true, completion: nil)
+                    UserDefaults.standard.removeObject(forKey: "flag")
+        }else {
+        
+        let c1 = getContent()
+        let c2 = getLocation()
+        let c3 = getTime()
+        let c4 = getPic()
+        if c1 == nil {
+            
+        }else {
+            rightBarButton.setTitleColor(UIColor.red, for: .normal)
+            rightBarButton.addTarget(self, action: #selector(look), for: .touchUpInside)
+        }
+        }
+    }
     
     func configNav(){
         
@@ -78,29 +96,37 @@ class TitleController: UIViewController {
     
     @objc func look() {
 
-        if c1 == nil {
-            ProgressHUD.showError("暂无段落")
-        }else {
-        var paras = [NoteParas]()
-        var para = NoteParas()
-        for index in 0 ..< c1!.count {
-            para.content = c1![index]
-            para.date = c3![index]
-            para.pics = c4![index]
-            para.place = c2![index]
-            paras.append(para)
-            
-        }
-        datas.noteParas = paras
-        let noteVC = NotesController(data: datas)
-        self.navigationController?.pushViewController(noteVC, animated: true)
-        }
+//        if c1 == nil {
+//            ProgressHUD.showError("暂无段落")
+//        }else {
+//        var paras = [NoteParas]()
+//        var para = NoteParas()
+//        for index in 0 ..< c1!.count {
+//            para.content = c1![index]
+//            para.date = c3![index]
+//            para.pics = c4![index]
+//            para.place = c2![index]
+//            paras.append(para)
+//
+//        }
+//        datas.noteParas = paras
+//        let noteVC = NotesController(data: datas)
+//        self.navigationController?.pushViewController(noteVC, animated: true)
+//        }
     }
     
     @IBAction func addStory(_ sender: UIButton) {
-        saveTitle(title: textView.text)
-        let noteVC = NoteController()
-        self.navigationController?.pushViewController(noteVC, animated: true)
+        
+        if textView.text == "故事标题" {
+            
+            ProgressHUD.showError("请添加故事标题")
+            
+        }else {
+            saveTitle(title: textView.text)
+            let noteVC = NoteController()
+            self.navigationController?.pushViewController(noteVC, animated: true)
+        }
+
     }
     
 }

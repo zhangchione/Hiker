@@ -18,7 +18,13 @@ func getToken() -> String? {
     return  defaults.string(forKey: "token")
 }
 
-
+func saveFlag(flag:String){
+    defaults.set(flag, forKey: "flag")
+    defaults.synchronize()
+}
+func getFlag() -> String? {
+    return  defaults.string(forKey: "flag")
+}
 //游记标题
 
 func saveTitle(title:String) {
@@ -78,6 +84,7 @@ func getPic() -> [[String]]? {
     
     return defaults.object(forKey: "pic") as? [[String]]
 }
+
 
 
 
