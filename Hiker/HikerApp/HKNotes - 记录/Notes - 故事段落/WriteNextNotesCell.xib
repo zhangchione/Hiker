@@ -35,15 +35,20 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dyv-NC-dgI">
-                                        <rect key="frame" x="83" y="23" width="200" height="27"/>
+                                        <rect key="frame" x="83" y="23" width="24" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <inset key="titleEdgeInsets" minX="9" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="-12" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="开启第一段故事" image="notes_title_add">
+                                        <state key="normal" image="notes_title_add">
                                             <color key="titleColor" red="0.24313725489999999" green="0.40000000000000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="开启下一段故事" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3R-WA-Lvh">
+                                        <rect key="frame" x="115" y="23" width="141" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="textColor" red="0.24313725489999999" green="0.40000000000000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -74,6 +79,10 @@
                                 <rect key="frame" x="283" y="108" width="91" height="91"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="title_back_img" translatesAutoresizingMaskIntoConstraints="NO" id="Pea-wE-AHs">
+                                <rect key="frame" x="4" y="207" width="366" height="265"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -96,11 +105,12 @@
                 <outlet property="btn" destination="Dyv-NC-dgI" id="hyw-se-5rq"/>
                 <outlet property="frontContainerView" destination="blT-x6-mFE" id="zlE-HD-PHd"/>
             </connections>
-            <point key="canvasLocation" x="-159" y="-20"/>
+            <point key="canvasLocation" x="-159.42028985507247" y="-20.089285714285712"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="notes_title_add" width="20" height="20"/>
+        <image name="title_back_img" width="616" height="296"/>
         <image name="路径 3 + 路径 3蒙版" width="159" height="180"/>
         <image name="路径 3 + 路径 3蒙版备份" width="180" height="88"/>
         <image name="路径 3 + 路径 3蒙版备份 2" width="88" height="88"/>

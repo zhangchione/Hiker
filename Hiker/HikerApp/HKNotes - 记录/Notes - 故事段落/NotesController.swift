@@ -42,7 +42,7 @@ class NotesController: ExpandingViewController {
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x:-10, y:0, width:30, height: 30)
         button.setTitle("完成", for: .normal)
-        button.setTitleColor(textColor, for: .normal)
+        button.setTitleColor(UIColor.red, for: .normal)
         button.addTarget(self, action: #selector(achieve), for: .touchUpInside)
         return button
     }()
@@ -89,7 +89,13 @@ extension NotesController {
     
     func scrollViewDidScroll(_: UIScrollView) {
         
-        self.navigation.item.title = "第" + "\(currentIndex + 1)" + "段故事"
+        if currentIndex == (data?.noteParas!.count)! {
+             self.navigation.item.title = "开启下一段故事"
+        } else {
+             self.navigation.item.title = "第" + "\(currentIndex + 1)" + "段故事"
+        }
+        
+       
     }
 }
 
