@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import ProgressHUD
 
 class NotesController: ExpandingViewController {
 
     public var data:NotesModel?
+    
+    var note:NoteParas?
+    var storyId = ""
+    var requestEndFlag = false
+    
     
     convenience init(data:NotesModel) {
         self.init()
@@ -77,8 +85,38 @@ class NotesController: ExpandingViewController {
     
     @objc func achieve(){
         saveFlag(flag: "001")
-        self.navigationController?.popToRootViewController(animated: true)
+        
+        print("title:",getTitle())
+        postStory(title: getTitle()!)
+        
+        
+        for index in 0 ..< (data?.noteParas!.count)! {
+            print(index,self.data?.noteParas![index].pics)
+            var imgs = ""
+            let imgsArray = self.data?.noteParas![index].pics.components(separatedBy:",")
+            print(imgsArray)
+            for img in imgsArray! {
+                print(img)
+                if imgs != "" {
+                    imgs = imgs + "," + uploadPic(imageURL: img)
+                }else {
+                    imgs = uploadPic(imageURL: img)
+                }
+                
+                
+            }
+            print(imgs,"imgs")
 
+            self.note = self.data?.noteParas![index]
+            
+            postNotes(note: self.note!, pic: imgs)
+            
+        }
+        
+        removeUserDeault()
+       
+        self.navigationController?.popToRootViewController(animated: true)
+        
     }
     
 }
@@ -178,7 +216,102 @@ extension NotesController {
         cell.time.text = data.date
         cell.location.text = data.place
         cell.content.text = data.content
-        cell.photoCell.imgDatas = data.pics
+        let pics = data.pics.components(separatedBy: ",")
+        cell.photoCell.isLocalImage = true
+        cell.photoCell.imgDatas = pics
         
     }
+}
+
+extension NotesController {
+    func postStory(title:String) {
+        let dic = ["title":title]
+        Alamofire.request(getStoryAPI(), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                print(json)
+                self.storyId = json["data"]["id"].stringValue
+                self.requestEndFlag = true
+            }
+        }
+        waitingRequestEnd()
+        self.requestEndFlag =  false
+    }
+    func uploadPic(imageURL:String) -> String{
+        let image = UIImage(contentsOfFile: imageURL)
+        let imageData = UIImage.jpegData(image!)(compressionQuality: 1)
+        var imgUrl = ""
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(imageData!, withName: "file", fileName: "2.jpg",mimeType: "image/jpeg")
+            print("111图片准备上传")
+            ProgressHUD.show("正在发布")
+        }, to: getImageAPI()) { (encodingResult) in
+            switch encodingResult {
+            case .success(let upload,_,_):
+                upload.responseString{ response in
+                    if let data = response.data {
+                        let json = JSON(data)
+                        print(json)
+                        imgUrl = json["data"].stringValue
+                        self.requestEndFlag = true
+
+                        print(imgUrl)
+                    }
+                    //获取上传进度
+                    upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+                        print("图片上传进度: \(progress.fractionCompleted)")
+                    }
+                }
+            case .failure(_):
+                print("上传失败")
+            }
+        }
+        waitingRequestEnd()
+        self.requestEndFlag = false
+        return imgUrl
+    }
+    func postNotes(note:NoteParas,pic:String) {
+        print("正在进行游记写入")
+        let dic = ["content":note.content,"pics":pic,"date": note.date,"place":note.place,"noteId":storyId]
+        
+        Alamofire.request(getNotesAPI(), method: .put, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("发布游记网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                print(json)
+                self.requestEndFlag = true
+                ProgressHUD.showSuccess("发布成功")
+            }
+        }
+        waitingRequestEnd()
+        self.requestEndFlag =  false
+        
+    }
+    /// 异步数据请求同步化
+    func waitingRequestEnd() {
+        if Thread.current == Thread.main {
+            while !requestEndFlag {
+                RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.3))
+            }
+        } else {
+            autoreleasepool {
+                while requestEndFlag {
+                    Thread.sleep(forTimeInterval: 0.3)
+                }
+            }
+        }
+    }
+    func removeUserDeault() {
+        UserDefaults.standard.removeObject(forKey: "content")
+        UserDefaults.standard.removeObject(forKey: "time")
+        UserDefaults.standard.removeObject(forKey: "pic")
+        UserDefaults.standard.removeObject(forKey: "location")
+        
+    }
+    
 }

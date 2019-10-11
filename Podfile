@@ -15,6 +15,9 @@ target 'Hiker' do
   # 缓存圆
   pod 'ProgressHUD'
   
+  
+  pod 'Kingfisher'
+  
   # 数据流
   pod 'SQLite.swift'
   pod 'RxSwift',    '~> 4.0'

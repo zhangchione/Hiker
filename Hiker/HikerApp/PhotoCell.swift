@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class PhotoCell: UIView {
 
@@ -15,6 +16,7 @@ class PhotoCell: UIView {
     lazy var img1: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "home_story_back")
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -23,6 +25,8 @@ class PhotoCell: UIView {
     lazy var img2: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "home_story_back")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -30,6 +34,8 @@ class PhotoCell: UIView {
     lazy var img3: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "home_story_back")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -37,6 +43,8 @@ class PhotoCell: UIView {
     lazy var img4: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "home_story_back")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -82,10 +90,13 @@ class PhotoCell: UIView {
         case 1:
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: [.topLeft , .topRight], radii: 10)
+
                 if self.isLocalImage {
                     self.img1.image = UIImage(contentsOfFile: data[0])
                 }else {
-                    self.img1.image = UIImage(named: data[0])
+                    let imgUrl = URL(string: data[0])
+                    self.img1.kf.setImage(with: imgUrl)
+                    
                 }
                 
             }
@@ -99,14 +110,19 @@ class PhotoCell: UIView {
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+                
                 if self.isLocalImage {
                     self.img1.image = UIImage(contentsOfFile: data[0])
                     self.img2.image = UIImage(contentsOfFile: data[1])
                 }else {
-                    self.img1.image = UIImage(named: data[0])
-                    self.img2.image = UIImage(named: data[1])
+                   
+                    let imgUrl = URL(string: data[0])
+                    self.img1.kf.setImage(with: imgUrl)
+                    let imgUrl2 = URL(string: data[1])
+                    self.img2.kf.setImage(with: imgUrl2)
+                    
                 }
-                
+
                 
             }
             img1.snp.makeConstraints { (make) in
@@ -125,16 +141,22 @@ class PhotoCell: UIView {
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+                
+
+
                 if self.isLocalImage {
                     self.img1.image = UIImage(contentsOfFile: data[0])
                     self.img2.image = UIImage(contentsOfFile: data[1])
                     self.img3.image = UIImage(contentsOfFile: data[2])
                 }else {
-                    self.img1.image = UIImage(named: data[0])
-                    self.img2.image = UIImage(named: data[1])
-                    self.img3.image = UIImage(named: data[2])
+                    let imgUrl = URL(string: data[0])
+                    self.img1.kf.setImage(with: imgUrl)
+                    let imgUrl2 = URL(string: data[1])
+                    self.img2.kf.setImage(with: imgUrl2)
+                    let imgUrl3 = URL(string: data[2])
+                    self.img3.kf.setImage(with: imgUrl3)
                 }
-                
+
 
             }
             img1.snp.makeConstraints { (make) in
@@ -159,18 +181,24 @@ class PhotoCell: UIView {
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+                
+
                 if self.isLocalImage {
                     self.img1.image = UIImage(contentsOfFile: data[0])
                     self.img2.image = UIImage(contentsOfFile: data[1])
                     self.img3.image = UIImage(contentsOfFile: data[2])
                     self.img4.image = UIImage(contentsOfFile: data[3])
                 }else {
-                    self.img1.image = UIImage(named: data[0])
-                    self.img2.image = UIImage(named: data[1])
-                    self.img3.image = UIImage(named: data[2])
-                    self.img4.image = UIImage(named: data[3])
+                    let imgUrl = URL(string: data[0])
+                    self.img1.kf.setImage(with: imgUrl)
+                    let imgUrl2 = URL(string: data[1])
+                    self.img2.kf.setImage(with: imgUrl2)
+                    let imgUrl3 = URL(string: data[2])
+                    self.img3.kf.setImage(with: imgUrl3)
+                    let imgUrl4 = URL(string: data[3])
+                    self.img4.kf.setImage(with: imgUrl4)
                 }
-                
+//
 
             }
             img1.snp.makeConstraints { (make) in

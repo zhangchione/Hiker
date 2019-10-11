@@ -159,13 +159,13 @@ extension CityViewController {
         cell.userName.text = data.user?.username
         cell.title.text = data.title
         var locations = ""
-        if let locas = data.locations {
-            locations = locas.joined(separator: "、")
-        }
+//        if let locas = data.locations {
+//            locations = locas.joined(separator: "、")
+//        }
         cell.trackLocation.text = "#" + locations
         cell.userIcon.image = UIImage(named: data.user!.headPic)
         cell.favLabel.text = "\(data.likes)"
-        cell.time.text = data.time
+        cell.time.text = "11"//data.time
         cell.liked = data.like
         if data.like {
             cell.favIcon.image = UIImage(named: "home_story_love")

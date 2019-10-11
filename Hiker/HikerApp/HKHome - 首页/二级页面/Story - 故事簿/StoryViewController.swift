@@ -10,6 +10,9 @@ import UIKit
 
 class StoryViewController: StoryBaseViewController {
 
+    
+    
+    
     let storyBannerView: StoryBannerView
     let storyBannerViewModel:StoryBannerViewModel
     let bannerHeight: CGFloat = 86+44+UIScreen().titleY

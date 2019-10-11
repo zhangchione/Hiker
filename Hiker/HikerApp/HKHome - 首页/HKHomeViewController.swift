@@ -13,16 +13,19 @@ import HandyJSON
 import SwiftyJSON
 import ProgressHUD
 import MJRefresh
+import Kingfisher
+
 
 private let HKHomeSearchViewID = "HomeSearchView"
 private let HKRecommendCityID = "RecommendCityView"
 private let HKStoryID = "StoryView"
 private let HeaderViewID = "HomeHeaderReusableView"
 
+
 class HKHomeViewController: UIViewController {
     
     
-
+    var page = 1
     
     var data = [1,2,3,4,5,1,2,3,4,5]
     var notesDatas = [NotesModel]()
@@ -83,6 +86,10 @@ class HKHomeViewController: UIViewController {
 //                cell.frame.origin.y = 0
 //            }, completion: nil)
 //        }
+        self.notesDatas.removeAll()
+        self.page = 1
+        self.configData(page: self.page)
+        self.collectionView.reloadData()
     }
 
     @objc func add() {
@@ -138,10 +145,11 @@ extension HKHomeViewController {
         if let obj = JSONDeserializer<HomeModel>.deserializeFrom(json: json.description) {
             
             for data in obj.data! {
-                self.notesDatas.append(data)
+                //self.notesDatas.append(data)
             }
             
         }
+        
         let cityPath = Bundle.main.path(forResource: "HKCityjson", ofType: "json")
         let cityData = NSData(contentsOfFile: cityPath!)
         let cityJson = JSON(cityData!)
@@ -158,22 +166,24 @@ extension HKHomeViewController {
         collectionView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 print("上拉加载更多数据")
-                self?.configLocationJsonData()
+                //self?.configLocationJsonData()
+                self!.page += 1
+                self?.configData(page: self!.page)
                 self?.collectionView.mj_footer.endRefreshing()
             })
         }
         collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 print("下拉刷新 --- 1")
+                
                 self?.collectionView.mj_header.endRefreshing()
             })
         }
     }
     /// 网络加载数据
-    func configData() {
-        let storyAPI = "http://120.77.151.36:8080/note/1?token=" + getToken()!
+    func configData(page:Int) {
         
-        Alamofire.request(storyAPI).responseJSON { (response) in
+        Alamofire.request(getHomeAPI(page: page)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }
@@ -355,21 +365,30 @@ extension HKHomeViewController {
     func config(_ cell:StoryView,with data:NotesModel) {
         cell.userName.text = data.user?.username
         cell.title.text = data.title
-        var locations = ""
-        if let locas = data.locations {
-            locations = locas.joined(separator: "、")
+        
+        var locations = [String]()
+        //cell.time.text = data.noteParas
+        for note in data.noteParas! {
+            locations.append(note.place)
         }
-        cell.trackLocation.text = "#" + locations
-        cell.userIcon.image = UIImage(named: data.user!.headPic)
+        let place = locations.joined(separator: "、")
+
+        cell.trackLocation.text = "#" + place
+        let imgUrl = URL(string: data.user!.headPic)
+        cell.userIcon.kf.setImage(with: imgUrl)
         cell.favLabel.text = "\(data.likes)"
-        cell.time.text = data.time
+        cell.time.text = data.noteParas![0].date//data.time
         cell.liked = data.like
         if data.like {
             cell.favIcon.image = UIImage(named: "home_story_love")
         }else {
             cell.favIcon.image = UIImage(named: "home_stroy_unlove")
         }
-        cell.photoCell.imgDatas = data.pics
+        let pics = data.noteParas![0].pics.components(separatedBy: ",")
+        cell.photoCell.imgDatas = pics
+
+       
+        
         //cell.userIcon.image = UIImage(named: "1")
     }
 }

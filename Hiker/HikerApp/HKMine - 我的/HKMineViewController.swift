@@ -13,6 +13,8 @@ import AudioToolbox
 import HandyJSON
 import SwiftyJSON
 import Alamofire
+import ProgressHUD
+
 
 private let glt_iphoneX = (UIScreen.main.bounds.height >= 812.0)
 
@@ -80,19 +82,36 @@ class HKMineViewController: UIViewController {
     }
     
     func configData(){
+        
+        Alamofire.request(getMineAPI()).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                if let obj = JSONDeserializer<MineModel>.deserializeFrom(json: json.debugDescription){
+                    print(obj)
+                    self.mineData = obj.data
+                    self.headerView.concernLabel.text = "\(self.mineData?.concern ?? 0)"
+                    self.headerView.fanLabel.text = "\(self.mineData?.fans ?? 3)"
+                    self.headerView.userSign.text = self.mineData?.sgin
+                    self.headerView.userName.text = self.mineData?.username
+                    let imgUrl = URL(string: self.mineData!.headPic)
+                    self.headerView.userImg.kf.setImage(with: imgUrl)
+                }
+            }
+        }
+        
         let path = Bundle.main.path(forResource: "HKMinejson", ofType: "json")
         let jsonData = NSData(contentsOfFile: path!)
         
         let json = JSON(jsonData!)
         
         if let obj = JSONDeserializer<MineModel>.deserializeFrom(json: json.description) {
-                mineData = obj.data
+               // mineData = obj.data
         }
-        headerView.concernLabel.text = "\(mineData?.concern ?? 0)"
-        headerView.fanLabel.text = "\(mineData?.fans ?? 3)"
-        headerView.userSign.text = mineData?.sgin
-        headerView.userName.text = mineData?.username
-        headerView.userImg.image = UIImage(named: mineData!.headPic)
+        
+
         
         let path1 = Bundle.main.path(forResource: "HKStoryjson", ofType: "json")
         let jsonData1 = NSData(contentsOfFile: path1!)

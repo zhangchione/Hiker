@@ -34,9 +34,10 @@ extension PageCollectionView {
         //collectionView.frame = CGRect(x: 0, y: 250, width: 414, height: 550)
         collectionView.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
-            make.bottom.equalTo(view).offset(-44)
-            make.height.equalTo(600)
+            make.bottom.equalTo(view).offset(22)
+            make.height.equalTo(644)
         }
+       
 //        // add constraints
 //        collectionView >>>- {
 //            $0.attribute = .height

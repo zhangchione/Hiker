@@ -38,6 +38,7 @@ class MainViewController: UIViewController {
                     ProgressHUD.showError("用户名或密码错误")
                     return
                 }
+                print(json)
                 saveToken(token: json["data"].string!)
                 ProgressHUD.showSuccess("登陆成功")
 

@@ -100,7 +100,8 @@ extension StoryBaseViewController {
         cell.content.text = data.content
         cell.location.text = data.place
         cell.time.text = data.date
-        cell.photoCell.imgDatas = data.pics
+        let pics = data.pics.components(separatedBy: ",")
+        cell.photoCell.imgDatas = pics
         print(data.pics)
     }
 }

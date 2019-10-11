@@ -46,8 +46,8 @@ struct NotesModel:HandyJSON {
     var user:User?
     var type = 0
     var pics: [String]?
-    var time = ""
-    var locations: [String]?
+   // var time = ""
+   // var locations: [String]?
     var comments:[Comments]?
     var title = ""
     var likes = 0
@@ -60,6 +60,10 @@ struct User:HandyJSON {
     var username = ""
     var password = ""
     var headPic = ""
+//    var sgin = ""
+//    var notes = ""
+//    var fans = ""
+//    var concern = ""
 }
 struct Comments:HandyJSON {
     var id = ""
@@ -71,7 +75,7 @@ struct Comments:HandyJSON {
 struct NoteParas:HandyJSON {
     var id = ""
     var content = ""
-    var pics:[String]?
+    var pics = ""
     var place = ""
     var date = ""
     var noteid = ""

@@ -27,6 +27,8 @@ class StoryView: UICollectionViewCell {
     lazy var userIcon: UIImageView = {
         let imageView = UIImageView()
 //        imageView.backgroundColor = .red
+        imageView.layer.cornerRadius = 17.5
+        imageView.clipsToBounds = true
         imageView.image = UIImage(named: "椭圆形")
         return imageView
     }()
@@ -86,7 +88,7 @@ class StoryView: UICollectionViewCell {
     // 被喜欢icon
     lazy var favIcon: UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "home_story_love")
+        img.image = UIImage(named: "home_story_loves")
         return img
     }()
     // 收藏按钮
@@ -208,7 +210,7 @@ class StoryView: UICollectionViewCell {
     
     func update(isliked:Bool) {
         guard isliked else {
-            self.favIcon.image = UIImage(named: "home_story_love")
+            self.favIcon.image = UIImage(named: "home_story_loves")
             return
         }
          self.favIcon.image = UIImage(named: "home_stroy_unlove")

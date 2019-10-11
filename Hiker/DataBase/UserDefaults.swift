@@ -76,13 +76,13 @@ func getTime() -> [String]? {
     return defaults.object(forKey: "time") as? [String]
 }
 
-func savePic(content:[[String]]) {
+func savePic(content:[String]) {
     defaults.set(content,forKey: "pic")
     defaults.synchronize()
 }
-func getPic() -> [[String]]? {
+func getPic() -> [String]? {
     
-    return defaults.object(forKey: "pic") as? [[String]]
+    return defaults.object(forKey: "pic") as? [String]
 }
 
 

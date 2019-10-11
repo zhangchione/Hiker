@@ -33,7 +33,7 @@ class TipsViewController: SubClassBaseViewController {
         // 设置图形样子
         maskLayer.path = maskPath.cgPath
         img1.layer.mask = maskLayer
-        view.addSubview(img1)
+        //view.addSubview(img1)
     }
 
 

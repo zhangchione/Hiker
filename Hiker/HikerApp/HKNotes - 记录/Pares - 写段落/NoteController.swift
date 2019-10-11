@@ -8,6 +8,9 @@
 
 import UIKit
 import ProgressHUD
+import Alamofire
+import SwiftyJSON
+
 
 class NoteController: UIViewController {
     /// 照片选择
@@ -284,14 +287,16 @@ extension NoteController {
         }
         saveTime(content: times)
         
-        var imgs = [[String]]()
+        var imgs = [String]()
         let locImg = getPic()
+        let imagess = self.images.joined(separator: ",")
         if locImg == nil {
-            imgs.append(self.images)
+            imgs.append(imagess)
         }else {
             imgs = locImg!
-            imgs.append(self.images)
+            imgs.append(imagess)
         }
+        
         savePic(content: imgs)
         
         let c1 = getContent()
@@ -362,12 +367,46 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         print("图片选取成功")
-        let img = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        let img = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        //转成jpg格式图片
+        let jpegData = UIImage.jpegData(img)(compressionQuality: 1)
+        
         
         let imageURL = info[UIImagePickerController.InfoKey.imageURL]!
+        //let file = Bundle.main.url(forResource: , withExtension: <#T##String?#>)
+        
+        
         let imageData1 = try! Data(contentsOf: imageURL as! URL)
         
         let imgUrl = (imageURL as! URL).path
+        
+        let image = UIImage(contentsOfFile: imgUrl)
+        
+        let imageData = UIImage.jpegData(image!)(compressionQuality: 1)
+
+        
+        
+//        Alamofire.upload(multipartFormData: { (multipartFormData) in
+//            multipartFormData.append(imageData!, withName: "file", fileName: "2.jpg",mimeType: "image/jpeg")
+//            print("111图片准备上传")
+//        }, to: getImageAPI()) { (encodingResult) in
+//            switch encodingResult {
+//            case .success(let upload,_,_):
+//                upload.responseString{ response in
+//                    if let data = response.data {
+//                        let json = JSON(data)
+//                        print(json)
+//                    }
+//                //获取上传进度
+//                    upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+//                        print("图片上传进度: \(progress.fractionCompleted)")
+//                    }
+//                }
+//            case .failure(_):
+//                print("上传失败")
+//            }
+//        }
+        
         
         self.imgs = imgUrl
         
@@ -379,6 +418,7 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
             make.bottom.equalTo(addPhotoBtn.snp.top)
             make.height.equalTo(200)
         }
+        self.photoCell.isLocalImage = true
         self.photoCell.imgDatas = images
         
         self.dismiss(animated: true, completion: nil)
@@ -389,3 +429,60 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
     }
     
 }
+////选择成功后代理
+//func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : Any]) {
+//    if flag == "视频" {
+//
+//        //获取选取的视频路径
+//        let videoURL = info[UIImagePickerControllerMediaURL] as! URL
+//        let pathString = videoURL.path
+//        print("视频地址：\(pathString)")
+//        //图片控制器退出
+//        self.dismiss(animated: true, completion: nil)
+//        let outpath = NSHomeDirectory() + "/Documents/\(Date().timeIntervalSince1970).mp4"
+//        //视频转码
+//        self.transformMoive(inputPath: pathString, outputPath: outpath)
+//    }else{
+//        //flag = "图片"
+//
+//        //获取选取后的图片
+//        let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+//        //转成jpg格式图片
+//        guard let jpegData = UIImageJPEGRepresentation(pickedImage, 0.5) else {
+//            return
+//        }
+//        //上传
+//        self.uploadImage(imageData: jpegData)
+//        //图片控制器退出
+//        self.dismiss(animated: true, completion:nil)
+//    }
+//}
+//
+////上传图片到服务器
+//func uploadImage(imageData : Data){
+//    Alamofire.upload(
+//        multipartFormData: { multipartFormData in
+//            //采用post表单上传
+//            // 参数解释：
+//            //withName:和后台服务器的name要一致 ；fileName:可以充分利用写成用户的id，但是格式要写对； mimeType：规定的，要上传其他格式可以自行百度查一下
+//            multipartFormData.append(imageData, withName: "file", fileName: "123456.jpg", mimeType: "image/jpeg")
+//            //如果需要上传多个文件,就多添加几个
+//            //multipartFormData.append(imageData, withName: "file", fileName: "123456.jpg", mimeType: "image/jpeg")
+//            //......
+//
+//    },to: uploadURL,encodingCompletion: { encodingResult in
+//        switch encodingResult {
+//        case .success(let upload, _, _):
+//            //连接服务器成功后，对json的处理
+//            upload.responseJSON { response in
+//                //解包
+//                guard let result = response.result.value else { return }
+//                print("json:\(result)")
+//            }
+//
+//        case .failure(let encodingError):
+//            //打印连接失败原因
+//            print(encodingError)
+//        }
+//    })
+//}
