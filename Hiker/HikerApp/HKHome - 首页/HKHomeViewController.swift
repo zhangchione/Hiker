@@ -24,6 +24,22 @@ private let HeaderViewID = "HomeHeaderReusableView"
 
 class HKHomeViewController: UIViewController {
     
+    public lazy var Title:UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    
+    func configBase(){
+        self.navigation.bar.isShadowHidden = true
+        self.navigation.bar.alpha = 0
+        Title.frame = CGRect(x: 22.fitWidth_CGFloat, y: 50.fitHeight_CGFloat, width: 100.fitWidth_CGFloat, height: 40.fitHeight_CGFloat)
+        Title.text = "发现"
+        Title.font = UIFont(name: "PingFangSC-Semibold", size: 26)
+        view.backgroundColor = UIColor.init(r: 247, g: 249, b: 254)
+        view.addSubview(Title)
+    }
+    
     
     var page = 1
     
@@ -57,18 +73,46 @@ class HKHomeViewController: UIViewController {
         collection.register(StoryView.self, forCellWithReuseIdentifier: HKStoryID)
         collection.showsHorizontalScrollIndicator  = false
         collection.showsVerticalScrollIndicator = false
+//        collection.uHead = URefreshHeader{ [weak self] in self?.refresh() }
+//        collection.mj_header = MJRefreshNormalHeader{[weak self] in
+//            self?.collectionView.mj_header.endRefreshing()
+//                }
+        collection.mj_footer = MJRefreshBackNormalFooter {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                print("上拉加载更多数据")
+                //self?.configLocationJsonData()
+                self!.page += 1
+                self?.configData(page: self!.page)
+                self?.collectionView.mj_footer.endRefreshing()
+            })
+        }
         
         return collection
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        refresh()
         configLocationJsonData()
         configUI()
         configNav()
-        refresh()
+
 
     }
+    
+//    override func viewLayoutMarginsDidChange() {
+//        if #available(iOS 13.0, *) {
+//            let margins = view.layoutMargins
+//            var frame = view.frame
+//            frame.origin.x = -margins.left
+//            frame.origin.y = -margins.top
+//            frame.size.width += margins.left + margins.right
+//            frame.size.height += margins.top + margins.bottom
+//            view.frame = frame
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
 //        //        key1: reload Data here
@@ -112,17 +156,22 @@ extension HKHomeViewController {
             make.width.height.equalToSuperview()
             make.center.equalToSuperview()
         }
+      //  self.collectionView.backgroundColor = .red
         view.backgroundColor = backColor
     }
     
     func configNav(){
         if #available(iOS 11.0, *) {
             self.navigation.bar.prefersLargeTitles = true
+            self.navigation.item.largeTitleDisplayMode = .automatic
         }
         navigation.bar.automaticallyAdjustsPosition = false
         self.navigation.item.title = "发现"
+        self.navigation.bar.alpha = 1
         self.navigation.bar.isShadowHidden = true
+        self.navigation.bar.frame.origin.y = 44
         self.navigation.bar.addSubview(rightBarButton)
+        //self.navigation.bar.isHidden = true
         rightBarButton.snp.makeConstraints { (make) in
             make.right.equalTo(navigation.bar.snp.right).offset(-25)
             make.bottom.equalTo(navigation.bar.snp.bottom).offset(-20)
@@ -163,22 +212,17 @@ extension HKHomeViewController {
     }
     /// 刷新
     func refresh(){
-        collectionView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                print("上拉加载更多数据")
-                //self?.configLocationJsonData()
-                self!.page += 1
-                self?.configData(page: self!.page)
-                self?.collectionView.mj_footer.endRefreshing()
-            })
-        }
-        collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                print("下拉刷新 --- 1")
-                
-                self?.collectionView.mj_header.endRefreshing()
-            })
-        }
+//          self.collectionView.mj_header.beginRefreshing()
+//
+
+
+//        collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+//                print("下拉刷新 --- 1")
+//
+//
+//            })
+//        }
     }
     /// 网络加载数据
     func configData(page:Int) {
@@ -270,6 +314,8 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
         if indexPath.section == 2{
             headerView.titleLabel.text = "故事"
+        }else {
+            headerView.titleLabel.text = "推荐城市"
         }
         return headerView
     }
@@ -377,7 +423,7 @@ extension HKHomeViewController {
         let imgUrl = URL(string: data.user!.headPic)
         cell.userIcon.kf.setImage(with: imgUrl)
         cell.favLabel.text = "\(data.likes)"
-        cell.time.text = data.noteParas![0].date//data.time
+//        cell.time.text = data.noteParas![0].date//data.time
         cell.liked = data.like
         if data.like {
             cell.favIcon.image = UIImage(named: "home_story_love")

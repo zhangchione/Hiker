@@ -81,7 +81,15 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        if #available(iOS 13.0, *) {
+//            let margins = view.layoutMargins
+//            var frame = view.frame
+//            frame.origin.x = -margins.left
+//            frame.origin.y = -margins.top
+//            frame.size.width += margins.left + margins.right
+//            frame.size.height += margins.top + margins.bottom
+//            view.frame = frame
+//        }
         configUI()
     }
 

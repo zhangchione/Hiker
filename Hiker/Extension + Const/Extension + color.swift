@@ -8,6 +8,61 @@
 
 import Foundation
 import UIKit
+import MJRefresh
+
+class URefreshHeader: MJRefreshGifHeader {
+    override func prepare() {
+        super.prepare()
+        setImages([UIImage(named: "pullToRefresh_0_80x60_")!], for: .idle)
+        setImages([UIImage(named: "pullToRefresh_0_80x60_")!], for: .pulling)
+        setImages([UIImage(named: "pullToRefresh_0_80x60_")!,
+                   UIImage(named: "pullToRefresh_1_80x60_")!,
+                   UIImage(named: "pullToRefresh_2_80x60_")!,
+                   UIImage(named: "pullToRefresh_3_80x60_")!,
+                   UIImage(named: "pullToRefresh_4_80x60_")!,
+                   UIImage(named: "pullToRefresh_5_80x60_")!,
+                   UIImage(named: "pullToRefresh_6_80x60_")!,
+                   UIImage(named: "pullToRefresh_7_80x60_")!,
+                   UIImage(named: "pullToRefresh_8_80x60_")!,
+                   UIImage(named: "pullToRefresh_9_80x60_")!], for: .refreshing)
+        
+        lastUpdatedTimeLabel.isHidden = true
+        stateLabel.isHidden = true
+    }
+}
+
+extension UIScrollView {
+    var uHead: MJRefreshHeader {
+        get { return mj_header }
+        set { mj_header = newValue }
+    }
+
+    var uFoot: MJRefreshFooter {
+        get { return mj_footer }
+        set { mj_footer = newValue }
+    }
+}
+
+public extension Double {
+    var fitWidth_Double: Double {
+        return self/414.0 * Double(TKWidth)
+    }
+    var fitHeight_Double: Double {
+        return self/896.0 * Double(TKHeight)
+    }
+    var fitWidth_CGFloat: CGFloat {
+        return CGFloat(self)/414.0 * CGFloat(TKWidth)
+    }
+    var fitHeight_CGFloat: CGFloat {
+        return CGFloat(self)/896.0 * CGFloat(TKHeight)
+    }
+    var fitWidth_Int: Int{
+        return Int(self/414.0 * Double(TKWidth))
+    }
+    var fitHeight_Int: Int{
+        return Int(self/896.0 * Double(TKHeight))
+    }
+}
 
 extension UIColor {
     convenience init(r : CGFloat, g : CGFloat, b : CGFloat) {
@@ -162,7 +217,7 @@ extension UIView {
         maskLayer.frame = self.bounds
         maskLayer.path = maskPath.cgPath
         self.layer.mask = maskLayer
-
+        
     }
 }
 extension UIImage

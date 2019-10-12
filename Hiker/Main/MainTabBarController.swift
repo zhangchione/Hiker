@@ -64,8 +64,8 @@ func mainTabBar() -> UITabBarController {
     
     let tabBarController = ESTabBarController()
     tabBarController.tabBar.shadowImage = UIImage(named: "tabbarColor")
-    tabBarController.tabBar.backgroundImage = UIImage(named: "tabColor")
-    tabBarController.tabBar.backgroundColor = .white
+ //   tabBarController.tabBar.backgroundImage = UIImage(named: "tabColor")
+   // tabBarController.tabBar.backgroundColor = .white
     
     tabBarController.shouldHijackHandler = {
         tabbarController, viewController, index in
