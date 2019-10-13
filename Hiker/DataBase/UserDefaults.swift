@@ -17,6 +17,15 @@ func saveToken(token:String){
 func getToken() -> String? {
     return  defaults.string(forKey: "token")
 }
+func saveUserId(userId:String){
+    defaults.set(userId, forKey: "userid")
+    defaults.synchronize()
+}
+
+func getUserId() -> String? {
+    return defaults.string(forKey: "userid")
+}
+
 
 func saveFlag(flag:String){
     defaults.set(flag, forKey: "flag")
@@ -37,15 +46,49 @@ func getTitle() -> String? {
     return defaults.string(forKey: "title")
 }
 
-// 游记内容
-struct note {
-    var content = ""
-    var location = ""
-    var time = ""
-    var pic = [String]()
+
+func saveHistory1(history1:String) {
+    defaults.set(history1,forKey: "history1")
+    defaults.synchronize()
+}
+
+func getHistory1() -> String? {
+    return defaults.string(forKey: "history1")
+}
+func saveHistory2(history2:String) {
+    defaults.set(history2,forKey: "history2")
+    defaults.synchronize()
+}
+func getHistory2() -> String? {
+    return defaults.string(forKey: "history2")
 }
 
 
+func saveBookName(bookname:[String]) {
+    defaults.set(bookname,forKey: "bookname")
+    defaults.synchronize()
+}
+func getBookName() -> [String]? {
+    let content = defaults.object(forKey: "bookname") as? [String]
+    return content
+}
+func saveBookId(bookname:[Int]) {
+    defaults.set(bookname,forKey: "bookid")
+    defaults.synchronize()
+}
+func getBookId() -> [Int]? {
+    let content = defaults.object(forKey: "bookid") as? [Int]
+    return content
+}
+func saveBookNum(bookname:[Int]) {
+    defaults.set(bookname,forKey: "booknum")
+    defaults.synchronize()
+}
+
+func getBookNum() -> [Int]? {
+    let content = defaults.object(forKey: "booknum") as? [Int]
+    return content
+}
 
 func saveContent(content:[String]) {
     print("存储内容为:",content)
@@ -123,7 +166,6 @@ class Notes: NSObject,NSCoding {
     var time:String
     var pic:String
     
-    
     required  init(content:String = "",location:String = "",time:String = "",pic:String = "") {
         self.content = content
         self.location = location
@@ -145,10 +187,6 @@ class Notes: NSObject,NSCoding {
         self.time = aDecoder.decodeObject(forKey: "Time") as? String ?? ""
         self.pic = aDecoder.decodeObject(forKey: "Pic") as? String ?? ""
     }
-    
-
-    
-
 }
 
 

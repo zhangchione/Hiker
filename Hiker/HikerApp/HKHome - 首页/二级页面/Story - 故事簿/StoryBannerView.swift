@@ -21,20 +21,43 @@ class StoryBannerView: UIView {
         return iv
     }()
     
-    private lazy var nameLabel = UILabel()
-    private lazy var titleLabel = UILabel()
+    private lazy var nameLabel : UILabel = {
+       let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.init(name: "苹方-简 常规体", size: 14)
+        return label
+    }()
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+         label.textColor = .white
+         label.font = UIFont.init(name: "苹方-简 中粗体", size: 30)
+         return label
+    }()
+    private lazy var userImg = UIImage()
     private lazy var favButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "home_stroy_favwhite"), for: .normal)
         button.addTarget(self, action: #selector(backButtonAction), for: .touchDown)
         return button
     }()
-    private lazy var userButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "椭圆形"), for: .normal)
-        button.addTarget(self, action: #selector(use), for: .touchDown)
-        return button
+//    private lazy var userButton: UIButton = {
+//        let button = UIButton()
+//        button.setImage(UIImage(named: "椭圆形"), for: .normal)
+//        button.addTarget(self, action: #selector(use), for: .touchDown)
+//        DispatchQueue.main.async {
+//        button.corner(byRoundingCorners: [.bottomLeft,.bottomRight,.topLeft,.topRight], radii: 20)
+//        }
+//        return button
+//    }()
+    private lazy var userButton: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.image = UIImage(named: "home_story_back")
+        iv.layer.cornerRadius = 20
+        return iv
     }()
+    
     init(with viewModel: StoryBannerViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
@@ -54,7 +77,17 @@ class StoryBannerView: UIView {
         print("更新UI")
         nameLabel.text = viewModel.model?.user?.username
         titleLabel.text = viewModel.model?.title
-        userButton.setImage(UIImage(named: (viewModel.model?.user!.headPic)!), for: .normal)
+//        userButton.setImage(UIImage(named: (viewModel.model?.user!.headPic)!), for: .normal)
+        
+        let imgUrl = URL(string: (viewModel.model?.user!.headPic)!)
+        
+        self.userButton.kf.setImage(with: imgUrl)
+
+        let pics = viewModel.model?.noteParas![0].pics.components(separatedBy: ",")
+        
+        let imgUrl2 = URL(string: pics![0])
+        self.backgroundImageView.kf.setImage(with: imgUrl2)
+        
     }
     
     func configUI(){
@@ -90,7 +123,6 @@ class StoryBannerView: UIView {
             make.width.equalTo(16)
             make.height.equalTo(20)
         }
-        print("加载UI")
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

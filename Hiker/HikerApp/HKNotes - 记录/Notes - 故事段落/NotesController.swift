@@ -10,13 +10,16 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import ProgressHUD
+import NVActivityIndicatorView
 
-class NotesController: ExpandingViewController {
+class NotesController: ExpandingViewController,NVActivityIndicatorViewable {
 
+    
     public var data:NotesModel?
     
     var note:NoteParas?
     var storyId = ""
+    var bookId = 0
     var requestEndFlag = false
     
     
@@ -35,6 +38,14 @@ class NotesController: ExpandingViewController {
         return label
     }()
     
+    // 底部设置按钮
+    private lazy var setButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x:10, y:0, width:30, height: 30)
+        button.setTitle("设置", for: .normal)
+        button.addTarget(self, action: #selector(set), for: .touchUpInside)
+        return button
+    }()
     
     // 左边返回按钮
     private lazy var leftBarButton: UIButton = {
@@ -55,6 +66,26 @@ class NotesController: ExpandingViewController {
         return button
     }()
     
+    private lazy var loginView : HiddenView = {
+        let loginView = HiddenView(frame: CGRect(x: 0, y: 0, width: TKWidth, height: TKHeight))
+        
+        var bookData = [BookModel]()
+        let bookid = getBookId()
+        let bookname = getBookName()
+        let booknum = getBookNum()
+        
+        var bookmodel = BookModel()
+        for index in 0 ..< bookid!.count {
+
+            bookmodel.name = bookname![index]
+            bookmodel.id = bookid![index]
+            bookmodel.num = booknum![index]
+            bookData.append(bookmodel)
+        }
+        loginView.data = bookData
+        loginView.delegate = self
+        return loginView
+    }()
     
     typealias ItemInfo = (imageName: String, title: String)
     fileprivate var cellsIsOpen = [Bool]()
@@ -79,43 +110,39 @@ class NotesController: ExpandingViewController {
 //        self.navigation.bar.isHidden = true
         self.navigation.item.title = "第一段故事"
     }
+    @objc func set(){
+        
+    }
+    
     @objc func back(){
-        //self.dismiss(animated: true, completion: nil)
+        var c1 = getContent()
+        var c2 = getLocation()
+        var c3 = getTime()
+        var c4 = getPic()
+        c1?.removeLast()
+        c2?.removeLast()
+        c3?.removeLast()
+        c4?.removeLast()
+        
+        if c1 != nil {
+            saveContent(content: c1!)
+            saveLocation(location: c2!)
+            saveTime(content: c3!)
+            savePic(content: c4!)
+        }
+        
+        print(c1)
+        print(c2)
+        print(c3)
+        print(c4)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func achieve(){
-        saveFlag(flag: "001")
         
-        print("title:",getTitle())
-        postStory(title: getTitle()!)
+        UIApplication.shared.keyWindow?.addSubview(self.loginView)
         
-        
-        for index in 0 ..< (data?.noteParas!.count)! {
-            print(index,self.data?.noteParas![index].pics)
-            var imgs = ""
-            let imgsArray = self.data?.noteParas![index].pics.components(separatedBy:",")
-            print(imgsArray)
-            for img in imgsArray! {
-                print(img)
-                if imgs != "" {
-                    imgs = imgs + "," + uploadPic(imageURL: img)
-                }else {
-                    imgs = uploadPic(imageURL: img)
-                }
-                
-                
-            }
-            print(imgs,"imgs")
-
-            self.note = self.data?.noteParas![index]
-            
-            postNotes(note: self.note!, pic: imgs)
-            
-        }
-        
-        removeUserDeault()
-       
-        self.navigationController?.popToRootViewController(animated: true)
+        self.loginView.showAddView()
         
     }
     
@@ -232,13 +259,13 @@ extension NotesController {
             }
             if let value = response.result.value {
                 let json = JSON(value)
-                print(json)
                 self.storyId = json["data"]["id"].stringValue
                 self.requestEndFlag = true
             }
         }
         waitingRequestEnd()
         self.requestEndFlag =  false
+        print("游记id获取成功,发布成功")
     }
     func uploadPic(imageURL:String) -> String{
         let image = UIImage(contentsOfFile: imageURL)
@@ -246,19 +273,16 @@ extension NotesController {
         var imgUrl = ""
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData!, withName: "file", fileName: "2.jpg",mimeType: "image/jpeg")
-            print("111图片准备上传")
-            ProgressHUD.show("正在发布")
+            print("图片准备上传")
+
         }, to: getImageAPI()) { (encodingResult) in
             switch encodingResult {
             case .success(let upload,_,_):
                 upload.responseString{ response in
                     if let data = response.data {
                         let json = JSON(data)
-                        print(json)
                         imgUrl = json["data"].stringValue
                         self.requestEndFlag = true
-
-                        print(imgUrl)
                     }
                     //获取上传进度
                     upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
@@ -268,9 +292,11 @@ extension NotesController {
             case .failure(_):
                 print("上传失败")
             }
+
         }
         waitingRequestEnd()
         self.requestEndFlag = false
+        print("图片上传完成")
         return imgUrl
     }
     func postNotes(note:NoteParas,pic:String) {
@@ -283,15 +309,52 @@ extension NotesController {
             }
             if let value = response.result.value {
                 let json = JSON(value)
-                print(json)
                 self.requestEndFlag = true
-                ProgressHUD.showSuccess("发布成功")
             }
         }
         waitingRequestEnd()
         self.requestEndFlag =  false
         
     }
+    
+    // 创建故事簿
+    func postNewBookName(bookname:String) {
+        let dic = ["bookName":bookname]
+        Alamofire.request(getNewBookAPI(), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                self.bookId = json["data"]["id"].intValue
+                self.requestEndFlag = true
+            }
+        }
+        waitingRequestEnd()
+        self.requestEndFlag =  false
+        print("故事本创建成功")
+    }
+    
+    // 收录到故事簿
+    func putBookName(bookid:Int) {
+        let dic = ["noteId":"4","groupId":bookid] as [String : Any]
+        
+        Alamofire.request(getHiddenBookNameAPI(), method: .put, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("发布游记网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                self.requestEndFlag = true
+                
+            }
+        }
+        waitingRequestEnd()
+        self.requestEndFlag =  false
+        print("收录成功")
+    }
+    
+    
     /// 异步数据请求同步化
     func waitingRequestEnd() {
         if Thread.current == Thread.main {
@@ -312,6 +375,48 @@ extension NotesController {
         UserDefaults.standard.removeObject(forKey: "pic")
         UserDefaults.standard.removeObject(forKey: "location")
         
+    }
+    
+}
+
+extension NotesController: selectBookDelegate {
+    func passBookData(with name: String, id: Int) {
+        print(name,id)
+        let size = CGSize(width: 30, height: 30)
+        startAnimating(size, message: "发布游记中...", type: .ballClipRotate, fadeInAnimation: nil)
+        
+        if id != 0 {
+            putBookName(bookid: id)
+            
+        }else {
+            postNewBookName(bookname: name)
+            putBookName(bookid: bookId)
+        }
+        
+         saveFlag(flag: "001")
+         postStory(title: getTitle()!)
+         for index in 0 ..< (data?.noteParas!.count)! {
+             print(index,self.data?.noteParas![index].pics)
+             var imgs = ""
+             let imgsArray = self.data?.noteParas![index].pics.components(separatedBy:",")
+             for img in imgsArray! {
+                 print(img)
+                 if imgs != "" {
+                     imgs = imgs + "," + uploadPic(imageURL: img)
+                 }else {
+                     imgs = uploadPic(imageURL: img)
+                 }
+             }
+            
+             self.note = self.data?.noteParas![index]
+
+             postNotes(note: self.note!, pic: imgs)
+         }
+         removeUserDeault()
+        NVActivityIndicatorPresenter.sharedInstance.setMessage("发布完成...")
+        
+         self.navigationController?.popToRootViewController(animated: true)
+        self.stopAnimating(nil)
     }
     
 }

@@ -40,12 +40,25 @@ class MainViewController: UIViewController {
                 }
                 print(json)
                 saveToken(token: json["data"].string!)
+                
                 ProgressHUD.showSuccess("登陆成功")
 
                 goToApp()
                 print("token为:",getToken()!)
             }
         }
+        
+        Alamofire.request(getUserInfoAPI()).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                saveUserId(userId: json["data"]["id"].stringValue)
+                print("userid 存储成功为：",getUserId())
+            }
+        }
+        
    
     }
     

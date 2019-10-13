@@ -12,15 +12,21 @@ import HandyJSON
 /// 故事簿
 struct HKStory:HandyJSON {
     var msg:String?
-    var code:String?
+    var code:Int?
     var data:[StoryModel]?
 }
 struct StoryModel:HandyJSON {
-    var bookname = ""
+    var bookName = ""
     var story:[NotesModel]?
+    var id = 0
 }
 
 /// City
+
+struct City {
+    var title:String?
+    var img:String?
+}
 
 struct HKCity:HandyJSON {
     var msg:String?
@@ -54,16 +60,17 @@ struct NotesModel:HandyJSON {
     var like = false
     var collected = false
     var noteParas:[NoteParas]?
+    var hidden = 0
 }
 struct User:HandyJSON {
     var id = ""
     var username = ""
     var password = ""
     var headPic = ""
-//    var sgin = ""
-//    var notes = ""
-//    var fans = ""
-//    var concern = ""
+    var sgin = ""
+    var notes = ""
+    var fans = ""
+    var concern = ""
 }
 struct Comments:HandyJSON {
     var id = ""
@@ -79,6 +86,7 @@ struct NoteParas:HandyJSON {
     var place = ""
     var date = ""
     var noteid = ""
+    var tags: [String]?
 }
 
 

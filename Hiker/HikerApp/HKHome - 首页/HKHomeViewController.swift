@@ -23,30 +23,17 @@ private let HeaderViewID = "HomeHeaderReusableView"
 
 
 class HKHomeViewController: UIViewController {
-    
-    public lazy var Title:UILabel = {
-        let label = UILabel()
-        return label
-    }()
-    
-    
-    func configBase(){
-        self.navigation.bar.isShadowHidden = true
-        self.navigation.bar.alpha = 0
-        Title.frame = CGRect(x: 22.fitWidth_CGFloat, y: 50.fitHeight_CGFloat, width: 100.fitWidth_CGFloat, height: 40.fitHeight_CGFloat)
-        Title.text = "发现"
-        Title.font = UIFont(name: "PingFangSC-Semibold", size: 26)
-        view.backgroundColor = UIColor.init(r: 247, g: 249, b: 254)
-        view.addSubview(Title)
-    }
-    
-    
+
     var page = 1
     
     var data = [1,2,3,4,5,1,2,3,4,5]
+    
     var notesDatas = [NotesModel]()
     var cityDatas = [CityModel]()
     
+    var myBookData = [StoryModel]()
+    
+    var cityData = [City]()
     /// 右边功能按钮
     private lazy var rightBarButton:UIButton = {
         let button = UIButton.init(type: .custom)
@@ -68,6 +55,7 @@ class HKHomeViewController: UIViewController {
         // 注册头部视图
         collection.register(HomeHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewID)
         
+        // 注册Cell
         collection.register(HomeSearchView.self, forCellWithReuseIdentifier: HKHomeSearchViewID)
         collection.register(RecommendCityView.self, forCellWithReuseIdentifier: HKRecommendCityID)
         collection.register(StoryView.self, forCellWithReuseIdentifier: HKStoryID)
@@ -79,66 +67,69 @@ class HKHomeViewController: UIViewController {
 //                }
         collection.mj_footer = MJRefreshBackNormalFooter {[weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                print("上拉加载更多数据")
-                //self?.configLocationJsonData()
+                
                 self!.page += 1
                 self?.configData(page: self!.page)
                 self?.collectionView.mj_footer.endRefreshing()
             })
         }
-        
         return collection
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        refresh()
+        //configHKStoryData()
         configLocationJsonData()
         configUI()
         configNav()
-
+        
 
     }
-    
-//    override func viewLayoutMarginsDidChange() {
-//        if #available(iOS 13.0, *) {
-//            let margins = view.layoutMargins
-//            var frame = view.frame
-//            frame.origin.x = -margins.left
-//            frame.origin.y = -margins.top
-//            frame.size.width += margins.left + margins.right
-//            frame.size.height += margins.top + margins.bottom
-//            view.frame = frame
-//        }
-//    }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-//        //        key1: reload Data here
-//        collectionView.reloadData()
-//        //        key2: do the animation in ViewwillApear,not in delegate "willDisplay", that will case reuse cell problem!
-//        let cells = collectionView.visibleCells
-//        let tableHeight: CGFloat = collectionView.bounds.size.height
-//
-//        for (index, cell) in cells.enumerated() {
-//            //            use origin.y or CGAffineTransform and set y has same effect!
-//            //            cell.transform = CGAffineTransform(translationX: 0, y: tableHeight)
-//            cell.frame.origin.y = tableHeight
-//            UIView.animate(withDuration: 1.0, delay: 0.04 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
-//                //                cell.transform = CGAffineTransform(translationX: 0, y: 0);
-//                cell.frame.origin.y = 0
-//            }, completion: nil)
-//        }
+        configHKStoryData()
         self.notesDatas.removeAll()
         self.page = 1
         self.configData(page: self.page)
         self.collectionView.reloadData()
+
     }
 
-    @objc func add() {
-        print("中间按钮")
+    func configHKStoryData(){
+        self.myBookData.removeAll()
+        
+        UserDefaults.standard.removeObject(forKey: "bookname")
+        UserDefaults.standard.removeObject(forKey: "bookid")
+        UserDefaults.standard.removeObject(forKey: "booknum")
+  
+        Alamofire.request(getMyBookAPI()).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                if let obj = JSONDeserializer<HKStory>.deserializeFrom(json: json.debugDescription){
+                    for data in obj.data! {
+                        self.myBookData.append(data)
+                    }
+                    var bookname = [String]()
+                    var bookid = [Int]()
+                    var booknum = [Int]()
+                    for data in self.myBookData {
+                        bookname.append(data.bookName)
+                        bookid.append(data.id)
+                        booknum.append(data.story!.count)
+                    }
+                    print("bookname",bookname)
+                    saveBookId(bookname: bookid)
+                    saveBookName(bookname: bookname)
+                    saveBookNum(bookname: booknum)
+                }
+            }
+        }
+
     }
+    
     @objc func tip(){
 
         let tipsVC = TipsViewController()
@@ -156,7 +147,6 @@ extension HKHomeViewController {
             make.width.height.equalToSuperview()
             make.center.equalToSuperview()
         }
-      //  self.collectionView.backgroundColor = .red
         view.backgroundColor = backColor
     }
     
@@ -184,20 +174,19 @@ extension HKHomeViewController {
 
 extension HKHomeViewController {
     
-    /// 加载本地json
+    /// 加载本地数据json
     func configLocationJsonData(){
-        let path = Bundle.main.path(forResource: "HKHomejson", ofType: "json")
-        let jsonData = NSData(contentsOfFile: path!)
+ 
         
-        let json = JSON(jsonData!)
+        let model = City(title: "上海", img: "img3")
+        let model2 = City(title: "株洲", img: "img2")
+        let model3 = City(title: "长沙", img: "img1")
+        let model4 = City(title: "苏州", img: "img3")
         
-        if let obj = JSONDeserializer<HomeModel>.deserializeFrom(json: json.description) {
-            
-            for data in obj.data! {
-                //self.notesDatas.append(data)
-            }
-            
-        }
+        self.cityData.append(model)
+        self.cityData.append(model2)
+        self.cityData.append(model3)
+        self.cityData.append(model4)
         
         let cityPath = Bundle.main.path(forResource: "HKCityjson", ofType: "json")
         let cityData = NSData(contentsOfFile: cityPath!)
@@ -210,20 +199,7 @@ extension HKHomeViewController {
         
         self.collectionView.reloadData()
     }
-    /// 刷新
-    func refresh(){
-//          self.collectionView.mj_header.beginRefreshing()
-//
 
-
-//        collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-//                print("下拉刷新 --- 1")
-//
-//
-//            })
-//        }
-    }
     /// 网络加载数据
     func configData(page:Int) {
         
@@ -234,11 +210,9 @@ extension HKHomeViewController {
             if let value = response.result.value {
                 let json = JSON(value)
                 if let obj = JSONDeserializer<HomeModel>.deserializeFrom(json: json.debugDescription){
-                    print(obj)
                     for data in obj.data! {
                         self.notesDatas.append(data)
                     }
-                    print(obj.data!.count)
                     self.collectionView.reloadData()
                 }
             }
@@ -292,7 +266,7 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
         }
         else if indexPath.section == 1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HKRecommendCityID, for: indexPath) as! RecommendCityView
-            cell.datas = self.cityDatas
+            cell.datas = self.cityData
             cell.delegate = self
             return cell
         }else {
@@ -300,7 +274,7 @@ extension HKHomeViewController: UICollectionViewDelegateFlowLayout, UICollection
             self.collectionView.register(StoryView.self, forCellWithReuseIdentifier: identifier)
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! StoryView
-            cell.favBtn.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
+
             //cell.photoCell.imgData = data[indexPath.row]
             config(cell, with: notesDatas[indexPath.row])
             return cell
@@ -382,25 +356,67 @@ extension HKHomeViewController:  UICollectionViewDelegate {
 
 extension HKHomeViewController {
     
+    @objc func collected(_ sender:UIButton){
+        
+        let btn = sender
+        let cell = btn.superView(of: StoryView.self)!
+        let indexPath = collectionView.indexPath(for: cell)
+        
+        if notesDatas[(indexPath?.row)!].collected {
+            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+            notesDatas[(indexPath?.row)!].collected = false
+        }else {
+            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+            notesDatas[(indexPath?.row)!].collected = true
+        }
+        
+        //sum = sum + (label.text! as NSString).integerValue
+        // self.title = "总数：\(sum)"
+        
+    }
+    
     @objc func fav(_ sender:UIButton){
         
         let btn = sender
         let cell = btn.superView(of: StoryView.self)!
         let indexPath = collectionView.indexPath(for: cell)
         
-        if data[(indexPath?.row)!] == 1 {
-            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
-            cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
-            data[(indexPath?.row)!] = 0
-        }else {
-            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+        if notesDatas[(indexPath?.row)!].like {
+            cell.favIcon.setImage(UIImage(named: "home_stroy_unlove"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
-            data[(indexPath?.row)!] = 1
-            
+            notesDatas[(indexPath?.row)!].like = false
+        }else {
+            cell.favIcon.setImage(UIImage(named: "home_stroy_love"), for: .normal)
+            cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
+            notesDatas[(indexPath?.row)!].like = true
+            favNet(noteId: notesDatas[(indexPath?.row)!].id)
         }
-        //sum = sum + (label.text! as NSString).integerValue
-        // self.title = "总数：\(sum)"
         
+    }
+    
+    func favNet(noteId:Int) {
+        
+        Alamofire.request(getFavAPI(noteId: noteId)).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                    print(json)
+            }
+        }
+    }
+    
+    func collecteNet(noteId:Int) {
+        Alamofire.request(getFavAPI(noteId: noteId)).responseJSON { (response) in
+             guard response.result.isSuccess else {
+                 ProgressHUD.showError("网络请求错误"); return
+             }
+             if let value = response.result.value {
+                 let json = JSON(value)
+                     print(json)
+             }
+         }
     }
     
 }
@@ -409,41 +425,42 @@ extension HKHomeViewController {
 
 extension HKHomeViewController {
     func config(_ cell:StoryView,with data:NotesModel) {
-        cell.userName.text = data.user?.username
-        cell.title.text = data.title
         
+        let pics = data.noteParas![0].pics.components(separatedBy: ",")
+        cell.photoCell.imgDatas = pics
+        let imgUrl = URL(string: data.user!.headPic)
+        cell.userIcon.kf.setImage(with: imgUrl)
+        cell.userName.text = data.user?.username
         var locations = [String]()
-        //cell.time.text = data.noteParas
         for note in data.noteParas! {
             locations.append(note.place)
         }
         let place = locations.joined(separator: "、")
-
         cell.trackLocation.text = "#" + place
-        let imgUrl = URL(string: data.user!.headPic)
-        cell.userIcon.kf.setImage(with: imgUrl)
+        cell.title.text = data.title
+        cell.time.text = data.noteParas![0].date
         cell.favLabel.text = "\(data.likes)"
-//        cell.time.text = data.noteParas![0].date//data.time
-        cell.liked = data.like
         if data.like {
-            cell.favIcon.image = UIImage(named: "home_story_love")
+            cell.favIcon.setImage(UIImage(named: "home_story_fav"), for: .normal)
         }else {
-            cell.favIcon.image = UIImage(named: "home_stroy_unlove")
+            cell.favIcon.setImage(UIImage(named: "home_story_unfav"), for: .normal)
         }
-        let pics = data.noteParas![0].pics.components(separatedBy: ",")
-        cell.photoCell.imgDatas = pics
+        cell.favIcon.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
+        if data.collected {
+            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+        }else {
+            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+        }
+        cell.favBtn.addTarget(self, action: #selector(collected(_:)), for: .touchUpInside)
 
-       
-        
-        //cell.userIcon.image = UIImage(named: "1")
     }
 }
 
 // MARK -  点击代理事件
 
 extension HKHomeViewController: CityDelegate {
-    func cityClick(with data: CityModel) {
-        let vc = CityViewController(data: data)
+    func cityClick(with data: String) {
+        let vc = SearchContentViewController(word: data)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

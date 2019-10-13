@@ -10,14 +10,14 @@ import UIKit
 
 // 图片按钮点击代理方法
 protocol CityDelegate:NSObjectProtocol {
-    func cityClick(with data:CityModel)
+    func cityClick(with data:String)
 }
 
 class RecommendCityView: UICollectionViewCell {
     
     weak var delegate: CityDelegate?
     
-    public var datas = [CityModel]()
+    public var datas = [City]()
     
     private let CityCellID = "CityView"
     
@@ -71,14 +71,14 @@ extension RecommendCityView: UICollectionViewDelegate, UICollectionViewDataSourc
     
         let data = datas[indexPath.row]
         
-        cell.imageView.image = UIImage(named: data.citypic )
-        cell.titleLabel.text = data.cityname
+        cell.imageView.image = UIImage(named: data.img! )
+        cell.titleLabel.text = data.title
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let data = datas[indexPath.row]
-        delegate?.cityClick(with: data)
+        delegate?.cityClick(with: data.title!)
     }
     
 

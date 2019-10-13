@@ -206,19 +206,12 @@ extension NoteController {
     
     
     @objc func back(){
-        UserDefaults.standard.removeObject(forKey: "content")
-        UserDefaults.standard.removeObject(forKey: "time")
-        UserDefaults.standard.removeObject(forKey: "pic")
-        UserDefaults.standard.removeObject(forKey: "location")
-        
-        let c1 = getContent()
-        let c2 = getLocation()
-        let c3 = getTime()
-        let c4 = getPic()
-        print(c1)
-        print(c2)
-        print(c3)
-        print(c4)
+//        UserDefaults.standard.removeObject(forKey: "content")
+//        UserDefaults.standard.removeObject(forKey: "time")
+//        UserDefaults.standard.removeObject(forKey: "pic")
+//        UserDefaults.standard.removeObject(forKey: "location")
+         saveFlag(flag: "001")
+         self.navigationController?.popToRootViewController(animated: true)
         
     }
     @objc func addLocation(){
@@ -315,7 +308,6 @@ extension NoteController {
                 para.pics = c4![index]
                 para.place = c2![index]
                 paras.append(para)
-                
             }
             datas.noteParas = paras
             let noteVC = NotesController(data: datas)

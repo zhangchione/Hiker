@@ -86,10 +86,10 @@ class StoryView: UICollectionViewCell {
         return label
     }()
     // 被喜欢icon
-    lazy var favIcon: UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(named: "home_story_loves")
-        return img
+    lazy var favIcon: UIButton = {
+        let Btn = UIButton()
+        Btn.setImage(UIImage(named: "home_stroy_unlove"), for: .normal)
+        return Btn
     }()
     // 收藏按钮
     lazy var favBtn: UIButton = {
@@ -197,7 +197,7 @@ class StoryView: UICollectionViewCell {
     var liked = false {
         willSet{
             guard newValue != liked else { return }
-            update(isliked:newValue)
+            //update(isliked:newValue)
             
         }
     }
@@ -209,11 +209,11 @@ class StoryView: UICollectionViewCell {
     }
     
     func update(isliked:Bool) {
-        guard isliked else {
-            self.favIcon.image = UIImage(named: "home_story_loves")
-            return
-        }
-         self.favIcon.image = UIImage(named: "home_stroy_unlove")
+//        guard isliked else {
+//            self.favIcon.image = UIImage(named: "home_story_loves")
+//            return
+//        }
+//         self.favIcon.image = UIImage(named: "home_stroy_unlove")
     }
     
 //    func updateCollected(iscollected:Bool) {

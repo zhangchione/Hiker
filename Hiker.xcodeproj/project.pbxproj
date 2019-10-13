@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -63,6 +63,11 @@
 		F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */; };
 		F58017E22326075B0014E3C3 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E12326075B0014E3C3 /* Const.swift */; };
 		F58017E4232607770014E3C3 /* Extension + color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E3232607770014E3C3 /* Extension + color.swift */; };
+		F5A72C522353128300F0322E /* AddTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A72C512353128300F0322E /* AddTrackView.swift */; };
+		F5A72C542353162D00F0322E /* HiddenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A72C532353162D00F0322E /* HiddenView.swift */; };
+		F5A72C5623531C5900F0322E /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A72C5523531C5900F0322E /* BookCell.swift */; };
+		F5A72C5823531DC700F0322E /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A72C5723531DC700F0322E /* BookModel.swift */; };
+		F5A72C5A23532B3900F0322E /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A72C5923532B3900F0322E /* AddBookView.swift */; };
 		F5AED64A2330C40200B5B824 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED6492330C40200B5B824 /* Photo.swift */; };
 		F5AED64C2330C69C00B5B824 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED64B2330C69C00B5B824 /* Album.swift */; };
 		F5AED6522330C7FB00B5B824 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AED6512330C7FB00B5B824 /* DataBase.swift */; };
@@ -84,6 +89,9 @@
 		F5C27E1D233C4BB700B5131F /* HKCityjson.json in Resources */ = {isa = PBXBuildFile; fileRef = F5C27E1C233C4BB700B5131F /* HKCityjson.json */; };
 		F5C27E1F233C89E200B5131F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C27E1E233C89E200B5131F /* API.swift */; };
 		F5C27E21233C8C2100B5131F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C27E20233C8C2100B5131F /* MainTabBarController.swift */; };
+		F5C5FA9D2351E7E700197A6A /* SearchContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C5FA9C2351E7E700197A6A /* SearchContentViewController.swift */; };
+		F5C5FA9F2352091500197A6A /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C5FA9E2352091500197A6A /* SearchUserModel.swift */; };
+		F5C5FAA1235209FD00197A6A /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C5FAA0235209FD00197A6A /* SearchUserCell.swift */; };
 		F5C872522331C4B60094DD7A /* GSCaptchaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */; };
 		F5C872542331C8480094DD7A /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C872532331C8470094DD7A /* TimerButton.swift */; };
 		F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8725A233203CF0094DD7A /* FanViewController.swift */; };
@@ -173,6 +181,11 @@
 		F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKBaseViewController.swift; sourceTree = "<group>"; };
 		F58017E12326075B0014E3C3 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		F58017E3232607770014E3C3 /* Extension + color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + color.swift"; sourceTree = "<group>"; };
+		F5A72C512353128300F0322E /* AddTrackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTrackView.swift; sourceTree = "<group>"; };
+		F5A72C532353162D00F0322E /* HiddenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenView.swift; sourceTree = "<group>"; };
+		F5A72C5523531C5900F0322E /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		F5A72C5723531DC700F0322E /* BookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
+		F5A72C5923532B3900F0322E /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		F5AED6492330C40200B5B824 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		F5AED64B2330C69C00B5B824 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		F5AED6512330C7FB00B5B824 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
@@ -196,6 +209,9 @@
 		F5C27E1C233C4BB700B5131F /* HKCityjson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = HKCityjson.json; sourceTree = "<group>"; };
 		F5C27E1E233C89E200B5131F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F5C27E20233C8C2100B5131F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		F5C5FA9C2351E7E700197A6A /* SearchContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContentViewController.swift; sourceTree = "<group>"; };
+		F5C5FA9E2352091500197A6A /* SearchUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
+		F5C5FAA0235209FD00197A6A /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
 		F5C872512331C4B60094DD7A /* GSCaptchaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSCaptchaButton.swift; sourceTree = "<group>"; };
 		F5C872532331C8470094DD7A /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		F5C8725A233203CF0094DD7A /* FanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanViewController.swift; sourceTree = "<group>"; };
@@ -258,8 +274,9 @@
 		F50155E023273CA200FD201C /* 二级页面 */ = {
 			isa = PBXGroup;
 			children = (
-				F5C27E19233C4AE400B5131F /* City - 推荐城市 */,
 				F50155F4232774AC00FD201C /* SubClassBaseViewController.swift */,
+				F5C5FA9B2351E76700197A6A /* FindStory - 指定故事 */,
+				F5C27E19233C4AE400B5131F /* City - 推荐城市 */,
 				F50155F62327759500FD201C /* Tips - 消息 */,
 				F50155F12327740000FD201C /* Search - 搜索 */,
 				F50155E32327402300FD201C /* Story - 故事簿 */,
@@ -293,6 +310,8 @@
 			isa = PBXGroup;
 			children = (
 				F50155F22327743200FD201C /* SearchViewController.swift */,
+				F5C5FA9E2352091500197A6A /* SearchUserModel.swift */,
+				F5C5FAA0235209FD00197A6A /* SearchUserCell.swift */,
 			);
 			path = "Search - 搜索";
 			sourceTree = "<group>";
@@ -644,6 +663,14 @@
 			path = "City - 推荐城市";
 			sourceTree = "<group>";
 		};
+		F5C5FA9B2351E76700197A6A /* FindStory - 指定故事 */ = {
+			isa = PBXGroup;
+			children = (
+				F5C5FA9C2351E7E700197A6A /* SearchContentViewController.swift */,
+			);
+			path = "FindStory - 指定故事";
+			sourceTree = "<group>";
+		};
 		F5C872572332037B0094DD7A /* Story - 游记 */ = {
 			isa = PBXGroup;
 			children = (
@@ -769,11 +796,16 @@
 		F5F0670A233D912D00159F30 /* Notes - 故事段落 */ = {
 			isa = PBXGroup;
 			children = (
+				F5A72C512353128300F0322E /* AddTrackView.swift */,
 				F558F63C2339FAD60013EBAC /* NotesCell.swift */,
 				F558F63D2339FAD60013EBAC /* NotesCell.xib */,
 				F558F6382339DA350013EBAC /* WriteNextNotesCell.swift */,
 				F558F6392339DA350013EBAC /* WriteNextNotesCell.xib */,
 				F558F6302339D9150013EBAC /* NotesController.swift */,
+				F5A72C532353162D00F0322E /* HiddenView.swift */,
+				F5A72C5523531C5900F0322E /* BookCell.swift */,
+				F5A72C5723531DC700F0322E /* BookModel.swift */,
+				F5A72C5923532B3900F0322E /* AddBookView.swift */,
 			);
 			path = "Notes - 故事段落";
 			sourceTree = "<group>";
@@ -926,12 +958,14 @@
 				F5C8725D233203D90094DD7A /* ConcernViewController.swift in Sources */,
 				F558F62E2339B5200013EBAC /* TitleController.swift in Sources */,
 				F5598268234D863500802220 /* Extension_UIView.swift in Sources */,
+				F5A72C522353128300F0322E /* AddTrackView.swift in Sources */,
 				F5AED6522330C7FB00B5B824 /* DataBase.swift in Sources */,
 				F57C320A23349F1600B6E7A0 /* UserDefaults.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
 				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
 				F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */,
 				F558F65D233A030D0013EBAC /* ExpandingTableViewController.swift in Sources */,
+				F5A72C5A23532B3900F0322E /* AddBookView.swift in Sources */,
 				F5EBB5572338976A006DAAC8 /* PhotoCell.swift in Sources */,
 				F57C320C2334A90500B6E7A0 /* NoteViewController.swift in Sources */,
 				F5015600232799D900FD201C /* SetViewController.swift in Sources */,
@@ -948,6 +982,7 @@
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
 				F57C320E2334AD8900B6E7A0 /* TitleViewController.swift in Sources */,
 				F50155F02327684A00FD201C /* StorySementCell.swift in Sources */,
+				F5A72C5823531DC700F0322E /* BookModel.swift in Sources */,
 				F558F65B233A030D0013EBAC /* PageCollectionView.swift in Sources */,
 				F5C27E1F233C89E200B5131F /* API.swift in Sources */,
 				F5AED6672330C8AA00B5B824 /* LocalAlbumTable.swift in Sources */,
@@ -966,6 +1001,7 @@
 				F5AED6622330C8AA00B5B824 /* ThingTable.swift in Sources */,
 				F558F662233A030D0013EBAC /* CornerAnimatable.swift in Sources */,
 				F5AED6682330C8AA00B5B824 /* DiaryTable.swift in Sources */,
+				F5C5FA9F2352091500197A6A /* SearchUserModel.swift in Sources */,
 				F58017C22325E0560014E3C3 /* AppDelegate.swift in Sources */,
 				F558F665233A031B0013EBAC /* Images.swift in Sources */,
 				F558F66D233A032F0013EBAC /* AnimationBarButton.swift in Sources */,
@@ -983,6 +1019,7 @@
 				F558F668233A03270013EBAC /* StoryboardHelper.swift in Sources */,
 				F5BD54E7233B2E0600357670 /* MineModel.swift in Sources */,
 				F5C27E21233C8C2100B5131F /* MainTabBarController.swift in Sources */,
+				F5A72C542353162D00F0322E /* HiddenView.swift in Sources */,
 				F558F63E2339FAD60013EBAC /* NotesCell.swift in Sources */,
 				F50155F32327743200FD201C /* SearchViewController.swift in Sources */,
 				F50155F8232775A700FD201C /* TipsViewController.swift in Sources */,
@@ -992,6 +1029,8 @@
 				F5D2C3D62328C97700DE60D2 /* MineSotryCell.swift in Sources */,
 				F58017E4232607770014E3C3 /* Extension + color.swift in Sources */,
 				F5C27E1B233C4AF500B5131F /* CityViewController.swift in Sources */,
+				F5C5FA9D2351E7E700197A6A /* SearchContentViewController.swift in Sources */,
+				F5A72C5623531C5900F0322E /* BookCell.swift in Sources */,
 				F558F663233A030D0013EBAC /* TransitionDriver.swift in Sources */,
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
 				F558F65C233A030D0013EBAC /* ExpandingViewController.swift in Sources */,
@@ -999,6 +1038,7 @@
 				F50155EE2327682D00FD201C /* MapCell.swift in Sources */,
 				F5EC43242326374600107F66 /* CityView.swift in Sources */,
 				F5E375C1232F735B00C7C351 /* FivePhotoCell.swift in Sources */,
+				F5C5FAA1235209FD00197A6A /* SearchUserCell.swift in Sources */,
 				F50155EB2327494B00FD201C /* StoryBaseViewController.swift in Sources */,
 				F5AED64C2330C69C00B5B824 /* Album.swift in Sources */,
 				F5EBB55523386FD1006DAAC8 /* NotesModel.swift in Sources */,

@@ -133,11 +133,11 @@ class HKMineViewController: UIViewController {
         
         if let datas = storyData {
             for data in datas {
-                titles.append(data.bookname)
+                titles.append(data.bookName)
                 let vc = MineStoryViewController()
                 vc.datas = data
                 viewControllers.append(vc)
-                print(data.bookname)
+                print(data.bookName)
             }
         }
         let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in

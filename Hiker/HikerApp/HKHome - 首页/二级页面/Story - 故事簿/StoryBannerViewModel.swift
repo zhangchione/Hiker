@@ -13,6 +13,7 @@ class StoryBannerViewModel{
     
     init(with model:NotesModel) {
         self.model = model
+        
     }
     
     typealias call = () -> Void

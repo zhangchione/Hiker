@@ -91,6 +91,7 @@ func mainTabBar() -> UITabBarController {
             noteNav.navigation.configuration.isEnabled = true
             noteNav.navigation.configuration.barTintColor = .white
             noteNav.navigation.configuration.tintColor = .white
+            noteNav.modalPresentationStyle = .fullScreen
             tabBarController?.present(noteNav, animated: true, completion: nil)
         }
     }

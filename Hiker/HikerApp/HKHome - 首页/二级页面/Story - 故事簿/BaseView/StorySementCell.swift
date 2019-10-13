@@ -92,7 +92,7 @@ class StorySementCell: UITableViewCell {
             make.left.equalTo(self).offset(20)
             make.top.equalTo(self).offset(10)
             make.height.equalTo(30)
-            make.width.equalTo(35)
+            make.width.equalTo(50)
         }
         time.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)

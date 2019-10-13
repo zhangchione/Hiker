@@ -45,7 +45,10 @@ class TitleController: UIViewController {
         
         configNav()
         configCV()
-        
+        UserDefaults.standard.removeObject(forKey: "content")
+        UserDefaults.standard.removeObject(forKey: "time")
+        UserDefaults.standard.removeObject(forKey: "pic")
+        UserDefaults.standard.removeObject(forKey: "location")
     }
     
     

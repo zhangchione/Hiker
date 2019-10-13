@@ -49,22 +49,8 @@ class CityViewController: SubClassBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        key1: reload Data here
-        collectionView.reloadData()
-        //        key2: do the animation in ViewwillApear,not in delegate "willDisplay", that will case reuse cell problem!
-        let cells = collectionView.visibleCells
-        let tableHeight: CGFloat = collectionView.bounds.size.height
-        
-        for (index, cell) in cells.enumerated() {
-            //            use origin.y or CGAffineTransform and set y has same effect!
-            //            cell.transform = CGAffineTransform(translationX: 0, y: tableHeight)
-            cell.frame.origin.y = tableHeight
-            UIView.animate(withDuration: 1.0, delay: 0.04 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
-                //                cell.transform = CGAffineTransform(translationX: 0, y: 0);
-                cell.frame.origin.y = 0
-            }, completion: nil)
-        }
     }
+    
     func configNav(){
        self.navigation.item.title =  "“" + data!.cityname + "”"
        self.navigation.bar.backgroundColor = backColor
@@ -146,7 +132,7 @@ extension CityViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             let storyData = data?.story![indexPath.row]
-        let vc = StoryViewController(model: storyData!)
+            let vc = StoryViewController(model: storyData!)
             self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -156,23 +142,35 @@ extension CityViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
 extension CityViewController {
     func config(_ cell:StoryView,with data:NotesModel) {
+        let pics = data.noteParas![0].pics.components(separatedBy: ",")
+        cell.photoCell.imgDatas = pics
+        let imgUrl = URL(string: data.user!.headPic)
+        cell.userIcon.kf.setImage(with: imgUrl)
         cell.userName.text = data.user?.username
-        cell.title.text = data.title
-        var locations = ""
-//        if let locas = data.locations {
-//            locations = locas.joined(separator: "、")
-//        }
-        cell.trackLocation.text = "#" + locations
-        cell.userIcon.image = UIImage(named: data.user!.headPic)
-        cell.favLabel.text = "\(data.likes)"
-        cell.time.text = "11"//data.time
-        cell.liked = data.like
-        if data.like {
-            cell.favIcon.image = UIImage(named: "home_story_love")
-        }else {
-            cell.favIcon.image = UIImage(named: "home_stroy_unlove")
+        var locations = [String]()
+        for note in data.noteParas! {
+            locations.append(note.place)
         }
-        cell.photoCell.imgDatas = data.pics
-        //cell.userIcon.image = UIImage(named: "1")
+        let place = locations.joined(separator: "、")
+        cell.trackLocation.text = "#" + place
+        cell.title.text = data.title
+        cell.time.text = data.noteParas![0].date
+        cell.favLabel.text = "\(data.likes)"
+        if data.like {
+            cell.favIcon.setImage(UIImage(named: "home_story_fav"), for: .normal)
+        }else {
+            cell.favIcon.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+        }
+        //cell.favIcon.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
+        if data.collected {
+            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+        }else {
+            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+        }
+        //cell.favBtn.addTarget(self, action: #selector(collected(_:)), for: .touchUpInside)
     }
+}
+
+extension CityViewController  {
+    
 }

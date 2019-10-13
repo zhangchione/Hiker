@@ -11,7 +11,7 @@ import UIKit
 class StoryViewController: StoryBaseViewController {
 
     
-    
+    private var notesData = NotesModel()
     
     let storyBannerView: StoryBannerView
     let storyBannerViewModel:StoryBannerViewModel
@@ -20,9 +20,9 @@ class StoryViewController: StoryBaseViewController {
     init(model:NotesModel) {
         storyBannerViewModel = StoryBannerViewModel(with: model)
         storyBannerView = StoryBannerView(with: storyBannerViewModel)
-        print(model)
         super.init()
         self.paras = model.noteParas
+        self.notesData = model
         storyBannerViewModel.userCallBack = { [unowned self] in
             print("点击用户")
         }
@@ -116,8 +116,8 @@ extension StoryViewController{
         
         
         if offset > 90 {
-                self.navigation.bar.alpha = 1
-                navigation.item.title = "魔都上海两日"
+            self.navigation.bar.alpha = 1
+            navigation.item.title = notesData.title
             leftBarButton.setImage(UIImage(named: "home_icon_back"), for: .normal)
         }else {
             self.navigation.bar.alpha = 0

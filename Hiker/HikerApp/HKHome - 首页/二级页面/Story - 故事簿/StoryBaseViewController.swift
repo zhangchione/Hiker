@@ -42,7 +42,7 @@ class StoryBaseViewController: UIViewController {
         self.tableView.snp.makeConstraints { (make) in
             make.top.left.equalTo(view)
             make.width.equalTo(TKWidth)
-            make.height.equalTo(TKHeight-30)
+            make.height.equalTo(TKHeight)
         }
         if #available(iOS 11.0, *) {
             self.navigation.bar.prefersLargeTitles = true
@@ -72,12 +72,12 @@ extension StoryBaseViewController: UITableViewDelegate, UITableViewDataSource {
             if let para = paras {
                 configCell(cell, with: paras![indexPath.row])
             }
-                cell.num.text = "\(indexPath.row + 1)"
+                cell.num.text = "0\(indexPath.row + 1)"
             return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var cellHeight =  CGFloat(self.getTextHeigh(textStr: str, font: UIFont.boldSystemFont(ofSize: 15), width: 374))
-        return cellHeight + 300
+        return cellHeight + 220
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -102,6 +102,6 @@ extension StoryBaseViewController {
         cell.time.text = data.date
         let pics = data.pics.components(separatedBy: ",")
         cell.photoCell.imgDatas = pics
-        print(data.pics)
+        //cell.photoCell.backgroundColor = .red
     }
 }

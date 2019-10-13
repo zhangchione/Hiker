@@ -37,7 +37,9 @@ target 'Hiker' do
   
   #动画
   pod 'pop'
+  
   pod 'NVActivityIndicatorView'
+  
   #消息提示
   pod 'SwiftMessages'
   #弹框
