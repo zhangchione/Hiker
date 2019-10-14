@@ -82,7 +82,7 @@ class HKHomeViewController: UIViewController {
         configLocationJsonData()
         configUI()
         configNav()
-        
+        getUserInfo()
 
     }
 
@@ -127,7 +127,6 @@ class HKHomeViewController: UIViewController {
                 }
             }
         }
-
     }
     
     @objc func tip(){
@@ -188,14 +187,7 @@ extension HKHomeViewController {
         self.cityData.append(model3)
         self.cityData.append(model4)
         
-        let cityPath = Bundle.main.path(forResource: "HKCityjson", ofType: "json")
-        let cityData = NSData(contentsOfFile: cityPath!)
-        let cityJson = JSON(cityData!)
-        
-        if let cityObj = JSONDeserializer<HKCity>.deserializeFrom(json: cityJson.description) {
-            
-            cityDatas = cityObj.data!
-        }
+
         
         self.collectionView.reloadData()
     }
@@ -218,7 +210,22 @@ extension HKHomeViewController {
             }
         }
     }
-    
+    func getUserInfo(){
+        Alamofire.request(getUserInfoAPI()).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                saveUserId(userId: json["data"]["id"].stringValue)
+                saveHeadPic(headPic: json["data"]["headPic"].stringValue)
+                saveNickName(nickName: json["data"]["nickName"].stringValue)
+                print("userid 存储成功为：",getUserId())
+                print(getHeadPic())
+                print(getNickName())
+            }
+        }
+    }
 }
 
 // MARK - ScrollView滚动代理
@@ -365,14 +372,14 @@ extension HKHomeViewController {
         if notesDatas[(indexPath?.row)!].collected {
             cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
             notesDatas[(indexPath?.row)!].collected = false
+            unCollecteNet(noteId: notesDatas[(indexPath?.row)!].id)
         }else {
             cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
             notesDatas[(indexPath?.row)!].collected = true
+            collecteNet(noteId: notesDatas[(indexPath?.row)!].id)
+            
         }
-        
-        //sum = sum + (label.text! as NSString).integerValue
-        // self.title = "总数：\(sum)"
-        
+
     }
     
     @objc func fav(_ sender:UIButton){
@@ -382,11 +389,11 @@ extension HKHomeViewController {
         let indexPath = collectionView.indexPath(for: cell)
         
         if notesDatas[(indexPath?.row)!].like {
-            cell.favIcon.setImage(UIImage(named: "home_stroy_unlove"), for: .normal)
+            cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
             notesDatas[(indexPath?.row)!].like = false
         }else {
-            cell.favIcon.setImage(UIImage(named: "home_stroy_love"), for: .normal)
+            cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
             notesDatas[(indexPath?.row)!].like = true
             favNet(noteId: notesDatas[(indexPath?.row)!].id)
@@ -408,16 +415,35 @@ extension HKHomeViewController {
     }
     
     func collecteNet(noteId:Int) {
-        Alamofire.request(getFavAPI(noteId: noteId)).responseJSON { (response) in
-             guard response.result.isSuccess else {
-                 ProgressHUD.showError("网络请求错误"); return
-             }
-             if let value = response.result.value {
-                 let json = JSON(value)
-                     print(json)
-             }
-         }
+        
+        
+        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
+        
+        Alamofire.request(getCollectedAPI(noteId: noteId), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("发布游记网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                print(json)
+            }
+        }
     }
+    
+    func unCollecteNet(noteId:Int) {
+        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
+        Alamofire.request(getUnCollectedAPI(noteId: noteId), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("发布游记网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+            }
+        }
+    
+    }
+    
+    
     
 }
 
@@ -430,7 +456,7 @@ extension HKHomeViewController {
         cell.photoCell.imgDatas = pics
         let imgUrl = URL(string: data.user!.headPic)
         cell.userIcon.kf.setImage(with: imgUrl)
-        cell.userName.text = data.user?.username
+        cell.userName.text = data.user?.nickName
         var locations = [String]()
         for note in data.noteParas! {
             locations.append(note.place)
@@ -441,9 +467,9 @@ extension HKHomeViewController {
         cell.time.text = data.noteParas![0].date
         cell.favLabel.text = "\(data.likes)"
         if data.like {
-            cell.favIcon.setImage(UIImage(named: "home_story_fav"), for: .normal)
+            cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
         }else {
-            cell.favIcon.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+            cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
         }
         cell.favIcon.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
         if data.collected {

@@ -9,11 +9,35 @@
 import UIKit
 
 class SetViewController: SubClassBaseViewController {
+    var useImg:UIImageView!
+    var imgPricker:UIImagePickerController!
+    
     @IBAction func Logout(_ sender: Any) {
                 logOutApp()
     }
     
+    @IBAction func cutUserImg(_ sender: Any) {
+        
+    }
+    
+    @IBAction func cutNickName(_ sender: Any) {
+    }
+    @IBAction func myLove(_ sender: Any) {
+        
+    }
+    
+    @IBAction func myCollected(_ sender: Any) {
+    }
+    
+    
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBAction func faceBook(_ sender: Any) {
+        
+    }
+    @IBAction func about(_ sender: Any) {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

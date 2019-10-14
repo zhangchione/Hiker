@@ -48,16 +48,7 @@ class MainViewController: UIViewController {
             }
         }
         
-        Alamofire.request(getUserInfoAPI()).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                ProgressHUD.showError("网络请求错误"); return
-            }
-            if let value = response.result.value {
-                let json = JSON(value)
-                saveUserId(userId: json["data"]["id"].stringValue)
-                print("userid 存储成功为：",getUserId())
-            }
-        }
+
         
    
     }

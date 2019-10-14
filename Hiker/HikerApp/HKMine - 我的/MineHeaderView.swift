@@ -31,7 +31,7 @@ class MineHeaderView: UIView {
     lazy var userName: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 16)
+        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 18)
         label.text = "王一一"
         return label
     }()
@@ -47,6 +47,7 @@ class MineHeaderView: UIView {
     lazy var alterBtn: UIButton = {
        let btn = UIButton()
         btn.backgroundColor = .cyan
+        btn.setImage(UIImage(named: "home_story_commot"), for: .normal)
         return btn
     }()
     
@@ -145,7 +146,7 @@ class MineHeaderView: UIView {
             make.width.equalTo(AdaptW(260))
         }
         alterBtn.snp.makeConstraints { (make) in
-            make.left.equalTo(userSign.snp.right).offset(AdaptW(16))
+            make.right.equalTo(self).offset(-AdaptW(10))
             make.centerY.equalTo(userSign.snp.centerY)
             make.height.equalTo(AdaptH(25))
             make.width.equalTo(AdaptW(25))

@@ -9,7 +9,13 @@
 import UIKit
 
 class FanViewController: SubClassBaseViewController {
-
+    var data = [UserModel]()
+    
+    convenience init(data:[UserModel]) {
+        self.init()
+        self.data = data
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -63,6 +63,11 @@
 		F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */; };
 		F58017E22326075B0014E3C3 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E12326075B0014E3C3 /* Const.swift */; };
 		F58017E4232607770014E3C3 /* Extension + color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58017E3232607770014E3C3 /* Extension + color.swift */; };
+		F58A2B62235406F000DE912F /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58A2B61235406F000DE912F /* CommentViewController.swift */; };
+		F58A2B6523540FD300DE912F /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58A2B6423540FD300DE912F /* CommentCell.swift */; };
+		F58A2B672354186000DE912F /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58A2B662354186000DE912F /* CommentView.swift */; };
+		F58A2B6E235494BE00DE912F /* AlterSginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58A2B6D235494BE00DE912F /* AlterSginView.swift */; };
+		F58A2B7023549ED200DE912F /* ConcernCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58A2B6F23549ED200DE912F /* ConcernCell.swift */; };
 		F5A72C522353128300F0322E /* AddTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A72C512353128300F0322E /* AddTrackView.swift */; };
 		F5A72C542353162D00F0322E /* HiddenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A72C532353162D00F0322E /* HiddenView.swift */; };
 		F5A72C5623531C5900F0322E /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A72C5523531C5900F0322E /* BookCell.swift */; };
@@ -181,6 +186,11 @@
 		F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKBaseViewController.swift; sourceTree = "<group>"; };
 		F58017E12326075B0014E3C3 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		F58017E3232607770014E3C3 /* Extension + color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + color.swift"; sourceTree = "<group>"; };
+		F58A2B61235406F000DE912F /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		F58A2B6423540FD300DE912F /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		F58A2B662354186000DE912F /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		F58A2B6D235494BE00DE912F /* AlterSginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlterSginView.swift; sourceTree = "<group>"; };
+		F58A2B6F23549ED200DE912F /* ConcernCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcernCell.swift; sourceTree = "<group>"; };
 		F5A72C512353128300F0322E /* AddTrackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTrackView.swift; sourceTree = "<group>"; };
 		F5A72C532353162D00F0322E /* HiddenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenView.swift; sourceTree = "<group>"; };
 		F5A72C5523531C5900F0322E /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
@@ -293,6 +303,8 @@
 				F50155E42327445C00FD201C /* StoryBannerViewModel.swift */,
 				F50155E6232744A400FD201C /* StoryBannerModel.swift */,
 				F50155E82327454800FD201C /* StoryBannerView.swift */,
+				F58A2B61235406F000DE912F /* CommentViewController.swift */,
+				F58A2B6323540FB900DE912F /* CommentCell */,
 			);
 			path = "Story - 故事簿";
 			sourceTree = "<group>";
@@ -575,18 +587,21 @@
 		F58017D92325E3440014E3C3 /* HKMine - 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				F58A2B6D235494BE00DE912F /* AlterSginView.swift */,
+				F58017DD2325F9E00014E3C3 /* HKMineViewController.swift */,
+				F50155F92327842F00FD201C /* MineHeaderView.swift */,
+				F5BD54E6233B2E0600357670 /* MineModel.swift */,
+				F58A2B6C2354872C00DE912F /* Book - 故事簿 */,
+				F58A2B6B235458BC00DE912F /* MyColletct - 收藏 */,
+				F58A2B6A2354589F00DE912F /* MyLove - 喜欢的 */,
+				F58A2B692354589200DE912F /* FaceBook - 反馈 */,
+				F58A2B682354588800DE912F /* About - 关于 */,
 				F5BD54E3233B2DD700357670 /* API */,
 				F5C872592332038E0094DD7A /* Concern - 关注 */,
 				F5C87258233203880094DD7A /* Fan - 粉丝 */,
 				F5C872572332037B0094DD7A /* Story - 游记 */,
 				F50155FD232799BE00FD201C /* Set - 设置 */,
 				F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */,
-				F58017DD2325F9E00014E3C3 /* HKMineViewController.swift */,
-				F50155F92327842F00FD201C /* MineHeaderView.swift */,
-				F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */,
-				F5D2C3D42328C97700DE60D2 /* MineSotryCell.swift */,
-				F5D2C3D52328C97700DE60D2 /* MineSotryCell.xib */,
-				F5BD54E6233B2E0600357670 /* MineModel.swift */,
 			);
 			path = "HKMine - 我的";
 			sourceTree = "<group>";
@@ -600,6 +615,53 @@
 				F5D8DD6B232A0E4C00B7EADF /* Trash */,
 			);
 			path = "HKNotes - 记录";
+			sourceTree = "<group>";
+		};
+		F58A2B6323540FB900DE912F /* CommentCell */ = {
+			isa = PBXGroup;
+			children = (
+				F58A2B6423540FD300DE912F /* CommentCell.swift */,
+				F58A2B662354186000DE912F /* CommentView.swift */,
+			);
+			path = CommentCell;
+			sourceTree = "<group>";
+		};
+		F58A2B682354588800DE912F /* About - 关于 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "About - 关于";
+			sourceTree = "<group>";
+		};
+		F58A2B692354589200DE912F /* FaceBook - 反馈 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "FaceBook - 反馈";
+			sourceTree = "<group>";
+		};
+		F58A2B6A2354589F00DE912F /* MyLove - 喜欢的 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "MyLove - 喜欢的";
+			sourceTree = "<group>";
+		};
+		F58A2B6B235458BC00DE912F /* MyColletct - 收藏 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "MyColletct - 收藏";
+			sourceTree = "<group>";
+		};
+		F58A2B6C2354872C00DE912F /* Book - 故事簿 */ = {
+			isa = PBXGroup;
+			children = (
+				F5D2C3D22328C85D00DE60D2 /* MineStoryViewController.swift */,
+				F5D2C3D42328C97700DE60D2 /* MineSotryCell.swift */,
+				F5D2C3D52328C97700DE60D2 /* MineSotryCell.xib */,
+			);
+			path = "Book - 故事簿";
 			sourceTree = "<group>";
 		};
 		F5AED6482330C3EB00B5B824 /* PhotoManage */ = {
@@ -690,6 +752,7 @@
 			isa = PBXGroup;
 			children = (
 				F5C8725C233203D90094DD7A /* ConcernViewController.swift */,
+				F58A2B6F23549ED200DE912F /* ConcernCell.swift */,
 			);
 			path = "Concern - 关注";
 			sourceTree = "<group>";
@@ -979,6 +1042,7 @@
 				F558F66C233A032F0013EBAC /* Rotatable.swift in Sources */,
 				F5AED6602330C8AA00B5B824 /* UserStateTable.swift in Sources */,
 				F5D2C3DB2328D0A200DE60D2 /* FadeTransition.swift in Sources */,
+				F58A2B672354186000DE912F /* CommentView.swift in Sources */,
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
 				F57C320E2334AD8900B6E7A0 /* TitleViewController.swift in Sources */,
 				F50155F02327684A00FD201C /* StorySementCell.swift in Sources */,
@@ -999,6 +1063,7 @@
 				F50155E92327454800FD201C /* StoryBannerView.swift in Sources */,
 				F5D2C3CF232892AD00DE60D2 /* RegisterViewController.swift in Sources */,
 				F5AED6622330C8AA00B5B824 /* ThingTable.swift in Sources */,
+				F58A2B6523540FD300DE912F /* CommentCell.swift in Sources */,
 				F558F662233A030D0013EBAC /* CornerAnimatable.swift in Sources */,
 				F5AED6682330C8AA00B5B824 /* DiaryTable.swift in Sources */,
 				F5C5FA9F2352091500197A6A /* SearchUserModel.swift in Sources */,
@@ -1015,6 +1080,7 @@
 				F50155FC2327865300FD201C /* LTAdvancedTestOneVC.swift in Sources */,
 				F558F659233A030D0013EBAC /* BasePageCollectionCell.swift in Sources */,
 				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
+				F58A2B7023549ED200DE912F /* ConcernCell.swift in Sources */,
 				F5D8DD6A232A0E2200B7EADF /* WriteStoryCell.swift in Sources */,
 				F558F668233A03270013EBAC /* StoryboardHelper.swift in Sources */,
 				F5BD54E7233B2E0600357670 /* MineModel.swift in Sources */,
@@ -1042,6 +1108,8 @@
 				F50155EB2327494B00FD201C /* StoryBaseViewController.swift in Sources */,
 				F5AED64C2330C69C00B5B824 /* Album.swift in Sources */,
 				F5EBB55523386FD1006DAAC8 /* NotesModel.swift in Sources */,
+				F58A2B62235406F000DE912F /* CommentViewController.swift in Sources */,
+				F58A2B6E235494BE00DE912F /* AlterSginView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,17 @@
 import Foundation
 import HandyJSON
 
+struct ConcernsModel:HandyJSON {
+    var code:String?
+    var data: [UserModel]?
+    var msg:String?
+}
+struct FansModel:HandyJSON {
+    var code:String?
+    var data: [UserModel]?
+    var msg:String?
+}
+
 struct MineModel:HandyJSON {
     var code:String?
     var data: UserModel?
@@ -24,16 +35,17 @@ struct UserModel:HandyJSON {
     var headPic = "head1"
     var fans = 0
     var concern = 0
+    var nickName = ""
     
 }
-struct Fan:HandyJSON {
-    var isconcern = false
-    var user:MineUser?
-}
-struct Concern:HandyJSON {
-    var isconcern = false
-    var user:MineUser?
-}
+//struct Fan:HandyJSON {
+//    var isconcern = false
+//    var user:MineUser?
+//}
+//struct Concern:HandyJSON {
+//    var isconcern = false
+//    var user:MineUser?
+//}
 struct MineUser:HandyJSON {
     var id = ""
     var userid = ""

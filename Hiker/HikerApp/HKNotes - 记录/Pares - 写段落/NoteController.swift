@@ -136,7 +136,7 @@ extension NoteController {
         self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
         view.backgroundColor = backColor
         self.navigation.bar.isShadowHidden = true
-        self.navigation.item.title = "第一段故事"
+        self.navigation.item.title = "添加故事段落"
     }
     
     func configUI(){

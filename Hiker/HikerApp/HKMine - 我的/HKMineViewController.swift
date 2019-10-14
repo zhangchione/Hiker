@@ -19,16 +19,25 @@ import ProgressHUD
 private let glt_iphoneX = (UIScreen.main.bounds.height >= 812.0)
 
 class HKMineViewController: UIViewController {
-
-    lazy var addStoryBtn: UIButton = {
-       let btn = UIButton()
-        btn.backgroundColor = .cyan
-        return btn
-    }()
     
+    
+    
+    var mineData:UserModel?
+    var storyData:[StoryModel]?
+    var concernData:[UserModel]?
+    var fansData: [UserModel]?
+    
+    var requestEndFlag = false
+    var imgPricker:UIImagePickerController!
     private  var viewControllers = [UIViewController]()
-    
     private  var titles = [String]()
+ 
+    
+    private lazy var alterSginView : AlterSginView = {
+        let loginView = AlterSginView(frame: CGRect(x: 0, y: 0, width: TKWidth, height: TKHeight))
+        loginView.delegate = self
+        return loginView
+    }()
     
     private lazy var layout: LTLayout = {
         let layout = LTLayout()
@@ -49,49 +58,28 @@ class HKMineViewController: UIViewController {
         let H: CGFloat = glt_iphoneX ? (view.bounds.height - Y ) : view.bounds.height - Y
         return CGRect(x: 0, y: statusBarH, width: view.bounds.width, height: H)
     }
-    
-    
-    // MARK - 右边功能按钮
-    private lazy var addBtn:UIButton = {
-        let button = UIButton.init(type: .custom)
-        //button.frame = CGRect(x:10, y:0, width:40, height: 40)
-        button.addTarget(self, action: #selector(set), for: UIControl.Event.touchUpInside)
-        button.setTitle("添加故事本", for: .normal)
-        //button.setImage(UIImage(named: "mine_icon_set"), for: .normal)
-        //button.backgroundColor = UIColor.red
-        return button
-    }()
+
     // MARK - 右边功能按钮
     private lazy var rightBarButton:UIButton = {
         let button = UIButton.init(type: .custom)
          button.frame = CGRect(x:10, y:0, width:40, height: 40)
         button.addTarget(self, action: #selector(set), for: UIControl.Event.touchUpInside)
         button.setImage(UIImage(named: "mine_icon_set"), for: .normal)
-        //button.backgroundColor = UIColor.red
         return button
     }()
-    
-    var mineData:UserModel?
-    
-    var storyData:[StoryModel]?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if #available(iOS 13.0, *) {
-//            let margins = view.layoutMargins
-//            var frame = view.frame
-//            frame.origin.x = -margins.left
-//            frame.origin.y = -margins.top
-//            frame.size.width += margins.left + margins.right
-//            frame.size.height += margins.top + margins.bottom
-//            view.frame = frame
-//        }
         configUI()
         configData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+
+    }
+    
     func configData(){
-        
+
         Alamofire.request(getMineAPI()).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
@@ -99,45 +87,84 @@ class HKMineViewController: UIViewController {
             if let value = response.result.value {
                 let json = JSON(value)
                 if let obj = JSONDeserializer<MineModel>.deserializeFrom(json: json.debugDescription){
-                    print(obj)
                     self.mineData = obj.data
                     self.headerView.concernLabel.text = "\(self.mineData?.concern ?? 0)"
                     self.headerView.fanLabel.text = "\(self.mineData?.fans ?? 3)"
                     self.headerView.userSign.text = self.mineData?.sgin
-                    self.headerView.userName.text = self.mineData?.username
+                    self.headerView.userName.text = self.mineData?.nickName
+                    self.headerView.storyLabel.text = "\(self.mineData?.notes ?? 0)"
                     let imgUrl = URL(string: self.mineData!.headPic)
                     self.headerView.userImg.kf.setImage(with: imgUrl)
                 }
             }
         }
-        
-        let path = Bundle.main.path(forResource: "HKMinejson", ofType: "json")
-        let jsonData = NSData(contentsOfFile: path!)
-        
-        let json = JSON(jsonData!)
-        
-        if let obj = JSONDeserializer<MineModel>.deserializeFrom(json: json.description) {
-               // mineData = obj.data
-        }
-        
 
         
-        let path1 = Bundle.main.path(forResource: "HKStoryjson", ofType: "json")
-        let jsonData1 = NSData(contentsOfFile: path1!)
-        
-        let json1 = JSON(jsonData1!)
-        
-        if let obj1 = JSONDeserializer<HKStory>.deserializeFrom(json: json1.description) {
-            storyData = obj1.data
+        Alamofire.request(getAttentionAPI()).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                if let obj = JSONDeserializer<ConcernsModel>.deserializeFrom(json: json.debugDescription){
+                    if let data = obj.data {
+                            self.concernData = data
+                            self.requestEndFlag = true
+
+                    }
+                }
+            }
         }
+        self.waitingRequestEnd()
+        self.requestEndFlag =  false
         
+        Alamofire.request(getFansAPI()).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                if let obj = JSONDeserializer<FansModel>.deserializeFrom(json: json.debugDescription){
+                    if let data = obj.data {
+                        self.requestEndFlag = true
+                        self.fansData = data
+                    }
+                }
+            }
+        }
+        self.waitingRequestEnd()
+        self.requestEndFlag =  false
+        
+        
+        Alamofire.request(getMyBookAPI()).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                if let obj = JSONDeserializer<HKStory>.deserializeFrom(json: json.debugDescription){
+                    self.storyData = obj.data
+                    self.requestEndFlag = true
+                    }
+                }
+
+        }
+        self.waitingRequestEnd()
+        self.requestEndFlag =  false
+        
+        
+        if let data = concernData {
+            self.headerView.concernLabel.text = "\(data.count)"
+        }
+        if let data = fansData {
+            self.headerView.fanLabel.text = "\(data.count)"
+        }
         if let datas = storyData {
             for data in datas {
                 titles.append(data.bookName)
                 let vc = MineStoryViewController()
                 vc.datas = data
                 viewControllers.append(vc)
-                print(data.bookName)
             }
         }
         let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in
@@ -156,11 +183,25 @@ class HKMineViewController: UIViewController {
         
         /* 代码设置滚动到第几个位置 */
         //        advancedManager.scrollToIndex(index: viewControllers.count - 1)
-            view.addSubview(advancedManager)
+        view.addSubview(advancedManager)
         
     }
     
-
+    /// 异步数据请求同步化
+     func waitingRequestEnd() {
+         if Thread.current == Thread.main {
+             while !requestEndFlag {
+                 RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.3))
+             }
+         } else {
+             autoreleasepool {
+                 while requestEndFlag {
+                     Thread.sleep(forTimeInterval: 0.3)
+                 }
+             }
+         }
+     }
+    
     
     func configUI(){
         if #available(iOS 11.0, *) {
@@ -193,8 +234,7 @@ class HKMineViewController: UIViewController {
     }()
     
     
-    var imgPricker:UIImagePickerController!
-    
+
 
 }
 extension HKMineViewController: LTAdvancedScrollViewDelegate {
@@ -257,13 +297,12 @@ extension HKMineViewController {
         action.addAction(alertN)
         
         self.present(action,animated: true,completion: nil)
-        
-        
-        
+
     }
 
     @objc func alterUserSign() {
-        
+        UIApplication.shared.keyWindow?.addSubview(self.alterSginView)
+        self.alterSginView.showAddView()
         print("改签名")
     }
     @objc func story() {
@@ -271,16 +310,26 @@ extension HKMineViewController {
         print("我的游记")
     }
     @objc func fan() {
-        
         print("我的粉丝")
-        let fanVC = FanViewController()
-        self.navigationController?.pushViewController(fanVC, animated: true)
+        if let data = concernData {
+            let concernVC = FanViewController(data:data)
+            self.navigationController?.pushViewController(concernVC, animated: true)
+        }else {
+            let concernVC = FanViewController()
+            self.navigationController?.pushViewController(concernVC, animated: true)
+        }
+        
     }
     @objc func concern() {
         
         print("我的关注")
-        let concernVC = ConcernViewController()
-        self.navigationController?.pushViewController(concernVC, animated: true)
+        if let data = concernData {
+            let concernVC = ConcernViewController(data:data)
+            self.navigationController?.pushViewController(concernVC, animated: true)
+        }else {
+            let concernVC = ConcernViewController()
+            self.navigationController?.pushViewController(concernVC, animated: true)
+        }
     }
     
     @objc func set() {
@@ -312,4 +361,10 @@ extension HKMineViewController :UIImagePickerControllerDelegate,UINavigationCont
         self.dismiss(animated: true, completion: nil)
     }
     
+}
+
+extension HKMineViewController:AlterSginDelegate {
+    func passBookName(with bookName: String) {
+        self.headerView.userSign.text = bookName
+    }
 }

@@ -92,13 +92,22 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
 extension MineStoryViewController{
     
     func configCell(_ cell:MineSotryCell,with data:NotesModel){
-        cell.img.image = UIImage(named: data.pics![0])
-      //  cell.time.text = data.time
+        
+        let pics = data.noteParas![0].pics.components(separatedBy: ",")
+        let imgUrl = URL(string: pics[0])
+        cell.img.kf.setImage(with: imgUrl)
+        cell.time.text = data.noteParas![0].date
         cell.title.text = data.title
-       //cell.locations.text = "#" + (data.locations?.joined(separator: "、"))!
+
+        var locations = [String]()
+        for note in data.noteParas! {
+            locations.append(note.place)
+        }
+        let place = locations.joined(separator: "、")
+        cell.locations.text = "#" + place
+        
         if data.type == 2 {
             cell.personal.isHidden = true
         }
-        print(data)
     }
 }

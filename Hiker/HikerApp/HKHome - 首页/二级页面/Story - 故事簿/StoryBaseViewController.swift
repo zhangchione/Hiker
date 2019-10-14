@@ -10,6 +10,31 @@ import UIKit
 
 class StoryBaseViewController: UIViewController {
 
+    lazy var commentBtn: UIButton = {
+        let button = UIButton()
+        //button.setImage(UIImage(named: "home_detialstory_comment"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "home_detialstory_comment"), for: .normal)
+        //button.backgroundColor = .cyan
+        //button.corner(byRoundingCorners: [.bottomLeft,.bottomRight,.topLeft,.topRight], radii: 20)
+        return button
+    }()
+    
+    lazy var loveBtn: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "home_detialstory_unfav"), for: .normal)
+        //button.backgroundColor = .cyan
+        //button.corner(byRoundingCorners: [.bottomLeft,.bottomRight,.topLeft,.topRight], radii: 20)
+        return button
+    }()
+    
+    lazy var hiddenBtn: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(named: "home_detialstory_uncollected"), for: .normal)
+        //button.backgroundColor = .cyan
+        //button.corner(byRoundingCorners: [.bottomLeft,.bottomRight,.topLeft,.topRight], radii: 20)
+        return button
+    }()
+    
     let str = "下了飞机第一件事是去地铁的人工窗口办一张三日卡，只需要45元，72小时内可以无限制乘坐地铁，能大大节约每次购票的时间和金钱，非常划算，毕竟，上海绝大部分地方，都是可以通过地铁达到的。另外，推荐下载“上海地铁”APP，能够方便查询线路等信息，便于高效换乘。"
     private let StorySementCellID = "StorySementCell"
     
@@ -19,9 +44,8 @@ class StoryBaseViewController: UIViewController {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-
         tableView.register(StorySementCell.self, forCellReuseIdentifier: StorySementCellID)
-       tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
 
         return tableView
     }()
@@ -44,6 +68,25 @@ class StoryBaseViewController: UIViewController {
             make.width.equalTo(TKWidth)
             make.height.equalTo(TKHeight)
         }
+        view.addSubview(commentBtn)
+        view.addSubview(loveBtn)
+        view.addSubview(hiddenBtn)
+        commentBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(13)
+            make.bottom.equalTo(-44)
+            make.width.height.equalTo(60)
+        }
+        loveBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(-13)
+            make.bottom.equalTo(-44)
+            make.width.height.equalTo(60)
+        }
+        hiddenBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(loveBtn.snp.left).offset(-10)
+            make.bottom.equalTo(-44)
+            make.width.height.equalTo(60)
+        }
+        
         if #available(iOS 11.0, *) {
             self.navigation.bar.prefersLargeTitles = true
            // self.navigation.item.largeTitleDisplayMode = .automatic
@@ -51,6 +94,8 @@ class StoryBaseViewController: UIViewController {
 
 
     }
+    
+
     
 
 }

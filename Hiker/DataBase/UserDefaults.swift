@@ -21,11 +21,23 @@ func saveUserId(userId:String){
     defaults.set(userId, forKey: "userid")
     defaults.synchronize()
 }
-
 func getUserId() -> String? {
     return defaults.string(forKey: "userid")
 }
-
+func saveHeadPic(headPic:String){
+    defaults.set(headPic, forKey: "headpic")
+    defaults.synchronize()
+}
+func getHeadPic() -> String? {
+    return defaults.string(forKey: "headpic")
+}
+func saveNickName(nickName:String){
+    defaults.set(nickName, forKey: "nickname")
+    defaults.synchronize()
+}
+func getNickName() -> String? {
+    return defaults.string(forKey: "nickname")
+}
 
 func saveFlag(flag:String){
     defaults.set(flag, forKey: "flag")

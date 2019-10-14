@@ -71,13 +71,15 @@ struct User:HandyJSON {
     var notes = ""
     var fans = ""
     var concern = ""
+    var nickName = ""
 }
 struct Comments:HandyJSON {
-    var id = ""
+    var id = 0
     var content = ""
     var user:User?
-    var type = ""
+    var type = 0
     var pics = ""
+    var time = ""
 }
 struct NoteParas:HandyJSON {
     var id = ""

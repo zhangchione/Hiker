@@ -36,7 +36,7 @@ class StoryBannerView: UIView {
     private lazy var userImg = UIImage()
     private lazy var favButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "home_stroy_favwhite"), for: .normal)
+        //button.setImage(UIImage(named: "home_stroy_favwhite"), for: .normal)
         button.addTarget(self, action: #selector(backButtonAction), for: .touchDown)
         return button
     }()

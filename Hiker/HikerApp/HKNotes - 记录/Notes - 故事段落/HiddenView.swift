@@ -40,9 +40,9 @@ class HiddenView: UIView {
         tableview.register(BookCell.self, forCellReuseIdentifier: "bookCell")
         tableview.separatorStyle = .none
         tableview.backgroundColor = .white
-        
         return tableview
     }()
+    
     private lazy var closeBtn = UIButton()
     private lazy var addBookBtn: UIButton = {
        let btn = UIButton()

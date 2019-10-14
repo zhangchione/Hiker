@@ -16,6 +16,11 @@ func getLoginAPI(userID:String,password:String) -> String {
     let api = basicURL + "/login?username=" + userID + "&password=" + password
     return api
 }
+
+func getUserInfoAPI() -> String {
+    return basicURL + "/user?token=" + getToken()!
+}
+
 func getHomeAPI(page:Int) -> String {
     let api = basicURL + "/note/" + "\(page)" + "?token=" + getToken()!
     return api
@@ -64,14 +69,43 @@ func getHiddenBookNameAPI() -> String  {
 func getFavAPI(noteId:Int)  -> String {
     return basicURL + "/note/like?token=" + getToken()! + "&noteId=" + "\(noteId)"
 }
+func getUnFavAPI(noteId:Int)  -> String {
+    return basicURL + "/note/like?token=" + getToken()! + "&noteId=" + "\(noteId)"
+}
 
 func getCollectedAPI(noteId:Int) -> String {
-    return basicURL + "/note/collected?token=" + getToken()! + "&userId=" + getUserId()!
+    return basicURL + "/note/collected?token=" + getToken()!
 }
 
-func getUserInfoAPI() -> String {
-    return basicURL + "/user?token=" + getToken()!
+func getUnCollectedAPI(noteId:Int) -> String {
+        return basicURL + "/note/collected?token=" + getToken()! 
 }
 
+func getCommentAPI() -> String {
+    return basicURL + "/note/comment?token=" + getToken()!
+}
 
+func getAttentionAPI() -> String {
+    return basicURL + "/api/attention/v?token=" + getToken()! + "&id=" + getUserId()!
+}
 
+func getFansAPI() -> String {
+    print(basicURL + "/api/attention?token=" + getToken()! + "&id=" + getUserId()!)
+    return basicURL + "/api/attention?token=" + getToken()! + "&id=" + getUserId()!
+}
+
+/*
+ 
+ Mine token:
+ 
+ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ6aGFuZ2NoaW9uZSIsInBhc3N3b3JkIjoiemMxMjMuLi4iLCJpZCI6IjI2M2U2OGRkLTEwNzgtNGY4Ny05NDI3LTY0YTYzZDU4ZTEyNSIsImlhdCI6MTU3MDY5NzQ1NSwianRpIjoiNDZjNWM5NGEtMmVjOC00ZWMyLWExYzMtNjRmNWQzNDhhM2YzIiwidXNlcm5hbWUiOiJ6aGFuZ2NoaW9uZSJ9.enRAdmbJymGPQVvgsAhMR80UXyLA1CEWwwjmOfBcK6M
+  ID:
+ 263e68dd-1078-4f87-9427-64a63d58e125
+ 
+ 
+ 
+ Jeffery Token
+ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKZWZmZXJ5IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpZCI6IjA5ZGJhODVhLThiODYtNDQ2MC1hMWRkLWI3Njg0M2IxY2M1MyIsImlhdCI6MTU3MTAzNDU4OCwianRpIjoiYzdjYjRmMjQtOTRkMy00NmNkLWIwYjctOTcwZDQ4ZjJmYjIxIiwidXNlcm5hbWUiOiJKZWZmZXJ5In0.KItJWZ0arO0WxxdNo2ZCWVZkDQYbO8OVaMKd2glNxbs
+ ID:
+ 09dba85a-8b86-4460-a1dd-b76843b1cc53
+ **/
