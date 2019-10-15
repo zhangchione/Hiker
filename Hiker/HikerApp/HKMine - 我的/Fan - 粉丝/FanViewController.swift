@@ -9,9 +9,9 @@
 import UIKit
 
 class FanViewController: SubClassBaseViewController {
-    var data = [UserModel]()
+    var data = [User]()
     
-    convenience init(data:[UserModel]) {
+    convenience init(data:[User]) {
         self.init()
         self.data = data
     }

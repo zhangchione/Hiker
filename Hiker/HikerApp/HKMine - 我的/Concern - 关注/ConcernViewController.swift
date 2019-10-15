@@ -10,7 +10,7 @@ import UIKit
 
 class ConcernViewController: UIViewController {
 
-    var data = [UserModel]()
+    var data = [User]()
     
     // 左边返回按钮
     private lazy var leftBarButton: UIButton = {
@@ -31,7 +31,7 @@ class ConcernViewController: UIViewController {
         return tableview
     }()
     
-    convenience init(data:[UserModel]) {
+    convenience init(data:[User]) {
         self.init()
         self.data = data
     }

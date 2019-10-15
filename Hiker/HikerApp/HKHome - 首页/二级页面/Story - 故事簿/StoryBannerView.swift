@@ -40,16 +40,16 @@ class StoryBannerView: UIView {
         button.addTarget(self, action: #selector(backButtonAction), for: .touchDown)
         return button
     }()
-//    private lazy var userButton: UIButton = {
-//        let button = UIButton()
-//        button.setImage(UIImage(named: "椭圆形"), for: .normal)
-//        button.addTarget(self, action: #selector(use), for: .touchDown)
-//        DispatchQueue.main.async {
+    private lazy var userButton: UIButton = {
+        let button = UIButton()
+        //button.setImage(UIImage(named: "椭圆形"), for: .normal)
+        button.addTarget(self, action: #selector(use), for: .touchDown)
+   //     DispatchQueue.main.async {
 //        button.corner(byRoundingCorners: [.bottomLeft,.bottomRight,.topLeft,.topRight], radii: 20)
 //        }
-//        return button
-//    }()
-    private lazy var userButton: UIImageView = {
+        return button
+    }()
+    private lazy var userIcon: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -81,7 +81,7 @@ class StoryBannerView: UIView {
         
         let imgUrl = URL(string: (viewModel.model?.user!.headPic)!)
         
-        self.userButton.kf.setImage(with: imgUrl)
+        self.userIcon.kf.setImage(with: imgUrl)
 
         let pics = viewModel.model?.noteParas![0].pics.components(separatedBy: ",")
         
@@ -92,10 +92,11 @@ class StoryBannerView: UIView {
     
     func configUI(){
         addSubview(backgroundImageView)
-        addSubview(userButton)
+        addSubview(userIcon)
         addSubview(nameLabel)
         addSubview(titleLabel)
         addSubview(favButton)
+        addSubview(userButton)
         backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
@@ -104,6 +105,12 @@ class StoryBannerView: UIView {
             make.left.right.equalToSuperview().inset(20)
             make.height.equalTo(20)
         }
+        userIcon.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(20)
+            make.bottom.equalTo(titleLabel.snp.top).offset(-15)
+            make.height.equalTo(40)
+            make.width.equalTo(40)
+        }
         userButton.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
             make.bottom.equalTo(titleLabel.snp.top).offset(-15)
@@ -111,8 +118,8 @@ class StoryBannerView: UIView {
             make.width.equalTo(40)
         }
         nameLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(userButton.snp.centerY)
-            make.left.equalTo(userButton.snp.right).offset(10)
+            make.centerY.equalTo(userIcon.snp.centerY)
+            make.left.equalTo(userIcon.snp.right).offset(10)
             make.width.equalTo(100)
             make.height.equalTo(30)
         }

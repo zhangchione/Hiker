@@ -50,6 +50,8 @@
 		F559826A234D863500802220 /* Extension_Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5598265234D863400802220 /* Extension_Date.swift */; };
 		F559826B234D863500802220 /* QDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5598266234D863400802220 /* QDatePicker.swift */; };
 		F559826C234D863500802220 /* Extension_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5598267234D863400802220 /* Extension_String.swift */; };
+		F5667C5923554DA3009EDF05 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5823554DA3009EDF05 /* UserHeaderView.swift */; };
+		F5667C5B23554DF4009EDF05 /* HKUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5A23554DF4009EDF05 /* HKUserViewController.swift */; };
 		F57C320A23349F1600B6E7A0 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57C320923349F1600B6E7A0 /* UserDefaults.swift */; };
 		F57C320C2334A90500B6E7A0 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57C320B2334A90500B6E7A0 /* NoteViewController.swift */; };
 		F57C320E2334AD8900B6E7A0 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57C320D2334AD8900B6E7A0 /* TitleViewController.swift */; };
@@ -171,6 +173,8 @@
 		F5598265234D863400802220 /* Extension_Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension_Date.swift; sourceTree = "<group>"; };
 		F5598266234D863400802220 /* QDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDatePicker.swift; sourceTree = "<group>"; };
 		F5598267234D863400802220 /* Extension_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension_String.swift; sourceTree = "<group>"; };
+		F5667C5823554DA3009EDF05 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
+		F5667C5A23554DF4009EDF05 /* HKUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKUserViewController.swift; sourceTree = "<group>"; };
 		F57C320923349F1600B6E7A0 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		F57C320B2334A90500B6E7A0 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		F57C320D2334AD8900B6E7A0 /* TitleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
@@ -484,6 +488,15 @@
 			path = DateUi;
 			sourceTree = "<group>";
 		};
+		F5667C5723554D71009EDF05 /* HKUser - 用户类 */ = {
+			isa = PBXGroup;
+			children = (
+				F5667C5823554DA3009EDF05 /* UserHeaderView.swift */,
+				F5667C5A23554DF4009EDF05 /* HKUserViewController.swift */,
+			);
+			path = "HKUser - 用户类";
+			sourceTree = "<group>";
+		};
 		F58017B52325E0560014E3C3 = {
 			isa = PBXGroup;
 			children = (
@@ -524,6 +537,7 @@
 			children = (
 				F58017DF2325F9F20014E3C3 /* HKBaseViewController.swift */,
 				F5EBB5562338976A006DAAC8 /* PhotoCell.swift */,
+				F5667C5723554D71009EDF05 /* HKUser - 用户类 */,
 				F5EBB5592338AD71006DAAC8 /* HKSer - 搜索 */,
 				F58017D82325E33C0014E3C3 /* HKHome - 首页 */,
 				F58017DA2325E34D0014E3C3 /* HKNotes - 记录 */,
@@ -1046,6 +1060,7 @@
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
 				F57C320E2334AD8900B6E7A0 /* TitleViewController.swift in Sources */,
 				F50155F02327684A00FD201C /* StorySementCell.swift in Sources */,
+				F5667C5B23554DF4009EDF05 /* HKUserViewController.swift in Sources */,
 				F5A72C5823531DC700F0322E /* BookModel.swift in Sources */,
 				F558F65B233A030D0013EBAC /* PageCollectionView.swift in Sources */,
 				F5C27E1F233C89E200B5131F /* API.swift in Sources */,
@@ -1073,6 +1088,7 @@
 				F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */,
 				F5C872542331C8480094DD7A /* TimerButton.swift in Sources */,
 				F5C872522331C4B60094DD7A /* GSCaptchaButton.swift in Sources */,
+				F5667C5923554DA3009EDF05 /* UserHeaderView.swift in Sources */,
 				F558F6312339D9150013EBAC /* NotesController.swift in Sources */,
 				F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */,
 				F5D2C3DA2328D0A200DE60D2 /* CustomTransitionViewController.swift in Sources */,

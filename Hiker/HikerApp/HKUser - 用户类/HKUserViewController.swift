@@ -1,8 +1,8 @@
 //
-//  HKMineViewController.swift
+//  HKUserViewController.swift
 //  Hiker
 //
-//  Created by 张驰 on 2019/9/9.
+//  Created by 张驰 on 2019/10/15.
 //  Copyright © 2019 张驰. All rights reserved.
 //
 
@@ -18,14 +18,22 @@ import ProgressHUD
 
 private let glt_iphoneX = (UIScreen.main.bounds.height >= 812.0)
 
-class HKMineViewController: UIViewController {
+class HKUserViewController: UIViewController {
     
+
+    convenience init(data:User) {
+        self.init()
+        self.userData = data
+        
+        
+    }
     
-    
-    var mineData:UserModel?
+    var userData:User?
     var storyData:[StoryModel]?
     var concernData:[User]?
     var fansData: [User]?
+    
+    var mydata = [String]()
     
     var requestEndFlag = false
     var imgPricker:UIImagePickerController!
@@ -56,7 +64,7 @@ class HKMineViewController: UIViewController {
         print(statusBarH)
         let Y: CGFloat = statusBarH + 88
         let H: CGFloat = glt_iphoneX ? (view.bounds.height - Y ) : view.bounds.height - Y
-        return CGRect(x: 0, y: statusBarH, width: view.bounds.width, height: H)
+        return CGRect(x: 0, y: statusBarH, width: view.bounds.width, height: H+88)
     }
 
     // MARK - 右边功能按钮
@@ -70,40 +78,43 @@ class HKMineViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getMyConcernUser()
         configUI()
         configData()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
-            configMineData()
+           // configuserData()
+        
     }
     
-    func configMineData() {
-        Alamofire.request(getMineAPI()).responseJSON { (response) in
+    func getMyConcernUser() {
+        Alamofire.request(getAttentionAPI(userId: getUserId()!)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }
             if let value = response.result.value {
                 let json = JSON(value)
-                if let obj = JSONDeserializer<MineModel>.deserializeFrom(json: json.debugDescription){
-                    self.mineData = obj.data
-                    self.headerView.concernLabel.text = "\(self.mineData?.concern ?? 0)"
-                    self.headerView.fanLabel.text = "\(self.mineData?.fans ?? 3)"
-                    self.headerView.userSign.text = self.mineData?.sgin
-                    self.headerView.userName.text = self.mineData?.nickName
-                    self.headerView.storyLabel.text = "\(self.mineData?.notes ?? 0)"
-                    let imgUrl = URL(string: self.mineData!.headPic)
-                    self.headerView.userImg.kf.setImage(with: imgUrl)
+                if let obj = JSONDeserializer<ConcernsModel>.deserializeFrom(json: json.debugDescription){
+                    if let datas = obj.data {
+                        for data in datas {
+                            self.mydata.append(data.id)
+                        }
+                    self.requestEndFlag = true
+
+                    }
                 }
             }
         }
+        self.waitingRequestEnd()
+        self.requestEndFlag =  false
+        print("mydata",mydata)
     }
     func configData(){
 
-
-
-        
-        Alamofire.request(getAttentionAPI(userId: getUserId()!)).responseJSON { (response) in
+    
+        Alamofire.request(getAttentionAPI(userId: userData!.id)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }
@@ -121,7 +132,7 @@ class HKMineViewController: UIViewController {
         self.waitingRequestEnd()
         self.requestEndFlag =  false
         
-        Alamofire.request(getFansAPI(userId: getUserId()!)).responseJSON { (response) in
+        Alamofire.request(getFansAPI(userId: userData!.id)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }
@@ -139,7 +150,7 @@ class HKMineViewController: UIViewController {
         self.requestEndFlag =  false
         
         
-        Alamofire.request(getMyBookAPI(userId: getUserId()!)).responseJSON { (response) in
+        Alamofire.request(getMyBookAPI(userId:userData!.id)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }
@@ -212,22 +223,46 @@ class HKMineViewController: UIViewController {
         }
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.alpha = 0
-        self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
+//        self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
         //self.navigation.item.title = "王一一"
         //advancedManager.backgroundColor = .red
 
         self.navigation.bar.backgroundColor = .white
         self.view.backgroundColor = .white
+        
+        self.headerView.concernLabel.text = "\(self.userData?.concern ?? 0)"
+        self.headerView.fanLabel.text = "\(self.userData?.fans ?? 3)"
+        self.headerView.userSign.text = self.userData?.sgin
+        self.headerView.userName.text = self.userData?.nickName
+        self.headerView.storyLabel.text = "\(self.userData?.notes ?? 0)"
+        let imgUrl = URL(string: self.userData!.headPic)
+        self.headerView.userImg.kf.setImage(with: imgUrl)
+        
+        if userData?.id == getUserId()! {
+            self.headerView.alterBtn.isHidden = true
+        }else {
+            if mydata.contains(userData!.id) {
+                self.headerView.alterBtn.backgroundColor = UIColor.init(r: 146, g: 146, b: 146)
+                self.headerView.alterBtn.addTarget(self, action: #selector(unAttention), for: .touchUpInside)
+                self.headerView.alterBtn.setTitle("已经关注", for: .normal)
+                print("包含这个分数")
+            }else {
+                headerView.alterBtn.addTarget(self, action: #selector(attention), for: .touchUpInside)
+                print("不包含这个分数")
+                self.headerView.alterBtn.setTitle("关注", for: .normal)
+            }
+        }
+        
         advancedManagerConfig()
     
     }
 
-    lazy var headerView:MineHeaderView = {
-        let headerView = MineHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: AdaptH(320)))
+    lazy var headerView:UserHeaderView = {
+        let headerView = UserHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: AdaptH(320)))
         let alterBackImgTap = UITapGestureRecognizer(target: self, action: #selector(alterBackImg))
         //headerView.backgroundImageView
         headerView.backgroundImageView.addGestureRecognizer(alterBackImgTap)
-        headerView.alterBtn.addTarget(self, action: #selector(alterUserSign), for: .touchUpInside)
+
         headerView.storyBtn.addTarget(self, action: #selector(story), for: .touchUpInside)
         headerView.fanBtn.addTarget(self, action: #selector(fan), for: .touchUpInside)
         headerView.concernBtn.addTarget(self, action: #selector(concern), for: .touchUpInside)
@@ -239,7 +274,7 @@ class HKMineViewController: UIViewController {
 
 
 }
-extension HKMineViewController: LTAdvancedScrollViewDelegate {
+extension HKUserViewController: LTAdvancedScrollViewDelegate {
     
     //MARK: 具体使用请参考以下
     private func advancedManagerConfig() {
@@ -255,7 +290,7 @@ extension HKMineViewController: LTAdvancedScrollViewDelegate {
     func glt_scrollViewOffsetY(_ offsetY: CGFloat) {
         if offsetY >= 260 {
             self.navigation.bar.alpha = 1
-            self.navigation.item.title = mineData?.username
+            self.navigation.item.title = userData?.username
             self.rightBarButton.setImage(UIImage(named: "mine_icon_setblack"), for: .normal)
         }
         else {
@@ -267,7 +302,7 @@ extension HKMineViewController: LTAdvancedScrollViewDelegate {
 }
 
 // - MARK: 事件
-extension HKMineViewController {
+extension HKUserViewController {
     @objc func alterBackImg() {
         print("改背景")
         
@@ -301,11 +336,16 @@ extension HKMineViewController {
         self.present(action,animated: true,completion: nil)
 
     }
-
-    @objc func alterUserSign() {
-        UIApplication.shared.keyWindow?.addSubview(self.alterSginView)
-        self.alterSginView.showAddView()
-        print("改签名")
+    @objc func unAttention() {
+        unAttentionNet(userId: userData!.id)
+        self.headerView.alterBtn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
+        self.headerView.alterBtn.setTitle("关注", for: .normal)
+    }
+    
+    @objc func attention() {
+        attentionNet(userId: userData!.id)
+        self.headerView.alterBtn.backgroundColor = UIColor.init(r: 146, g: 146, b: 146)
+            self.headerView.alterBtn.setTitle("已经关注", for: .normal)
     }
     @objc func story() {
         
@@ -336,16 +376,13 @@ extension HKMineViewController {
     
     @objc func set() {
         print("右边按钮")
-        let setVC = SetViewController()
-        setVC.userData = mineData
-        self.navigationController?.pushViewController(setVC, animated: true)
     }
     
     @objc func addStory(){
         print("添加故事簿")
     }
 }
-extension HKMineViewController :UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+extension HKUserViewController :UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         print("图片选取成功")
@@ -366,11 +403,11 @@ extension HKMineViewController :UIImagePickerControllerDelegate,UINavigationCont
     
 }
 
-extension HKMineViewController:AlterSginDelegate {
+extension HKUserViewController:AlterSginDelegate {
     func passBookName(with bookName: String) {
         self.headerView.userSign.text = bookName
         
-        alterSginNet(username: mineData!.username, password: mineData!.password, sgin: bookName)
+        alterSginNet(username: userData!.username, password: userData!.password, sgin: bookName)
     }
     
     func alterSginNet(username:String,password:String,sgin:String) {
@@ -385,4 +422,34 @@ extension HKMineViewController:AlterSginDelegate {
             }
         }
     }
+}
+
+extension HKUserViewController {
+    func attentionNet(userId:String) {
+        let dic = ["vId":userId]
+        
+        Alamofire.request(getToAttentionAPI(), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                print("关注成功")
+            }
+        }
+    }
+    func unAttentionNet(userId:String) {
+        let dic = ["vId":userId]
+        
+        Alamofire.request(getUnAttentionAPI(), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                print("取消关注成功")
+            }
+        }
+    }
+    
 }

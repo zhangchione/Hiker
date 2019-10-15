@@ -11,12 +11,12 @@ import HandyJSON
 
 struct ConcernsModel:HandyJSON {
     var code:String?
-    var data: [UserModel]?
+    var data: [User]?
     var msg:String?
 }
 struct FansModel:HandyJSON {
     var code:String?
-    var data: [UserModel]?
+    var data: [User]?
     var msg:String?
 }
 
@@ -36,7 +36,7 @@ struct UserModel:HandyJSON {
     var fans = 0
     var concern = 0
     var nickName = ""
-    
+    var bgPic = ""
 }
 //struct Fan:HandyJSON {
 //    var isconcern = false

@@ -68,11 +68,13 @@ struct User:HandyJSON {
     var password = ""
     var headPic = ""
     var sgin = ""
-    var notes = ""
-    var fans = ""
-    var concern = ""
+    var notes = 0
+    var fans = 0
+    var concern = 0
     var nickName = ""
+    var bgPic = ""
 }
+
 struct Comments:HandyJSON {
     var id = 0
     var content = ""

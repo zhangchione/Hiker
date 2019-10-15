@@ -53,8 +53,8 @@ func getSearchAPI(word:String) -> String {
 }
 
 
-func getMyBookAPI() -> String {
-    return basicURL + "/note/my/group?token=" + getToken()!
+func getMyBookAPI(userId:String) -> String {
+    return basicURL + "/note/my/group?token=" + getToken()! + "&userId=" + userId
 }
 
 func getNewBookAPI() -> String {
@@ -85,27 +85,50 @@ func getCommentAPI() -> String {
     return basicURL + "/note/comment?token=" + getToken()!
 }
 
-func getAttentionAPI() -> String {
-    return basicURL + "/api/attention/v?token=" + getToken()! + "&id=" + getUserId()!
+func getAttentionAPI(userId:String) -> String {
+    return basicURL + "/api/attention/v?token=" + getToken()! + "&id=" + userId
 }
 
-func getFansAPI() -> String {
-    print(basicURL + "/api/attention?token=" + getToken()! + "&id=" + getUserId()!)
-    return basicURL + "/api/attention?token=" + getToken()! + "&id=" + getUserId()!
+func getFansAPI(userId:String) -> String {
+    
+    return basicURL + "/api/attention?token=" + getToken()! + "&id=" + userId
 }
 
+func getToAttentionAPI() -> String{
+    return basicURL + "/api/attention?token=" + getToken()!
+}
+func getUnAttentionAPI() -> String{
+    return basicURL + "/api/attention?token=" + getToken()!
+}
+
+
+func getAlterUserInfoAPI() -> String {
+    let api = basicURL + "/user?token=" + getToken()!
+    return api
+}
+
+
+func getUserNotesAPI(userId:String) -> String {
+    return basicURL + "/note/other?token=" + getToken()! + "&userId=" + userId
+}
 /*
  
  Mine token:
  
- eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ6aGFuZ2NoaW9uZSIsInBhc3N3b3JkIjoiemMxMjMuLi4iLCJpZCI6IjI2M2U2OGRkLTEwNzgtNGY4Ny05NDI3LTY0YTYzZDU4ZTEyNSIsImlhdCI6MTU3MDY5NzQ1NSwianRpIjoiNDZjNWM5NGEtMmVjOC00ZWMyLWExYzMtNjRmNWQzNDhhM2YzIiwidXNlcm5hbWUiOiJ6aGFuZ2NoaW9uZSJ9.enRAdmbJymGPQVvgsAhMR80UXyLA1CEWwwjmOfBcK6M
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ6aGFuZ2NoaW9uZSIsInBhc3N3b3JkIjoiemMxMjMuLi4iLCJpZCI6IjI2M2U2OGRkLTEwNzgtNGY4Ny05NDI3LTY0YTYzZDU4ZTEyNSIsImlhdCI6MTU3MDY5NzQ1NSwianRpIjoiNDZjNWM5NGEtMmVjOC00ZWMyLWExYzMtNjRmNWQzNDhhM2YzIiwidXNlcm5hbWUiOiJ6aGFuZ2NoaW9uZSJ9.enRAdmbJymGPQVvgsAhMR80UXyLA1CEWwwjmOfBcK6M
   ID:
- 263e68dd-1078-4f87-9427-64a63d58e125
+263e68dd-1078-4f87-9427-64a63d58e125
  
  
  
  Jeffery Token
- eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKZWZmZXJ5IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpZCI6IjA5ZGJhODVhLThiODYtNDQ2MC1hMWRkLWI3Njg0M2IxY2M1MyIsImlhdCI6MTU3MTAzNDU4OCwianRpIjoiYzdjYjRmMjQtOTRkMy00NmNkLWIwYjctOTcwZDQ4ZjJmYjIxIiwidXNlcm5hbWUiOiJKZWZmZXJ5In0.KItJWZ0arO0WxxdNo2ZCWVZkDQYbO8OVaMKd2glNxbs
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKZWZmZXJ5IiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpZCI6IjA5ZGJhODVhLThiODYtNDQ2MC1hMWRkLWI3Njg0M2IxY2M1MyIsImlhdCI6MTU3MTAzNDU4OCwianRpIjoiYzdjYjRmMjQtOTRkMy00NmNkLWIwYjctOTcwZDQ4ZjJmYjIxIiwidXNlcm5hbWUiOiJKZWZmZXJ5In0.KItJWZ0arO0WxxdNo2ZCWVZkDQYbO8OVaMKd2glNxbs
  ID:
- 09dba85a-8b86-4460-a1dd-b76843b1cc53
+09dba85a-8b86-4460-a1dd-b76843b1cc53
+ 
+ zc123
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ6YzEyMyIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWQiOiIyMDg4M2JhMC0yZDQ3LTRiZTAtYWZlMS04MmVkOWVhNjI2ZmQiLCJpYXQiOjE1NzExMDA3NzksImp0aSI6IjI4MDg3MWE4LWUxNDgtNGIzOC1iOWIxLTJkNDc5ZTU3ZTMzMCIsInVzZXJuYW1lIjoiemMxMjMifQ._3yg-A3ZmpJF_QuUZrB4fX88yP5lrkrrKULmMyjli0I
+ 
+ ID:
+20883ba0-2d47-4be0-afe1-82ed9ea626fd
  **/

@@ -102,7 +102,7 @@ class HKHomeViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: "bookid")
         UserDefaults.standard.removeObject(forKey: "booknum")
   
-        Alamofire.request(getMyBookAPI()).responseJSON { (response) in
+        Alamofire.request(getMyBookAPI(userId: getUserId()!)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }

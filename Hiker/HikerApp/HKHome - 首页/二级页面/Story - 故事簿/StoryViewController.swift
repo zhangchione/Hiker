@@ -29,6 +29,8 @@ class StoryViewController: StoryBaseViewController {
         self.notesData = model
         storyBannerViewModel.userCallBack = { [unowned self] in
             print("点击用户")
+            let userVC = HKUserViewController(data: model.user!)
+            self.navigationController?.pushViewController(userVC, animated: true)
         }
         storyBannerViewModel.backCallBack = { [unowned self] in
             print("收藏")

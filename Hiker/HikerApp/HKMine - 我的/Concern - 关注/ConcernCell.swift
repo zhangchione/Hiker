@@ -84,7 +84,7 @@ class ConcernCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func updateUI(with data:UserModel) {
+    func updateUI(with data:User) {
         self.backgroundColor = backColor
         let imgUrl = URL(string: data.headPic)
         self.userIcon.kf.setImage(with: imgUrl)
