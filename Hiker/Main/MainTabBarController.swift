@@ -29,6 +29,7 @@ func logOutApp(){
 }
 
 func mainTabBar() -> UITabBarController {
+    var app = AppContext()
     let homeVC = HKHomeViewController()
     let noteVC = UIViewController()
     let mineVC = HKMineViewController()
@@ -96,8 +97,21 @@ func mainTabBar() -> UITabBarController {
         }
     }
     tabBarController.viewControllers = [homeNav,noteNav,mineNav]
+    if TKHeight >= 812 {
     tabBarController.viewControllers?.first?.tabBarItem.imageInsets =  UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
     tabBarController.viewControllers?.last?.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
+    }else {
+        noteNav.tabBarItem.imageInsets = UIEdgeInsets(top: -5, left: 0, bottom: 5, right: 0)
+    }
     
     return tabBarController
+}
+
+class AppContext {
+    lazy var photoDataManager = PhotoDataManager()
+    //    var photoDataManager: PhotoDataManager
+    //    init() {
+    //        photoDataManager = PhotoDataManager()
+    ////        photoDataManager = PhotoDataManager(recognize)
+    //    }
 }

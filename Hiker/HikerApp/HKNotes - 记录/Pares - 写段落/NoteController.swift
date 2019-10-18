@@ -10,15 +10,48 @@ import UIKit
 import ProgressHUD
 import Alamofire
 import SwiftyJSON
+import NVActivityIndicatorView
+import SwiftDate
 
 
-class NoteController: UIViewController {
+class NoteController: UIViewController,NVActivityIndicatorViewable        ,DataToEasyDelegate {
+    let keyMap = ["building":["塔","高楼","小洋房","别墅","学校"],
+                  "food":["美食","食品","小吃","面","汤包"],
+                  "landscape":["美景","山","水","湖","湖泊","江","白云"],
+                  "animal":["猫","狗","猴子"],
+                  "night_scene":["夜","深夜","傍晚","黄昏"],
+                  "face":["人"]
+                ]
+    
+    func recognize(current: Int, max: Int) {
+            DispatchQueue.main.async {
+                       self.tipLabel.text = "第一次配图需要给系统照片分类，正在分类图片\(current)/\(max)，如果数字卡死，请重启App"
+       
+        }
+    }
+    var photoDataManager: PhotoDataManager
+
+
+    init(_ photoDataManager: PhotoDataManager) {
+    self.photoDataManager = photoDataManager
+    super.init(nibName: nil, bundle: nil)
+    self.photoDataManager.dataToEasyDelegate = self
+    }
+
+    required  init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+    }
     /// 照片选择
     var imgPricker:UIImagePickerController!
     var imgs: String = ""
     var time: String = ""
     var location: String = ""
     var images = [String]()
+    
+    var nowdate: Date?
+    var startDate: Date?
+    var endDate: Date?
+    
     // 数据
     var datas = NotesModel()
     
@@ -45,7 +78,7 @@ class NoteController: UIViewController {
         tv.backgroundColor = UIColor.clear
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.textColor = UIColor.init(r: 204, g: 204, b: 204  )
-        tv.text = "以段落的形式分享您旅途中印象深刻的故事、有趣的体验，行迹将帮助您从系统相册中匹配图片发表游记。"
+        tv.text = "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~"
         tv.delegate = self
         return tv
     }()
@@ -76,6 +109,14 @@ class NoteController: UIViewController {
         return btn
     }()
     
+    lazy var tipLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.text = "非常抱歉，由于智能配图功能将在10月24日上线，目前图片只支持单选。"
+        label.numberOfLines = 0
+        return label
+    }()
+    
     lazy var nextBtn:UIButton = {
         let btn = UIButton()
         
@@ -86,7 +127,21 @@ class NoteController: UIViewController {
         btn.addTarget(self, action: #selector(nextNote), for: .touchUpInside)
         return btn
     }()
-    
+    private lazy var loginView : LocationView = {
+        let loginView = LocationView(frame: CGRect(x: 0, y: 0, width: TKWidth, height: TKHeight))
+            var bookData = [BookModel]()
+            var bookmodel = BookModel()
+            let albums = DataSingle.shared.locationAlbums.map { $0.value }
+            for album in albums {
+            print(album.name)
+                bookmodel.name = album.name
+                bookmodel.num = album.photos.count
+                bookData.append(bookmodel)
+            }
+                loginView.data = bookData
+        loginView.delegate = self
+        return loginView
+    }()
 //    lazy var photoView:UIView = {
 //       let vi = UIView()
 //        return vi
@@ -147,6 +202,8 @@ extension NoteController {
         view.addSubview(writeTextView)
         view.addSubview(locationBtn)
         view.addSubview(timeBtn)
+        view.addSubview(tipLabel)
+        
         view.addSubview(nextBtn)
         //view.addSubview(photoView)
         
@@ -164,6 +221,12 @@ extension NoteController {
             make.left.equalTo(view).offset(20)
             make.height.equalTo(30)
             make.width.equalTo(120)
+        }
+        tipLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(locationBtn.snp.bottom).offset(5)
+            make.left.equalTo(view).offset(20)
+            make.height.equalTo(40)
+            make.width.equalTo(TKWidth-40)
         }
         timeBtn.snp.makeConstraints { (make) in
             make.top.equalTo(writeTextView.snp.bottom).offset(5)
@@ -216,24 +279,28 @@ extension NoteController {
     }
     @objc func addLocation(){
         
-        let alert = UIAlertController.init(title: "消息", message: "请添加地点信息", preferredStyle: .alert)
+        UIApplication.shared.keyWindow?.addSubview(self.loginView)
         
-        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
-            self.location =  (alert.textFields?.first?.text!)!
-                    self.locationBtn.setTitle( (alert.textFields?.first?.text!)!, for: .normal)
-            ProgressHUD.showSuccess("地点添加成功")
-        }
-        let noAction = UIAlertAction.init(title: "取消", style: .destructive) { (no) in
-            print("地点信息取消",no.style)
-        }
-        alert.addAction(yesAction)
-        alert.addAction(noAction)
-        alert.addTextField { (text) in
-            print(text.text,11)
-            
-        }
-
-        self.present(alert, animated: true, completion: nil)
+        self.loginView.showAddView()
+        
+//        let alert = UIAlertController.init(title: "消息", message: "请添加地点信息", preferredStyle: .alert)
+//
+//        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
+//            self.location =  (alert.textFields?.first?.text!)!
+//                    self.locationBtn.setTitle( (alert.textFields?.first?.text!)!, for: .normal)
+//            ProgressHUD.showSuccess("地点添加成功")
+//        }
+//        let noAction = UIAlertAction.init(title: "取消", style: .destructive) { (no) in
+//            print("地点信息取消",no.style)
+//        }
+//        alert.addAction(yesAction)
+//        alert.addAction(noAction)
+//        alert.addTextField { (text) in
+//            print(text.text,11)
+//
+//        }
+//
+//        self.present(alert, animated: true, completion: nil)
 
 
     }
@@ -241,6 +308,9 @@ extension NoteController {
         let picker = QDatePicker { (date: Date) in
             self.timeBtn.setTitle("\(date.formatterDate(formatter: "yyyy-MM-dd"))", for: .normal)
             self.time = date.formatterDate(formatter: "yyyy-MM-dd")
+            self.nowdate = date
+            self.startDate = date - 10.days
+            self.endDate = date + 10.days
         }
         picker.datePickerStyle = .YMD
         picker.themeColor = UIColor.init(r: 55, g: 194, b: 207)
@@ -250,69 +320,91 @@ extension NoteController {
         
     }
     @objc func save(){
-        var contents = [String]()
-        let locaCon = getContent()
-        if  locaCon == nil {
-            contents.append(writeTextView.text!)
-        }else {
-            contents = locaCon!
-            contents.append(writeTextView.text!)
-        }
-        saveContent(content: contents)
+        let tvtext = writeTextView.text!
+
+
         
-        var locations = [String]()
-        let locLoc = getLocation()
-        if locLoc == nil {
-            locations.append(self.location)
-        }else {
-            locations = locLoc!
-            locations.append(self.location)
-        }
-        saveLocation(location: locations)
-        
-        var times = [String]()
-        let locTime = getTime()
-        if locTime == nil {
-            times.append(self.time)
-        }else {
-            times = locTime!
-            times.append(self.time)
-        }
-        saveTime(content: times)
-        
-        var imgs = [String]()
-        let locImg = getPic()
-        let imagess = self.images.joined(separator: ",")
-        if locImg == nil {
-            imgs.append(imagess)
-        }else {
-            imgs = locImg!
-            imgs.append(imagess)
-        }
-        
-        savePic(content: imgs)
-        
-        let c1 = getContent()
-        let c2 = getLocation()
-        let c3 = getTime()
-        let c4 = getPic()
-        
-        if c1 == nil {
-            ProgressHUD.showError("暂无段落")
-        }else {
-            var paras = [NoteParas]()
-            var para = NoteParas()
-            for index in 0 ..< c1!.count {
-                para.content = c1![index]
-                para.date = c3![index]
-                para.pics = c4![index]
-                para.place = c2![index]
-                paras.append(para)
+        if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
+            ProgressHUD.showError("请写入内容")
+        }else{
+            if location == ""{
+                    ProgressHUD.showError("请添加地点")
+            }else {
+                if time == ""{
+                    ProgressHUD.showError("请添加时间")
+                }else {
+                    if images.count == 0 {
+                        ProgressHUD.showError("请至少添加一张图片")
+                    }else {
+                        var contents = [String]()
+                        let locaCon = getContent()
+                        if  locaCon == nil {
+                            contents.append(writeTextView.text!)
+                        }else {
+                            contents = locaCon!
+                            contents.append(writeTextView.text!)
+                        }
+                        saveContent(content: contents)
+                        
+                        var locations = [String]()
+                        let locLoc = getLocation()
+                        if locLoc == nil {
+                            locations.append(self.location)
+                        }else {
+                            locations = locLoc!
+                            locations.append(self.location)
+                        }
+                        saveLocation(location: locations)
+                        
+                        var times = [String]()
+                        let locTime = getTime()
+                        if locTime == nil {
+                            times.append(self.time)
+                        }else {
+                            times = locTime!
+                            times.append(self.time)
+                        }
+                        saveTime(content: times)
+                        
+                        var imgs = [String]()
+                        let locImg = getPic()
+                        let imagess = self.images.joined(separator: ",")
+                        if locImg == nil {
+                            imgs.append(imagess)
+                        }else {
+                            imgs = locImg!
+                            imgs.append(imagess)
+                        }
+                        
+                        savePic(content: imgs)
+                        
+                        let c1 = getContent()
+                        let c2 = getLocation()
+                        let c3 = getTime()
+                        let c4 = getPic()
+                        
+
+                            
+                             var paras = [NoteParas]()
+                             var para = NoteParas()
+                             for index in 0 ..< c1!.count {
+                                 para.content = c1![index]
+                                 para.date = c3![index]
+                                 para.pics = c4![index]
+                                 para.place = c2![index]
+                                 paras.append(para)
+                             }
+                             datas.noteParas = paras
+                             let noteVC = NotesController(data: datas)
+                             self.navigationController?.pushViewController(noteVC, animated: true)
+                         
+                    }
+                }
             }
-            datas.noteParas = paras
-            let noteVC = NotesController(data: datas)
-            self.navigationController?.pushViewController(noteVC, animated: true)
         }
+        
+        
+ 
         
     
     }
@@ -326,18 +418,91 @@ extension NoteController {
         
     }
     @objc func addPhoto(){
-        print("本地相册打开")
-        self.imgPricker = UIImagePickerController()
-        self.imgPricker.delegate = self
-        self.imgPricker.allowsEditing = true
-        self.imgPricker.sourceType = .photoLibrary
+        ProgressHUD.show("配图中")
         
-        self.imgPricker.navigationBar.barTintColor = UIColor.gray
-        self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        let tvtext = writeTextView.text!
+
+        if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
+            ProgressHUD.showError("请写入内容")
+        }else{
+            if location == ""{
+                    ProgressHUD.showError("添加地点可以提高匹配精度哦")
+            }else {
+                if time == ""{
+                    ProgressHUD.showError("添加时间可以提高匹配精度哦")
+                }else {
+                    
+                    var total = ["building":0,"food":0,"landscape":0,"animal":0,"night_scene":0,"face":0]
+                    
+                     for str in tvtext {
+                        for (key,value) in self.keyMap {
+                            if (self.keyMap[key]?.contains(String(str)))! {
+                                total[key]! += 1
+                            }else {
+                                
+                            }
+                        }
+                     }
+                    let lasted = total.sorted {(s1,s2) -> Bool in
+                        return s1.1 > s2.1
+                    }
+                    var wordArray = [String]()
+                    print(total,lasted[0].value)
+                    for lst in lasted {
+                        if lst.value == 0 {
+                            break;
+                        }
+                        wordArray.append(lst.key)
+                    }
+                    
+                    print(wordArray)
+                    var datas = [Photo]()
+                    for word in wordArray {
+                        var classify = [String]()
+                        classify.append(word)
+                        var locationChoice = [String]()
+                        locationChoice.append(self.location)
+                        let newAlbum = NewAlbum.init(name: "智能配图", classifyChoice: classify, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
+                        if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlbum) {
+                            // 这里处理获取的图片
+                            datas.append(photo[0])
+                        }
+                        
+                    }
+                    var imgsData = [UIImage]()
+                    // 配图失败处理
+                    if datas.count == 0 {
+                            ProgressHUD.showError("配图失败")
+                        
+                    }else {
+                        for data in datas {
+                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
+                        }
+                        ProgressHUD.showSuccess("配图完成")
+                        self.photoCell.updateUILocal(imgsData.count, with: imgsData)
+                    }
+                    
+                }
+            }
         
-        self.imgPricker.navigationBar.tintColor = UIColor.white
+        }
         
-        self.present(self.imgPricker, animated: true, completion: nil)
+        
+        
+
+
+
+//        self.imgPricker = UIImagePickerController()
+//        self.imgPricker.delegate = self
+//        self.imgPricker.allowsEditing = true
+//        self.imgPricker.sourceType = .photoLibrary
+//
+//        self.imgPricker.navigationBar.barTintColor = UIColor.gray
+//        self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+//
+//        self.imgPricker.navigationBar.tintColor = UIColor.white
+//
+//        self.present(self.imgPricker, animated: true, completion: nil)
     }
 }
 
@@ -345,7 +510,7 @@ extension NoteController {
 
 extension NoteController: UITextViewDelegate {
     func textViewShouldBeginEditing(_ content: UITextView) -> Bool {
-        if (content.text == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验，行迹将帮助您从系统相册中匹配图片发表游记。") {
+        if (content.text == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~") {
             content.text = ""
             content.textColor = UIColor.black
         }else {
@@ -359,7 +524,7 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         print("图片选取成功")
-        let img = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        let img = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
         //转成jpg格式图片
         let jpegData = UIImage.jpegData(img)(compressionQuality: 1)
         
@@ -378,32 +543,13 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
 
         
         
-//        Alamofire.upload(multipartFormData: { (multipartFormData) in
-//            multipartFormData.append(imageData!, withName: "file", fileName: "2.jpg",mimeType: "image/jpeg")
-//            print("111图片准备上传")
-//        }, to: getImageAPI()) { (encodingResult) in
-//            switch encodingResult {
-//            case .success(let upload,_,_):
-//                upload.responseString{ response in
-//                    if let data = response.data {
-//                        let json = JSON(data)
-//                        print(json)
-//                    }
-//                //获取上传进度
-//                    upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
-//                        print("图片上传进度: \(progress.fractionCompleted)")
-//                    }
-//                }
-//            case .failure(_):
-//                print("上传失败")
-//            }
-//        }
-        
         
         self.imgs = imgUrl
-        
-        self.images.append(imgUrl)
-        
+        if images.count < 3 {
+            self.images.append(imgUrl)
+        }else {
+            ProgressHUD.showError("最多只能选择三张图片")
+        }
         self.photoCell.snp.makeConstraints { (make) in
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
@@ -419,6 +565,15 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+}
+
+extension NoteController: LocationDelegate {
+    func passBookData(with name: String, id: Int) {
+        self.location = name
+        self.locationBtn.setTitle( name, for: .normal)
+    }
+    
     
 }
 ////选择成功后代理
@@ -478,3 +633,50 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
 //        }
 //    })
 //}
+        
+//        //开始选择照片，最多允许选择4张
+//        _ = self.presentHGImagePicker(maxSelected:4) { (assets) in
+//            //结果处理
+//            self.photoCell.removeFromSuperview()
+//                let size = CGSize(width: 30, height: 30)
+//            self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
+//            print("共选择了\(assets.count)张图片，分别如下：")
+//            var seleImgs = [UIImage]()
+//            var imgsData = [Data]()
+//            var datas = [[Data]]()
+//            for asset in assets {
+//                let img = SKPHAssetToImageTool.PHAssetToImage(asset: asset)
+//                print("img:",img)
+//                seleImgs.append(img)
+//                let img2 = UIImage(cgImage: img.cgImage!, scale: img.scale,orientation: img.imageOrientation)
+//                let data = NSKeyedArchiver.archivedData(withRootObject: img2)
+//                imgsData.append(data)
+//            }
+//            self.view.addSubview(self.photoCell)
+//            self.photoCell.snp.makeConstraints { (make) in
+//                make.left.equalTo(self.view).offset(20)
+//                make.right.equalTo(self.view).offset(-20)
+//                make.bottom.equalTo(self.addPhotoBtn.snp.top)
+//                make.height.equalTo(200)
+//            }
+//            self.photoCell.isLocalImage = true
+//            self.photoCell.imgsUIImage = seleImgs
+//            datas.append(imgsData)
+//            saveImgs(datas: datas)
+//            self.stopAnimating(nil)
+//            let getdatas = getImgs()
+//            for gdatas in getdatas {
+//                for data in gdatas {
+//                    let myImage = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIImage
+//                    print("imgdata",myImage)
+//                }
+//            }
+//
+////            self.photoCell.snp.makeConstraints { (make) in
+////                make.left.equalTo(view).offset(20)
+////                make.right.equalTo(view).offset(-20)
+////                make.bottom.equalTo(addPhotoBtn.snp.top)
+////                make.height.equalTo(200)
+////            }
+//
+//        }

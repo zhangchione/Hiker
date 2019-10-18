@@ -18,6 +18,7 @@ target 'Hiker' do
   
   pod 'Kingfisher'
   
+    pod 'SwiftDate'
   # 数据流
   pod 'SQLite.swift'
   pod 'RxSwift',    '~> 4.0'

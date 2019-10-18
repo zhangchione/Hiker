@@ -186,9 +186,9 @@ extension SearchContentViewController {
           cell.time.text = data.noteParas![0].date
           cell.favLabel.text = "\(data.likes)"
           if data.like {
-              cell.favIcon.setImage(UIImage(named: "home_story_fav"), for: .normal)
+              cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
           }else {
-              cell.favIcon.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+              cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
           }
           cell.favIcon.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
           if data.collected {
@@ -210,17 +210,15 @@ extension SearchContentViewController {
         
         if data[(indexPath?.row)!].collected {
             cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
-            cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
             data[(indexPath?.row)!].collected = false
+            unCollecteNet(noteId: data[(indexPath?.row)!].id)
         }else {
             cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
-            cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
             data[(indexPath?.row)!].collected = true
+            collecteNet(noteId: data[(indexPath?.row)!].id)
+            
         }
-        
-        //sum = sum + (label.text! as NSString).integerValue
-        // self.title = "总数：\(sum)"
-        
+
     }
     
     @objc func fav(_ sender:UIButton){
@@ -230,13 +228,13 @@ extension SearchContentViewController {
         let indexPath = collectionView.indexPath(for: cell)
         
         if data[(indexPath?.row)!].like {
-            cell.favIcon.setImage(UIImage(named: "home_stroy_unlove"), for: .normal)
+            cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
-            data[(indexPath?.row)!].collected = false
+            data[(indexPath?.row)!].like = false
         }else {
-            cell.favIcon.setImage(UIImage(named: "home_stroy_love"), for: .normal)
+            cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
-            data[(indexPath?.row)!].collected = true
+            data[(indexPath?.row)!].like = true
             favNet(noteId: data[(indexPath?.row)!].id)
         }
         
@@ -253,5 +251,34 @@ extension SearchContentViewController {
                     print(json)
             }
         }
+    }
+    
+    func collecteNet(noteId:Int) {
+        
+        
+        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
+        
+        Alamofire.request(getCollectedAPI(noteId: noteId), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("发布游记网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                print(json)
+            }
+        }
+    }
+    
+    func unCollecteNet(noteId:Int) {
+        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
+        Alamofire.request(getUnCollectedAPI(noteId: noteId), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("发布游记网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+            }
+        }
+    
     }
 }

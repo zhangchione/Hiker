@@ -75,6 +75,16 @@ class HKUserViewController: UIViewController {
         button.setImage(UIImage(named: "mine_icon_set"), for: .normal)
         return button
     }()
+    
+    // 左边返回按钮
+    lazy var leftBarButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x:10, y:0, width:30, height: 30)
+        button.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
+        button.addTarget(self, action: #selector(back), for: .touchUpInside)
+        return button
+    }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +92,9 @@ class HKUserViewController: UIViewController {
         configUI()
         configData()
 
+    }
+    @objc func back(){
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -224,6 +237,7 @@ class HKUserViewController: UIViewController {
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.alpha = 0
 //        self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
+        self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)
         //self.navigation.item.title = "王一一"
         //advancedManager.backgroundColor = .red
 
@@ -288,15 +302,17 @@ extension HKUserViewController: LTAdvancedScrollViewDelegate {
     }
     
     func glt_scrollViewOffsetY(_ offsetY: CGFloat) {
-        if offsetY >= 260 {
+        print(offsetY)
+        if offsetY >= 140 {
             self.navigation.bar.alpha = 1
             self.navigation.item.title = userData?.username
-            self.rightBarButton.setImage(UIImage(named: "mine_icon_setblack"), for: .normal)
+            self.leftBarButton.setImage(UIImage(named: "home_icon_back"), for: .normal)
+            
         }
         else {
             self.navigation.bar.alpha = 0
             self.navigation.item.title = ""
-            self.rightBarButton.setImage(UIImage(named: "mine_icon_set"), for: .normal)
+            self.leftBarButton.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
         }
     }
 }
@@ -340,12 +356,14 @@ extension HKUserViewController {
         unAttentionNet(userId: userData!.id)
         self.headerView.alterBtn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
         self.headerView.alterBtn.setTitle("关注", for: .normal)
+        self.headerView.alterBtn.addTarget(self, action: #selector(attention), for: .touchUpInside)
     }
     
     @objc func attention() {
         attentionNet(userId: userData!.id)
         self.headerView.alterBtn.backgroundColor = UIColor.init(r: 146, g: 146, b: 146)
-            self.headerView.alterBtn.setTitle("已经关注", for: .normal)
+        self.headerView.alterBtn.setTitle("已经关注", for: .normal)
+        self.headerView.alterBtn.addTarget(self, action: #selector(unAttention), for: .touchUpInside)
     }
     @objc func story() {
         

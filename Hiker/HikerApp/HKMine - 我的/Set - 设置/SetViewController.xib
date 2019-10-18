@@ -252,6 +252,9 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <gestureRecognizers/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="yeN-bG-SyC" appends="YES" id="NEz-Ex-RH5"/>
+                                    </connections>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Olw-i6-mHA">
                                     <rect key="frame" x="12" y="78" width="351" height="67"/>
@@ -374,9 +377,14 @@
                 <action selector="about:" destination="-1" id="hXx-se-tqY"/>
             </connections>
         </tapGestureRecognizer>
+        <tapGestureRecognizer id="yeN-bG-SyC">
+            <connections>
+                <action selector="cutUser:" destination="-1" id="nwf-qf-zA0"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="mine_set_head" width="14" height="14"/>
-        <image name="椭圆形" width="32" height="32"/>
+        <image name="椭圆形" width="40" height="40"/>
     </resources>
 </document>

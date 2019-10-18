@@ -23,7 +23,7 @@ private let HeaderViewID = "HomeHeaderReusableView"
 
 
 class HKHomeViewController: UIViewController {
-
+    
     var page = 1
     
     var data = [1,2,3,4,5,1,2,3,4,5]
@@ -82,7 +82,6 @@ class HKHomeViewController: UIViewController {
         configLocationJsonData()
         configUI()
         configNav()
-        getUserInfo()
 
     }
 
@@ -158,7 +157,12 @@ extension HKHomeViewController {
         self.navigation.item.title = "发现"
         self.navigation.bar.alpha = 1
         self.navigation.bar.isShadowHidden = true
-        self.navigation.bar.frame.origin.y = 44
+        if TKHeight >= 812 {
+                self.navigation.bar.frame.origin.y = 44
+        }else {
+                self.navigation.bar.frame.origin.y = 20
+        }
+
         self.navigation.bar.addSubview(rightBarButton)
         //self.navigation.bar.isHidden = true
         rightBarButton.snp.makeConstraints { (make) in
@@ -177,10 +181,10 @@ extension HKHomeViewController {
     func configLocationJsonData(){
  
         
-        let model = City(title: "上海", img: "img3")
+        let model = City(title: "上海", img: "img1")
         let model2 = City(title: "株洲", img: "img2")
-        let model3 = City(title: "长沙", img: "img1")
-        let model4 = City(title: "苏州", img: "img3")
+        let model3 = City(title: "长沙", img: "img3")
+        let model4 = City(title: "杭州", img: "img4")
         
         self.cityData.append(model)
         self.cityData.append(model2)
@@ -210,22 +214,22 @@ extension HKHomeViewController {
             }
         }
     }
-    func getUserInfo(){
-        Alamofire.request(getUserInfoAPI()).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                ProgressHUD.showError("网络请求错误"); return
-            }
-            if let value = response.result.value {
-                let json = JSON(value)
-                saveUserId(userId: json["data"]["id"].stringValue)
-                saveHeadPic(headPic: json["data"]["headPic"].stringValue)
-                saveNickName(nickName: json["data"]["nickName"].stringValue)
-                print("userid 存储成功为：",getUserId())
-                print(getHeadPic())
-                print(getNickName())
-            }
-        }
-    }
+//    func getUserInfo(){
+//        Alamofire.request(getUserInfoAPI()).responseJSON { (response) in
+//            guard response.result.isSuccess else {
+//                ProgressHUD.showError("网络请求错误"); return
+//            }
+//            if let value = response.result.value {
+//                let json = JSON(value)
+//                saveUserId(userId: json["data"]["id"].stringValue)
+//                saveHeadPic(headPic: json["data"]["headPic"].stringValue)
+//                saveNickName(nickName: json["data"]["nickName"].stringValue)
+//                print("userid 存储成功为：",getUserId())
+//                print(getHeadPic())
+//                print(getNickName())
+//            }
+//        }
+//    }
 }
 
 // MARK - ScrollView滚动代理
@@ -329,19 +333,19 @@ extension HKHomeViewController:  UICollectionViewDelegate {
         if indexPath.section == 0 {
             return CGSize(width: AdaptW(374), height: AdaptH(50))
         }else if indexPath.section == 1{
-            return CGSize(width: TKWidth, height: AdaptH(220))
+            return CGSize(width: TKWidth, height: 220)
         }else {
-            return CGSize(width: AdaptW(374), height: AdaptH(350))
+            return CGSize(width: AdaptW(374), height: 350)
         }
     }
     
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 1 {
-        return CGSize(width: TKWidth, height: AdaptH(30))
+        return CGSize(width: TKWidth, height: 30)
         }
         if section == 2 {
-            return CGSize(width: TKWidth, height: AdaptH(30))
+            return CGSize(width: TKWidth, height: 30)
         }
         return CGSize(width: 0, height: 0)
     }
@@ -442,9 +446,7 @@ extension HKHomeViewController {
         }
     
     }
-    
-    
-    
+   
 }
 
 // MARK - 配置cell

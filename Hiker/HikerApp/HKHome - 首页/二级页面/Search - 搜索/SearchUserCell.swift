@@ -11,6 +11,13 @@ import UIKit
 
 class SearchUserCell: UIView {
     
+    lazy var zanwu: UILabel = {
+       let label = UILabel()
+        label.text = "暂无推荐噢~"
+        label.font = UIFont.init(name: "苹方-简 中黑体", size: 14)
+        label.textColor = UIColor.init(r: 56, g: 56, b: 56)
+        return label
+    }()
     
     init() {
         super.init(frame: .zero)
@@ -28,7 +35,10 @@ class SearchUserCell: UIView {
     }
     
     func configUI() {
-        
+        addSubview(zanwu)
+        zanwu.snp.makeConstraints { (make) in
+            make.center.equalTo(self)
+        }
     }
     
     func configShadow() {

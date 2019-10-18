@@ -23,9 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let rootVc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()
 //        UIApplication.shared.keyWindow?.rootViewController = rootVc
 //        UIApplication.shared.keyWindow?.makeKeyAndVisible()
-        
-
-        
+        UserDefaults.standard.removeObject(forKey: "content")
+        UserDefaults.standard.removeObject(forKey: "time")
+        UserDefaults.standard.removeObject(forKey: "pic")
+        UserDefaults.standard.removeObject(forKey: "location")
+        //UserDefaults.standard.removeObject(forKey: "token")
         if getToken() != nil {
             let mainTabVar = mainTabBar()
             window?.rootViewController = mainTabVar
@@ -36,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let rootViewController = UIStoryboard(name: "Main", bundle: nil)
                 .instantiateInitialViewController()!
             let loginVC = MainNavigationController.init(rootViewController: rootViewController)
+            loginVC.navigation.configuration.isEnabled = true
             //loginVC.navigation.configuration.isEnabled = true
             self.window!.rootViewController = loginVC
             

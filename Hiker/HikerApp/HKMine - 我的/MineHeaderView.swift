@@ -46,8 +46,7 @@ class MineHeaderView: UIView {
     
     lazy var alterBtn: UIButton = {
        let btn = UIButton()
-        btn.backgroundColor = .cyan
-        btn.setImage(UIImage(named: "home_story_commot"), for: .normal)
+        btn.setImage(UIImage(named: "mine_alter_icon"), for: .normal)
         return btn
     }()
     
@@ -157,31 +156,44 @@ class MineHeaderView: UIView {
             make.left.equalTo(self).offset(16)
             make.top.equalTo(userSign.snp.bottom).offset(Adapt(28))
             make.height.equalTo(AdaptH(20))
-            make.width.equalTo(AdaptW(30))
+            if TKWidth >= 812 {
+                make.width.equalTo(AdaptW(30))
+            }else {
+                make.width.equalTo(35)
+            }
+
         }
         storyBtn.snp.makeConstraints { (make) in
             make.left.equalTo(storyLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(AdaptW(30))
+            make.width.equalTo(30)
         }
         fanLabel.snp.makeConstraints { (make) in
             make.left.equalTo(storyBtn.snp.right).offset(30)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(20))
-            make.width.equalTo(AdaptW(30))
+            if TKWidth >= 812 {
+                make.width.equalTo(AdaptW(30))
+            }else {
+                make.width.equalTo(35)
+            }
         }
         fanBtn.snp.makeConstraints { (make) in
             make.left.equalTo(fanLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(AdaptW(30))
+            make.width.equalTo(AdaptW(35))
         }
         concernLabel.snp.makeConstraints { (make) in
             make.left.equalTo(fanBtn.snp.right).offset(30)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(20))
-            make.width.equalTo(AdaptW(30))
+            if TKWidth >= 812 {
+                make.width.equalTo(AdaptW(30))
+            }else {
+                make.width.equalTo(35)
+            }
         }
         concernBtn.snp.makeConstraints { (make) in
             make.left.equalTo(concernLabel.snp.right).offset(0)

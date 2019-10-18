@@ -14,6 +14,7 @@ import SwiftyJSON
 import Alamofire
 import ProgressHUD
 import NVActivityIndicatorView
+import SwiftMessages
 
 class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable {
     
@@ -32,7 +33,31 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
     }()
     
     @IBAction func Logout(_ sender: Any) {
-                logOutApp()
+        let alert = UIAlertController.init(title: "消息", message: "您确认要退出登陆吗？", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
+            ProgressHUD.showSuccess("退出成功")
+            logOutApp()
+        }
+        let noAction = UIAlertAction.init(title: "取消", style: .destructive) { (no) in
+        }
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+
+
+        self.present(alert, animated: true, completion: nil)
+
+    }
+    @IBAction func cutUser(_ sender: Any) {
+        let warning = MessageView.viewFromNib(layout: .cardView)
+        warning.configureTheme(.warning)
+        warning.configureDropShadow()
+        let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
+        warning.configureContent(title: "不好意思啦", body: "切换账号功能目前还未没有开放噢", iconText: iconText)
+        warning.button?.isHidden = true
+        var warningConfig = SwiftMessages.defaultConfig
+        warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+        SwiftMessages.show(config: warningConfig, view: warning)
     }
     
     @IBAction func cutUserImg(_ sender: Any) {
@@ -90,20 +115,25 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
         
     }
     @IBAction func myLove(_ sender: Any) {
-        
+        let bookVC = BookViewController()
+        self.navigationController?.pushViewController(bookVC, animated: true)
     }
     
     @IBAction func myCollected(_ sender: Any) {
+        let collectionsVC = MyCollectionsController()
+        self.navigationController?.pushViewController(collectionsVC, animated: true)
     }
     
     
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBAction func faceBook(_ sender: Any) {
-        
+        let fbVC = FaceBookViewController()
+         self.navigationController?.pushViewController(fbVC, animated: true)
     }
     @IBAction func about(_ sender: Any) {
-        
+        let aboutvc = AboutViewController()
+        self.navigationController?.pushViewController(aboutvc, animated: true)
     }
     
     override func viewDidLoad() {
@@ -121,6 +151,10 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
         let imgUrl = URL(string: userData!.headPic)
         self.userImg.kf.setImage(with: imgUrl)
         self.nickname.text = userData!.nickName
+        if #available(iOS 11.0, *) {
+            self.navigation.bar.prefersLargeTitles = true
+            self.navigation.item.largeTitleDisplayMode = .always
+        }
         
     }
     

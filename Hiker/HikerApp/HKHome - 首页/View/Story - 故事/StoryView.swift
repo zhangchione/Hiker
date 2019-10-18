@@ -126,64 +126,64 @@ class StoryView: UICollectionViewCell {
         photoCell.snp.makeConstraints { (make) in
             make.right.equalTo(self)
             make.left.equalTo(self)
-            make.height.equalTo(AdaptH(190))
+            make.height.equalTo(190)
             make.top.equalTo(self)
         }
         
         favBtn.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(AdaptW(-15))
-            make.bottom.equalTo(self).offset(AdaptH(-20))
+            make.bottom.equalTo(self).offset(-20)
             make.width.equalTo(AdaptW(15))
-            make.height.equalTo(AdaptH(20))
+            make.height.equalTo(20)
         }
         favIcon.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(AdaptW(15))
-            make.bottom.equalTo(self).offset(AdaptH(-20))
+            make.bottom.equalTo(self).offset(-20)
             make.width.equalTo(AdaptW(25))
-            make.height.equalTo(AdaptH(20))
+            make.height.equalTo(20)
         }
         favLabel.snp.makeConstraints { (make) in
             make.left.equalTo(favIcon.snp.right).offset(AdaptW(5))
             make.centerY.equalTo(favIcon.snp.centerY)
             make.width.equalTo(AdaptW(50))
-            make.height.equalTo(AdaptH(20))
+            make.height.equalTo(20)
         }
         line.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(AdaptW(15))
-            make.bottom.equalTo(favBtn.snp.top).offset(AdaptH(-20))
+            make.bottom.equalTo(favBtn.snp.top).offset(-20)
             make.right.equalTo(self).offset(AdaptW(-15))
             make.height.equalTo(AdaptH(0.8))
         }
         time.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(AdaptW(-15))
-            make.bottom.equalTo(line.snp.top).offset(AdaptH(-20))
+            make.bottom.equalTo(line.snp.top).offset(-20)
             make.width.equalTo(AdaptW(100))
-            make.height.equalTo(AdaptH(20))
+            make.height.equalTo(20)
         }
         title.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(AdaptW(15))
             make.centerY.equalTo(time.snp.centerY)
             make.width.equalTo(AdaptW(180))
-            make.height.equalTo(AdaptH(30))
+            make.height.equalTo(30)
         }
         userIcon.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(AdaptW(15))
-             make.bottom.equalTo(title.snp.top).offset(AdaptH(-10))
+             make.bottom.equalTo(title.snp.top).offset(-10)
             make.width.equalTo(AdaptW(35))
-            make.height.equalTo(AdaptH(35))
+            make.height.equalTo(35)
         }
         userName.snp.makeConstraints { (make) in
             make.left.equalTo(userIcon.snp.right).offset(AdaptW(5))
             make.centerY.equalTo(userIcon.snp.centerY)
             make.width.equalTo(AdaptW(100))
-            make.height.equalTo(AdaptH(20))
+            make.height.equalTo(20)
         }
         
         trackLocation.snp.makeConstraints { (make) in
             make.right.equalTo(self).offset(AdaptW(-15))
             make.centerY.equalTo(userIcon.snp.centerY)
             make.width.equalTo(AdaptW(200))
-            make.height.equalTo(AdaptH(20))
+            make.height.equalTo(20)
         }
     
     }

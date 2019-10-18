@@ -9,6 +9,7 @@
 import UIKit
 import CollectionKit
 import SnapKit
+import SwiftMessages
 
 class SearchViewController: SubClassBaseViewController {
 
@@ -46,6 +47,13 @@ class SearchViewController: SubClassBaseViewController {
         return label
     }()
     
+    lazy var zanwu: UILabel = {
+       let label = UILabel()
+        label.text = "目前没有用户推荐噢~"
+        label.font = UIFont.init(name: "苹方-简 中黑体", size: 14)
+        label.textColor = UIColor.init(r: 56, g: 56, b: 56)
+        return label
+    }()
     
     lazy var historyBtn1:UIButton = {
         let btn = UIButton()
@@ -249,6 +257,18 @@ extension SearchViewController {
         provider.animator = ScaleAnimator()
         let layout = FlowLayout(spacing: 10,justifyContent: .end)
         provider.layout = layout
+        provider.tapHandler = { context -> Void in
+            let warning = MessageView.viewFromNib(layout: .cardView)
+             warning.configureTheme(.warning)
+             warning.configureDropShadow()
+             let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
+             warning.configureContent(title: "不好意思啦", body: "系统目前暂时没有用户推荐噢~", iconText: iconText)
+             warning.button?.isHidden = true
+             var warningConfig = SwiftMessages.defaultConfig
+             warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+             SwiftMessages.show(config: warningConfig, view: warning)
+            
+        }
         collectionView.provider = provider
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         

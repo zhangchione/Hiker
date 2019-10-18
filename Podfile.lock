@@ -25,6 +25,7 @@ PODS:
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
+  - SwiftDate (6.1.0)
   - SwiftEntryKit (1.2.0):
     - QuickLayout (= 3.0.0)
   - SwiftMessages (7.0.1):
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - SnapKit
   - SQLite.swift
+  - SwiftDate
   - SwiftEntryKit
   - SwiftMessages
   - SwiftyJSON
@@ -77,6 +79,7 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - SQLite.swift
+    - SwiftDate
     - SwiftEntryKit
     - SwiftMessages
     - SwiftyJSON
@@ -112,11 +115,12 @@ SPEC CHECKSUMS:
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
+  SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwiftEntryKit: 8303faf480f405b57df16b6fc2b251647cf40349
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
-PODFILE CHECKSUM: cc01cba300442d5d86b61bdf3b78bd3f071a210c
+PODFILE CHECKSUM: 65de779f3afb42c5db1ac43ffa198a41839ba513
 
 COCOAPODS: 1.8.3

@@ -82,8 +82,15 @@ class PhotoCell: UIView {
             self.updateUI(imgdatas.count,with: imgdatas)
         }
     }
+    var imgsUIImage:[UIImage]? {
+        didSet{
+            guard let imgs = imgsUIImage else { return }
+            self.updateUILocal(imgs.count,with: imgs)
+        }
+    }
     
     var isLocalImage = false
+    
     
     func updateUI(_ count:Int,with data:[String]) {
         switch count {
@@ -141,9 +148,6 @@ class PhotoCell: UIView {
             DispatchQueue.main.async {
                 self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
                 self.img2.corner(byRoundingCorners: .topRight, radii: 10)
-                
-
-
                 if self.isLocalImage {
                     self.img1.image = UIImage(contentsOfFile: data[0])
                     self.img2.image = UIImage(contentsOfFile: data[1])
@@ -267,6 +271,130 @@ class PhotoCell: UIView {
 
     }
     
-    
+        func updateUILocal(_ count:Int,with data:[UIImage]) {
+            switch count {
+            case 1:
+                DispatchQueue.main.async {
+                    self.img1.corner(byRoundingCorners: [.topLeft , .topRight], radii: 10)
+                        self.img1.image = data[0]
+                    
+                }
+                img1.snp.makeConstraints { (make) in
+                    make.top.equalTo(self)
+                    make.left.equalTo(self)
+                    make.bottom.equalTo(self)
+                    make.right.equalTo(self)
+                }
+            case 2:
+                DispatchQueue.main.async {
+                    self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
+                    self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+                        self.img1.image =  data[0]
+                        self.img2.image = data[1]
+
+                }
+                img1.snp.makeConstraints { (make) in
+                    make.top.equalTo(self)
+                    make.left.equalTo(self)
+                    make.bottom.equalTo(self)
+                    make.right.equalTo(self.snp.centerX).offset(-2.5)
+                }
+                img2.snp.makeConstraints { (make) in
+                    make.top.right.equalTo(self)
+                    make.bottom.equalTo(self)
+                    make.left.equalTo(self.snp.centerX).offset(2.5)
+                }
+
+            case 3:
+                DispatchQueue.main.async {
+                    self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
+                    self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+
+                        self.img1.image = data[0]
+                        self.img2.image = data[1]
+                        self.img3.image = data[2]
+                    }
+                img1.snp.makeConstraints { (make) in
+                    make.top.equalTo(self)
+                    make.left.equalTo(self)
+                    make.bottom.equalTo(self)
+                    make.right.equalTo(self.snp.centerX).offset(-2.5)
+                }
+                img2.snp.makeConstraints { (make) in
+                    make.top.right.equalTo(self)
+                    make.bottom.equalTo(img1.snp.centerY).offset(-2.5)
+                    make.left.equalTo(self.snp.centerX).offset(2.5)
+                }
+                img3.snp.makeConstraints { (make) in
+                    make.bottom.right.equalTo(self)
+                    make.top.equalTo(img1.snp.centerY).offset(2.5)
+                    make.left.equalTo(self.snp.centerX).offset(2.5)
+                }
+                
+
+            case 4:
+                DispatchQueue.main.async {
+                    self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
+                    self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+                        self.img1.image = data[0]
+                        self.img2.image = data[1]
+                        self.img3.image = data[2]
+                        self.img4.image = data[3]
+                    }
+                img1.snp.makeConstraints { (make) in
+                    make.top.equalTo(self)
+                    make.left.equalTo(self)
+                    make.bottom.equalTo(self)
+                    make.right.equalTo(self.snp.centerX).offset(-2.5)
+                }
+                img2.snp.makeConstraints { (make) in
+                    make.top.right.equalTo(self)
+                    make.bottom.equalTo(img1.snp.centerY).offset(-2.5)
+                    make.left.equalTo(self.snp.centerX).offset(2.5)
+                }
+                img3.snp.makeConstraints { (make) in
+                    make.bottom.equalTo(self)
+                    make.left.equalTo(self.snp.centerX).offset(2.5)
+                    make.top.equalTo(img1.snp.centerY).offset(2.5)
+                    make.right.equalTo(img2.snp.centerX).offset(-2.5)
+                }
+                img4.snp.makeConstraints { (make) in
+                    make.bottom.equalTo(self)
+                    make.left.equalTo(img2.snp.centerX).offset(2.5)
+                    make.top.equalTo(img1.snp.centerY).offset(5)
+                    make.right.equalTo(self)
+                }
+                
+            default:
+                DispatchQueue.main.async {
+                    self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
+                    self.img2.corner(byRoundingCorners: .topRight, radii: 10)
+                }
+                img1.snp.makeConstraints { (make) in
+                    make.top.equalTo(self)
+                    make.left.equalTo(self)
+                    make.bottom.equalTo(self)
+                    make.right.equalTo(self.snp.centerX).offset(-2.5)
+                }
+                img2.snp.makeConstraints { (make) in
+                    make.top.right.equalTo(self)
+                    make.bottom.equalTo(img1.snp.centerY).offset(-2.5)
+                    make.left.equalTo(self.snp.centerX).offset(2.5)
+                }
+                
+                img3.snp.makeConstraints { (make) in
+                    make.bottom.equalTo(self)
+                    make.left.equalTo(self.snp.centerX).offset(2.5)
+                    make.top.equalTo(img1.snp.centerY).offset(2.5)
+                    make.right.equalTo(img2.snp.centerX).offset(-2.5)
+                }
+                img4.snp.makeConstraints { (make) in
+                    make.bottom.equalTo(self)
+                    make.left.equalTo(img2.snp.centerX).offset(2.5)
+                    make.top.equalTo(img1.snp.centerY).offset(5)
+                    make.right.equalTo(self)
+                }
+            }
+        }
 
 }

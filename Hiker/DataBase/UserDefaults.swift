@@ -140,6 +140,15 @@ func getPic() -> [String]? {
     return defaults.object(forKey: "pic") as? [String]
 }
 
+func saveImgs(datas:Array<Array<Data>>) {
+    defaults.set(datas,forKey:"imgs")
+    defaults.synchronize()
+}
+
+func getImgs() -> [[Data]] {
+    return defaults.object(forKey: "imgs") as! [[Data]]
+}
+
 
 
 

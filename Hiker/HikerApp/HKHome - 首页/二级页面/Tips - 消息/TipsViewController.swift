@@ -18,10 +18,18 @@ class TipsViewController: SubClassBaseViewController {
         return imageView
     }()
     
+    lazy var tipLabel: UILabel = {
+          let label = UILabel()
+          label.font = UIFont.systemFont(ofSize: 24)
+          label.text = "暂无通知"
+          label.numberOfLines = 0
+          return label
+      }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
        configUI()
+        
     }
     
     func configUI(){
@@ -34,6 +42,11 @@ class TipsViewController: SubClassBaseViewController {
         maskLayer.path = maskPath.cgPath
         img1.layer.mask = maskLayer
         //view.addSubview(img1)
+        
+        self.view.addSubview(tipLabel)
+        tipLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(view)
+        }
     }
 
 

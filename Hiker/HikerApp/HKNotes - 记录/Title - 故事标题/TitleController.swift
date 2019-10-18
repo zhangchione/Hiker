@@ -33,6 +33,19 @@ class TitleController: UIViewController {
     var dismissKetboardTap = UITapGestureRecognizer()
     
 
+    @IBAction func startBtno(_ sender: Any) {
+            var app = AppContext()
+        
+        if textView.text == "故事标题" {
+            
+            ProgressHUD.showError("请添加故事标题")
+            
+        }else {
+            saveTitle(title: textView.text)
+            let noteVC = NoteController(app.photoDataManager)
+            self.navigationController?.pushViewController(noteVC, animated: true)
+        }
+    }
     
     @objc func dismissKeyboard(){
         print("键盘成功关闭")
@@ -120,15 +133,7 @@ class TitleController: UIViewController {
     
     @IBAction func addStory(_ sender: UIButton) {
         
-        if textView.text == "故事标题" {
-            
-            ProgressHUD.showError("请添加故事标题")
-            
-        }else {
-            saveTitle(title: textView.text)
-            let noteVC = NoteController()
-            self.navigationController?.pushViewController(noteVC, animated: true)
-        }
+
 
     }
     

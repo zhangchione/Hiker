@@ -178,11 +178,15 @@ extension NotesController {
         view.addSubview(storyTitle)
         storyTitle.snp.makeConstraints { (make) in
             make.left.equalTo(view).offset(20)
-            make.top.equalTo(self.navigation.bar.snp.bottom).offset(10)
+            if TKWidth >= 812 {
+            make.top.equalTo(self.navigation.bar.snp.bottom).offset(30)
+            }else {
+                        make.top.equalTo(self.navigation.bar.snp.bottom).offset(0)
+            }
             make.height.equalTo(100)
             make.width.equalTo(200)
         }
-        
+        storyTitle.text = getTitle()!
 
 
     }
@@ -228,7 +232,8 @@ extension NotesController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row ==  (data?.noteParas!.count)! {
            // self.navigationController?.popToRootViewController(animated: true)
-            let noteVC = NoteController()
+                var app = AppContext()
+            let noteVC = NoteController(app.photoDataManager)
             self.navigationController?.pushViewController(noteVC, animated: true)
         }
     }

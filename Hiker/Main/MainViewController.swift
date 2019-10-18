@@ -18,7 +18,7 @@ import SwiftyJSON
 class MainViewController: UIViewController {
     
     var dissmissKeyboredTap = UITapGestureRecognizer()
-    
+    var requestEndFlag = false
     @IBOutlet weak var userID: UITextField!
     @IBOutlet weak var userPwd: UITextField!
     
@@ -40,10 +40,8 @@ class MainViewController: UIViewController {
                 }
                 print(json)
                 saveToken(token: json["data"].string!)
-                
-                ProgressHUD.showSuccess("登陆成功")
+                self.getUserInfo()
 
-                goToApp()
                 print("token为:",getToken()!)
             }
         }
@@ -108,7 +106,43 @@ class MainViewController: UIViewController {
     @objc func dismissKey(){
         self.view.endEditing(true)
     }
+    
+    func getUserInfo(){
+        Alamofire.request(getUserInfoAPI()).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
 
+                saveUserId(userId: json["data"]["id"].stringValue)
+                saveHeadPic(headPic: json["data"]["headPic"].stringValue)
+                saveNickName(nickName: json["data"]["nickName"].stringValue)
+                print("userid 存储成功为：",getUserId())
+                print(getHeadPic())
+                print(getNickName())
+                ProgressHUD.showSuccess("登陆成功")
+                goToApp()
+            }
+        }
+
+    }
+    
+    
+    /// 异步数据请求同步化
+    func waitingRequestEnd() {
+        if Thread.current == Thread.main {
+            while !requestEndFlag {
+                RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.3))
+            }
+        } else {
+            autoreleasepool {
+                while requestEndFlag {
+                    Thread.sleep(forTimeInterval: 0.3)
+                }
+            }
+        }
+    }
 }
 
 

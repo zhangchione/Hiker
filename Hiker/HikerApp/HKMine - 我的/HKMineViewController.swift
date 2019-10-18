@@ -100,9 +100,6 @@ class HKMineViewController: UIViewController {
     }
     func configData(){
 
-
-
-        
         Alamofire.request(getAttentionAPI(userId: getUserId()!)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
@@ -253,7 +250,7 @@ extension HKMineViewController: LTAdvancedScrollViewDelegate {
     }
     
     func glt_scrollViewOffsetY(_ offsetY: CGFloat) {
-        if offsetY >= 260 {
+        if offsetY >= 140 {
             self.navigation.bar.alpha = 1
             self.navigation.item.title = mineData?.username
             self.rightBarButton.setImage(UIImage(named: "mine_icon_setblack"), for: .normal)

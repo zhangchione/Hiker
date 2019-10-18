@@ -50,7 +50,7 @@ class RecommendCityView: UICollectionViewCell {
             make.left.equalTo(self).offset(20)
             make.centerY.equalTo(self.snp.centerY)
             make.width.equalTo(AdaptW(394))
-            make.height.equalTo(AdaptH(200))
+            make.height.equalTo(200)
         }
         
     }
