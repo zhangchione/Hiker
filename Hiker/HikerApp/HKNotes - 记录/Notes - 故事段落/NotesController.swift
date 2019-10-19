@@ -233,7 +233,8 @@ extension NotesController {
         if indexPath.row ==  (data?.noteParas!.count)! {
            // self.navigationController?.popToRootViewController(animated: true)
                 var app = AppContext()
-            let noteVC = NoteController(app.photoDataManager)
+            //let noteVC = NoteController(app.photoDataManager)
+            let noteVC = NoteController()
             self.navigationController?.pushViewController(noteVC, animated: true)
         }
     }
@@ -342,7 +343,7 @@ extension NotesController {
     
     // 收录到故事簿
     func putBookName(bookid:Int) {
-        let dic = ["noteId":"4","groupId":bookid] as [String : Any]
+        let dic = ["noteId":storyId,"groupId":bookid] as [String : Any]
         
         Alamofire.request(getHiddenBookNameAPI(), method: .put, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             guard response.result.isSuccess else {
@@ -389,6 +390,7 @@ extension NotesController: selectBookDelegate {
         print(name,id)
         let size = CGSize(width: 30, height: 30)
         startAnimating(size, message: "发布游记中...", type: .ballClipRotate, fadeInAnimation: nil)
+        postStory(title: getTitle()!)
         
         if id != 0 {
             putBookName(bookid: id)
@@ -399,7 +401,7 @@ extension NotesController: selectBookDelegate {
         }
         
          saveFlag(flag: "001")
-         postStory(title: getTitle()!)
+
          for index in 0 ..< (data?.noteParas!.count)! {
              print(index,self.data?.noteParas![index].pics)
              var imgs = ""

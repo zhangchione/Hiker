@@ -14,33 +14,33 @@ import NVActivityIndicatorView
 import SwiftDate
 
 
-class NoteController: UIViewController,NVActivityIndicatorViewable        ,DataToEasyDelegate {
-    let keyMap = ["building":["塔","高楼","小洋房","别墅","学校"],
-                  "food":["美食","食品","小吃","面","汤包"],
-                  "landscape":["美景","山","水","湖","湖泊","江","白云"],
-                  "animal":["猫","狗","猴子"],
-                  "night_scene":["夜","深夜","傍晚","黄昏"],
-                  "face":["人"]
-                ]
-    
-    func recognize(current: Int, max: Int) {
-            DispatchQueue.main.async {
-                       self.tipLabel.text = "第一次配图需要给系统照片分类，正在分类图片\(current)/\(max)，如果数字卡死，请重启App"
-       
-        }
-    }
-    var photoDataManager: PhotoDataManager
-
-
-    init(_ photoDataManager: PhotoDataManager) {
-    self.photoDataManager = photoDataManager
-    super.init(nibName: nil, bundle: nil)
-    self.photoDataManager.dataToEasyDelegate = self
-    }
-
-    required  init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-    }
+class NoteController: UIViewController,NVActivityIndicatorViewable     {   //,DataToEasyDelegate {
+//    let keyMap = ["building":["塔","高楼","小洋房","别墅","学校"],
+//                  "food":["美食","食品","小吃","面","汤包"],
+//                  "landscape":["美景","山","水","湖","湖泊","江","白云"],
+//                  "animal":["猫","狗","猴子"],
+//                  "night_scene":["夜","深夜","傍晚","黄昏"],
+//                  "face":["人"]
+//                ]
+//
+//    func recognize(current: Int, max: Int) {
+//            DispatchQueue.main.async {
+//                       self.tipLabel.text = "第一次配图需要给系统照片分类，正在分类图片\(current)/\(max)，如果数字卡死，请重启App"
+//
+//        }
+//    }
+//    var photoDataManager: PhotoDataManager
+//
+//
+//    init(_ photoDataManager: PhotoDataManager) {
+//    self.photoDataManager = photoDataManager
+//    super.init(nibName: nil, bundle: nil)
+//    self.photoDataManager.dataToEasyDelegate = self
+//    }
+//
+//    required  init?(coder aDecoder: NSCoder) {
+//    fatalError("init(coder:) has not been implemented")
+//    }
     /// 照片选择
     var imgPricker:UIImagePickerController!
     var imgs: String = ""
@@ -279,28 +279,28 @@ extension NoteController {
     }
     @objc func addLocation(){
         
-        UIApplication.shared.keyWindow?.addSubview(self.loginView)
+//        UIApplication.shared.keyWindow?.addSubview(self.loginView)
+//        
+//        self.loginView.showAddView()
         
-        self.loginView.showAddView()
-        
-//        let alert = UIAlertController.init(title: "消息", message: "请添加地点信息", preferredStyle: .alert)
-//
-//        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
-//            self.location =  (alert.textFields?.first?.text!)!
-//                    self.locationBtn.setTitle( (alert.textFields?.first?.text!)!, for: .normal)
-//            ProgressHUD.showSuccess("地点添加成功")
-//        }
-//        let noAction = UIAlertAction.init(title: "取消", style: .destructive) { (no) in
-//            print("地点信息取消",no.style)
-//        }
-//        alert.addAction(yesAction)
-//        alert.addAction(noAction)
-//        alert.addTextField { (text) in
-//            print(text.text,11)
-//
-//        }
-//
-//        self.present(alert, animated: true, completion: nil)
+        let alert = UIAlertController.init(title: "消息", message: "请添加地点信息", preferredStyle: .alert)
+
+        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
+            self.location =  (alert.textFields?.first?.text!)!
+                    self.locationBtn.setTitle( (alert.textFields?.first?.text!)!, for: .normal)
+            ProgressHUD.showSuccess("地点添加成功")
+        }
+        let noAction = UIAlertAction.init(title: "取消", style: .destructive) { (no) in
+            print("地点信息取消",no.style)
+        }
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        alert.addTextField { (text) in
+            print(text.text,11)
+
+        }
+
+        self.present(alert, animated: true, completion: nil)
 
 
     }
@@ -418,91 +418,91 @@ extension NoteController {
         
     }
     @objc func addPhoto(){
-        ProgressHUD.show("配图中")
-        
-        let tvtext = writeTextView.text!
-
-        if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
-            ProgressHUD.showError("请写入内容")
-        }else{
-            if location == ""{
-                    ProgressHUD.showError("添加地点可以提高匹配精度哦")
-            }else {
-                if time == ""{
-                    ProgressHUD.showError("添加时间可以提高匹配精度哦")
-                }else {
-                    
-                    var total = ["building":0,"food":0,"landscape":0,"animal":0,"night_scene":0,"face":0]
-                    
-                     for str in tvtext {
-                        for (key,value) in self.keyMap {
-                            if (self.keyMap[key]?.contains(String(str)))! {
-                                total[key]! += 1
-                            }else {
-                                
-                            }
-                        }
-                     }
-                    let lasted = total.sorted {(s1,s2) -> Bool in
-                        return s1.1 > s2.1
-                    }
-                    var wordArray = [String]()
-                    print(total,lasted[0].value)
-                    for lst in lasted {
-                        if lst.value == 0 {
-                            break;
-                        }
-                        wordArray.append(lst.key)
-                    }
-                    
-                    print(wordArray)
-                    var datas = [Photo]()
-                    for word in wordArray {
-                        var classify = [String]()
-                        classify.append(word)
-                        var locationChoice = [String]()
-                        locationChoice.append(self.location)
-                        let newAlbum = NewAlbum.init(name: "智能配图", classifyChoice: classify, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
-                        if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlbum) {
-                            // 这里处理获取的图片
-                            datas.append(photo[0])
-                        }
-                        
-                    }
-                    var imgsData = [UIImage]()
-                    // 配图失败处理
-                    if datas.count == 0 {
-                            ProgressHUD.showError("配图失败")
-                        
-                    }else {
-                        for data in datas {
-                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
-                        }
-                        ProgressHUD.showSuccess("配图完成")
-                        self.photoCell.updateUILocal(imgsData.count, with: imgsData)
-                    }
-                    
-                }
-            }
-        
-        }
-        
-        
-        
-
-
-
-//        self.imgPricker = UIImagePickerController()
-//        self.imgPricker.delegate = self
-//        self.imgPricker.allowsEditing = true
-//        self.imgPricker.sourceType = .photoLibrary
+//        ProgressHUD.show("配图中")
 //
-//        self.imgPricker.navigationBar.barTintColor = UIColor.gray
-//        self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+//        let tvtext = writeTextView.text!
 //
-//        self.imgPricker.navigationBar.tintColor = UIColor.white
+//        if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
+//            ProgressHUD.showError("请写入内容")
+//        }else{
+//            if location == ""{
+//                    ProgressHUD.showError("添加地点可以提高匹配精度哦")
+//            }else {
+//                if time == ""{
+//                    ProgressHUD.showError("添加时间可以提高匹配精度哦")
+//                }else {
 //
-//        self.present(self.imgPricker, animated: true, completion: nil)
+//                    var total = ["building":0,"food":0,"landscape":0,"animal":0,"night_scene":0,"face":0]
+//
+//                     for str in tvtext {
+//                        for (key,value) in self.keyMap {
+//                            if (self.keyMap[key]?.contains(String(str)))! {
+//                                total[key]! += 1
+//                            }else {
+//
+//                            }
+//                        }
+//                     }
+//                    let lasted = total.sorted {(s1,s2) -> Bool in
+//                        return s1.1 > s2.1
+//                    }
+//                    var wordArray = [String]()
+//                    print(total,lasted[0].value)
+//                    for lst in lasted {
+//                        if lst.value == 0 {
+//                            break;
+//                        }
+//                        wordArray.append(lst.key)
+//                    }
+//
+//                    print(wordArray)
+//                    var datas = [Photo]()
+//                    for word in wordArray {
+//                        var classify = [String]()
+//                        classify.append(word)
+//                        var locationChoice = [String]()
+//                        locationChoice.append(self.location)
+//                        let newAlbum = NewAlbum.init(name: "智能配图", classifyChoice: classify, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
+//                        if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlbum) {
+//                            // 这里处理获取的图片
+//                            datas.append(photo[0])
+//                        }
+//
+//                    }
+//                    var imgsData = [UIImage]()
+//                    // 配图失败处理
+//                    if datas.count == 0 {
+//                            ProgressHUD.showError("配图失败")
+//
+//                    }else {
+//                        for data in datas {
+//                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
+//                        }
+//                        ProgressHUD.showSuccess("配图完成")
+//                        self.photoCell.updateUILocal(imgsData.count, with: imgsData)
+//                    }
+//
+//                }
+//            }
+//
+//        }
+        
+        
+        
+
+
+
+        self.imgPricker = UIImagePickerController()
+        self.imgPricker.delegate = self
+        self.imgPricker.allowsEditing = true
+        self.imgPricker.sourceType = .photoLibrary
+
+        self.imgPricker.navigationBar.barTintColor = UIColor.gray
+        self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+
+        self.imgPricker.navigationBar.tintColor = UIColor.white
+
+        self.present(self.imgPricker, animated: true, completion: nil)
     }
 }
 

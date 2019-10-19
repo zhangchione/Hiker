@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.9.0)
+  - Cache (5.2.0)
   - CollectionKit (2.4.0):
     - CollectionKit/Core (= 2.4.0)
   - CollectionKit/Core (2.4.0)
@@ -7,7 +8,11 @@ PODS:
   - ESTabBarController-swift (2.7)
   - HandyJSON (5.0.0-beta.1)
   - Hero (1.4.0)
+  - Imaginary (4.2.0):
+    - Cache (~> 5.0)
   - Kingfisher (4.10.1)
+  - Lightbox (2.3.0):
+    - Imaginary (~> 4.0)
   - LTScrollView (0.2.1)
   - MJRefresh (3.2.0)
   - NewPopMenu (2.1.2)
@@ -42,6 +47,7 @@ DEPENDENCIES:
   - HandyJSON (from `https://github.com/alibaba/HandyJSON.git`, branch `dev_for_swift5.0`)
   - Hero
   - Kingfisher
+  - Lightbox
   - LTScrollView
   - MJRefresh
   - NewPopMenu (~> 2.0)
@@ -62,11 +68,14 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Cache
     - CollectionKit
     - EachNavigationBar
     - ESTabBarController-swift
     - Hero
+    - Imaginary
     - Kingfisher
+    - Lightbox
     - LTScrollView
     - MJRefresh
     - NewPopMenu
@@ -97,12 +106,15 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
+  Cache: 807c5d86d01a177f06ede9865add3aea269bbfd4
   CollectionKit: 8f01e7629185bb81072c4aa734d105df5c2d1c8b
   EachNavigationBar: edd979ad7b4a63ce5ea4208087ba55eb1e2f2b55
   ESTabBarController-swift: 4fb52ad03d94d0717ef97bc9eb09a5abfdded0a2
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
+  Imaginary: dae33d06dbc2ada22f98afef5eb45cc061311a2c
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  Lightbox: d317750e4132bfb871a5307cfe0a2c7d6a583c65
   LTScrollView: 93fff4aed9f9545f541a99b320b27808f5307c12
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   NewPopMenu: c6129e08e8192f6257ceb5f9a4357e1b59c6e2e7
@@ -121,6 +133,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
-PODFILE CHECKSUM: 65de779f3afb42c5db1ac43ffa198a41839ba513
+PODFILE CHECKSUM: bb5feced6d83151512ab7f8cf5f29bb8a0f91633
 
 COCOAPODS: 1.8.3

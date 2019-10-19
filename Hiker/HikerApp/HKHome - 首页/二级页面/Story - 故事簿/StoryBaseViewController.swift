@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Lightbox
+
 
 class StoryBaseViewController: UIViewController {
 
@@ -126,6 +128,10 @@ extension StoryBaseViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        print("111")
+        if let para = paras {
+            showPhoto(data: para[indexPath.row])
+        }
     }
 }
 
@@ -138,15 +144,44 @@ extension StoryBaseViewController {
         let stringSize = normalText.boundingRect(with: size,options: .usesLineFragmentOrigin, attributes: dic as! [NSAttributedString.Key : Any] , context:nil).size
         return stringSize.height
     }
+    
+    // 图片点击
+    func showPhoto(data:NoteParas){
+        
+        let pics = data.pics.components(separatedBy: ",")
+        var imgs = [LightboxImage]()
+        for pic in pics {
+            
+            let img = LightboxImage(imageURL: URL(string: pic)!, text: data.content)
+            imgs.append(img)
+        }
+
+        let controller = LightboxController(images: imgs)
+        controller.dynamicBackground = true
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
+    }
 }
 
 extension StoryBaseViewController {
     func configCell(_ cell:StorySementCell,with data:NoteParas) {
         cell.content.text = data.content
-        cell.location.text = data.place
+        cell.location.text = "#" + data.place
         cell.time.text = data.date
         let pics = data.pics.components(separatedBy: ",")
         cell.photoCell.imgDatas = pics
         //cell.photoCell.backgroundColor = .red
+        cell.locationBtn.addTarget(self, action: #selector(city(_:)), for: .touchUpInside)
+        
+    }
+    
+    @objc func city(_ sender: UIButton) {
+        let btn = sender
+        let cell = btn.superView(of: StorySementCell.self)!
+        let indexPath = tableView.indexPath(for: cell)
+        
+        let data = paras![indexPath!.row].place
+        let vc = SearchContentViewController(word: data)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

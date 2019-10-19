@@ -36,7 +36,10 @@ class StorySementCell: UITableViewCell {
         label.textAlignment = .right
         return label
     }()
-    
+    lazy var locationBtn: UIButton = {
+        let label = UIButton()
+        return label
+    }()
     
     lazy var content: UILabel = {
         let label = UILabel()
@@ -84,6 +87,7 @@ class StorySementCell: UITableViewCell {
         addSubview(num)
         addSubview(time)
         addSubview(location)
+        addSubview(locationBtn)
         addSubview(content)
         addSubview(img)
         addSubview(photoCell)
@@ -106,6 +110,13 @@ class StorySementCell: UITableViewCell {
             make.height.equalTo(20)
             make.width.equalTo(50)
         }
+        locationBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(self).offset(-20)
+            make.centerY.equalTo(num.snp.centerY)
+            make.height.equalTo(20)
+            make.width.equalTo(50)
+        }
+        
         content.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
             make.top.equalTo(time.snp.bottom).offset(10)

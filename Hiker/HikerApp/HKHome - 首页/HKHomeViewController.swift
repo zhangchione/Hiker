@@ -396,6 +396,7 @@ extension HKHomeViewController {
             cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
             notesDatas[(indexPath?.row)!].like = false
+            favNet(noteId: notesDatas[(indexPath?.row)!].id)
         }else {
             cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
@@ -421,11 +422,11 @@ extension HKHomeViewController {
     func collecteNet(noteId:Int) {
         
         
-        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
+        let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
         
         Alamofire.request(getCollectedAPI(noteId: noteId), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             guard response.result.isSuccess else {
-                ProgressHUD.showError("发布游记网络请求错误"); return
+                ProgressHUD.showError("收藏网络请求错误"); return
             }
             if let value = response.result.value {
                 let json = JSON(value)
@@ -435,11 +436,12 @@ extension HKHomeViewController {
     }
     
     func unCollecteNet(noteId:Int) {
-        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
+        let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
         Alamofire.request(getUnCollectedAPI(noteId: noteId), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             guard response.result.isSuccess else {
-                ProgressHUD.showError("发布游记网络请求错误"); return
+                ProgressHUD.showError("收藏网络请求错误"); return
             }
+            
             if let value = response.result.value {
                 let json = JSON(value)
             }
@@ -465,6 +467,8 @@ extension HKHomeViewController {
         }
         let place = locations.joined(separator: "、")
         cell.trackLocation.text = "#" + place
+ 
+        
         cell.title.text = data.title
         cell.time.text = data.noteParas![0].date
         cell.favLabel.text = "\(data.likes)"
@@ -480,8 +484,34 @@ extension HKHomeViewController {
             cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
         }
         cell.favBtn.addTarget(self, action: #selector(collected(_:)), for: .touchUpInside)
-
+        cell.trackBtn.addTarget(self, action: #selector(self.city(_:)), for:    .touchUpInside)
+         cell.userBtn.addTarget(self, action: #selector(self.user(_:)), for:    .touchUpInside)
     }
+    
+    @objc func city(_ sender:UIButton){
+        let btn = sender
+        let cell = btn.superView(of: StoryView.self)!
+        let indexPath = collectionView.indexPath(for: cell)
+        
+        let data = notesDatas[(indexPath?.row)!]
+        var locations = [String]()
+        for note in data.noteParas! {
+            locations.append(note.place)
+        }
+        let vc = SearchContentViewController(word: locations[0])
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func user(_ sender:UIButton){
+        let btn = sender
+        let cell = btn.superView(of: StoryView.self)!
+        let indexPath = collectionView.indexPath(for: cell)
+        
+        let model = notesDatas[(indexPath?.row)!]
+
+        let userVC = HKUserViewController(data: model.user!)
+        self.navigationController?.pushViewController(userVC, animated: true)
+    }
+    
 }
 
 // MARK -  点击代理事件

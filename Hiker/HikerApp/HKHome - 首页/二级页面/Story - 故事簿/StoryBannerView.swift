@@ -75,7 +75,7 @@ class StoryBannerView: UIView {
     
     func updateUI(){
         print("更新UI")
-        nameLabel.text = viewModel.model?.user?.username
+        nameLabel.text = viewModel.model?.user?.nickName
         titleLabel.text = viewModel.model?.title
 //        userButton.setImage(UIImage(named: (viewModel.model?.user!.headPic)!), for: .normal)
         
@@ -97,6 +97,7 @@ class StoryBannerView: UIView {
         addSubview(titleLabel)
         addSubview(favButton)
         addSubview(userButton)
+        
         backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }

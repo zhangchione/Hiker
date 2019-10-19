@@ -10,6 +10,7 @@ import UIKit
 import CollectionKit
 import SnapKit
 import SwiftMessages
+import ProgressHUD
 
 class SearchViewController: SubClassBaseViewController {
 
@@ -77,9 +78,18 @@ class SearchViewController: SubClassBaseViewController {
         return btn
     }()
     
+    lazy var clearBtn:UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "home_search_clear"), for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        btn.setTitleColor(UIColor.init(r: 58, g: 58, b: 58), for: .normal)
+        btn.backgroundColor = UIColor.init(r: 238, g: 238, b: 238)
+        btn.layer.cornerRadius = 15
+        btn.addTarget(self, action: #selector(clear), for: .touchUpInside)
+        return btn
+    }()
     
-    
-    fileprivate let dataSource = ArrayDataSource(data:[SearchUserModel]())
+    fileprivate let dataSource = ArrayDataSource(data:[User]())
     fileprivate lazy var collectionView = CollectionView()
 
     
@@ -130,6 +140,13 @@ extension SearchViewController {
         let vc = SearchContentViewController(word: word)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    @objc func clear() {
+        UserDefaults.standard.removeObject(forKey: "history1")
+        UserDefaults.standard.removeObject(forKey: "history2")
+        ProgressHUD.showSuccess("记录删除成功")
+        self.historyBtn1.isHidden = true
+        self.historyBtn2.isHidden = true
+    }
 }
 
 /// MRAK - 输入监听
@@ -176,6 +193,8 @@ extension SearchViewController {
         view.addSubview(collectionView)
         view.addSubview(userLabel)
 
+        view.addSubview(clearBtn)
+        
         view.addSubview(historyBtn1)
         view.addSubview(historyBtn2)
         
@@ -203,6 +222,7 @@ extension SearchViewController {
             make.width.equalTo(TKWidth-15)
             make.height.equalTo(150)
         }
+
         
         tfBackView.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
@@ -237,15 +257,20 @@ extension SearchViewController {
             make.height.equalTo(30)
         }
         
+        clearBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(view).offset(-20)
+            make.centerY.equalTo(historyBtn2)
+            make.width.height.equalTo(30)
+        }
         
     }
     
     func configCV() {
-        let viewSource = ClosureViewSource(viewUpdater: {(view:SearchUserCell,data:SearchUserModel,index:Int) in
+        let viewSource = ClosureViewSource(viewUpdater: {(view:SearchUserCell,data:User,index:Int) in
                 view.updateUI(with:data)
             })
         
-        let sizeSource = {(index:Int,data:SearchUserModel,collectionSize:CGSize) ->CGSize in
+        let sizeSource = {(index:Int,data:User,collectionSize:CGSize) ->CGSize in
             return CGSize(width: 120, height: 150)
             }
               
@@ -258,16 +283,17 @@ extension SearchViewController {
         let layout = FlowLayout(spacing: 10,justifyContent: .end)
         provider.layout = layout
         provider.tapHandler = { context -> Void in
-            let warning = MessageView.viewFromNib(layout: .cardView)
-             warning.configureTheme(.warning)
-             warning.configureDropShadow()
-             let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
-             warning.configureContent(title: "不好意思啦", body: "系统目前暂时没有用户推荐噢~", iconText: iconText)
-             warning.button?.isHidden = true
-             var warningConfig = SwiftMessages.defaultConfig
-             warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
-             SwiftMessages.show(config: warningConfig, view: warning)
-            
+//            let warning = MessageView.viewFromNib(layout: .cardView)
+//             warning.configureTheme(.warning)
+//             warning.configureDropShadow()
+//             let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
+//             warning.configureContent(title: "不好意思啦", body: "系统目前暂时没有用户推荐噢~", iconText: iconText)
+//             warning.button?.isHidden = true
+//             var warningConfig = SwiftMessages.defaultConfig
+//             warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
+//             SwiftMessages.show(config: warningConfig, view: warning)
+            let userVC = HKUserViewController(data: context.data)
+            self.navigationController?.pushViewController(userVC, animated: true)
         }
         collectionView.provider = provider
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -275,12 +301,15 @@ extension SearchViewController {
     }
     
     func configData(){
-        let data1 = SearchUserModel(userimg: "user1", username: "李汪汪", numStory: 17, fans: 10)
-        let data2 = SearchUserModel(userimg: "user2", username: "李汪汪", numStory: 17, fans: 10)
-        let data3 = SearchUserModel(userimg: "user3", username: "李汪汪", numStory: 17, fans: 10)
-        self.dataSource.data.append(data1)
-        self.dataSource.data.append(data2)
-        self.dataSource.data.append(data3)
+        let user1 = User(id: "263e68dd-1078-4f87-9427-64a63d58e125", username: "zhangchione", password: "zc123...", headPic: "https://www.hut-idea.top/images/20191014/cIt7MVKFLwK186wjWeCj.png", sgin: "喜欢远方", notes: 6, fans: 1, concern: 0, nickName: "小张同学", bgPic: "https://uploadfiles.nowcoder.com/files/20190814/6658561_1565778336259_120x120.png")
+        
+        let user2 = User(id: "20883ba0-2d47-4be0-afe1-82ed9ea626fd", username: "zc123", password: "123456", headPic: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568805954241&di=92427105ce91bac17ca2ef9fa75e1326&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180909%2Ffcc86038b8c0410f87aee5229aa092c3.jpeg", sgin: "爱旅行,爱旅拍", notes: 0, fans: 2, concern: 1, nickName: "旅中人", bgPic: "https://uploadfiles.nowcoder.com/files/20190814/6658561_1565778336259_120x120.png")
+        
+        let user3 = User(id: "75f03a3c-2398-4607-ae0c-be1224f54c56", username: "cone", password: "zc123...", headPic: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568805954241&di=92427105ce91bac17ca2ef9fa75e1326&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180909%2Ffcc86038b8c0410f87aee5229aa092c3.jpeg", sgin: "爱旅行的小张同学", notes: 1, fans: 0, concern: 1, nickName: "Cone噢", bgPic: "https://uploadfiles.nowcoder.com/files/20190814/6658561_1565778336259_120x120.png")
+        
+        self.dataSource.data.append(user1)
+        self.dataSource.data.append(user2)
+        self.dataSource.data.append(user3)
         self.collectionView.reloadData()
     }
 

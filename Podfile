@@ -15,6 +15,8 @@ target 'Hiker' do
   # 缓存圆
   pod 'ProgressHUD'
   
+  # 图片查看
+  pod 'Lightbox'
   
   pod 'Kingfisher'
   

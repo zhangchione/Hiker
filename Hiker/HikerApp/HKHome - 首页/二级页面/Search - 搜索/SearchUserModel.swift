@@ -13,4 +13,5 @@ struct SearchUserModel {
     var username = ""
     var numStory = 17
     var fans = 20
+    var user = User()
 }

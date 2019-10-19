@@ -146,6 +146,7 @@ extension StoryViewController {
         if notesData.like {
             self.loveBtn.setBackgroundImage(UIImage(named: "home_detialstory_unfav"), for: .normal)
             notesData.like = false
+            favNet(noteId: notesData.id)
         }else {
              self.loveBtn.setBackgroundImage(UIImage(named: "home_detialstory_fav"), for: .normal)
             notesData.like = true

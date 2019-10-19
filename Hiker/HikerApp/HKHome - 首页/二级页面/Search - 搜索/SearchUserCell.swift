@@ -11,11 +11,29 @@ import UIKit
 
 class SearchUserCell: UIView {
     
-    lazy var zanwu: UILabel = {
+    // 图片
+    lazy var userIcon: UIImageView = {
+            let imageView = UIImageView()
+    //        imageView.backgroundColor = .red
+            imageView.layer.cornerRadius = 30
+            imageView.clipsToBounds = true
+            imageView.image = UIImage(named: "椭圆形")
+            return imageView
+        }()
+    
+    lazy var nickName: UILabel = {
        let label = UILabel()
-        label.text = "暂无推荐噢~"
-        label.font = UIFont.init(name: "苹方-简 中黑体", size: 14)
+        label.font = UIFont.init(name: "苹方-简 常规体", size: 12)
         label.textColor = UIColor.init(r: 56, g: 56, b: 56)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var detial: UILabel = {
+       let label = UILabel()
+        label.font = UIFont.init(name: "苹方-简 常规体", size: 8)
+        label.textColor = UIColor.init(r: 146, g: 146, b: 146)
+        label.textAlignment = .center
         return label
     }()
     
@@ -30,14 +48,34 @@ class SearchUserCell: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateUI(with data:SearchUserModel){
+    func updateUI(with data:User){
         
+        let imgUrl = URL(string: data.headPic)
+        self.userIcon.kf.setImage(with: imgUrl)
+        self.nickName.text = data.nickName
+        self.detial.text = "\(data.notes)故事 | \(data.fans)粉丝"
     }
     
     func configUI() {
-        addSubview(zanwu)
-        zanwu.snp.makeConstraints { (make) in
-            make.center.equalTo(self)
+        addSubview(userIcon)
+        addSubview(nickName)
+        addSubview(detial)
+        userIcon.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(10)
+            make.centerX.equalTo(self)
+            make.height.width.equalTo(60)
+        }
+        nickName.snp.makeConstraints { (make) in
+            make.top.equalTo(userIcon.snp.bottom).offset(15)
+            make.centerX.equalTo(self)
+            make.height.equalTo(20)
+            make.width.equalTo(self)
+        }
+        detial.snp.makeConstraints { (make) in
+            make.top.equalTo(nickName.snp.bottom).offset(15)
+            make.centerX.equalTo(self)
+            make.height.equalTo(15)
+            make.width.equalTo(self)
         }
     }
     

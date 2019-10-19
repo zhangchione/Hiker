@@ -175,13 +175,14 @@ extension SearchContentViewController {
           cell.photoCell.imgDatas = pics
           let imgUrl = URL(string: data.user!.headPic)
           cell.userIcon.kf.setImage(with: imgUrl)
-          cell.userName.text = data.user?.username
+          cell.userName.text = data.user?.nickName
           var locations = [String]()
           for note in data.noteParas! {
               locations.append(note.place)
           }
           let place = locations.joined(separator: "、")
           cell.trackLocation.text = "#" + place
+        
           cell.title.text = data.title
           cell.time.text = data.noteParas![0].date
           cell.favLabel.text = "\(data.likes)"
@@ -197,8 +198,35 @@ extension SearchContentViewController {
               cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
           }
           cell.favBtn.addTarget(self, action: #selector(collected(_:)), for: .touchUpInside)
+            cell.trackBtn.addTarget(self, action: #selector(self.city(_:)), for:    .touchUpInside)
+             cell.userBtn.addTarget(self, action: #selector(self.user(_:)), for:    .touchUpInside)
+        }
+        
+        @objc func city(_ sender:UIButton){
+            let btn = sender
+            let cell = btn.superView(of: StoryView.self)!
+            let indexPath = collectionView.indexPath(for: cell)
+            
+            let datas = data[(indexPath?.row)!]
+            var locations = [String]()
+            for note in datas.noteParas! {
+                locations.append(note.place)
+            }
+            let vc = SearchContentViewController(word: locations[0])
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        @objc func user(_ sender:UIButton){
+            let btn = sender
+            let cell = btn.superView(of: StoryView.self)!
+            let indexPath = collectionView.indexPath(for: cell)
+            
+            let model = data[(indexPath?.row)!].user!
 
-      }
+            let userVC = HKUserViewController(data: model)
+            self.navigationController?.pushViewController(userVC, animated: true)
+        }
+
+    
     
 }
 extension SearchContentViewController {

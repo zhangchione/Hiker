@@ -53,6 +53,7 @@ class CommentViewController: UIViewController {
         tableview.register(CommentCell.self, forCellReuseIdentifier: "commentcell")
         tableview.separatorStyle = .none
         tableview.backgroundColor = .white
+        
         return tableview
     }()
     
@@ -129,6 +130,7 @@ extension CommentViewController :UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:identifier , for: indexPath) as! CommentCell
         cell.updateUI(with: datas[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

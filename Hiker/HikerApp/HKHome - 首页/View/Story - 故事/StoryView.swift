@@ -32,6 +32,12 @@ class StoryView: UICollectionViewCell {
         imageView.image = UIImage(named: "椭圆形")
         return imageView
     }()
+        // 图片
+        lazy var userBtn: UIButton = {
+            let btn = UIButton()
+            return btn
+        }()
+    
     // 用户名
     lazy var userName: UILabel = {
         let label = UILabel()
@@ -50,6 +56,13 @@ class StoryView: UICollectionViewCell {
         label.textAlignment = .right
         return label
     }()
+    
+    // 地点
+    lazy var trackBtn: UIButton = {
+        let btn = UIButton()
+        return btn
+    }()
+    
     
     // 标题
     lazy var title: UILabel = {
@@ -119,7 +132,9 @@ class StoryView: UICollectionViewCell {
         addSubview(time)
         addSubview(title)
         addSubview(trackLocation)
+        addSubview(trackBtn)
         addSubview(userIcon)
+        addSubview(userBtn)
         addSubview(userName)
         addSubview(photoCell)
         
@@ -172,6 +187,12 @@ class StoryView: UICollectionViewCell {
             make.width.equalTo(AdaptW(35))
             make.height.equalTo(35)
         }
+        userBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(AdaptW(15))
+             make.bottom.equalTo(title.snp.top).offset(-10)
+            make.width.equalTo(AdaptW(100))
+            make.height.equalTo(35)
+        }
         userName.snp.makeConstraints { (make) in
             make.left.equalTo(userIcon.snp.right).offset(AdaptW(5))
             make.centerY.equalTo(userIcon.snp.centerY)
@@ -183,6 +204,12 @@ class StoryView: UICollectionViewCell {
             make.right.equalTo(self).offset(AdaptW(-15))
             make.centerY.equalTo(userIcon.snp.centerY)
             make.width.equalTo(AdaptW(200))
+            make.height.equalTo(20)
+        }
+        trackBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(self).offset(AdaptW(-15))
+            make.centerY.equalTo(userIcon.snp.centerY)
+            make.width.equalTo(AdaptW(100))
             make.height.equalTo(20)
         }
     

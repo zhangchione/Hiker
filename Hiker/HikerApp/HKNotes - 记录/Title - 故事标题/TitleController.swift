@@ -42,7 +42,7 @@ class TitleController: UIViewController {
             
         }else {
             saveTitle(title: textView.text)
-            let noteVC = NoteController(app.photoDataManager)
+            let noteVC = NoteController()
             self.navigationController?.pushViewController(noteVC, animated: true)
         }
     }
