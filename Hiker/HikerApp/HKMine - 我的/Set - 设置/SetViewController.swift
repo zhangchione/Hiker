@@ -29,6 +29,8 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
     private lazy var alterNickNameView : AlterSginView = {
         let loginView = AlterSginView(frame: CGRect(x: 0, y: 0, width: TKWidth, height: TKHeight))
         loginView.delegate = self
+        loginView.textField.placeholder = "修改您喜欢的昵称吧~"
+        loginView.titleLab.text = "修改昵称"
         return loginView
     }()
     
@@ -177,11 +179,17 @@ extension SetViewController :UIImagePickerControllerDelegate,UINavigationControl
         let imgUrl = (imageURL as! URL).path
         self.headimg = img
         self.userImg.image = self.headimg
- 
 
+//          let size = CGSize(width: 30, height: 30)
+//              startAnimating(size, message: "上传头像中...", type: .ballClipRotate, fadeInAnimation: nil)
+        
         let headpic = uploadPic(imageURL: imgUrl)
-        alterHeadPicNet(username: userData!.username, password: userData!.password,headPic: headpic)
-            self.dismiss(animated: true, completion: nil)
+//        alterHeadPicNet(username: userData!.username, password: userData!.password,headPic: headpic)
+        print(headpic)
+//        NVActivityIndicatorPresenter.sharedInstance.setMessage("更改完成...")
+//        self.stopAnimating(nil)
+        self.dismiss(animated: true, completion: nil)
+        
 
     }
     
@@ -223,8 +231,6 @@ extension SetViewController: AlterSginDelegate {
                 let json = JSON(value)
                 print(json)
                 print("头像修改成功")
-
-                
             }
         }
     }
@@ -245,7 +251,9 @@ extension SetViewController: AlterSginDelegate {
                     if let data = response.data {
                         let json = JSON(data)
                         imgUrl = json["data"].stringValue
-                            //self.requestEndFlag = true
+                        print(imgUrl)
+                        self.alterHeadPicNet(username: self.userData!.username, password: self.userData!.password,headPic: imgUrl)
+//                            self.requestEndFlag = true
                     }
                     //获取上传进度
                     upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
@@ -257,8 +265,8 @@ extension SetViewController: AlterSginDelegate {
             }
 
         }
-       // waitingRequestEnd()
-        //self.requestEndFlag = false
+//        waitingRequestEnd()
+//        self.requestEndFlag = false
         print("图片上传完成")
         return imgUrl
     }

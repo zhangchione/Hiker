@@ -12,7 +12,7 @@ class FanCell: UITableViewCell {
 
    lazy var userIcon:UIImageView = {
        let img = UIImageView()
-        img.layer.cornerRadius = 30
+        img.layer.cornerRadius = 25
         img.clipsToBounds = true
         img.image = UIImage(named: "椭圆形(1)")
         return img

@@ -259,6 +259,7 @@ extension SearchContentViewController {
             cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
             data[(indexPath?.row)!].like = false
+            favNet(noteId: data[(indexPath?.row)!].id)
         }else {
             cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
             cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
@@ -282,27 +283,28 @@ extension SearchContentViewController {
     }
     
     func collecteNet(noteId:Int) {
-        
-        
-        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
+
+        let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
         
         Alamofire.request(getCollectedAPI(noteId: noteId), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             guard response.result.isSuccess else {
-                ProgressHUD.showError("发布游记网络请求错误"); return
+                ProgressHUD.showError("收藏网络请求错误"); return
             }
             if let value = response.result.value {
                 let json = JSON(value)
-                print(json)
+                print(json,1)
             }
         }
     }
     
     func unCollecteNet(noteId:Int) {
-        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
+        let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
         Alamofire.request(getUnCollectedAPI(noteId: noteId), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            
             guard response.result.isSuccess else {
-                ProgressHUD.showError("发布游记网络请求错误"); return
+                ProgressHUD.showError("收藏网络请求错误"); return
             }
+            
             if let value = response.result.value {
                 let json = JSON(value)
             }

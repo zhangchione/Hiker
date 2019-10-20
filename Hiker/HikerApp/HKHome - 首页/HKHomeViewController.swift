@@ -153,7 +153,7 @@ extension HKHomeViewController {
             self.navigation.bar.prefersLargeTitles = true
             self.navigation.item.largeTitleDisplayMode = .automatic
         }
-        navigation.bar.automaticallyAdjustsPosition = false
+        //navigation.bar.automaticallyAdjustsPosition = false
         self.navigation.item.title = "发现"
         self.navigation.bar.alpha = 1
         self.navigation.bar.isShadowHidden = true
@@ -420,8 +420,7 @@ extension HKHomeViewController {
     }
     
     func collecteNet(noteId:Int) {
-        
-        
+
         let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
         
         Alamofire.request(getCollectedAPI(noteId: noteId), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
@@ -430,7 +429,7 @@ extension HKHomeViewController {
             }
             if let value = response.result.value {
                 let json = JSON(value)
-                print(json)
+                print(json,1)
             }
         }
     }
@@ -438,6 +437,7 @@ extension HKHomeViewController {
     func unCollecteNet(noteId:Int) {
         let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
         Alamofire.request(getUnCollectedAPI(noteId: noteId), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            
             guard response.result.isSuccess else {
                 ProgressHUD.showError("收藏网络请求错误"); return
             }
@@ -498,7 +498,7 @@ extension HKHomeViewController {
         for note in data.noteParas! {
             locations.append(note.place)
         }
-        let vc = SearchContentViewController(word: locations[0])
+        let vc = CityViewController(words: locations)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc func user(_ sender:UIButton){

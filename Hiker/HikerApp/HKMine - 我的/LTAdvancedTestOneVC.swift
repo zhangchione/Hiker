@@ -59,8 +59,8 @@ extension LTAdvancedTestOneVC {
                 self?.tableView.mj_header.endRefreshing()
             })
         }
-        
     }
+    
 }
 
 

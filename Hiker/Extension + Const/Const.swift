@@ -33,7 +33,19 @@ let TKWidth = UIScreen.main.bounds.width
 let TKHeight = UIScreen.main.bounds.height
 
 // 背景色
-let backColor = UIColor.init(r: 247, g: 247, b: 247)
+
+@available(iOS 13.0, *)
+let backColor = UIColor {(trait) -> UIColor in
+    switch trait.userInterfaceStyle {
+    case .light:
+        return .white
+    case .dark:
+        return UIColor.init(r: 247, g: 247, b: 247)
+    default:
+        fatalError()
+    }
+}
+    
 // 文字色
 let textColor = UIColor.init(r: 146, g: 146, b: 146)
 // 底部状态栏背景色

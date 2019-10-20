@@ -27,11 +27,13 @@ class LocationView: UIView {
     // 代理
     weak var delegate:LocationDelegate?
     
-//    private lazy var addBookView : AddBookView = {
-//        let loginView = AddBookView(frame: CGRect(x: 0, y: 0, width: TKWidth, height: TKHeight))
-//        loginView.delegate = self
-//        return loginView
-//    }()
+    private lazy var addBookView : AddBookView = {
+        let loginView = AddBookView(frame: CGRect(x: 0, y: 0, width: TKWidth, height: TKHeight))
+        loginView.delegate = self
+        loginView.textField.placeholder = "添加你想要添加的地点"
+        loginView.titleLab.text = "添加地点"
+        return loginView
+    }()
     
     // 故事簿
     var bookName: String?
@@ -56,7 +58,7 @@ class LocationView: UIView {
     private lazy var addBookBtn: UIButton = {
        let btn = UIButton()
         btn.setImage(UIImage(named: "note_add_story"), for: .normal)
-        btn.setTitle("添加故事本", for: .normal)
+        btn.setTitle("添加地点", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
@@ -132,14 +134,14 @@ class LocationView: UIView {
             make.top.equalTo(Adapt(50))
             make.height.equalTo(Adapt(32))
         })
-//        self.bgView.addSubview(addBookBtn)
-//        
-//        addBookBtn.snp.makeConstraints { (make) in
-//            make.right.equalTo(bgView.snp.right).offset(-10)
-//            make.centerY.equalTo(titleLab.snp.centerY)
-//            make.height.equalTo(30)
-//            make.width.equalTo(120)
-//        }
+        self.bgView.addSubview(addBookBtn)
+        
+        addBookBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(bgView.snp.right).offset(-10)
+            make.centerY.equalTo(titleLab.snp.centerY)
+            make.height.equalTo(30)
+            make.width.equalTo(120)
+        }
         
         self.line1 = UIView.tk_createView(bgClor: UIColor.init(r: 238, g: 238, b: 238), supView: bgView, closure: { (make) in
             make.left.equalTo(Adapt(30))
@@ -179,8 +181,8 @@ class LocationView: UIView {
 
 extension LocationView {
     @objc func addBook(){
-//        UIApplication.shared.keyWindow?.addSubview(self.addBookView)
-//        self.addBookView.showAddView()
+        UIApplication.shared.keyWindow?.addSubview(self.addBookView)
+        self.addBookView.showAddView()
     }
     
     @objc func start(){
@@ -240,4 +242,11 @@ extension LocationView: UITableViewDataSource,UITableViewDelegate {
         }
     }
     
+}
+extension LocationView : AddBookDelegate {
+    func passBookName(with data: String) {
+        self.bookName = data
+        self.data.append(BookModel(name: data, num: 0))
+        self.tableview.reloadData()
+    }
 }

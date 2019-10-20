@@ -12,6 +12,8 @@ import SwiftyJSON
 import ProgressHUD
 import NVActivityIndicatorView
 
+@available(iOS 13.0, *)
+@available(iOS 13.0, *)
 class NotesController: ExpandingViewController,NVActivityIndicatorViewable {
 
     
@@ -233,8 +235,8 @@ extension NotesController {
         if indexPath.row ==  (data?.noteParas!.count)! {
            // self.navigationController?.popToRootViewController(animated: true)
                 var app = AppContext()
-            //let noteVC = NoteController(app.photoDataManager)
             let noteVC = NoteController()
+            //let noteVC = NoteController()
             self.navigationController?.pushViewController(noteVC, animated: true)
         }
     }
@@ -249,10 +251,10 @@ extension NotesController {
         cell.time.text = data.date
         cell.location.text = data.place
         cell.content.text = data.content
+        print(data.pics)
         let pics = data.pics.components(separatedBy: ",")
-        cell.photoCell.isLocalImage = true
+        //cell.photoCell.isLocalImage = true
         cell.photoCell.imgDatas = pics
-        
     }
 }
 
@@ -404,20 +406,20 @@ extension NotesController: selectBookDelegate {
 
          for index in 0 ..< (data?.noteParas!.count)! {
              print(index,self.data?.noteParas![index].pics)
-             var imgs = ""
-             let imgsArray = self.data?.noteParas![index].pics.components(separatedBy:",")
-             for img in imgsArray! {
-                 print(img)
-                 if imgs != "" {
-                     imgs = imgs + "," + uploadPic(imageURL: img)
-                 }else {
-                     imgs = uploadPic(imageURL: img)
-                 }
-             }
-            
+             var imgs = self.data?.noteParas![index].pics
+//             let imgsArray = self.data?.noteParas![index].pics.components(separatedBy:",")
+//             for img in imgsArray! {
+//                 print(img)
+//                 if imgs != "" {
+//                     imgs = imgs + "," + uploadPic(imageURL: img)
+//                 }else {
+//                     imgs = uploadPic(imageURL: img)
+//                 }
+//             }
+//
              self.note = self.data?.noteParas![index]
 
-             postNotes(note: self.note!, pic: imgs)
+            postNotes(note: self.note!, pic: imgs!)
          }
          removeUserDeault()
         NVActivityIndicatorPresenter.sharedInstance.setMessage("发布完成...")

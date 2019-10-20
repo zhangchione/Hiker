@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MJRefresh
+import LTScrollView
 
 
 class MineStoryViewController: UIViewController {
@@ -22,13 +24,16 @@ class MineStoryViewController: UIViewController {
         
         tableView.register(UINib(nibName: storyID, bundle: nil), forCellReuseIdentifier: storyID)
         tableView.separatorStyle = .none
+        
         return tableView
     }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configUI()
+        reftreshData()
     }
     override func viewWillAppear(_ animated: Bool) {
 //                super.viewWillAppear(animated)
@@ -53,6 +58,7 @@ class MineStoryViewController: UIViewController {
         view.addSubview(self.tableView)
         self.tableView.frame = CGRect(x: 0, y: 0, width: TKWidth, height: TKHeight - 120)
         glt_scrollView = tableView
+        glt_scrollView?.showsVerticalScrollIndicator = false
     }
 
 }
@@ -73,7 +79,7 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: storyID, for: indexPath) as! MineSotryCell
             
             configCell(cell, with: (datas?.story![indexPath.row])!)
-            cell.selectionStyle = .none;
+            
             return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -110,4 +116,20 @@ extension MineStoryViewController{
             cell.personal.isHidden = true
         }
     }
+    fileprivate func reftreshData()  {
+        
+        tableView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                print("上拉加载更多数据")
+                self?.tableView.mj_footer.endRefreshing()
+            })
+        }
+        tableView.mj_header = MJRefreshNormalHeader {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                print("下拉刷新 --- 1")
+                self?.tableView.mj_header.endRefreshing()
+            })
+        }
+    }
+    
 }

@@ -201,114 +201,143 @@ extension MyCollectionsController: UICollectionViewDelegateFlowLayout, UICollect
 
 extension MyCollectionsController {
     func config(_ cell:StoryView,with data:NotesModel) {
-          let pics = data.noteParas![0].pics.components(separatedBy: ",")
-          cell.photoCell.imgDatas = pics
-          let imgUrl = URL(string: data.user!.headPic)
-          cell.userIcon.kf.setImage(with: imgUrl)
-          cell.userName.text = data.user?.username
-          var locations = [String]()
-          for note in data.noteParas! {
-              locations.append(note.place)
-          }
-          let place = locations.joined(separator: "、")
-          cell.trackLocation.text = "#" + place
-          cell.title.text = data.title
-          cell.time.text = data.noteParas![0].date
-          cell.favLabel.text = "\(data.likes)"
-          if data.like {
-              cell.favIcon.setImage(UIImage(named: "home_story_fav"), for: .normal)
-          }else {
-              cell.favIcon.setImage(UIImage(named: "home_story_unfav"), for: .normal)
-          }
-          cell.favIcon.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
-          if data.collected {
-              cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
-          }else {
-              cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
-          }
-          cell.favBtn.addTarget(self, action: #selector(collected(_:)), for: .touchUpInside)
+            let pics = data.noteParas![0].pics.components(separatedBy: ",")
+            cell.photoCell.imgDatas = pics
+            let imgUrl = URL(string: data.user!.headPic)
+            cell.userIcon.kf.setImage(with: imgUrl)
+            cell.userName.text = data.user?.nickName
+            var locations = [String]()
+            for note in data.noteParas! {
+                locations.append(note.place)
+            }
+            let place = locations.joined(separator: "、")
+            cell.trackLocation.text = "#" + place
+          
+            cell.title.text = data.title
+            cell.time.text = data.noteParas![0].date
+            cell.favLabel.text = "\(data.likes)"
+            if data.like {
+                cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
+            }else {
+                cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
+            }
+            cell.favIcon.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
+            if data.collected {
+                cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+            }else {
+                cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+            }
+            cell.favBtn.addTarget(self, action: #selector(collected(_:)), for: .touchUpInside)
+              cell.trackBtn.addTarget(self, action: #selector(self.city(_:)), for:    .touchUpInside)
+               cell.userBtn.addTarget(self, action: #selector(self.user(_:)), for:    .touchUpInside)
 
       }
     
 }
 extension MyCollectionsController {
-    @objc func collected(_ sender:UIButton){
-        
+    @objc func city(_ sender:UIButton){
         let btn = sender
         let cell = btn.superView(of: StoryView.self)!
         let indexPath = collectionView.indexPath(for: cell)
         
-        if data[(indexPath?.row)!].collected {
-            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
-            data[(indexPath?.row)!].collected = false
-            unCollecteNet(noteId: data[(indexPath?.row)!].id)
-        }else {
-            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
-            data[(indexPath?.row)!].collected = true
-            collecteNet(noteId: data[(indexPath?.row)!].id)
-            
+        let datas = data[(indexPath?.row)!]
+        var locations = [String]()
+        for note in datas.noteParas! {
+            locations.append(note.place)
         }
+        let vc = SearchContentViewController(word: locations[0])
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func user(_ sender:UIButton){
+        let btn = sender
+        let cell = btn.superView(of: StoryView.self)!
+        let indexPath = collectionView.indexPath(for: cell)
+        
+        let model = data[(indexPath?.row)!].user!
 
+        let userVC = HKUserViewController(data: model)
+        self.navigationController?.pushViewController(userVC, animated: true)
     }
     
-    @objc func fav(_ sender:UIButton){
-        
-        let btn = sender
-        let cell = btn.superView(of: StoryView.self)!
-        let indexPath = collectionView.indexPath(for: cell)
-        
-        if data[(indexPath?.row)!].like {
-            cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
-            cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
-            data[(indexPath?.row)!].like = false
-        }else {
-            cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
-            cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
-            data[(indexPath?.row)!].like = true
-            favNet(noteId: data[(indexPath?.row)!].id)
-        }
-        
-    }
-    
-    func favNet(noteId:Int) {
-        
-        Alamofire.request(getFavAPI(noteId: noteId)).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                ProgressHUD.showError("网络请求错误"); return
-            }
-            if let value = response.result.value {
-                let json = JSON(value)
-                    print(json)
-            }
-        }
-    }
-    
-    func collecteNet(noteId:Int) {
-        
-        
-        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
-        
-        Alamofire.request(getCollectedAPI(noteId: noteId), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                ProgressHUD.showError("发布游记网络请求错误"); return
-            }
-            if let value = response.result.value {
-                let json = JSON(value)
-                print(json)
-            }
-        }
-    }
-    
-    func unCollecteNet(noteId:Int) {
-        let dic = ["userId":getUserId(),"noteId":noteId] as [String : Any]
-        Alamofire.request(getUnCollectedAPI(noteId: noteId), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                ProgressHUD.showError("发布游记网络请求错误"); return
-            }
-            if let value = response.result.value {
-                let json = JSON(value)
-            }
-        }
-    
-    }
+    @objc func collected(_ sender:UIButton){
+           
+           let btn = sender
+           let cell = btn.superView(of: StoryView.self)!
+           let indexPath = collectionView.indexPath(for: cell)
+           
+           if data[(indexPath?.row)!].collected {
+               cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+               data[(indexPath?.row)!].collected = false
+               unCollecteNet(noteId: data[(indexPath?.row)!].id)
+           }else {
+               cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+               data[(indexPath?.row)!].collected = true
+               collecteNet(noteId: data[(indexPath?.row)!].id)
+               
+           }
+
+       }
+       
+       @objc func fav(_ sender:UIButton){
+           
+           let btn = sender
+           let cell = btn.superView(of: StoryView.self)!
+           let indexPath = collectionView.indexPath(for: cell)
+           
+           if data[(indexPath?.row)!].like {
+               cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
+               cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
+               data[(indexPath?.row)!].like = false
+               favNet(noteId: data[(indexPath?.row)!].id)
+           }else {
+               cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
+               cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
+               data[(indexPath?.row)!].like = true
+               favNet(noteId: data[(indexPath?.row)!].id)
+           }
+           
+       }
+       
+       func favNet(noteId:Int) {
+           
+           Alamofire.request(getFavAPI(noteId: noteId)).responseJSON { (response) in
+               guard response.result.isSuccess else {
+                   ProgressHUD.showError("网络请求错误"); return
+               }
+               if let value = response.result.value {
+                   let json = JSON(value)
+                       print(json)
+               }
+           }
+       }
+       
+       func collecteNet(noteId:Int) {
+
+           let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
+           
+           Alamofire.request(getCollectedAPI(noteId: noteId), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+               guard response.result.isSuccess else {
+                   ProgressHUD.showError("收藏网络请求错误"); return
+               }
+               if let value = response.result.value {
+                   let json = JSON(value)
+                   print(json,1)
+               }
+           }
+       }
+       
+       func unCollecteNet(noteId:Int) {
+           let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
+           Alamofire.request(getUnCollectedAPI(noteId: noteId), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+               
+               guard response.result.isSuccess else {
+                   ProgressHUD.showError("收藏网络请求错误"); return
+               }
+               
+               if let value = response.result.value {
+                   let json = JSON(value)
+               }
+           }
+       
+       }
 }

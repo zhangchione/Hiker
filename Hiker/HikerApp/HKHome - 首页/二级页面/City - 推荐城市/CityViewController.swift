@@ -7,19 +7,28 @@
 //
 
 import UIKit
+import SnapKit
+import Alamofire
+import HandyJSON
+import SwiftyJSON
+import ProgressHUD
 
-class CityViewController: SubClassBaseViewController {
+private let HKHomeSearchViewID = "HomeSearchView"
+private let HKRecommendCityID = "RecommendCityView"
+private let HKStoryID = "StoryView"
+private let HeaderViewID = "HomeHeaderReusableView"
 
-    private var data:CityModel?
-    convenience init(data:CityModel) {
-        self.init()
-        self.data = data
-    }
+class CityViewController: SubClassBaseViewController1 {
     
-    private let HKHomeSearchViewID = "HomeSearchView"
-    private let HKRecommendCityID = "RecommendCityView"
-    private let HKStoryID = "StoryView"
-    private let HeaderViewID = "HomeHeaderReusableView"
+
+    private var data = [NotesModel]()
+    private var words = [String]()
+    
+    convenience init(words:[String]) {
+        self.init()
+        self.words = words
+        ProgressHUD.show()
+    }
     
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
@@ -40,21 +49,27 @@ class CityViewController: SubClassBaseViewController {
         return collection
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configNav()
         configUI()
+        configNav()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        data.removeAll()
+        self.configData()
+        self.collectionView.reloadData()
     }
     
     func configNav(){
-       self.navigation.item.title =  "“" + data!.cityname + "”"
+
+        let place = words.joined(separator: "、")
+        
+        self.navigation.item.title =  "“\(place)”"
        self.navigation.bar.backgroundColor = backColor
     }
+    
     func configUI(){
         view.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints { (make) in
@@ -64,8 +79,33 @@ class CityViewController: SubClassBaseViewController {
         view.backgroundColor = backColor
     }
     
+    /// 网络加载数据
+    func configData() {
+        
+        for word in self.words {
+            Alamofire.request(getSearchAPI(word: word)).responseJSON { (response) in
+                 guard response.result.isSuccess else {
+                     ProgressHUD.showError("网络请求错误"); return
+                 }
+                 if let value = response.result.value {
+                     let json = JSON(value)
+                     if let obj = JSONDeserializer<HomeModel>.deserializeFrom(json: json.debugDescription){
+                         for data in obj.data! {
+                             self.data.append(data)
+                            ProgressHUD.showSuccess("数据请求成功")
+                            self.collectionView.reloadData()
+                         }
 
+                     }
+                 }
+             }
+        }
+
+ 
+    }
+    
 }
+
 extension CityViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -73,7 +113,7 @@ extension CityViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (data?.story?.count)!
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -82,10 +122,8 @@ extension CityViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             self.collectionView.register(StoryView.self, forCellWithReuseIdentifier: identifier)
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! StoryView
-            let storyData = data?.story![indexPath.row]
-            //cell.favBtn.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
-            //cell.photoCell.imgData = data[indexPath.row]
-            config(cell, with: storyData!)
+            
+            config(cell, with: data[indexPath.row])
             return cell
         
     }
@@ -119,8 +157,9 @@ extension CityViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewID, for: indexPath) as? HomeHeaderReusableView else {
             return UICollectionReusableView()
         }
-        let cityname = data?.cityname
-        headerView.titleLabel.text = "有\((data?.story?.count)!)个关于“\(cityname ?? "")”的故事。"
+        let place =  words.joined(separator: "、")
+        
+        headerView.titleLabel.text = "有\(data.count)个关于“\(place)”的故事。"
         headerView.titleLabel.textColor = UIColor.init(r: 146, g: 146, b: 146)
         headerView.titleLabel.font = UIFont.init(name: "PingFangSC-Regular", size: 16)
         
@@ -131,8 +170,8 @@ extension CityViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let storyData = data?.story![indexPath.row]
-            let vc = StoryViewController(model: storyData!)
+           let model = data[indexPath.row]
+            let vc = StoryViewController(model: model)
             self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -142,35 +181,144 @@ extension CityViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
 extension CityViewController {
     func config(_ cell:StoryView,with data:NotesModel) {
-        let pics = data.noteParas![0].pics.components(separatedBy: ",")
-        cell.photoCell.imgDatas = pics
-        let imgUrl = URL(string: data.user!.headPic)
-        cell.userIcon.kf.setImage(with: imgUrl)
-        cell.userName.text = data.user?.username
-        var locations = [String]()
-        for note in data.noteParas! {
-            locations.append(note.place)
+          let pics = data.noteParas![0].pics.components(separatedBy: ",")
+          cell.photoCell.imgDatas = pics
+          let imgUrl = URL(string: data.user!.headPic)
+          cell.userIcon.kf.setImage(with: imgUrl)
+          cell.userName.text = data.user?.nickName
+          var locations = [String]()
+          for note in data.noteParas! {
+              locations.append(note.place)
+          }
+          let place = locations.joined(separator: "、")
+          cell.trackLocation.text = "#" + place
+        
+          cell.title.text = data.title
+          cell.time.text = data.noteParas![0].date
+          cell.favLabel.text = "\(data.likes)"
+          if data.like {
+              cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
+          }else {
+              cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
+          }
+          cell.favIcon.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
+          if data.collected {
+              cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+          }else {
+              cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+          }
+          cell.favBtn.addTarget(self, action: #selector(collected(_:)), for: .touchUpInside)
+            cell.trackBtn.addTarget(self, action: #selector(self.city(_:)), for:    .touchUpInside)
+             cell.userBtn.addTarget(self, action: #selector(self.user(_:)), for:    .touchUpInside)
         }
-        let place = locations.joined(separator: "、")
-        cell.trackLocation.text = "#" + place
-        cell.title.text = data.title
-        cell.time.text = data.noteParas![0].date
-        cell.favLabel.text = "\(data.likes)"
-        if data.like {
-            cell.favIcon.setImage(UIImage(named: "home_story_fav"), for: .normal)
-        }else {
-            cell.favIcon.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+        
+        @objc func city(_ sender:UIButton){
+            let btn = sender
+            let cell = btn.superView(of: StoryView.self)!
+            let indexPath = collectionView.indexPath(for: cell)
+            
+            let datas = data[(indexPath?.row)!]
+            var locations = [String]()
+            for note in datas.noteParas! {
+                locations.append(note.place)
+            }
+            let vc = CityViewController(words: locations)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-        //cell.favIcon.addTarget(self, action: #selector(fav(_:)), for: .touchUpInside)
-        if data.collected {
-            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
-        }else {
-            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
-        }
-        //cell.favBtn.addTarget(self, action: #selector(collected(_:)), for: .touchUpInside)
-    }
-}
+        @objc func user(_ sender:UIButton){
+            let btn = sender
+            let cell = btn.superView(of: StoryView.self)!
+            let indexPath = collectionView.indexPath(for: cell)
+            
+            let model = data[(indexPath?.row)!].user!
 
-extension CityViewController  {
+            let userVC = HKUserViewController(data: model)
+            self.navigationController?.pushViewController(userVC, animated: true)
+        }
+
     
+    
+}
+extension CityViewController {
+    @objc func collected(_ sender:UIButton){
+        
+        let btn = sender
+        let cell = btn.superView(of: StoryView.self)!
+        let indexPath = collectionView.indexPath(for: cell)
+        
+        if data[(indexPath?.row)!].collected {
+            cell.favBtn.setImage(UIImage(named: "home_story_unfav"), for: .normal)
+            data[(indexPath?.row)!].collected = false
+            unCollecteNet(noteId: data[(indexPath?.row)!].id)
+        }else {
+            cell.favBtn.setImage(UIImage(named: "home_story_fav"), for: .normal)
+            data[(indexPath?.row)!].collected = true
+            collecteNet(noteId: data[(indexPath?.row)!].id)
+            
+        }
+
+    }
+    
+    @objc func fav(_ sender:UIButton){
+        
+        let btn = sender
+        let cell = btn.superView(of: StoryView.self)!
+        let indexPath = collectionView.indexPath(for: cell)
+        
+        if data[(indexPath?.row)!].like {
+            cell.favIcon.setImage(UIImage(named: "home_stroy_unloveblack"), for: .normal)
+            cell.favLabel.text = "\(Int(cell.favLabel.text!)! - 1)"
+            data[(indexPath?.row)!].like = false
+            favNet(noteId: data[(indexPath?.row)!].id)
+        }else {
+            cell.favIcon.setImage(UIImage(named: "home_story_lovered"), for: .normal)
+            cell.favLabel.text = "\(Int(cell.favLabel.text!)! + 1)"
+            data[(indexPath?.row)!].like = true
+            favNet(noteId: data[(indexPath?.row)!].id)
+        }
+        
+    }
+    
+    func favNet(noteId:Int) {
+        
+        Alamofire.request(getFavAPI(noteId: noteId)).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                    print(json)
+            }
+        }
+    }
+    
+    func collecteNet(noteId:Int) {
+
+        let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
+        
+        Alamofire.request(getCollectedAPI(noteId: noteId), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("收藏网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                print(json,1)
+            }
+        }
+    }
+    
+    func unCollecteNet(noteId:Int) {
+        let dic = ["userId":getUserId()!,"noteId":noteId] as [String : Any]
+        Alamofire.request(getUnCollectedAPI(noteId: noteId), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("收藏网络请求错误"); return
+            }
+            
+            if let value = response.result.value {
+                let json = JSON(value)
+            }
+        }
+    
+    }
 }

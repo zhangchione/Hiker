@@ -12,9 +12,10 @@ import Alamofire
 import SwiftyJSON
 import NVActivityIndicatorView
 import SwiftDate
+import Lightbox
 
-
-class NoteController: UIViewController,NVActivityIndicatorViewable     {   //,DataToEasyDelegate {
+class NoteController: UIViewController,NVActivityIndicatorViewable{
+//,DataToEasyDelegate {
 //    let keyMap = ["building":["塔","高楼","小洋房","别墅","学校"],
 //                  "food":["美食","食品","小吃","面","汤包"],
 //                  "landscape":["美景","山","水","湖","湖泊","江","白云"],
@@ -52,6 +53,10 @@ class NoteController: UIViewController,NVActivityIndicatorViewable     {   //,Da
     var startDate: Date?
     var endDate: Date?
     
+        var requestEndFlag = false
+    var upPhotoNum = 0
+    var selectPhotoNum = 0
+    
     // 数据
     var datas = NotesModel()
     
@@ -85,12 +90,13 @@ class NoteController: UIViewController,NVActivityIndicatorViewable     {   //,Da
     
     lazy var locationBtn:UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "note_icon_location"), for: .normal)
+        btn.setImage(UIImage(named: "note_icon_locations"), for: .normal)
         btn.setTitle("添加地点", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        btn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
+        btn.backgroundColor = UIColor.init(r: 222, g: 237, b: 254)
+        btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         btn.layer.cornerRadius = 15
         btn.addTarget(self, action: #selector(addLocation), for: .touchUpInside)
         return btn
@@ -98,12 +104,13 @@ class NoteController: UIViewController,NVActivityIndicatorViewable     {   //,Da
     
     lazy var timeBtn:UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "note_icon_location"), for: .normal)
+        btn.setImage(UIImage(named: "note_icon_time"), for: .normal)
         btn.setTitle("添加时间", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        btn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
+        btn.backgroundColor = UIColor.init(r: 222, g: 237, b: 254)
+        btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         btn.layer.cornerRadius = 15
         btn.addTarget(self, action: #selector(addTime), for: .touchUpInside)
         return btn
@@ -112,7 +119,7 @@ class NoteController: UIViewController,NVActivityIndicatorViewable     {   //,Da
     lazy var tipLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-        label.text = "非常抱歉，由于智能配图功能将在10月24日上线，目前图片只支持单选。"
+        label.text = "智能配图功能正在测试，暂未上线。预计将在10月24日上线。"
         label.numberOfLines = 0
         return label
     }()
@@ -257,9 +264,26 @@ extension NoteController {
             make.bottom.equalTo(addPhotoBtn.snp.top)
             make.height.equalTo(200)
         }
+
+
         DispatchQueue.main.async {
             self.addPhotoBtn.corner(byRoundingCorners: [.bottomLeft,.bottomRight], radii: 10)
         }
+        
+    }
+    
+    @objc func photoCellClick() {
+        var imgs = [LightboxImage]()
+        for pic in images {
+            
+            let img = LightboxImage(imageURL: URL(string: pic)!, text: "")
+            imgs.append(img)
+        }
+
+        let controller = LightboxController(images: imgs)
+        controller.dynamicBackground = true
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
     }
 }
 
@@ -279,28 +303,28 @@ extension NoteController {
     }
     @objc func addLocation(){
         
-//        UIApplication.shared.keyWindow?.addSubview(self.loginView)
-//        
-//        self.loginView.showAddView()
+        UIApplication.shared.keyWindow?.addSubview(self.loginView)
+
+        self.loginView.showAddView()
         
-        let alert = UIAlertController.init(title: "消息", message: "请添加地点信息", preferredStyle: .alert)
-
-        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
-            self.location =  (alert.textFields?.first?.text!)!
-                    self.locationBtn.setTitle( (alert.textFields?.first?.text!)!, for: .normal)
-            ProgressHUD.showSuccess("地点添加成功")
-        }
-        let noAction = UIAlertAction.init(title: "取消", style: .destructive) { (no) in
-            print("地点信息取消",no.style)
-        }
-        alert.addAction(yesAction)
-        alert.addAction(noAction)
-        alert.addTextField { (text) in
-            print(text.text,11)
-
-        }
-
-        self.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController.init(title: "消息", message: "请添加地点信息", preferredStyle: .alert)
+//
+//        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
+//            self.location =  (alert.textFields?.first?.text!)!
+//                    self.locationBtn.setTitle( (alert.textFields?.first?.text!)!, for: .normal)
+//            ProgressHUD.showSuccess("地点添加成功")
+//        }
+//        let noAction = UIAlertAction.init(title: "取消", style: .destructive) { (no) in
+//            print("地点信息取消",no.style)
+//        }
+//        alert.addAction(yesAction)
+//        alert.addAction(noAction)
+//        alert.addTextField { (text) in
+//            print(text.text,11)
+//
+//        }
+//
+//        self.present(alert, animated: true, completion: nil)
 
 
     }
@@ -418,8 +442,14 @@ extension NoteController {
         
     }
     @objc func addPhoto(){
-//        ProgressHUD.show("配图中")
-//
+        
+        self.upPhotoNum = 0
+        self.selectPhotoNum = 0
+        self.images  = [String]()
+
+        
+//      //  ProgressHUD.show("配图中")
+//        let strs = "西湖的水很美，杭州的美食也不错，人也有点多噢，今日打卡西湖。"
 //        let tvtext = writeTextView.text!
 //
 //        if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
@@ -431,10 +461,12 @@ extension NoteController {
 //                if time == ""{
 //                    ProgressHUD.showError("添加时间可以提高匹配精度哦")
 //                }else {
+//                        let size = CGSize(width: 30, height: 30)
+//                    self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
 //
 //                    var total = ["building":0,"food":0,"landscape":0,"animal":0,"night_scene":0,"face":0]
 //
-//                     for str in tvtext {
+//                     for str in strs {
 //                        for (key,value) in self.keyMap {
 //                            if (self.keyMap[key]?.contains(String(str)))! {
 //                                total[key]! += 1
@@ -472,14 +504,19 @@ extension NoteController {
 //                    var imgsData = [UIImage]()
 //                    // 配图失败处理
 //                    if datas.count == 0 {
-//                            ProgressHUD.showError("配图失败")
 //
+//                            self.stopAnimating(nil)
+//                         ProgressHUD.showError("配图失败")
 //                    }else {
 //                        for data in datas {
-//                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
+////                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
+//                            self.selectPhotoNum = datas.count
+//                            let img = SKPHAssetToImageTool.PHAssetToImage(asset: data.asset)
+//                            let up = self.uploadPic(image: img)
 //                        }
-//                        ProgressHUD.showSuccess("配图完成")
-//                        self.photoCell.updateUILocal(imgsData.count, with: imgsData)
+//
+//
+//                        //self.photoCell.updateUILocal(imgsData.count, with: imgsData)
 //                    }
 //
 //                }
@@ -489,20 +526,72 @@ extension NoteController {
         
         
         
+             //   开始选择照片，最多允许选择4张
+                _ = self.presentHGImagePicker(maxSelected:3) { (assets) in
+                    //结果处理
+                    self.selectPhotoNum = assets.count
+                        let size = CGSize(width: 30, height: 30)
+                    self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
+
+                    var seleimgs = [String]()
+                    for asset in assets {
+                        let img = SKPHAssetToImageTool.PHAssetToImage(asset: asset)
+                        seleimgs.append(self.uploadPic(image: img))
+                    }
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.photoCellClick))
+                    self.photoCell.addGestureRecognizer(tap)
+                    
+        }
+
+                    
+//                    self.photoCell.removeFromSuperview()
+
+//                    print("共选择了\(assets.count)张图片，分别如下：")
+//                    var seleImgs = [UIImage]()
+//                    var imgsData = [Data]()
+//                    var datas = [[Data]]()
+
+//                    self.view.addSubview(self.photoCell)
+//                    self.photoCell.snp.makeConstraints { (make) in
+//                        make.left.equalTo(self.view).offset(20)
+//                        make.right.equalTo(self.view).offset(-20)
+//                        make.bottom.equalTo(self.addPhotoBtn.snp.top)
+//                        make.height.equalTo(200)
+//                    }
+//
+//                    datas.append(imgsData)
+//                    saveImgs(datas: datas)
+//                    let getdatas = getImgs()
+//                    for gdatas in getdatas {
+//                        for data in gdatas {
+//                            let myImage = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIImage
+//                            print("imgdata",myImage)
+//                        }
+//                    }
+
+        //            self.photoCell.snp.makeConstraints { (make) in
+        //                make.left.equalTo(view).offset(20)
+        //                make.right.equalTo(view).offset(-20)
+        //                make.bottom.equalTo(addPhotoBtn.snp.top)
+        //                make.height.equalTo(200)
+        //            }
+
+               // }
+        
 
 
 
-        self.imgPricker = UIImagePickerController()
-        self.imgPricker.delegate = self
-        self.imgPricker.allowsEditing = true
-        self.imgPricker.sourceType = .photoLibrary
-
-        self.imgPricker.navigationBar.barTintColor = UIColor.gray
-        self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
-
-        self.imgPricker.navigationBar.tintColor = UIColor.white
-
-        self.present(self.imgPricker, animated: true, completion: nil)
+//        self.imgPricker = UIImagePickerController()
+//        self.imgPricker.delegate = self
+//        self.imgPricker.allowsEditing = true
+//        self.imgPricker.sourceType = .photoLibrary
+//
+//        self.imgPricker.navigationBar.barTintColor = UIColor.gray
+//        self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+//
+//        self.imgPricker.navigationBar.tintColor = UIColor.white
+//
+//        self.present(self.imgPricker, animated: true, completion: nil)
     }
 }
 
@@ -574,6 +663,69 @@ extension NoteController: LocationDelegate {
         self.locationBtn.setTitle( name, for: .normal)
     }
     
+    func uploadPic(image:UIImage) -> String{
+//        let image = UIImage(contentsOfFile: imageURL)
+        let imageData = UIImage.jpegData(image)(compressionQuality: 0.5)
+        var imgUrl = ""
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            let now = Date()
+            let timeForMatter = DateFormatter()
+            timeForMatter.dateFormat = "yyyyMMddHHmmss"
+            let id = timeForMatter.string(from: now)
+            
+            multipartFormData.append(imageData!, withName: "file", fileName: "\(id).jpg",mimeType: "image/jpeg")
+            print("图片准备上传")
+
+        }, to: getImageAPI()) { (encodingResult) in
+            switch encodingResult {
+            case .success(let upload,_,_):
+                upload.responseString{ response in
+                    if let data = response.data {
+                        let json = JSON(data)
+                        imgUrl = json["data"].stringValue
+                        //self.requestEndFlag = true
+                        print(json)
+                        self.images.append(imgUrl)
+                        
+                        self.upPhotoNum += 1
+                        if self.upPhotoNum == self.selectPhotoNum {
+                            print(self.images)
+                            self.photoCell.imgDatas = self.images
+                            self.stopAnimating(nil)
+                            ProgressHUD.showSuccess("完成")
+                        }
+                    }
+                    //获取上传进度
+                    upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+                        print("图片上传进度: \(progress.fractionCompleted)")
+                    }
+                }
+            case .failure(_):
+                print("上传失败")
+            }
+
+        }
+       // waitingRequestEnd()
+       // self.requestEndFlag = false
+        print("图片上传完成")
+        return imgUrl
+    }
+    
+    /// 异步数据请求同步化
+    func waitingRequestEnd() {
+        if Thread.current == Thread.main {
+            while !requestEndFlag {
+                RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.3))
+            }
+        } else {
+            autoreleasepool {
+                while requestEndFlag {
+                    Thread.sleep(forTimeInterval: 0.3)
+                }
+            }
+        }
+    }
+    
     
 }
 ////选择成功后代理
@@ -634,49 +786,4 @@ extension NoteController: LocationDelegate {
 //    })
 //}
         
-//        //开始选择照片，最多允许选择4张
-//        _ = self.presentHGImagePicker(maxSelected:4) { (assets) in
-//            //结果处理
-//            self.photoCell.removeFromSuperview()
-//                let size = CGSize(width: 30, height: 30)
-//            self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
-//            print("共选择了\(assets.count)张图片，分别如下：")
-//            var seleImgs = [UIImage]()
-//            var imgsData = [Data]()
-//            var datas = [[Data]]()
-//            for asset in assets {
-//                let img = SKPHAssetToImageTool.PHAssetToImage(asset: asset)
-//                print("img:",img)
-//                seleImgs.append(img)
-//                let img2 = UIImage(cgImage: img.cgImage!, scale: img.scale,orientation: img.imageOrientation)
-//                let data = NSKeyedArchiver.archivedData(withRootObject: img2)
-//                imgsData.append(data)
-//            }
-//            self.view.addSubview(self.photoCell)
-//            self.photoCell.snp.makeConstraints { (make) in
-//                make.left.equalTo(self.view).offset(20)
-//                make.right.equalTo(self.view).offset(-20)
-//                make.bottom.equalTo(self.addPhotoBtn.snp.top)
-//                make.height.equalTo(200)
-//            }
-//            self.photoCell.isLocalImage = true
-//            self.photoCell.imgsUIImage = seleImgs
-//            datas.append(imgsData)
-//            saveImgs(datas: datas)
-//            self.stopAnimating(nil)
-//            let getdatas = getImgs()
-//            for gdatas in getdatas {
-//                for data in gdatas {
-//                    let myImage = NSKeyedUnarchiver.unarchiveObject(with: data) as? UIImage
-//                    print("imgdata",myImage)
-//                }
-//            }
-//
-////            self.photoCell.snp.makeConstraints { (make) in
-////                make.left.equalTo(view).offset(20)
-////                make.right.equalTo(view).offset(-20)
-////                make.bottom.equalTo(addPhotoBtn.snp.top)
-////                make.height.equalTo(200)
-////            }
-//
-//        }
+

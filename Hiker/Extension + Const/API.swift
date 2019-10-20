@@ -41,6 +41,9 @@ func getMineAPI() -> String {
 func getImageAPI() -> String {
     return  "https://www.hut-idea.top/resources/upload"
 }
+func getImageAPIfast() -> String {
+    return "http://images.huthelper.cn:8888/api/v1/moments/upload"
+}
 
 func getStoryAPI() -> String {
     return basicURL + "/note/?token=" + getToken()!
@@ -81,7 +84,7 @@ func getUnFavAPI(noteId:Int)  -> String {
 }
 
 func getCollectedAPI(noteId:Int) -> String {
-    return basicURL + "/note/collected?token=" + getToken()!
+    return basicURL + "/note/collected?token=" + getToken()! //+ "&userId=" + getUserId()! + "&noteId" + "\(noteId)"
 }
 
 func getUnCollectedAPI(noteId:Int) -> String {

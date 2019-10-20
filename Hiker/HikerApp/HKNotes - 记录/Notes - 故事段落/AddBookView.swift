@@ -17,7 +17,7 @@ class AddBookView: UIView {
     weak var delegate : AddBookDelegate?
     
     private lazy var bgView = UIView()
-    private lazy var titleLab = UILabel()
+     lazy var titleLab = UILabel()
     private lazy var line1 = UIView()
     private lazy var closeBtn = UIButton()
     private lazy var startTrackBtn = UIButton()

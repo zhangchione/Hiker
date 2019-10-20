@@ -47,6 +47,7 @@ class HKMineViewController: UIViewController {
         layout.bottomLineColor = UIColor.init(r: 64, g: 223, b: 238)
         layout.sliderHeight = 48
         layout.lrMargin = 20
+        layout.showsHorizontalScrollIndicator = false
         /* 更多属性设置请参考 LTLayout 中 public 属性说明 */
         return layout
     }()
@@ -76,6 +77,7 @@ class HKMineViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
             configMineData()
+            configFansData()
     }
     
     func configMineData() {
@@ -87,54 +89,57 @@ class HKMineViewController: UIViewController {
                 let json = JSON(value)
                 if let obj = JSONDeserializer<MineModel>.deserializeFrom(json: json.debugDescription){
                     self.mineData = obj.data
-                    self.headerView.concernLabel.text = "\(self.mineData?.concern ?? 0)"
-                    self.headerView.fanLabel.text = "\(self.mineData?.fans ?? 3)"
+                    //self.headerView.concernLabel.text = "\(self.mineData?.concern ?? 0)"
+                    //self.headerView.fanLabel.text = "\(self.mineData?.fans ?? 3)"
                     self.headerView.userSign.text = self.mineData?.sgin
                     self.headerView.userName.text = self.mineData?.nickName
                     self.headerView.storyLabel.text = "\(self.mineData?.notes ?? 0)"
                     let imgUrl = URL(string: self.mineData!.headPic)
                     self.headerView.userImg.kf.setImage(with: imgUrl)
+                    let backImgUrl = URL(string:self.mineData!.bgPic)
+                    self.headerView.backgroundImageView.kf.setImage(with: backImgUrl)
+                    
                 }
             }
         }
     }
+    
+    func configFansData() {
+         Alamofire.request(getAttentionAPI(userId: getUserId()!)).responseJSON { (response) in
+             guard response.result.isSuccess else {
+                 ProgressHUD.showError("网络请求错误"); return
+             }
+             if let value = response.result.value {
+                 let json = JSON(value)
+                 if let obj = JSONDeserializer<ConcernsModel>.deserializeFrom(json: json.debugDescription){
+                     if let data = obj.data {
+                             self.concernData = data
+                             self.headerView.concernLabel.text = "\(data.count)"
+                            // self.requestEndFlag = true
+                         print(data,2)
+                     }
+                 }
+             }
+         }
+
+         Alamofire.request(getFansAPI(userId: getUserId()!)).responseJSON { (response) in
+             guard response.result.isSuccess else {
+                 ProgressHUD.showError("网络请求错误"); return
+             }
+             if let value = response.result.value {
+                 let json = JSON(value)
+                 if let obj = JSONDeserializer<FansModel>.deserializeFrom(json: json.debugDescription){
+                     if let data = obj.data {
+                        // self.requestEndFlag = true
+                         self.fansData = data
+                         self.headerView.fanLabel.text = "\(data.count)"
+                         print(data,1)
+                     }
+                 }
+             }
+         }
+    }
     func configData(){
-
-        Alamofire.request(getAttentionAPI(userId: getUserId()!)).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                ProgressHUD.showError("网络请求错误"); return
-            }
-            if let value = response.result.value {
-                let json = JSON(value)
-                if let obj = JSONDeserializer<ConcernsModel>.deserializeFrom(json: json.debugDescription){
-                    if let data = obj.data {
-                            self.concernData = data
-                            self.requestEndFlag = true
-
-                    }
-                }
-            }
-        }
-        self.waitingRequestEnd()
-        self.requestEndFlag =  false
-        
-        Alamofire.request(getFansAPI(userId: getUserId()!)).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                ProgressHUD.showError("网络请求错误"); return
-            }
-            if let value = response.result.value {
-                let json = JSON(value)
-                if let obj = JSONDeserializer<FansModel>.deserializeFrom(json: json.debugDescription){
-                    if let data = obj.data {
-                        self.requestEndFlag = true
-                        self.fansData = data
-                    }
-                }
-            }
-        }
-        self.waitingRequestEnd()
-        self.requestEndFlag =  false
-        
         
         Alamofire.request(getMyBookAPI(userId: getUserId()!)).responseJSON { (response) in
             guard response.result.isSuccess else {
@@ -149,16 +154,10 @@ class HKMineViewController: UIViewController {
                 }
 
         }
+
         self.waitingRequestEnd()
         self.requestEndFlag =  false
         
-        
-        if let data = concernData {
-            self.headerView.concernLabel.text = "\(data.count)"
-        }
-        if let data = fansData {
-            self.headerView.fanLabel.text = "\(data.count)"
-        }
         if let datas = storyData {
             for data in datas {
                 titles.append(data.bookName)
@@ -252,7 +251,7 @@ extension HKMineViewController: LTAdvancedScrollViewDelegate {
     func glt_scrollViewOffsetY(_ offsetY: CGFloat) {
         if offsetY >= 140 {
             self.navigation.bar.alpha = 1
-            self.navigation.item.title = mineData?.username
+            self.navigation.item.title = mineData?.nickName
             self.rightBarButton.setImage(UIImage(named: "mine_icon_setblack"), for: .normal)
         }
         else {
@@ -310,7 +309,7 @@ extension HKMineViewController {
     }
     @objc func fan() {
         print("我的粉丝")
-        if let data = concernData {
+        if let data = fansData {
             let concernVC = FanViewController(data:data)
             self.navigationController?.pushViewController(concernVC, animated: true)
         }else {
@@ -350,10 +349,11 @@ extension HKMineViewController :UIImagePickerControllerDelegate,UINavigationCont
         
         let imageURL = info[UIImagePickerController.InfoKey.imageURL]!
         let imageData1 = try! Data(contentsOf: imageURL as! URL)
-        //self.img.image = img
-        
-       self.headerView.backgroundImageView.image = UIImage(data: imageData1)
+        let imgUrl = (imageURL as! URL).path
 
+       self.headerView.backgroundImageView.image = UIImage(data: imageData1)
+        // 上传背景图
+        let code =  uploadPic(imageURL:imgUrl)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -382,4 +382,55 @@ extension HKMineViewController:AlterSginDelegate {
             }
         }
     }
+    
+    func alterBackImgNet(username:String,password:String,backImg:String) {
+            let dic = ["username":username,"password":password,"headPic": backImg]
+            
+            Alamofire.request(getAlterUserInfoAPI(), method: .put, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+                guard response.result.isSuccess else {
+                    ProgressHUD.showError("网络请求错误"); return
+                }
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    print(json)
+                    print("头像修改成功")
+                }
+            }
+        }
+        
+        func uploadPic(imageURL:String) -> String{
+
+            let image = UIImage(contentsOfFile: imageURL)
+            let imageData = UIImage.jpegData(image!)(compressionQuality: 1)
+            var imgUrl = ""
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                multipartFormData.append(imageData!, withName: "file", fileName: "2.jpg",mimeType: "image/jpeg")
+                print("图片准备上传")
+
+            }, to: getImageAPI()) { (encodingResult) in
+                switch encodingResult {
+                case .success(let upload,_,_):
+                    upload.responseString{ response in
+                        if let data = response.data {
+                            let json = JSON(data)
+                            imgUrl = json["data"].stringValue
+                            print(imgUrl)
+                            self.alterBackImgNet(username: self.mineData!.username, password: self.mineData!.password,backImg: imgUrl)
+    //                            self.requestEndFlag = true
+                        }
+                        //获取上传进度
+                        upload.uploadProgress(queue: DispatchQueue.global(qos: .utility)) { progress in
+                            print("图片上传进度: \(progress.fractionCompleted)")
+                        }
+                    }
+                case .failure(_):
+                    print("上传失败")
+                }
+
+            }
+    //        waitingRequestEnd()
+    //        self.requestEndFlag = false
+            print("图片上传完成")
+            return imgUrl
+        }
 }

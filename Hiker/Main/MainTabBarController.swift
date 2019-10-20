@@ -44,13 +44,15 @@ func mainTabBar() -> UITabBarController {
     
     
     homeNav.navigation.configuration.isEnabled = true
-    homeNav.navigation.configuration.barTintColor = backColor
-    homeNav.navigation.configuration.tintColor = backColor
+    
+        homeNav.navigation.configuration.barTintColor = backColor
+        homeNav.navigation.configuration.tintColor = backColor
+   
     
     
     mineNav.navigation.configuration.isEnabled = true
-    mineNav.navigation.configuration.barTintColor = .white
-    mineNav.navigation.configuration.tintColor = .white
+   // mineNav.navigation.configuration.barTintColor = .white
+    //mineNav.navigation.configuration.tintColor = .white
     
     
     
@@ -66,7 +68,7 @@ func mainTabBar() -> UITabBarController {
     let tabBarController = ESTabBarController()
     tabBarController.tabBar.shadowImage = UIImage(named: "tabbarColor")
  //   tabBarController.tabBar.backgroundImage = UIImage(named: "tabColor")
-   // tabBarController.tabBar.backgroundColor = .white
+    tabBarController.tabBar.backgroundColor = .white
     
     tabBarController.shouldHijackHandler = {
         tabbarController, viewController, index in

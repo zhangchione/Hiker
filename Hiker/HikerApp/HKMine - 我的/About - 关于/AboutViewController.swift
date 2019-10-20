@@ -9,6 +9,7 @@
 import UIKit
 import ProgressHUD
 
+@available(iOS 13.0, *)
 class AboutViewController: SubClassBaseViewController {
     
     @IBAction func commentScore(_ sender: Any) {

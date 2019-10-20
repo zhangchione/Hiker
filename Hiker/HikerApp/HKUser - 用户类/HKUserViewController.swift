@@ -88,6 +88,7 @@ class HKUserViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configFansData()
         getMyConcernUser()
         configUI()
         configData()
@@ -98,12 +99,12 @@ class HKUserViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-           // configuserData()
+            configFansData()
         
     }
     
     func getMyConcernUser() {
-        Alamofire.request(getAttentionAPI(userId: getUserId()!)).responseJSON { (response) in
+        Alamofire.request(getAttentionAPI(userId: self.userData!.id)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }
@@ -124,43 +125,47 @@ class HKUserViewController: UIViewController {
         self.requestEndFlag =  false
         print("mydata",mydata)
     }
+    
+    
+    func configFansData() {
+         Alamofire.request(getAttentionAPI(userId: self.userData!.id)).responseJSON { (response) in
+             guard response.result.isSuccess else {
+                 ProgressHUD.showError("网络请求错误"); return
+             }
+             if let value = response.result.value {
+                 let json = JSON(value)
+                 if let obj = JSONDeserializer<ConcernsModel>.deserializeFrom(json: json.debugDescription){
+                     if let data = obj.data {
+                             self.concernData = data
+                             self.headerView.concernLabel.text = "\(data.count)"
+                            // self.requestEndFlag = true
+                         print(data,2)
+                     }
+                 }
+             }
+         }
+
+        Alamofire.request(getFansAPI(userId: self.userData!.id)).responseJSON { (response) in
+             guard response.result.isSuccess else {
+                 ProgressHUD.showError("网络请求错误"); return
+             }
+             if let value = response.result.value {
+                 let json = JSON(value)
+                 if let obj = JSONDeserializer<FansModel>.deserializeFrom(json: json.debugDescription){
+                     if let data = obj.data {
+                        // self.requestEndFlag = true
+                         self.fansData = data
+                         self.headerView.fanLabel.text = "\(data.count)"
+                         print(data,1)
+                     }
+                 }
+             }
+         }
+    }
+    
+    
     func configData(){
 
-    
-        Alamofire.request(getAttentionAPI(userId: userData!.id)).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                ProgressHUD.showError("网络请求错误"); return
-            }
-            if let value = response.result.value {
-                let json = JSON(value)
-                if let obj = JSONDeserializer<ConcernsModel>.deserializeFrom(json: json.debugDescription){
-                    if let data = obj.data {
-                            self.concernData = data
-                            self.requestEndFlag = true
-
-                    }
-                }
-            }
-        }
-        self.waitingRequestEnd()
-        self.requestEndFlag =  false
-        
-        Alamofire.request(getFansAPI(userId: userData!.id)).responseJSON { (response) in
-            guard response.result.isSuccess else {
-                ProgressHUD.showError("网络请求错误"); return
-            }
-            if let value = response.result.value {
-                let json = JSON(value)
-                if let obj = JSONDeserializer<FansModel>.deserializeFrom(json: json.debugDescription){
-                    if let data = obj.data {
-                        self.requestEndFlag = true
-                        self.fansData = data
-                    }
-                }
-            }
-        }
-        self.waitingRequestEnd()
-        self.requestEndFlag =  false
         
         
         Alamofire.request(getMyBookAPI(userId:userData!.id)).responseJSON { (response) in
@@ -180,12 +185,7 @@ class HKUserViewController: UIViewController {
         self.requestEndFlag =  false
         
         
-        if let data = concernData {
-            self.headerView.concernLabel.text = "\(data.count)"
-        }
-        if let data = fansData {
-            self.headerView.fanLabel.text = "\(data.count)"
-        }
+
         if let datas = storyData {
             for data in datas {
                 titles.append(data.bookName)
@@ -244,8 +244,8 @@ class HKUserViewController: UIViewController {
         self.navigation.bar.backgroundColor = .white
         self.view.backgroundColor = .white
         
-        self.headerView.concernLabel.text = "\(self.userData?.concern ?? 0)"
-        self.headerView.fanLabel.text = "\(self.userData?.fans ?? 3)"
+       // self.headerView.concernLabel.text = "\(self.userData?.concern ?? 0)"
+       // self.headerView.fanLabel.text = "\(self.userData?.fans ?? 3)"
         self.headerView.userSign.text = self.userData?.sgin
         self.headerView.userName.text = self.userData?.nickName
         self.headerView.storyLabel.text = "\(self.userData?.notes ?? 0)"
@@ -273,9 +273,7 @@ class HKUserViewController: UIViewController {
 
     lazy var headerView:UserHeaderView = {
         let headerView = UserHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: AdaptH(320)))
-        let alterBackImgTap = UITapGestureRecognizer(target: self, action: #selector(alterBackImg))
-        //headerView.backgroundImageView
-        headerView.backgroundImageView.addGestureRecognizer(alterBackImgTap)
+            
 
         headerView.storyBtn.addTarget(self, action: #selector(story), for: .touchUpInside)
         headerView.fanBtn.addTarget(self, action: #selector(fan), for: .touchUpInside)
@@ -305,7 +303,7 @@ extension HKUserViewController: LTAdvancedScrollViewDelegate {
         print(offsetY)
         if offsetY >= 140 {
             self.navigation.bar.alpha = 1
-            self.navigation.item.title = userData?.username
+            self.navigation.item.title = userData?.nickName
             self.leftBarButton.setImage(UIImage(named: "home_icon_back"), for: .normal)
             
         }
@@ -371,7 +369,7 @@ extension HKUserViewController {
     }
     @objc func fan() {
         print("我的粉丝")
-        if let data = concernData {
+        if let data = fansData {
             let concernVC = FanViewController(data:data)
             self.navigationController?.pushViewController(concernVC, animated: true)
         }else {
@@ -452,6 +450,7 @@ extension HKUserViewController {
             }
             if let value = response.result.value {
                 let json = JSON(value)
+                print(json)
                 print("关注成功")
             }
         }
@@ -465,6 +464,7 @@ extension HKUserViewController {
             }
             if let value = response.result.value {
                 let json = JSON(value)
+                print(json)
                 print("取消关注成功")
             }
         }
