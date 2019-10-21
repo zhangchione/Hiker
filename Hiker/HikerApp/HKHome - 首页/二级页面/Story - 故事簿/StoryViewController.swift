@@ -65,6 +65,16 @@ class StoryViewController: StoryBaseViewController {
         return button
     }()
     
+    // MARK - 右边功能按钮
+     private lazy var rightBarButton:UIButton = {
+         let button = UIButton.init(type: .custom)
+          button.frame = CGRect(x:10, y:0, width:40, height: 40)
+         button.addTarget(self, action: #selector(set), for: UIControl.Event.touchUpInside)
+         button.setImage(UIImage(named: "mine_icon_set"), for: .normal)
+         return button
+     }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -76,6 +86,7 @@ class StoryViewController: StoryBaseViewController {
         self.navigation.bar.isShadowHidden = true
         self.navigation.bar.alpha = 0
         self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)
+        self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
         if #available(iOS 11.0, *) {
             self.navigation.bar.prefersLargeTitles = true
             self.navigation.item.largeTitleDisplayMode = .automatic
@@ -114,8 +125,15 @@ class StoryViewController: StoryBaseViewController {
     @objc func back(){
         self.navigationController?.popViewController(animated: true)
     }
-    
+    @objc func set(){
+        let img = cutFullImageWithView(scrollView: self.tableView)
+        writeImageToAlbum(image: img)
+    }
 
+}
+
+extension StoryViewController {
+    
 }
 
 // 收藏 点赞 评论 按钮事件
@@ -235,3 +253,5 @@ extension StoryViewController{
 
     }
 }
+
+

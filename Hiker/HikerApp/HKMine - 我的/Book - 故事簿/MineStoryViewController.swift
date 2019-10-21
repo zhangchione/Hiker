@@ -13,7 +13,7 @@ import LTScrollView
 
 class MineStoryViewController: UIViewController {
     public var count = 10
-    public var datas:StoryModel?
+    public var datas:[NotesModel]?
     
     private let storyID = "MineSotryCell"
     
@@ -70,7 +70,7 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
         -> Int {
-            return (datas?.story!.count)!
+            return datas!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
@@ -78,7 +78,7 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: storyID, for: indexPath) as! MineSotryCell
             
-            configCell(cell, with: (datas?.story![indexPath.row])!)
+            configCell(cell, with: datas![indexPath.row])
             
             return cell
     }
@@ -89,8 +89,8 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         print("111")
-        let model = datas?.story![indexPath.row]
-        let vc = StoryViewController(model: model!)
+        let model = datas![indexPath.row]
+        let vc = StoryViewController(model: model)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

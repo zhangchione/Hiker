@@ -9,13 +9,15 @@
 import UIKit
 import ProgressHUD
 
-@available(iOS 13.0, *)
 class AboutViewController: SubClassBaseViewController {
     
     @IBAction func commentScore(_ sender: Any) {
-        let url = URL(string: "itms-apps://itunes.apple.com/")
-        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+//        let url = URL(string: "itms-apps://itunes.apple.com/")
+//        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        let fbVC = FaceBookViewController()
+        self.navigationController?.pushViewController(fbVC, animated: true)
     }
+    
     @IBAction func function(_ sender: Any) {
         if let url = URL(string: "https://shimo.im/docs/VrWVWKCPVC9hKQpV") {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -57,4 +59,65 @@ class AboutViewController: SubClassBaseViewController {
 }
 extension AboutViewController : UIScrollViewDelegate {
     
+    /// 截屏
+    ///
+    /// - Parameters:
+    ///   - view: 要截屏的view
+    /// - Returns: 一个UIImage
+    func cutImageWithView(view:UIView) -> UIImage
+    {
+        // 参数①：截屏区域  参数②：是否透明  参数③：清晰度
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, UIScreen.main.scale)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext();
+        return image;
+    }
+    func writeImageToAlbum(image:UIImage)
+    {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    @objc func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer)
+    {
+        if let e = error as NSError?
+        {
+            print(e)
+        }
+        else
+        {
+            UIAlertController.init(title: nil,
+                                   message: "保存成功！",
+                                   preferredStyle: UIAlertController.Style.alert).show(self, sender: nil);
+        }
+    }
+    
+         /// 截长屏
+        ///
+        /// - Parameters:
+        ///   - view: 要截屏的view
+        /// - Returns: 一个UIImage
+        func cutFullImageWithView(scrollView:UIScrollView) -> UIImage
+        {
+            // 记录当前的scrollView的偏移量和坐标
+            let currentContentOffSet:CGPoint = scrollView.contentOffset
+            let currentFrame:CGRect = scrollView.frame;
+            
+            // 设置为zero和相应的坐标
+            scrollView.contentOffset = CGPoint.zero
+            scrollView.frame = CGRect.init(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
+            
+            // 参数①：截屏区域  参数②：是否透明  参数③：清晰度
+            UIGraphicsBeginImageContextWithOptions(scrollView.contentSize, true, UIScreen.main.scale)
+            scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
+            let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+            
+            // 重新设置原来的参数
+            scrollView.contentOffset = currentContentOffSet
+            scrollView.frame = currentFrame
+            
+            UIGraphicsEndImageContext();
+            
+            return image;
+        }
+
 }

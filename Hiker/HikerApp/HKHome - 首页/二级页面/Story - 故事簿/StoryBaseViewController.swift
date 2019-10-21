@@ -185,3 +185,89 @@ extension StoryBaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+extension StoryBaseViewController {
+    /// 截屏
+       ///
+       /// - Parameters:
+       ///   - view: 要截屏的view
+       /// - Returns: 一个UIImage
+       func cutImageWithView(view:UIView) -> UIImage
+       {
+           // 参数①：截屏区域  参数②：是否透明  参数③：清晰度
+           UIGraphicsBeginImageContextWithOptions(view.frame.size, true, UIScreen.main.scale)
+           view.layer.render(in: UIGraphicsGetCurrentContext()!)
+           let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+           UIGraphicsEndImageContext();
+           return image;
+       }
+       func writeImageToAlbum(image:UIImage)
+       {
+           UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+       }
+       @objc func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer)
+       {
+           if let e = error as NSError?
+           {
+               print(e)
+           }
+           else
+           {
+                print("保存成功")
+               UIAlertController.init(title: nil,
+                                      message: "保存成功！",
+                                      preferredStyle: UIAlertController.Style.alert).show(self, sender: nil);
+           }
+       }
+       
+            /// 截长屏
+           ///
+           /// - Parameters:
+           ///   - view: 要截屏的view
+           /// - Returns: 一个UIImage
+           func cutFullImageWithView(scrollView:UIScrollView) -> UIImage
+           {
+               // 记录当前的scrollView的偏移量和坐标
+               let currentContentOffSet:CGPoint = scrollView.contentOffset
+               let currentFrame:CGRect = scrollView.frame;
+               
+               // 设置为zero和相应的坐标
+               scrollView.contentOffset = CGPoint.zero
+               scrollView.frame = CGRect.init(x: 0, y: 0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
+               
+               // 参数①：截屏区域  参数②：是否透明  参数③：清晰度
+               UIGraphicsBeginImageContextWithOptions(scrollView.contentSize, true, UIScreen.main.scale)
+               scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
+               let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+               
+               // 重新设置原来的参数
+               scrollView.contentOffset = currentContentOffSet
+               scrollView.frame = currentFrame
+               
+               UIGraphicsEndImageContext();
+               
+               return image;
+           }
+    
+    func combinTwoImage(image1:UIImage,image2:UIImage) -> UIImage
+    {
+        let width = max(image1.size.width, image2.size.width)
+        let height = image1.size.height + image2.size.height
+        let offScreenSize = CGSize.init(width: width, height: height)
+        
+        UIGraphicsBeginImageContext(offScreenSize);
+        
+        let rect = CGRect.init(x:0, y:0, width:width, height:image1.size.height)
+        image1.draw(in: rect)
+        
+        let rect2 = CGRect.init(x:0, y:image1.size.height, width:width, height:image2.size.height)
+        image1.draw(in: rect2)
+        
+        let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        UIGraphicsEndImageContext();
+        
+        return image;
+    }
+    
+}

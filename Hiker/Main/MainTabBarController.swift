@@ -30,7 +30,7 @@ func logOutApp(){
 
 func mainTabBar() -> UITabBarController {
     var app = AppContext()
-    let homeVC = HKHomeViewController()
+    let homeVC = HKHomeController()
     let noteVC = UIViewController()
     let mineVC = HKMineViewController()
     

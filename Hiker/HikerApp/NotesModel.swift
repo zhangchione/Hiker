@@ -21,6 +21,11 @@ struct StoryModel:HandyJSON {
     var id = 0
 }
 
+struct HKUser:HandyJSON {
+    var user:User?
+    var data: [NotesModel]?
+
+}
 /// City
 
 struct City {

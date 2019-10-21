@@ -360,7 +360,6 @@ extension HKHomeViewController:  UICollectionViewDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-
 }
 
 // MARK - @objc 方法

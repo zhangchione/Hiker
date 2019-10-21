@@ -58,6 +58,13 @@
 		F559826A234D863500802220 /* Extension_Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5598265234D863400802220 /* Extension_Date.swift */; };
 		F559826B234D863500802220 /* QDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5598266234D863400802220 /* QDatePicker.swift */; };
 		F559826C234D863500802220 /* Extension_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5598267234D863400802220 /* Extension_String.swift */; };
+		F5625E59235D6FBC00574DFD /* apple-app-site-association.json in Resources */ = {isa = PBXBuildFile; fileRef = F5625E58235D6FBC00574DFD /* apple-app-site-association.json */; };
+		F5625E5B235D7A1800574DFD /* HKHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E5A235D7A1800574DFD /* HKHomeController.swift */; };
+		F5625E5D235D7A3900574DFD /* HKHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E5C235D7A3900574DFD /* HKHomeHeaderView.swift */; };
+		F5625E5F235D7B6300574DFD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E5E235D7B6300574DFD /* HomeController.swift */; };
+		F5625E61235D944900574DFD /* CityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E60235D944900574DFD /* CityController.swift */; };
+		F5625E63235D97D600574DFD /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E62235D97D600574DFD /* WeatherDataModel.swift */; };
+		F5625E65235DAF8000574DFD /* ConcernController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E64235DAF8000574DFD /* ConcernController.swift */; };
 		F5667C5923554DA3009EDF05 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5823554DA3009EDF05 /* UserHeaderView.swift */; };
 		F5667C5B23554DF4009EDF05 /* HKUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5A23554DF4009EDF05 /* HKUserViewController.swift */; };
 		F5667C5D23557C16009EDF05 /* MyCollectionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5C23557C16009EDF05 /* MyCollectionsController.swift */; };
@@ -205,6 +212,14 @@
 		F5598265234D863400802220 /* Extension_Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension_Date.swift; sourceTree = "<group>"; };
 		F5598266234D863400802220 /* QDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QDatePicker.swift; sourceTree = "<group>"; };
 		F5598267234D863400802220 /* Extension_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension_String.swift; sourceTree = "<group>"; };
+		F5625E57235D6E9400574DFD /* HikerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HikerRelease.entitlements; sourceTree = "<group>"; };
+		F5625E58235D6FBC00574DFD /* apple-app-site-association.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apple-app-site-association.json"; sourceTree = "<group>"; };
+		F5625E5A235D7A1800574DFD /* HKHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHomeController.swift; sourceTree = "<group>"; };
+		F5625E5C235D7A3900574DFD /* HKHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHomeHeaderView.swift; sourceTree = "<group>"; };
+		F5625E5E235D7B6300574DFD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		F5625E60235D944900574DFD /* CityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityController.swift; sourceTree = "<group>"; };
+		F5625E62235D97D600574DFD /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
+		F5625E64235DAF8000574DFD /* ConcernController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcernController.swift; sourceTree = "<group>"; };
 		F5667C5823554DA3009EDF05 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
 		F5667C5A23554DF4009EDF05 /* HKUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKUserViewController.swift; sourceTree = "<group>"; };
 		F5667C5C23557C16009EDF05 /* MyCollectionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionsController.swift; sourceTree = "<group>"; };
@@ -580,6 +595,8 @@
 		F58017C02325E0560014E3C3 /* Hiker */ = {
 			isa = PBXGroup;
 			children = (
+				F5625E58235D6FBC00574DFD /* apple-app-site-association.json */,
+				F5625E57235D6E9400574DFD /* HikerRelease.entitlements */,
 				F58017C12325E0560014E3C3 /* AppDelegate.swift */,
 				F5AED64F2330C7D100B5B824 /* DataBase */,
 				F58017D72325E3340014E3C3 /* Third */,
@@ -658,6 +675,12 @@
 				F5EC431523262CE200107F66 /* Model */,
 				F5EC431423262CD500107F66 /* View */,
 				F5EC431323262CCF00107F66 /* API */,
+				F5625E5A235D7A1800574DFD /* HKHomeController.swift */,
+				F5625E5C235D7A3900574DFD /* HKHomeHeaderView.swift */,
+				F5625E5E235D7B6300574DFD /* HomeController.swift */,
+				F5625E60235D944900574DFD /* CityController.swift */,
+				F5625E64235DAF8000574DFD /* ConcernController.swift */,
+				F5625E62235D97D600574DFD /* WeatherDataModel.swift */,
 			);
 			path = "HKHome - 首页";
 			sourceTree = "<group>";
@@ -1054,6 +1077,7 @@
 				F5D2C3D72328C97700DE60D2 /* MineSotryCell.xib in Resources */,
 				F58017C92325E0570014E3C3 /* Assets.xcassets in Resources */,
 				F5667C6923559C4F009EDF05 /* AboutViewController.xib in Resources */,
+				F5625E59235D6FBC00574DFD /* apple-app-site-association.json in Resources */,
 				F5C27E1D233C4BB700B5131F /* HKCityjson.json in Resources */,
 				F58017C72325E0560014E3C3 /* Main.storyboard in Resources */,
 				F5D8DD662329E58400B7EADF /* WriteCell.xib in Resources */,
@@ -1150,9 +1174,11 @@
 				F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */,
 				F5598269234D863500802220 /* Extension_UIColor.swift in Sources */,
 				F558F66C233A032F0013EBAC /* Rotatable.swift in Sources */,
+				F5625E63235D97D600574DFD /* WeatherDataModel.swift in Sources */,
 				F5AED6602330C8AA00B5B824 /* UserStateTable.swift in Sources */,
 				F5D2C3DB2328D0A200DE60D2 /* FadeTransition.swift in Sources */,
 				F58A2B672354186000DE912F /* CommentView.swift in Sources */,
+				F5625E5F235D7B6300574DFD /* HomeController.swift in Sources */,
 				F5EC431D23262E4400107F66 /* RecommendCityView.swift in Sources */,
 				F5667C7C2355E3A4009EDF05 /* HGImagePickerController.swift in Sources */,
 				F57C320E2334AD8900B6E7A0 /* TitleViewController.swift in Sources */,
@@ -1176,6 +1202,7 @@
 				F5667C65235596DB009EDF05 /* FanCell.swift in Sources */,
 				F5667C7E2355E3A4009EDF05 /* HGImageCollectionViewController.swift in Sources */,
 				F50155FA2327842F00FD201C /* MineHeaderView.swift in Sources */,
+				F5625E65235DAF8000574DFD /* ConcernController.swift in Sources */,
 				F558F63A2339DA350013EBAC /* WriteNextNotesCell.swift in Sources */,
 				F5667C5F235581D8009EDF05 /* FaceBookViewController.swift in Sources */,
 				F50155E52327445C00FD201C /* StoryBannerViewModel.swift in Sources */,
@@ -1225,14 +1252,17 @@
 				F5C27E1B233C4AF500B5131F /* CityViewController.swift in Sources */,
 				F5C5FA9D2351E7E700197A6A /* SearchContentViewController.swift in Sources */,
 				F5A72C5623531C5900F0322E /* BookCell.swift in Sources */,
+				F5625E5D235D7A3900574DFD /* HKHomeHeaderView.swift in Sources */,
 				F558F663233A030D0013EBAC /* TransitionDriver.swift in Sources */,
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
 				F558F65C233A030D0013EBAC /* ExpandingViewController.swift in Sources */,
+				F5625E61235D944900574DFD /* CityController.swift in Sources */,
 				F559826A234D863500802220 /* Extension_Date.swift in Sources */,
 				F50155EE2327682D00FD201C /* MapCell.swift in Sources */,
 				F5EC43242326374600107F66 /* CityView.swift in Sources */,
 				F5E375C1232F735B00C7C351 /* FivePhotoCell.swift in Sources */,
 				F5C5FAA1235209FD00197A6A /* SearchUserCell.swift in Sources */,
+				F5625E5B235D7A1800574DFD /* HKHomeController.swift in Sources */,
 				F50155EB2327494B00FD201C /* StoryBaseViewController.swift in Sources */,
 				F5AED64C2330C69C00B5B824 /* Album.swift in Sources */,
 				F5EBB55523386FD1006DAAC8 /* NotesModel.swift in Sources */,
@@ -1409,6 +1439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Hiker/HikerRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20191020;
 				DEVELOPMENT_TEAM = YAJ74PJU3F;

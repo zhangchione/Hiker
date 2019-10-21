@@ -1,0 +1,15 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "cone1.cone.cc.Hiker",
+                "paths": [ "/cc/cone/", "/videos/wwdc/2015/*"]
+            },
+            {
+                "appID": "cone1.cone.cc.Hiker",
+                "paths": [ "*" ]
+            }
+        ]
+    }
+}

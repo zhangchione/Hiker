@@ -21,7 +21,6 @@ private let glt_iphoneX = (UIScreen.main.bounds.height >= 812.0)
 class HKMineViewController: UIViewController {
     
     
-    
     var mineData:UserModel?
     var storyData:[StoryModel]?
     var concernData:[User]?
@@ -48,6 +47,9 @@ class HKMineViewController: UIViewController {
         layout.sliderHeight = 48
         layout.lrMargin = 20
         layout.showsHorizontalScrollIndicator = false
+        layout.isHiddenPageBottomLine = true
+        layout.isShowBounces = true
+        layout.pageBottomLineHeight = 0
         /* 更多属性设置请参考 LTLayout 中 public 属性说明 */
         return layout
     }()
@@ -140,7 +142,7 @@ class HKMineViewController: UIViewController {
          }
     }
     func configData(){
-        
+        var stroyData = [NotesModel]()
         Alamofire.request(getMyBookAPI(userId: getUserId()!)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
@@ -151,6 +153,42 @@ class HKMineViewController: UIViewController {
                     self.storyData = obj.data
                     self.requestEndFlag = true
                     }
+                if let datas = self.storyData {
+                    for data in datas {
+                        self.titles.append(data.bookName)
+                        let vc = MineStoryViewController()
+                        vc.datas = data.story
+                        self.viewControllers.append(vc)
+                        
+                        for s in data.story! {
+                            stroyData.append(s)
+                        }
+                      
+                    }
+                }
+                self.titles.insert("全部", at: 0)
+                let allVC = MineStoryViewController()
+                allVC.datas = stroyData
+                self.viewControllers.insert(allVC, at: 0)
+                
+                let advancedManager = LTAdvancedManager(frame: self.managerReact(), viewControllers: self.viewControllers, titles: self.titles, currentViewController: self, layout: self.layout, headerViewHandle: {[weak self] in
+                    guard let strongSelf = self else { return UIView() }
+                    let headerView = strongSelf.headerView
+                    return headerView
+                })
+                /* 设置代理 监听滚动 */
+                advancedManager.delegate = self
+                
+                //设置悬停位置
+                advancedManager.hoverY = 44
+                
+                /* 点击切换滚动过程动画 */
+                advancedManager.isClickScrollAnimation = true
+                
+                /* 代码设置滚动到第几个位置 */
+                //        advancedManager.scrollToIndex(index: viewControllers.count - 1)
+                self.view.addSubview(advancedManager)
+                
                 }
 
         }
@@ -158,31 +196,7 @@ class HKMineViewController: UIViewController {
         self.waitingRequestEnd()
         self.requestEndFlag =  false
         
-        if let datas = storyData {
-            for data in datas {
-                titles.append(data.bookName)
-                let vc = MineStoryViewController()
-                vc.datas = data
-                viewControllers.append(vc)
-            }
-        }
-        let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in
-            guard let strongSelf = self else { return UIView() }
-            let headerView = strongSelf.headerView
-            return headerView
-        })
-        /* 设置代理 监听滚动 */
-        advancedManager.delegate = self
-        
-        //设置悬停位置
-        advancedManager.hoverY = 44
-        
-        /* 点击切换滚动过程动画 */
-        advancedManager.isClickScrollAnimation = true
-        
-        /* 代码设置滚动到第几个位置 */
-        //        advancedManager.scrollToIndex(index: viewControllers.count - 1)
-        view.addSubview(advancedManager)
+
         
     }
     
@@ -384,7 +398,7 @@ extension HKMineViewController:AlterSginDelegate {
     }
     
     func alterBackImgNet(username:String,password:String,backImg:String) {
-            let dic = ["username":username,"password":password,"headPic": backImg]
+            let dic = ["username":username,"password":password,"bgPic": backImg]
             
             Alamofire.request(getAlterUserInfoAPI(), method: .put, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
                 guard response.result.isSuccess else {

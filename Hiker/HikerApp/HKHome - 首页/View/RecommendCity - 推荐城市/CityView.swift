@@ -23,6 +23,7 @@ class CityView: UICollectionViewCell {
         label.textColor = UIColor.white
         return label
     }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
@@ -49,7 +50,7 @@ class CityView: UICollectionViewCell {
     func configShadow(){
         self.backgroundColor = backColor
         self.layer.cornerRadius = 12
-        self.layer.shadowColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1).cgColor
+        self.layer.shadowColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 0.14).cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: 8)
         self.layer.shadowOpacity = 1
         self.layer.shadowRadius = 19

@@ -51,15 +51,8 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
 
     }
     @IBAction func cutUser(_ sender: Any) {
-        let warning = MessageView.viewFromNib(layout: .cardView)
-        warning.configureTheme(.warning)
-        warning.configureDropShadow()
-        let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
-        warning.configureContent(title: "不好意思啦", body: "切换账号功能目前还未没有开放噢", iconText: iconText)
-        warning.button?.isHidden = true
-        var warningConfig = SwiftMessages.defaultConfig
-        warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
-        SwiftMessages.show(config: warningConfig, view: warning)
+        let aboutvc = AboutViewController()
+        self.navigationController?.pushViewController(aboutvc, animated: true)
     }
     
     @IBAction func cutUserImg(_ sender: Any) {
@@ -130,12 +123,11 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBAction func faceBook(_ sender: Any) {
-        let fbVC = FaceBookViewController()
-         self.navigationController?.pushViewController(fbVC, animated: true)
+       // 足迹
+        
     }
     @IBAction func about(_ sender: Any) {
-        let aboutvc = AboutViewController()
-        self.navigationController?.pushViewController(aboutvc, animated: true)
+        // 回忆
     }
     
     override func viewDidLoad() {
