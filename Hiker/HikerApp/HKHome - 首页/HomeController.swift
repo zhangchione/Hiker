@@ -56,12 +56,12 @@ class HomeController: UIViewController {
         configUI()
         configNav()
         reftreshData()
-        self.configData(page: self.page)
-        self.collectionView.reloadData()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        self.configData(page: self.page)
+        self.collectionView.reloadData()
     }
     
     func configNav(){
@@ -177,7 +177,7 @@ extension HomeController: UICollectionViewDelegateFlowLayout, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
            let model = data[indexPath.row]
-            let vc = StoryViewController(model: model)
+            let vc = ParasController(data: model)
             self.navigationController?.pushViewController(vc, animated: true)
     }
     

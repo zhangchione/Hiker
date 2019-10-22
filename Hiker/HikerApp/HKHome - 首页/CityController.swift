@@ -55,11 +55,11 @@ class CityController: UIViewController {
         configUI()
         configNav()
         reftreshData()
-        self.configData()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        self.configData()
     }
     
     func configNav(){
@@ -176,8 +176,8 @@ extension CityController: UICollectionViewDelegateFlowLayout, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
            let model = data[indexPath.row]
-            let vc = StoryViewController(model: model)
-            self.navigationController?.pushViewController(vc, animated: true)
+              let vc = ParasController(data: model)
+                                  self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

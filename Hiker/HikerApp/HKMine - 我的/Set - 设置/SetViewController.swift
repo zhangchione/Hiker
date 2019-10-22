@@ -128,6 +128,9 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
     }
     @IBAction func about(_ sender: Any) {
         // 回忆
+        let apptext = AppContext()
+        let vc = RememberViewController(apptext.photoDataManager)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func viewDidLoad() {

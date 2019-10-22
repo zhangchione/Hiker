@@ -171,7 +171,7 @@ extension CityViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
            let model = data[indexPath.row]
-            let vc = StoryViewController(model: model)
+            let vc = ParasController(data: model)
             self.navigationController?.pushViewController(vc, animated: true)
     }
     

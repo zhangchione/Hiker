@@ -151,7 +151,7 @@ class HKMineViewController: UIViewController {
                 let json = JSON(value)
                 if let obj = JSONDeserializer<HKStory>.deserializeFrom(json: json.debugDescription){
                     self.storyData = obj.data
-                    self.requestEndFlag = true
+                    //self.requestEndFlag = true
                     }
                 if let datas = self.storyData {
                     for data in datas {
@@ -193,8 +193,8 @@ class HKMineViewController: UIViewController {
 
         }
 
-        self.waitingRequestEnd()
-        self.requestEndFlag =  false
+//        self.waitingRequestEnd()
+//        self.requestEndFlag =  false
         
 
         
@@ -363,6 +363,8 @@ extension HKMineViewController :UIImagePickerControllerDelegate,UINavigationCont
         
         let imageURL = info[UIImagePickerController.InfoKey.imageURL]!
         let imageData1 = try! Data(contentsOf: imageURL as! URL)
+        let a = imageURL as! URL
+        print(a)
         let imgUrl = (imageURL as! URL).path
 
        self.headerView.backgroundImageView.image = UIImage(data: imageData1)

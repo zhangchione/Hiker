@@ -24,6 +24,8 @@ class HKUserViewController: UIViewController {
     convenience init(data:User) {
         self.init()
         self.userData = data
+        
+        
     }
     
     var userData:User?
@@ -164,7 +166,7 @@ class HKUserViewController: UIViewController {
     
     func configData(){
 
-         var stroyData = [NotesModel]()
+        
         
         Alamofire.request(getMyBookAPI(userId:userData!.id)).responseJSON { (response) in
             guard response.result.isSuccess else {
@@ -174,50 +176,41 @@ class HKUserViewController: UIViewController {
                 let json = JSON(value)
                 if let obj = JSONDeserializer<HKStory>.deserializeFrom(json: json.debugDescription){
                     self.storyData = obj.data
+                    self.requestEndFlag = true
                     }
-                if let datas = self.storyData {
-                     for data in datas {
-                         self.titles.append(data.bookName)
-                         let vc = MineStoryViewController()
-                         vc.datas = data.story
-                         self.viewControllers.append(vc)
-                         
-                        for s in data.story! {
-                            stroyData.append(s)
-                        }
-                      
-                    }
-                    self.titles.insert("全部", at: 0)
-                    let allVC = MineStoryViewController()
-                    allVC.datas = stroyData
-                    self.viewControllers.insert(allVC, at: 0)
-                    
-                    let advancedManager = LTAdvancedManager(frame: self.managerReact(), viewControllers: self.viewControllers, titles: self.titles, currentViewController: self, layout: self.layout, headerViewHandle: {[weak self] in
-                        guard let strongSelf = self else { return UIView() }
-                        let headerView = strongSelf.headerView
-                        return headerView
-                    })
-                    /* 设置代理 监听滚动 */
-                    advancedManager.delegate = self
-                    
-                    //设置悬停位置
-                    advancedManager.hoverY = 44
-                    
-                    /* 点击切换滚动过程动画 */
-                    advancedManager.isClickScrollAnimation = true
-                    
-                    /* 代码设置滚动到第几个位置 */
-                    //        advancedManager.scrollToIndex(index: viewControllers.count - 1)
-                    self.view.addSubview(advancedManager)
                 }
-            }
-            
-                
-            }
 
+        }
         self.waitingRequestEnd()
         self.requestEndFlag =  false
         
+        
+
+        if let datas = storyData {
+            for data in datas {
+                titles.append(data.bookName)
+                let vc = MineStoryViewController()
+                vc.datas = data.story
+                viewControllers.append(vc)
+            }
+        }
+        let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in
+            guard let strongSelf = self else { return UIView() }
+            let headerView = strongSelf.headerView
+            return headerView
+        })
+        /* 设置代理 监听滚动 */
+        advancedManager.delegate = self
+        
+        //设置悬停位置
+        advancedManager.hoverY = 44
+        
+        /* 点击切换滚动过程动画 */
+        advancedManager.isClickScrollAnimation = true
+        
+        /* 代码设置滚动到第几个位置 */
+        //        advancedManager.scrollToIndex(index: viewControllers.count - 1)
+        view.addSubview(advancedManager)
         
     }
     

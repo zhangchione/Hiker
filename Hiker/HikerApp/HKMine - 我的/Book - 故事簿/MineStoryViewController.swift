@@ -90,7 +90,7 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         print("111")
         let model = datas![indexPath.row]
-        let vc = StoryViewController(model: model)
+        let vc = ParasController(data: model)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

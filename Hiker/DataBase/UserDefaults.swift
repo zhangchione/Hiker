@@ -131,6 +131,18 @@ func getTime() -> [String]? {
     return defaults.object(forKey: "time") as? [String]
 }
 
+
+func saveTags(tags:[[String]]) {
+    defaults.set(tags,forKey: "tags")
+    defaults.synchronize()
+}
+func getTags() -> [[String]]? {
+    
+    return defaults.object(forKey: "tags") as? [[String]]
+}
+
+
+
 func savePic(content:[String]) {
     defaults.set(content,forKey: "pic")
     defaults.synchronize()

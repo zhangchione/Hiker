@@ -50,6 +50,9 @@ class StoryViewController: StoryBaseViewController {
         self.tableView.addSubview(storyBannerView)
     }
     
+    
+    var it = PXAgileShareItem()
+    var imagesArray = [UIImage]()
     //导航栏背景视图
     var barImageView: UIView?
     var imageView: UIImageView! // 图片视图
@@ -70,7 +73,7 @@ class StoryViewController: StoryBaseViewController {
          let button = UIButton.init(type: .custom)
           button.frame = CGRect(x:10, y:0, width:40, height: 40)
          button.addTarget(self, action: #selector(set), for: UIControl.Event.touchUpInside)
-         button.setImage(UIImage(named: "mine_icon_set"), for: .normal)
+         button.setImage(UIImage(named: "home_stroy_setmore"), for: .normal)
          return button
      }()
     
@@ -125,11 +128,72 @@ class StoryViewController: StoryBaseViewController {
     @objc func back(){
         self.navigationController?.popViewController(animated: true)
     }
-    @objc func set(){
-        let img = cutFullImageWithView(scrollView: self.tableView)
-        writeImageToAlbum(image: img)
+
+    
+   @objc func set() {
+                let img = cutFullImageWithView(scrollView: self.tableView)
+                let imageToShare1 = UIImage.init(named: "image1")
+                let imageToShare2 = UIImage.init(named: "image6")
+                let activityItems = [imageToShare1]
+                //let its = PXAgileShareItem(image: imageToShare1, imagePath: nil)
+                self.imagesArray.append(imageToShare1!)
+                self.imagesArray.append(imageToShare2!)
+              //  let items = createActivityItems()
+                
+                
+                let activityVC = UIActivityViewController.init(activityItems: ["上海之旅",img], applicationActivities: nil)
+
+        //
+        //        writeImageToAlbum(image: img)
+        //        let textToShare = "行迹"
+        //        let imageToShare = UIImage.init(named: "image1")
+        //        let urlToShare = NSURL.init(string: "http://www.zhangchione.cc")
+        //        let items = [textToShare,imageToShare ?? "WeShare"] as [Any]
+        //        let activityVC = UIActivityViewController( activityItems: items, applicationActivities: nil)
+        //
+                activityVC.completionWithItemsHandler = {activity, success, items, error in
+                    
+                    print(activity)
+                    print(success)
+                    print(items)
+                    print(error)
+                    
+                }
+                
+                self.present(activityVC, animated: true, completion: nil)
+    }
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any? {
+        return it.image
     }
 
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return it.imagePath
+    }
+    
+    func createActivityItems() -> Array<Any>? {
+        var tempArray = Array<Any>()
+        var index = 0
+        for image in imagesArray {
+            let docPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+            let imagePath = docPath + (String(format: "/Share_%ld.jpg", index))
+            let shareobj = NSURL(fileURLWithPath: imagePath)
+            print(shareobj.absoluteURL)
+           //let obj = (imagePath as! URL).path
+           // image.jpegData(compressionQuality: 1)?.write(toFile: imagePath)
+            try? image.jpegData(compressionQuality: 1)?.write(to:shareobj as URL)
+                  
+            //file:///private/var/mobile/Containers/Data/Application/DF00DF02-94A9-43A1-8DD3-F4B2C57D8E6C/tmp/0BD3E554-D728-4F65-B7DA-CA9627B9AF19.jpeg
+            let item = PXAgileShareItem(image: image, imagePath: NSURL(fileURLWithPath: imagePath))
+//            item.image = image
+//            item.imagePath = shareobj
+            //分享的数组
+            tempArray.append(item)
+            index += 1
+        }
+        return tempArray
+    }
+
+    
 }
 
 extension StoryViewController {
@@ -255,3 +319,8 @@ extension StoryViewController{
 }
 
 
+
+struct PXAgileShareItem {
+    var image: UIImage?
+    var imagePath: NSURL?
+}

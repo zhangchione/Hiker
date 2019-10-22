@@ -33,6 +33,7 @@ class StoryBannerView: UIView {
          label.font = UIFont.init(name: "苹方-简 中粗体", size: 30)
          return label
     }()
+    
     private lazy var userImg = UIImage()
     private lazy var favButton: UIButton = {
         let button = UIButton()

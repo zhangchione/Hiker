@@ -25,7 +25,7 @@ class ConcernController: UIViewController {
     var concernData:[User]?
     var storyData:[StoryModel]?
     var userStory: [HKStory]?
-    var usersData: [HKUser]?
+    var usersData =  [HKUser]()
     
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
@@ -48,8 +48,11 @@ class ConcernController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configConcernData()
+
         configUI()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+                configConcernData()
     }
     func configUI(){
         view.addSubview(self.collectionView)
@@ -105,7 +108,7 @@ class ConcernController: UIViewController {
                     var us = HKUser()
                     us.user = user
                     us.data = das
-                    self.usersData?.append(us)
+                    self.usersData.append(us)
                     self.collectionView.reloadData()
                 }
                 
@@ -118,15 +121,14 @@ class ConcernController: UIViewController {
 extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if usersData != nil {
-        return usersData!.count
-        }
-        return 0
+        
+        return usersData.count
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return usersData![section].data!.count
+        return usersData[section].data!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -135,7 +137,8 @@ extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionVie
             self.collectionView.register(StoryView.self, forCellWithReuseIdentifier: identifier)
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! StoryView
-            let da = usersData![indexPath.section].data![indexPath.row]
+        let da = usersData[indexPath.section].data![indexPath.row]
+            print(da)
             config(cell, with: da)
             return cell
         
@@ -165,7 +168,7 @@ extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionVie
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewID, for: indexPath) as? HomeHeaderReusableView else {
             return UICollectionReusableView()
         }
-        headerView.titleLabel.text = "有\(data.count)个关于“\(self.usersData![indexPath.section].user?.nickName)”的故事。"
+        headerView.titleLabel.text = "有\(usersData[indexPath.section].data!.count)个关于“\(self.usersData[indexPath.section].user?.nickName ??  "")”的故事。"
         headerView.titleLabel.textColor = UIColor.init(r: 146, g: 146, b: 146)
         headerView.titleLabel.font = UIFont.init(name: "PingFangSC-Regular", size: 16)
         
@@ -176,9 +179,9 @@ extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           let model = data[indexPath.row]
-            let vc = StoryViewController(model: model)
-            self.navigationController?.pushViewController(vc, animated: true)
+        let model = usersData[indexPath.section].data![indexPath.row]
+        let vc = ParasController(data: model)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

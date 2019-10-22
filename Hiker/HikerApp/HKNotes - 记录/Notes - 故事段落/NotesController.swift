@@ -27,6 +27,7 @@ class NotesController: ExpandingViewController,NVActivityIndicatorViewable {
     convenience init(data:NotesModel) {
         self.init()
         self.data = data
+        print(data.noteParas![0].tags)
     }
     
     // 标题
@@ -93,7 +94,7 @@ class NotesController: ExpandingViewController,NVActivityIndicatorViewable {
     fileprivate let items: [ItemInfo] = [("item0", "Boston"), ("item1", "New York"), ("item2", "San Francisco"), ("item3", "Washington")]
     
     override func viewDidLoad() {
-        itemSize = CGSize(width: 374, height: 600)
+        itemSize = CGSize(width: 374, height: 580)
         super.viewDidLoad()
         registerCell()
         fillCellIsOpenArray()
@@ -254,6 +255,39 @@ extension NotesController {
         let pics = data.pics.components(separatedBy: ",")
         //cell.photoCell.isLocalImage = true
         cell.photoCell.imgDatas = pics
+        cell.tag1.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
+        cell.tag2.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
+        cell.tag3.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
+        cell.tag1.backgroundColor = UIColor.init(r: 238, g: 243, b: 249)
+        cell.tag2.backgroundColor = UIColor.init(r: 238, g: 243, b: 249)
+        cell.tag3.backgroundColor = UIColor.init(r: 238, g: 243, b: 249)
+        cell.tag1.layer.cornerRadius = 14
+                cell.tag2.layer.cornerRadius = 14
+                cell.tag3.layer.cornerRadius = 14
+        cell.tag1.isHidden = true
+        cell.tag2.isHidden = true
+        cell.tag3.isHidden = true
+        if let tag = data.tags {
+        
+        if tag.count == 1{
+            cell.tag1.setTitle(tag[0], for: .normal)
+            cell.tag1.isHidden = false
+        }else if tag.count == 2{
+            cell.tag1.setTitle(tag[0], for: .normal)
+            cell.tag2.setTitle(tag[2], for: .normal)
+                        cell.tag1.isHidden = false
+                        cell.tag2.isHidden = false
+        }else if tag.count == 3{
+            cell.tag1.setTitle(tag[0], for: .normal)
+            cell.tag2.setTitle(tag[1], for: .normal)
+            cell.tag3.setTitle(tag[2], for: .normal)
+                        cell.tag1.isHidden = false
+                        cell.tag2.isHidden = false
+                        cell.tag3.isHidden = false
+        }
+        }
+        
+        
     }
 }
 

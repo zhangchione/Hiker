@@ -90,7 +90,7 @@ class StoryBaseViewController: UIViewController {
         }
         
         if #available(iOS 11.0, *) {
-            self.navigation.bar.prefersLargeTitles = true
+            self.navigation.bar.prefersLargeTitles = false
            // self.navigation.item.largeTitleDisplayMode = .automatic
         }
 
@@ -264,7 +264,6 @@ extension StoryBaseViewController {
         image1.draw(in: rect2)
         
         let image:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        
         UIGraphicsEndImageContext();
         
         return image;

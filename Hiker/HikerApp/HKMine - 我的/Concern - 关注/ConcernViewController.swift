@@ -93,8 +93,8 @@ extension ConcernViewController: UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableview.deselectRow(at: indexPath, animated: true)
-//        let vc = HKUserViewController(data: data[indexPath.row])
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = HKUserViewController(data: data[indexPath.row])
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

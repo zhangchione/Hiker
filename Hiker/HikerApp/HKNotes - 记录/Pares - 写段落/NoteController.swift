@@ -124,16 +124,7 @@ class NoteController: UIViewController,NVActivityIndicatorViewable{
         return label
     }()
     
-    lazy var nextBtn:UIButton = {
-        let btn = UIButton()
-        
-        btn.setTitle("下一段", for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        btn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
-        btn.layer.cornerRadius = 20
-        btn.addTarget(self, action: #selector(nextNote), for: .touchUpInside)
-        return btn
-    }()
+
     private lazy var loginView : LocationView = {
         let loginView = LocationView(frame: CGRect(x: 0, y: 0, width: TKWidth, height: TKHeight))
             var bookData = [BookModel]()
@@ -153,12 +144,53 @@ class NoteController: UIViewController,NVActivityIndicatorViewable{
 //       let vi = UIView()
 //        return vi
 //    }()
+    lazy var tagBtn:UIButton = {
+        let btn = UIButton()
+        
+        btn.setTitle("# 添加标签", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        btn.setTitleColor(UIColor.init(r: 64, g: 102, b: 214), for: .normal)
+        btn.addTarget(self, action: #selector(nextNote), for: .touchUpInside)
+        return btn
+    }()
+    var tag = [String]()
+    lazy var tag1: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.text = ""
+        label.textColor = UIColor.init(r: 146, g: 146, b: 146)
+        label.backgroundColor = UIColor.init(r: 238, g: 243, b: 249)
+        label.layer.cornerRadius = 14
+        label.textAlignment = .center
+        return label
+    }()
+    lazy var tag2: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.text = ""
+        label.textColor = UIColor.init(r: 146, g: 146, b: 146)
+        label.backgroundColor = UIColor.init(r: 238, g: 243, b: 249)
+                label.layer.cornerRadius = 14
+        label.textAlignment = .center
+        return label
+    }()
+    lazy var tag3: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.text = ""
+        label.backgroundColor = UIColor.init(r: 238, g: 243, b: 249)
+        label.textColor = UIColor.init(r: 146, g: 146, b: 146)
+        label.layer.cornerRadius = 14
+        label.textAlignment = .center
+        return label
+    }()
     lazy var addPhotoBtn:UIButton = {
         let btn = UIButton()
         btn.setTitleColor(UIColor.white, for: .normal)
         btn.setTitle("添加图片", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
+        
         //btn.layer.cornerRadius = 20
         btn.addTarget(self, action: #selector(addPhoto), for: .touchUpInside)
         return btn
@@ -211,9 +243,14 @@ extension NoteController {
         view.addSubview(timeBtn)
         view.addSubview(tipLabel)
         
-        view.addSubview(nextBtn)
+        view.addSubview(tagBtn)
+        view.addSubview(tag1)
+        view.addSubview(tag2)
+        view.addSubview(tag3)
         //view.addSubview(photoView)
-        
+        self.tag1.isHidden = true
+        self.tag2.isHidden = true
+        self.tag3.isHidden = true
         view.addSubview(addPhotoBtn)
         view.addSubview(photoCell)
         
@@ -241,13 +278,30 @@ extension NoteController {
             make.height.equalTo(30)
             make.width.equalTo(120)
         }
-//        nextBtn.snp.makeConstraints { (make) in
-//            make.top.equalTo(timeBtn.snp.bottom).offset(25)
-//            make.right.equalTo(view).offset(-20)
-//            make.width.equalTo(100)
-//            make.height.equalTo(40)
-//        }
-        
+        tagBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(timeBtn.snp.bottom).offset(25)
+            make.left.equalTo(view).offset(20)
+            make.width.equalTo(100)
+            make.height.equalTo(30)
+        }
+        tag1.snp.makeConstraints { (make) in
+            make.top.equalTo(tagBtn.snp.bottom).offset(10)
+            make.left.equalTo(view).offset(20)
+            make.width.equalTo(80)
+            make.height.equalTo(35)
+        }
+        tag2.snp.makeConstraints { (make) in
+            make.top.equalTo(tagBtn.snp.bottom).offset(10)
+            make.left.equalTo(view).offset(110)
+            make.width.equalTo(80)
+            make.height.equalTo(35)
+        }
+        tag3.snp.makeConstraints { (make) in
+            make.top.equalTo(tagBtn.snp.bottom).offset(10)
+            make.left.equalTo(view).offset(200)
+            make.width.equalTo(80)
+            make.height.equalTo(35)
+        }
 //        photoView.snp.makeConstraints { (make) in
 //            make.height.equalTo(200)
 //        }
@@ -402,11 +456,23 @@ extension NoteController {
                         
                         savePic(content: imgs)
                         
+                        
+                        var tags = [[String]]()
+                        let loctag = getTags()
+                        let tagss = self.tag
+                        if loctag == nil {
+                            tags.append(tagss)
+                        }else {
+                            tags = loctag!
+                            tags.append(tagss)
+                        }
+                        saveTags(tags:tags )
+                        
                         let c1 = getContent()
                         let c2 = getLocation()
                         let c3 = getTime()
                         let c4 = getPic()
-                        
+                        let c5 = getTags()
 
                             
                              var paras = [NoteParas]()
@@ -416,6 +482,7 @@ extension NoteController {
                                  para.date = c3![index]
                                  para.pics = c4![index]
                                  para.place = c2![index]
+                                para.tags = c5![index]
                                  paras.append(para)
                              }
                              datas.noteParas = paras
@@ -440,6 +507,50 @@ extension NoteController {
     
     @objc func nextNote(){
         
+        if self.tag.count == 3{
+            ProgressHUD.showError("最多添加三个标签")
+        }else {
+        
+            let alert = UIAlertController.init(title: "消息", message: "请添加标签信息", preferredStyle: .alert)
+        
+            let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
+                    self.tag.append((alert.textFields?.first?.text!)!)
+
+                    self.updateTag()
+                    ProgressHUD.showSuccess("标签添加成功")
+            }
+            let noAction = UIAlertAction.init(title: "取消", style: .default) { (no) in
+                print("地点信息取消",no.style)
+            }
+            alert.addAction(yesAction)
+            alert.addAction(noAction)
+            alert.addTextField { (text) in
+                print(text.text,11)
+    
+            }
+        
+            self.present(alert, animated: true, completion: nil)
+        
+        }
+        
+    }
+    func updateTag(){
+        if self.tag.count == 1{
+            self.tag1.text = tag[0]
+            self.tag1.isHidden = false
+        }else if tag.count == 2{
+            self.tag1.text = tag[0]
+            self.tag2.text = tag[1]
+                        self.tag1.isHidden = false
+                        self.tag2.isHidden = false
+        }else if tag.count == 3{
+            self.tag1.text = tag[0]
+            self.tag2.text = tag[1]
+            self.tag3.text = tag[2]
+                        self.tag1.isHidden = false
+                        self.tag2.isHidden = false
+                        self.tag3.isHidden = false
+        }
     }
     @objc func addPhoto(){
         
