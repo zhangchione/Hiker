@@ -174,7 +174,7 @@ class MineHeaderView: UIView {
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(20))
             if TKWidth >= 812 {
-                make.width.equalTo(AdaptW(30))
+                make.width.equalTo(AdaptW(20))
             }else {
                 make.width.equalTo(35)
             }
@@ -190,7 +190,7 @@ class MineHeaderView: UIView {
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(20))
             if TKWidth >= 812 {
-                make.width.equalTo(AdaptW(30))
+                make.width.equalTo(AdaptW(20))
             }else {
                 make.width.equalTo(35)
             }

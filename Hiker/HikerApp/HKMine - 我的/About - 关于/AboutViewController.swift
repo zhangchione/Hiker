@@ -12,10 +12,9 @@ import ProgressHUD
 class AboutViewController: SubClassBaseViewController {
     
     @IBAction func commentScore(_ sender: Any) {
-//        let url = URL(string: "itms-apps://itunes.apple.com/")
-//        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-        let fbVC = FaceBookViewController()
-        self.navigationController?.pushViewController(fbVC, animated: true)
+        let url = URL(string: "itms-apps://itunes.apple.com/")
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+
     }
     
     @IBAction func function(_ sender: Any) {

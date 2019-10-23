@@ -1,9 +1,16 @@
 PODS:
+  - ACBadge (1.4.2)
   - Alamofire (4.9.0)
   - Cache (5.2.0)
   - CollectionKit (2.4.0):
     - CollectionKit/Core (= 2.4.0)
   - CollectionKit/Core (2.4.0)
+  - DifferenceKit (1.1.3):
+    - DifferenceKit/Core (= 1.1.3)
+    - DifferenceKit/UIKitExtension (= 1.1.3)
+  - DifferenceKit/Core (1.1.3)
+  - DifferenceKit/UIKitExtension (1.1.3):
+    - DifferenceKit/Core
   - EachNavigationBar (1.12.1)
   - ESTabBarController-swift (2.7)
   - HandyJSON (5.0.0-beta.1)
@@ -14,6 +21,7 @@ PODS:
   - Lightbox (2.3.0):
     - Imaginary (~> 4.0)
   - LTScrollView (0.2.1)
+  - LYEmptyView (1.3.1)
   - MJRefresh (3.2.0)
   - NewPopMenu (2.1.2)
   - NVActivityIndicatorView (4.8.0):
@@ -33,6 +41,27 @@ PODS:
   - SwiftDate (6.1.0)
   - SwiftEntryKit (1.2.0):
     - QuickLayout (= 3.0.0)
+  - SwifterSwift (5.1.0):
+    - SwifterSwift/AppKit (= 5.1.0)
+    - SwifterSwift/CoreGraphics (= 5.1.0)
+    - SwifterSwift/CoreLocation (= 5.1.0)
+    - SwifterSwift/Dispatch (= 5.1.0)
+    - SwifterSwift/Foundation (= 5.1.0)
+    - SwifterSwift/MapKit (= 5.1.0)
+    - SwifterSwift/SceneKit (= 5.1.0)
+    - SwifterSwift/SpriteKit (= 5.1.0)
+    - SwifterSwift/SwiftStdlib (= 5.1.0)
+    - SwifterSwift/UIKit (= 5.1.0)
+  - SwifterSwift/AppKit (5.1.0)
+  - SwifterSwift/CoreGraphics (5.1.0)
+  - SwifterSwift/CoreLocation (5.1.0)
+  - SwifterSwift/Dispatch (5.1.0)
+  - SwifterSwift/Foundation (5.1.0)
+  - SwifterSwift/MapKit (5.1.0)
+  - SwifterSwift/SceneKit (5.1.0)
+  - SwifterSwift/SpriteKit (5.1.0)
+  - SwifterSwift/SwiftStdlib (5.1.0)
+  - SwifterSwift/UIKit (5.1.0)
   - SwiftMessages (7.0.1):
     - SwiftMessages/App (= 7.0.1)
   - SwiftMessages/App (7.0.1)
@@ -40,8 +69,10 @@ PODS:
   - SwiftyUserDefaults (4.0.0)
 
 DEPENDENCIES:
+  - ACBadge (~> 1.4.1)
   - Alamofire
   - CollectionKit
+  - DifferenceKit
   - EachNavigationBar
   - ESTabBarController-swift
   - HandyJSON (from `https://github.com/alibaba/HandyJSON.git`, branch `dev_for_swift5.0`)
@@ -49,6 +80,7 @@ DEPENDENCIES:
   - Kingfisher
   - Lightbox
   - LTScrollView
+  - LYEmptyView
   - MJRefresh
   - NewPopMenu (~> 2.0)
   - NVActivityIndicatorView
@@ -61,15 +93,18 @@ DEPENDENCIES:
   - SQLite.swift
   - SwiftDate
   - SwiftEntryKit
+  - SwifterSwift
   - SwiftMessages
   - SwiftyJSON
   - SwiftyUserDefaults (~> 4.0)
 
 SPEC REPOS:
   trunk:
+    - ACBadge
     - Alamofire
     - Cache
     - CollectionKit
+    - DifferenceKit
     - EachNavigationBar
     - ESTabBarController-swift
     - Hero
@@ -77,6 +112,7 @@ SPEC REPOS:
     - Kingfisher
     - Lightbox
     - LTScrollView
+    - LYEmptyView
     - MJRefresh
     - NewPopMenu
     - NVActivityIndicatorView
@@ -90,6 +126,7 @@ SPEC REPOS:
     - SQLite.swift
     - SwiftDate
     - SwiftEntryKit
+    - SwifterSwift
     - SwiftMessages
     - SwiftyJSON
     - SwiftyUserDefaults
@@ -105,9 +142,11 @@ CHECKOUT OPTIONS:
     :git: https://github.com/alibaba/HandyJSON.git
 
 SPEC CHECKSUMS:
+  ACBadge: f8adc8342eccfc8d8d52af85e1bcb9f2d5c21639
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   Cache: 807c5d86d01a177f06ede9865add3aea269bbfd4
   CollectionKit: 8f01e7629185bb81072c4aa734d105df5c2d1c8b
+  DifferenceKit: 5018791b6c1fc839921a3c171a0a539ace6ea60c
   EachNavigationBar: edd979ad7b4a63ce5ea4208087ba55eb1e2f2b55
   ESTabBarController-swift: 4fb52ad03d94d0717ef97bc9eb09a5abfdded0a2
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
@@ -116,6 +155,7 @@ SPEC CHECKSUMS:
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Lightbox: d317750e4132bfb871a5307cfe0a2c7d6a583c65
   LTScrollView: 93fff4aed9f9545f541a99b320b27808f5307c12
+  LYEmptyView: b6d418cfa38b78df0cf243f9a9c25ccbdc399922
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   NewPopMenu: c6129e08e8192f6257ceb5f9a4357e1b59c6e2e7
   NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
@@ -129,10 +169,11 @@ SPEC CHECKSUMS:
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwiftEntryKit: 8303faf480f405b57df16b6fc2b251647cf40349
+  SwifterSwift: a9e8e144832638c2850b43da5feaf9598c6ad65b
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
 
-PODFILE CHECKSUM: e89a9828ce285b99521d0f2e18d21329af28ff68
+PODFILE CHECKSUM: 3acf3cd7a70b5efaf5dc305b34b33fdcbe8fa622
 
 COCOAPODS: 1.8.3

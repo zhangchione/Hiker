@@ -1,0 +1,6 @@
+framework module ACBadge {
+  umbrella header "ACBadge-umbrella.h"
+
+  export *
+  module * { export * }
+}

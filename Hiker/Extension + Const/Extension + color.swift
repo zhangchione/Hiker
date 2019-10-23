@@ -86,56 +86,7 @@ extension UIColor {
 
 
 
-extension UIScreen {
-    var titleY: CGFloat {
-        if safeAreaInsets.top == 0 {
-            return 20.0
-        } else {
-            return safeAreaInsets.top
-        }
-    }
-    
-    var safeAreaInsets: UIEdgeInsets {
-        if #available(iOS 11.0, *) {
-            return  UIApplication.shared.keyWindow?.safeAreaInsets ?? .zero
-        } else {
-            return .zero
-            // Fallback on earlier versions
-        }
-    }
-    
-    func widthOfSafeArea() -> CGFloat {
-        guard let rootView = UIApplication.shared.keyWindow else { return 0 }
-        if #available(iOS 11.0, *) {
-            let leftInset = rootView.safeAreaInsets.left
-            let rightInset = rootView.safeAreaInsets.right
-            return rootView.bounds.width - leftInset - rightInset
-        } else {
-            return rootView.bounds.width
-        }
-    }
-    
-    func heightOfSafeArea() -> CGFloat {
-        
-        guard let rootView = UIApplication.shared.keyWindow else { return 0 }
-        
-        if #available(iOS 11.0, *) {
-            
-            let topInset = rootView.safeAreaInsets.top
-            
-            let bottomInset = rootView.safeAreaInsets.bottom
-            
-            return rootView.bounds.height - topInset - bottomInset
-            
-        } else {
-            
-            return rootView.bounds.height
-            
-        }
-        
-    }
-    
-}
+
 extension UIView{
     @IBInspectable
     var cornerRadius: CGFloat {

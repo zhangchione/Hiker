@@ -14,7 +14,10 @@ target 'Hiker' do
   pod 'SwiftEntryKit'
   # 缓存圆
   pod 'ProgressHUD'
-  
+  # UI控件
+  pod 'LYEmptyView'
+  pod 'DifferenceKit'
+      pod 'ACBadge', '~> 1.4.1'
   # 图片查看
   pod 'Lightbox'
   
@@ -42,6 +45,8 @@ target 'Hiker' do
   pod 'pop'
   
   pod 'NVActivityIndicatorView'
+  # 扩展
+  pod 'SwifterSwift'
   
   #消息提示
   pod 'SwiftMessages'

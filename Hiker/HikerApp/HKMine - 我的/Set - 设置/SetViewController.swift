@@ -51,8 +51,19 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
 
     }
     @IBAction func cutUser(_ sender: Any) {
-        let aboutvc = AboutViewController()
-        self.navigationController?.pushViewController(aboutvc, animated: true)
+        let alert = UIAlertController.init(title: "消息", message: "您确认要退出账号吗？", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction.init(title: "确定", style: .default) { (yes) in
+            ProgressHUD.showSuccess("切换成功")
+            logOutApp()
+        }
+        let noAction = UIAlertAction.init(title: "取消", style: .destructive) { (no) in
+        }
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+
+
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func cutUserImg(_ sender: Any) {
@@ -115,22 +126,22 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
     }
     
     @IBAction func myCollected(_ sender: Any) {
-        let collectionsVC = MyCollectionsController()
-        self.navigationController?.pushViewController(collectionsVC, animated: true)
+       let apptext = AppContext()
+        let vc = TracksViewController(apptext.photoDataManager)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBAction func faceBook(_ sender: Any) {
-       // 足迹
+       let fbVC = FaceBookViewController()
+       self.navigationController?.pushViewController(fbVC, animated: true)
         
     }
     @IBAction func about(_ sender: Any) {
-        // 回忆
-        let apptext = AppContext()
-        let vc = RememberViewController(apptext.photoDataManager)
-        self.navigationController?.pushViewController(vc, animated: true)
+         let aboutvc = AboutViewController()
+        self.navigationController?.pushViewController(aboutvc, animated: true)
     }
     
     override func viewDidLoad() {

@@ -72,6 +72,41 @@
 		F563A2812360204E00AA928B /* GuoQingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2802360204E00AA928B /* GuoQingViewController.swift */; };
 		F563A2832360340400AA928B /* HongseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2822360340400AA928B /* HongseViewController.swift */; };
 		F563A2852360465900AA928B /* DeleteParasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2842360465900AA928B /* DeleteParasController.swift */; };
+		F563A28B236064F100AA928B /* TrackHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A28A236064F100AA928B /* TrackHeaderReusableView.swift */; };
+		F563A28D2360669A00AA928B /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A28C2360669A00AA928B /* TrackCell.swift */; };
+		F563A28F2360681700AA928B /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A28E2360681700AA928B /* NoticeView.swift */; };
+		F563A2AE2360781D00AA928B /* PhotoCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2AD2360781D00AA928B /* PhotoCell1.swift */; };
+		F563A2B02360786200AA928B /* Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2AF2360786200AA928B /* Ext.swift */; };
+		F563A2B22360788400AA928B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2B12360788400AA928B /* BaseViewController.swift */; };
+		F563A2B42360788A00AA928B /* TKPhotoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2B32360788A00AA928B /* TKPhotoBaseViewController.swift */; };
+		F563A2B6236078D600AA928B /* PhotoBottonBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2B5236078D500AA928B /* PhotoBottonBanner.swift */; };
+		F563A2C22360790400AA928B /* BottomPopupUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2B82360790000AA928B /* BottomPopupUtils.swift */; };
+		F563A2C32360790400AA928B /* BottomPopupDismissInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2B92360790100AA928B /* BottomPopupDismissInteractionController.swift */; };
+		F563A2C42360790400AA928B /* BottomPopupPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2BA2360790100AA928B /* BottomPopupPresentationController.swift */; };
+		F563A2C52360790400AA928B /* BottomPopupNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2BB2360790200AA928B /* BottomPopupNavigationController.swift */; };
+		F563A2C62360790400AA928B /* BottomPopupPresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2BC2360790200AA928B /* BottomPopupPresentAnimator.swift */; };
+		F563A2C72360790400AA928B /* SwipeSelectingGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2BD2360790300AA928B /* SwipeSelectingGestureRecognizer.swift */; };
+		F563A2C82360790400AA928B /* BottomPopupDismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2BE2360790300AA928B /* BottomPopupDismissAnimator.swift */; };
+		F563A2C92360790400AA928B /* BottomPopupTransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2BF2360790400AA928B /* BottomPopupTransitionHandler.swift */; };
+		F563A2CA2360790400AA928B /* BottomPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2C02360790400AA928B /* BottomPopupViewController.swift */; };
+		F563A2CB2360790400AA928B /* SwipeSelectingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2C12360790400AA928B /* SwipeSelectingCollectionView.swift */; };
+		F563A2CF2360799E00AA928B /* Zephyr.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2CE2360799E00AA928B /* Zephyr.swift */; };
+		F563A2D2236079DF00AA928B /* PhotoAddPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2D0236079DE00AA928B /* PhotoAddPickerViewController.swift */; };
+		F563A2D3236079DF00AA928B /* PhotoAddPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2D1236079DF00AA928B /* PhotoAddPickerCell.swift */; };
+		F563A2D623607A1400AA928B /* NoticeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2D423607A1400AA928B /* NoticeHelper.swift */; };
+		F563A2D723607A1400AA928B /* AlbumHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2D523607A1400AA928B /* AlbumHelper.swift */; };
+		F563A2D923607A4A00AA928B /* PhotoHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2D823607A4A00AA928B /* PhotoHeaderReusableView.swift */; };
+		F563A2DB23607AED00AA928B /* CustomPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2DA23607AED00AA928B /* CustomPhotoViewController.swift */; };
+		F563A2DF23607B3700AA928B /* PhotoBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2DD23607B3700AA928B /* PhotoBannerView.swift */; };
+		F563A2E523607B8400AA928B /* PhotoBannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2E423607B8400AA928B /* PhotoBannerViewModel.swift */; };
+		F563A2EC2360815C00AA928B /* AlbumShowBottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2E62360815700AA928B /* AlbumShowBottomCell.swift */; };
+		F563A2ED2360815C00AA928B /* AddAlbumShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2E72360815800AA928B /* AddAlbumShowCell.swift */; };
+		F563A2EE2360815C00AA928B /* AlbumShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2E82360815900AA928B /* AlbumShowViewController.swift */; };
+		F563A2EF2360815C00AA928B /* AlbumShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2E92360815A00AA928B /* AlbumShowCell.swift */; };
+		F563A2F02360815C00AA928B /* AlbumShowViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2EA2360815B00AA928B /* AlbumShowViewController+CollectionView.swift */; };
+		F563A2F12360815C00AA928B /* AlbumShowViewController+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2EB2360815C00AA928B /* AlbumShowViewController+Config.swift */; };
+		F563A2F32360825300AA928B /* I18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2F22360825200AA928B /* I18n.swift */; };
+		F563A2F52360826100AA928B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F563A2F42360826100AA928B /* Localizable.strings */; };
 		F5667C5923554DA3009EDF05 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5823554DA3009EDF05 /* UserHeaderView.swift */; };
 		F5667C5B23554DF4009EDF05 /* HKUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5A23554DF4009EDF05 /* HKUserViewController.swift */; };
 		F5667C5D23557C16009EDF05 /* MyCollectionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5C23557C16009EDF05 /* MyCollectionsController.swift */; };
@@ -239,6 +274,41 @@
 		F563A2802360204E00AA928B /* GuoQingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuoQingViewController.swift; sourceTree = "<group>"; };
 		F563A2822360340400AA928B /* HongseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HongseViewController.swift; sourceTree = "<group>"; };
 		F563A2842360465900AA928B /* DeleteParasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteParasController.swift; sourceTree = "<group>"; };
+		F563A28A236064F100AA928B /* TrackHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHeaderReusableView.swift; sourceTree = "<group>"; };
+		F563A28C2360669A00AA928B /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
+		F563A28E2360681700AA928B /* NoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
+		F563A2AD2360781D00AA928B /* PhotoCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell1.swift; sourceTree = "<group>"; };
+		F563A2AF2360786200AA928B /* Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ext.swift; sourceTree = "<group>"; };
+		F563A2B12360788400AA928B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F563A2B32360788A00AA928B /* TKPhotoBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TKPhotoBaseViewController.swift; sourceTree = "<group>"; };
+		F563A2B5236078D500AA928B /* PhotoBottonBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBottonBanner.swift; sourceTree = "<group>"; };
+		F563A2B82360790000AA928B /* BottomPopupUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupUtils.swift; sourceTree = "<group>"; };
+		F563A2B92360790100AA928B /* BottomPopupDismissInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupDismissInteractionController.swift; sourceTree = "<group>"; };
+		F563A2BA2360790100AA928B /* BottomPopupPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupPresentationController.swift; sourceTree = "<group>"; };
+		F563A2BB2360790200AA928B /* BottomPopupNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupNavigationController.swift; sourceTree = "<group>"; };
+		F563A2BC2360790200AA928B /* BottomPopupPresentAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupPresentAnimator.swift; sourceTree = "<group>"; };
+		F563A2BD2360790300AA928B /* SwipeSelectingGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeSelectingGestureRecognizer.swift; sourceTree = "<group>"; };
+		F563A2BE2360790300AA928B /* BottomPopupDismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupDismissAnimator.swift; sourceTree = "<group>"; };
+		F563A2BF2360790400AA928B /* BottomPopupTransitionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupTransitionHandler.swift; sourceTree = "<group>"; };
+		F563A2C02360790400AA928B /* BottomPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPopupViewController.swift; sourceTree = "<group>"; };
+		F563A2C12360790400AA928B /* SwipeSelectingCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeSelectingCollectionView.swift; sourceTree = "<group>"; };
+		F563A2CE2360799E00AA928B /* Zephyr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zephyr.swift; sourceTree = "<group>"; };
+		F563A2D0236079DE00AA928B /* PhotoAddPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAddPickerViewController.swift; sourceTree = "<group>"; };
+		F563A2D1236079DF00AA928B /* PhotoAddPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAddPickerCell.swift; sourceTree = "<group>"; };
+		F563A2D423607A1400AA928B /* NoticeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeHelper.swift; sourceTree = "<group>"; };
+		F563A2D523607A1400AA928B /* AlbumHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumHelper.swift; sourceTree = "<group>"; };
+		F563A2D823607A4A00AA928B /* PhotoHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHeaderReusableView.swift; sourceTree = "<group>"; };
+		F563A2DA23607AED00AA928B /* CustomPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPhotoViewController.swift; sourceTree = "<group>"; };
+		F563A2DD23607B3700AA928B /* PhotoBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBannerView.swift; sourceTree = "<group>"; };
+		F563A2E423607B8400AA928B /* PhotoBannerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBannerViewModel.swift; sourceTree = "<group>"; };
+		F563A2E62360815700AA928B /* AlbumShowBottomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumShowBottomCell.swift; sourceTree = "<group>"; };
+		F563A2E72360815800AA928B /* AddAlbumShowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlbumShowCell.swift; sourceTree = "<group>"; };
+		F563A2E82360815900AA928B /* AlbumShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumShowViewController.swift; sourceTree = "<group>"; };
+		F563A2E92360815A00AA928B /* AlbumShowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumShowCell.swift; sourceTree = "<group>"; };
+		F563A2EA2360815B00AA928B /* AlbumShowViewController+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumShowViewController+CollectionView.swift"; sourceTree = "<group>"; };
+		F563A2EB2360815C00AA928B /* AlbumShowViewController+Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlbumShowViewController+Config.swift"; sourceTree = "<group>"; };
+		F563A2F22360825200AA928B /* I18n.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I18n.swift; sourceTree = "<group>"; };
+		F563A2F42360826100AA928B /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F5667C5823554DA3009EDF05 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
 		F5667C5A23554DF4009EDF05 /* HKUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKUserViewController.swift; sourceTree = "<group>"; };
 		F5667C5C23557C16009EDF05 /* MyCollectionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionsController.swift; sourceTree = "<group>"; };
@@ -588,6 +658,50 @@
 			path = WRCycleScrollView;
 			sourceTree = "<group>";
 		};
+		F563A2902360742600AA928B /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				F563A2F42360826100AA928B /* Localizable.strings */,
+				F563A2F22360825200AA928B /* I18n.swift */,
+				F563A2E92360815A00AA928B /* AlbumShowCell.swift */,
+				F563A2E72360815800AA928B /* AddAlbumShowCell.swift */,
+				F563A2E62360815700AA928B /* AlbumShowBottomCell.swift */,
+				F563A2E82360815900AA928B /* AlbumShowViewController.swift */,
+				F563A2EA2360815B00AA928B /* AlbumShowViewController+CollectionView.swift */,
+				F563A2EB2360815C00AA928B /* AlbumShowViewController+Config.swift */,
+				F563A2E423607B8400AA928B /* PhotoBannerViewModel.swift */,
+				F563A2DD23607B3700AA928B /* PhotoBannerView.swift */,
+				F563A2DA23607AED00AA928B /* CustomPhotoViewController.swift */,
+				F563A2D823607A4A00AA928B /* PhotoHeaderReusableView.swift */,
+				F563A2D0236079DE00AA928B /* PhotoAddPickerViewController.swift */,
+				F563A2D1236079DF00AA928B /* PhotoAddPickerCell.swift */,
+				F563A2CE2360799E00AA928B /* Zephyr.swift */,
+				F563A2B5236078D500AA928B /* PhotoBottonBanner.swift */,
+				F563A2B12360788400AA928B /* BaseViewController.swift */,
+				F563A2AF2360786200AA928B /* Ext.swift */,
+				F563A2AD2360781D00AA928B /* PhotoCell1.swift */,
+				F563A2B32360788A00AA928B /* TKPhotoBaseViewController.swift */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
+		F563A2B7236078F200AA928B /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				F563A2BE2360790300AA928B /* BottomPopupDismissAnimator.swift */,
+				F563A2B92360790100AA928B /* BottomPopupDismissInteractionController.swift */,
+				F563A2BB2360790200AA928B /* BottomPopupNavigationController.swift */,
+				F563A2BC2360790200AA928B /* BottomPopupPresentAnimator.swift */,
+				F563A2BA2360790100AA928B /* BottomPopupPresentationController.swift */,
+				F563A2BF2360790400AA928B /* BottomPopupTransitionHandler.swift */,
+				F563A2B82360790000AA928B /* BottomPopupUtils.swift */,
+				F563A2C02360790400AA928B /* BottomPopupViewController.swift */,
+				F563A2C12360790400AA928B /* SwipeSelectingCollectionView.swift */,
+				F563A2BD2360790300AA928B /* SwipeSelectingGestureRecognizer.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		F5667C5723554D71009EDF05 /* HKUser - 用户类 */ = {
 			isa = PBXGroup;
 			children = (
@@ -622,7 +736,13 @@
 		F56EE124235F1B1100F9866F /* MyTrack - 足迹 */ = {
 			isa = PBXGroup;
 			children = (
+				F563A2D523607A1400AA928B /* AlbumHelper.swift */,
+				F563A2D423607A1400AA928B /* NoticeHelper.swift */,
+				F563A2902360742600AA928B /* Photo */,
+				F563A28E2360681700AA928B /* NoticeView.swift */,
 				F56EE125235F1CCB00F9866F /* TracksViewController.swift */,
+				F563A28A236064F100AA928B /* TrackHeaderReusableView.swift */,
+				F563A28C2360669A00AA928B /* TrackCell.swift */,
 			);
 			path = "MyTrack - 足迹";
 			sourceTree = "<group>";
@@ -706,6 +826,7 @@
 		F58017D72325E3340014E3C3 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				F563A2B7236078F200AA928B /* New Group */,
 				F563A212235FF9C400AA928B /* WRCycleScrollView */,
 				F5667C722355E392009EDF05 /* HGImage */,
 				F5598262234D863400802220 /* DateUi */,
@@ -1140,6 +1261,7 @@
 				F5625E59235D6FBC00574DFD /* apple-app-site-association.json in Resources */,
 				F5C27E1D233C4BB700B5131F /* HKCityjson.json in Resources */,
 				F58017C72325E0560014E3C3 /* Main.storyboard in Resources */,
+				F563A2F52360826100AA928B /* Localizable.strings in Resources */,
 				F5D8DD662329E58400B7EADF /* WriteCell.xib in Resources */,
 				F558F63B2339DA350013EBAC /* WriteNextNotesCell.xib in Resources */,
 				F5667C802355E3A4009EDF05 /* HGImage.xcassets in Resources */,
@@ -1205,6 +1327,7 @@
 				F5D8DD652329E58400B7EADF /* WriteCell.swift in Sources */,
 				F5AED6632330C8AA00B5B824 /* ThingIndexTable.swift in Sources */,
 				F5EC431F23262E5700107F66 /* StoryView.swift in Sources */,
+				F563A2D2236079DF00AA928B /* PhotoAddPickerViewController.swift in Sources */,
 				F5D2C3DD2328D0D000DE60D2 /* NotesViewController.swift in Sources */,
 				F58017DE2325F9E00014E3C3 /* HKMineViewController.swift in Sources */,
 				F5AED6642330C8AA00B5B824 /* CustomAlbumTable.swift in Sources */,
@@ -1212,12 +1335,17 @@
 				F5AED64A2330C40200B5B824 /* Photo.swift in Sources */,
 				F5C8725D233203D90094DD7A /* ConcernViewController.swift in Sources */,
 				F558F62E2339B5200013EBAC /* TitleController.swift in Sources */,
+				F563A2C82360790400AA928B /* BottomPopupDismissAnimator.swift in Sources */,
 				F5598268234D863500802220 /* Extension_UIView.swift in Sources */,
 				F5A72C522353128300F0322E /* AddTrackView.swift in Sources */,
+				F563A2E523607B8400AA928B /* PhotoBannerViewModel.swift in Sources */,
 				F5AED6522330C7FB00B5B824 /* DataBase.swift in Sources */,
+				F563A2EF2360815C00AA928B /* AlbumShowCell.swift in Sources */,
 				F57C320A23349F1600B6E7A0 /* UserDefaults.swift in Sources */,
+				F563A2CA2360790400AA928B /* BottomPopupViewController.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
 				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
+				F563A2CF2360799E00AA928B /* Zephyr.swift in Sources */,
 				F563A251235FF9C500AA928B /* WRCycleScrollView.swift in Sources */,
 				F563A24F235FF9C500AA928B /* WRProxy.swift in Sources */,
 				F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */,
@@ -1230,8 +1358,10 @@
 				F5015600232799D900FD201C /* SetViewController.swift in Sources */,
 				F5EC431223261D7A00107F66 /* MainNavigationController.swift in Sources */,
 				F53B544B23588D7A0049F5C2 /* PhotoDataManager+Observer.swift in Sources */,
+				F563A2B02360786200AA928B /* Ext.swift in Sources */,
 				F58017E02325F9F20014E3C3 /* HKBaseViewController.swift in Sources */,
 				F558F65A233A030D0013EBAC /* PageCollectionLayout.swift in Sources */,
+				F563A2F32360825300AA928B /* I18n.swift in Sources */,
 				F558F660233A030D0013EBAC /* SubviewsForEach.swift in Sources */,
 				F58017C42325E0560014E3C3 /* MainViewController.swift in Sources */,
 				F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */,
@@ -1253,9 +1383,11 @@
 				F558F65B233A030D0013EBAC /* PageCollectionView.swift in Sources */,
 				F5C27E1F233C89E200B5131F /* API.swift in Sources */,
 				F56EE11C235E9A4A00F9866F /* ConcernHeaderView.swift in Sources */,
+				F563A2F12360815C00AA928B /* AlbumShowViewController+Config.swift in Sources */,
 				F53B544F23588DD80049F5C2 /* CenterViewController.swift in Sources */,
 				F53B544D23588D7A0049F5C2 /* PhotoDataManager+Configuration.swift in Sources */,
 				F56EE11E235F031200F9866F /* ExpandingViewController1.swift in Sources */,
+				F563A2ED2360815C00AA928B /* AddAlbumShowCell.swift in Sources */,
 				F5AED6672330C8AA00B5B824 /* LocalAlbumTable.swift in Sources */,
 				F5AED6662330C8AA00B5B824 /* DelectTable.swift in Sources */,
 				F558F65F233A030D0013EBAC /* ConstraintsHelper.swift in Sources */,
@@ -1264,23 +1396,29 @@
 				F5667C5D23557C16009EDF05 /* MyCollectionsController.swift in Sources */,
 				F558F65E233A030D0013EBAC /* ScreenShotHelper.swift in Sources */,
 				F558F669233A03270013EBAC /* CollectionViewHelper.swift in Sources */,
+				F563A2C32360790400AA928B /* BottomPopupDismissInteractionController.swift in Sources */,
 				F50155E7232744A400FD201C /* StoryBannerModel.swift in Sources */,
 				F5667C65235596DB009EDF05 /* FanCell.swift in Sources */,
 				F5667C7E2355E3A4009EDF05 /* HGImageCollectionViewController.swift in Sources */,
 				F50155FA2327842F00FD201C /* MineHeaderView.swift in Sources */,
 				F5625E65235DAF8000574DFD /* ConcernController.swift in Sources */,
 				F563A250235FF9C500AA928B /* WRPageControl.swift in Sources */,
+				F563A2DB23607AED00AA928B /* CustomPhotoViewController.swift in Sources */,
 				F558F63A2339DA350013EBAC /* WriteNextNotesCell.swift in Sources */,
 				F5667C5F235581D8009EDF05 /* FaceBookViewController.swift in Sources */,
 				F50155E52327445C00FD201C /* StoryBannerViewModel.swift in Sources */,
 				F5667C6323558D96009EDF05 /* BookViewController.swift in Sources */,
 				F558F661233A030D0013EBAC /* ConfigurationHelper.swift in Sources */,
+				F563A2EC2360815C00AA928B /* AlbumShowBottomCell.swift in Sources */,
 				F50155E92327454800FD201C /* StoryBannerView.swift in Sources */,
 				F5D2C3CF232892AD00DE60D2 /* RegisterViewController.swift in Sources */,
 				F5667C7D2355E3A4009EDF05 /* HGImagePickerCell.swift in Sources */,
 				F56EE123235F1B0D00F9866F /* RememberViewController.swift in Sources */,
+				F563A2C52360790400AA928B /* BottomPopupNavigationController.swift in Sources */,
 				F56EE120235F037100F9866F /* ParasController.swift in Sources */,
 				F5AED6622330C8AA00B5B824 /* ThingTable.swift in Sources */,
+				F563A2B42360788A00AA928B /* TKPhotoBaseViewController.swift in Sources */,
+				F563A2EE2360815C00AA928B /* AlbumShowViewController.swift in Sources */,
 				F58A2B6523540FD300DE912F /* CommentCell.swift in Sources */,
 				F558F662233A030D0013EBAC /* CornerAnimatable.swift in Sources */,
 				F5AED6682330C8AA00B5B824 /* DiaryTable.swift in Sources */,
@@ -1290,18 +1428,23 @@
 				F558F66D233A032F0013EBAC /* AnimationBarButton.swift in Sources */,
 				F5667C6823559C4F009EDF05 /* AboutViewController.swift in Sources */,
 				F5667C7F2355E3A4009EDF05 /* HGImageCompleteButton.swift in Sources */,
+				F563A2D3236079DF00AA928B /* PhotoAddPickerCell.swift in Sources */,
+				F563A2B22360788400AA928B /* BaseViewController.swift in Sources */,
 				F5D2C3D12328C45D00DE60D2 /* TabBarItem.swift in Sources */,
 				F5C872542331C8480094DD7A /* TimerButton.swift in Sources */,
 				F5C872522331C4B60094DD7A /* GSCaptchaButton.swift in Sources */,
 				F5667C5923554DA3009EDF05 /* UserHeaderView.swift in Sources */,
 				F558F6312339D9150013EBAC /* NotesController.swift in Sources */,
 				F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */,
+				F563A28B236064F100AA928B /* TrackHeaderReusableView.swift in Sources */,
 				F563A2852360465900AA928B /* DeleteParasController.swift in Sources */,
 				F5D2C3DA2328D0A200DE60D2 /* CustomTransitionViewController.swift in Sources */,
 				F5667C712355D684009EDF05 /* TeamViewController.swift in Sources */,
+				F563A2AE2360781D00AA928B /* PhotoCell1.swift in Sources */,
 				F5D8DD682329FDED00B7EADF /* WriteHeaderReusableView.swift in Sources */,
 				F50155FC2327865300FD201C /* LTAdvancedTestOneVC.swift in Sources */,
 				F558F659233A030D0013EBAC /* BasePageCollectionCell.swift in Sources */,
+				F563A28D2360669A00AA928B /* TrackCell.swift in Sources */,
 				F53B544923588D7A0049F5C2 /* PhotoDataManager.swift in Sources */,
 				F58017E22326075B0014E3C3 /* Const.swift in Sources */,
 				F58A2B7023549ED200DE912F /* ConcernCell.swift in Sources */,
@@ -1317,24 +1460,37 @@
 				F559826C234D863500802220 /* Extension_String.swift in Sources */,
 				F5BD54EB233B52DB00357670 /* NoteController.swift in Sources */,
 				F5AED6652330C8AA00B5B824 /* LocationTable.swift in Sources */,
+				F563A2C22360790400AA928B /* BottomPopupUtils.swift in Sources */,
 				F5D2C3D62328C97700DE60D2 /* MineSotryCell.swift in Sources */,
 				F58017E4232607770014E3C3 /* Extension + color.swift in Sources */,
+				F563A2D923607A4A00AA928B /* PhotoHeaderReusableView.swift in Sources */,
 				F5C27E1B233C4AF500B5131F /* CityViewController.swift in Sources */,
 				F5C5FA9D2351E7E700197A6A /* SearchContentViewController.swift in Sources */,
 				F56EE126235F1CCB00F9866F /* TracksViewController.swift in Sources */,
+				F563A2C72360790400AA928B /* SwipeSelectingGestureRecognizer.swift in Sources */,
 				F5A72C5623531C5900F0322E /* BookCell.swift in Sources */,
 				F5625E5D235D7A3900574DFD /* HKHomeHeaderView.swift in Sources */,
+				F563A2D623607A1400AA928B /* NoticeHelper.swift in Sources */,
+				F563A2C92360790400AA928B /* BottomPopupTransitionHandler.swift in Sources */,
+				F563A2C42360790400AA928B /* BottomPopupPresentationController.swift in Sources */,
 				F558F663233A030D0013EBAC /* TransitionDriver.swift in Sources */,
+				F563A2F02360815C00AA928B /* AlbumShowViewController+CollectionView.swift in Sources */,
 				F563A27F235FF9C500AA928B /* WRCycleCell.swift in Sources */,
+				F563A2B6236078D600AA928B /* PhotoBottonBanner.swift in Sources */,
+				F563A28F2360681700AA928B /* NoticeView.swift in Sources */,
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
 				F558F65C233A030D0013EBAC /* ExpandingViewController.swift in Sources */,
 				F5625E61235D944900574DFD /* CityController.swift in Sources */,
 				F559826A234D863500802220 /* Extension_Date.swift in Sources */,
 				F50155EE2327682D00FD201C /* MapCell.swift in Sources */,
 				F5EC43242326374600107F66 /* CityView.swift in Sources */,
+				F563A2DF23607B3700AA928B /* PhotoBannerView.swift in Sources */,
 				F5E375C1232F735B00C7C351 /* FivePhotoCell.swift in Sources */,
+				F563A2C62360790400AA928B /* BottomPopupPresentAnimator.swift in Sources */,
 				F5C5FAA1235209FD00197A6A /* SearchUserCell.swift in Sources */,
 				F5625E5B235D7A1800574DFD /* HKHomeController.swift in Sources */,
+				F563A2CB2360790400AA928B /* SwipeSelectingCollectionView.swift in Sources */,
+				F563A2D723607A1400AA928B /* AlbumHelper.swift in Sources */,
 				F50155EB2327494B00FD201C /* StoryBaseViewController.swift in Sources */,
 				F5AED64C2330C69C00B5B824 /* Album.swift in Sources */,
 				F5EBB55523386FD1006DAAC8 /* NotesModel.swift in Sources */,

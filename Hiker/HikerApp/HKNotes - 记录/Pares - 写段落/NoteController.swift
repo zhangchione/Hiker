@@ -15,12 +15,12 @@ import SwiftDate
 import Lightbox
 
 class NoteController: UIViewController,NVActivityIndicatorViewable,DataToEasyDelegate {
-    let keyMap = ["building":["塔","高楼","小洋房","别墅","学校"],
-                  "food":["美食","食品","小吃","面","汤包"],
-                  "landscape":["美景","山","水","湖","湖泊","江","白云"],
-                  "animal":["猫","狗","猴子"],
-                  "night_scene":["夜","深夜","傍晚","黄昏"],
-                  "face":["人"]
+    let keyMap = ["building":["塔","高楼","小洋房","别墅","学校","高楼大厦","古色古香","高大"],
+                  "food":["美食","食品","小吃","面","汤包","小笼包","甜食","美味","大餐","好吃",""],
+                  "landscape":["美景","山","水","湖","湖泊","江","白云","美丽","甜美","林","树","花","草","葵","大地"],
+                  "animal":["猫","狗","猴子","虎","狼","鼠","鹿","貂","猴","熊","象","豹子","牛","狮子","熊猫","猪"],
+                  "night_scene":["夜","深夜","傍晚","黄昏","夜色","夜风","黑夜","月","星星","夜幕","夕照"],
+                  "face":["人","孩子","爸爸","妈妈","爷爷","奶奶","外公","外婆","叔叔","阿姨","哥哥","姐姐","弟弟","弟","妹妹"]
                 ]
 
     func recognize(current: Int, max: Int) {
@@ -202,7 +202,7 @@ class NoteController: UIViewController,NVActivityIndicatorViewable,DataToEasyDel
     lazy var addPhotoBtn:UIButton = {
         let btn = UIButton()
         btn.setTitleColor(UIColor.white, for: .normal)
-        btn.setTitle("添加图片", for: .normal)
+        btn.setTitle("智能配图", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
         
@@ -584,7 +584,7 @@ extension NoteController {
 
         
       //  ProgressHUD.show("配图中")
-        let strs = "西湖的水很美，杭州的美食也不错，人也有点多噢，今日打卡西湖。"
+        let strs = writeTextView.text! //"西湖的水很美，杭州的美食也不错，人也有点多噢，今日打卡西湖。"
         let tvtext = writeTextView.text!
 
         if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
@@ -754,7 +754,7 @@ extension NoteController {
                             
                             self.selectPhotoNum = datas.count
                             let size = CGSize(width: 30, height: 30)
-                            self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
+                            self.startAnimating(size, message: "智能配图加载中", type: .ballClipRotate, fadeInAnimation: nil)
                             
                             let img = SKPHAssetToImageTool.PHAssetToImage(asset: data.asset)
                             let up = self.uploadPic(image: img)

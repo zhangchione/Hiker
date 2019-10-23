@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import DifferenceKit
 
 class Photo {
     var asset: PHAsset
@@ -38,3 +39,5 @@ extension Photo: Hashable {
         hasher.combine(asset.localIdentifier)
     }
 }
+
+extension Photo: Differentiable {}

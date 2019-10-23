@@ -26,7 +26,8 @@ class SubClassBaseViewController: UIViewController {
         
     }
     
-
+func configNav() {
+    }
     func setUI(){
         self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)
         self.navigation.bar.backgroundColor = .white
