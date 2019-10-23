@@ -31,7 +31,7 @@ class HomeController: UIViewController {
 //        self.word = word
 //        ProgressHUD.show()
 //    }
-    
+        let refresh = UIRefreshControl()
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
         let collection = UICollectionView.init(frame:.zero, collectionViewLayout: layout)
@@ -47,10 +47,17 @@ class HomeController: UIViewController {
         collection.register(StoryView.self, forCellWithReuseIdentifier: HKStoryID)
         collection.showsHorizontalScrollIndicator  = false
         collection.showsVerticalScrollIndicator = false
+        refresh.attributedTitle = NSAttributedString(string: "下拉刷新")
+        
+        refresh.addTarget(self, action: #selector(pullTheRefresh), for: UIControl.Event.valueChanged)
+        //collection.addSubview(refresh)
         
         return collection
     }()
-    
+    @objc func pullTheRefresh() {
+        refresh.endRefreshing()
+        collectionView.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
@@ -104,13 +111,14 @@ class HomeController: UIViewController {
                 self?.configData(page: self!.page)
                 self?.collectionView.mj_footer.endRefreshing()
         }
-//        collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
-//
-//                print("下拉刷新 --- 1")
-////                self!.data.removeAll()
-////                self!.configData(page: 1)
-////                self!.collectionView.reloadData()
-//        }
+        collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
+
+                print("下拉刷新 --- 1")
+                self!.data.removeAll()
+                self!.configData(page: 1)
+                self!.collectionView.reloadData()
+                self?.collectionView.mj_header.endRefreshing()
+        }
     }
 }
 
@@ -262,7 +270,6 @@ extension HomeController {
             collecteNet(noteId: data[(indexPath?.row)!].id)
             
         }
-
     }
     
     @objc func fav(_ sender:UIButton){

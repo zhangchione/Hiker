@@ -95,7 +95,12 @@ struct NoteParas:HandyJSON {
     var place = ""
     var date = ""
     var noteid = ""
-    var tags: [String]?
+    var tags: [Tags]?
+}
+struct Tags:HandyJSON {
+    var id = ""
+    var name = ""
+    var paraId = 0
 }
 
 

@@ -14,34 +14,49 @@ import NVActivityIndicatorView
 import SwiftDate
 import Lightbox
 
-class NoteController: UIViewController,NVActivityIndicatorViewable{
-//,DataToEasyDelegate {
-//    let keyMap = ["building":["塔","高楼","小洋房","别墅","学校"],
-//                  "food":["美食","食品","小吃","面","汤包"],
-//                  "landscape":["美景","山","水","湖","湖泊","江","白云"],
-//                  "animal":["猫","狗","猴子"],
-//                  "night_scene":["夜","深夜","傍晚","黄昏"],
-//                  "face":["人"]
-//                ]
-//
-//    func recognize(current: Int, max: Int) {
-//            DispatchQueue.main.async {
-//                       self.tipLabel.text = "第一次配图需要给系统照片分类，正在分类图片\(current)/\(max)，如果数字卡死，请重启App"
-//
-//        }
-//    }
-//    var photoDataManager: PhotoDataManager
-//
-//
-//    init(_ photoDataManager: PhotoDataManager) {
-//    self.photoDataManager = photoDataManager
-//    super.init(nibName: nil, bundle: nil)
-//    self.photoDataManager.dataToEasyDelegate = self
-//    }
-//
-//    required  init?(coder aDecoder: NSCoder) {
-//    fatalError("init(coder:) has not been implemented")
-//    }
+class NoteController: UIViewController,NVActivityIndicatorViewable,DataToEasyDelegate {
+    let keyMap = ["building":["塔","高楼","小洋房","别墅","学校"],
+                  "food":["美食","食品","小吃","面","汤包"],
+                  "landscape":["美景","山","水","湖","湖泊","江","白云"],
+                  "animal":["猫","狗","猴子"],
+                  "night_scene":["夜","深夜","傍晚","黄昏"],
+                  "face":["人"]
+                ]
+
+    func recognize(current: Int, max: Int) {
+            DispatchQueue.main.async {
+                       self.tipLabel.text = "第一次配图需要给系统照片分类，正在分类图片\(current)/\(max)，分类期间如遇到数字卡死，请重启App再次进入分类"
+
+        }
+        let isNumberOK = current%100 == 0 || (current==1) || (current%20==0&&current<100)
+        guard (isNumberOK && isReloading == false) || max <= current else { return }
+        if max == 0 { self.finishLoad = true }
+        DispatchQueue.main.async {
+            self.isReloading = true
+            if Double(current)/Double(max) >= 0.99 {
+                self.tipLabel.snp.updateConstraints({ (make) in
+                    make.height.equalTo(0)
+                })
+                self.tipLabel.isHidden = true
+            }
+        }
+        DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + 1) {
+            self.isReloading = false
+        }
+    }
+    var photoDataManager: PhotoDataManager
+    var finishLoad = false
+    var isReloading =  false
+
+    init(_ photoDataManager: PhotoDataManager) {
+    self.photoDataManager = photoDataManager
+    super.init(nibName: nil, bundle: nil)
+    self.photoDataManager.dataToEasyDelegate = self
+    }
+
+    required  init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+    }
     /// 照片选择
     var imgPricker:UIImagePickerController!
     var imgs: String = ""
@@ -119,7 +134,7 @@ class NoteController: UIViewController,NVActivityIndicatorViewable{
     lazy var tipLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-        label.text = "智能配图功能正在测试，暂未上线。预计将在10月24日上线。"
+        label.text = ""
         label.numberOfLines = 0
         return label
     }()
@@ -267,7 +282,7 @@ extension NoteController {
             make.width.equalTo(120)
         }
         tipLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(locationBtn.snp.bottom).offset(5)
+            make.top.equalTo(tagBtn.snp.bottom).offset(5)
             make.left.equalTo(view).offset(20)
             make.height.equalTo(40)
             make.width.equalTo(TKWidth-40)
@@ -482,7 +497,16 @@ extension NoteController {
                                  para.date = c3![index]
                                  para.pics = c4![index]
                                  para.place = c2![index]
-                                para.tags = c5![index]
+                                
+                                if c5 != nil {
+                                 var tag = [Tags]()
+                                var t = Tags()
+                                for ta in c5![index] {
+                                    t.name = ta
+                                    tag.append(t)
+                                }
+                                 para.tags = tag
+                                }
                                  paras.append(para)
                              }
                              datas.noteParas = paras
@@ -559,100 +583,212 @@ extension NoteController {
         self.images  = [String]()
 
         
-//      //  ProgressHUD.show("配图中")
-//        let strs = "西湖的水很美，杭州的美食也不错，人也有点多噢，今日打卡西湖。"
-//        let tvtext = writeTextView.text!
-//
-//        if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
-//            ProgressHUD.showError("请写入内容")
-//        }else{
-//            if location == ""{
-//                    ProgressHUD.showError("添加地点可以提高匹配精度哦")
-//            }else {
-//                if time == ""{
-//                    ProgressHUD.showError("添加时间可以提高匹配精度哦")
-//                }else {
-//                        let size = CGSize(width: 30, height: 30)
-//                    self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
-//
-//                    var total = ["building":0,"food":0,"landscape":0,"animal":0,"night_scene":0,"face":0]
-//
-//                     for str in strs {
-//                        for (key,value) in self.keyMap {
-//                            if (self.keyMap[key]?.contains(String(str)))! {
-//                                total[key]! += 1
-//                            }else {
-//
-//                            }
-//                        }
-//                     }
-//                    let lasted = total.sorted {(s1,s2) -> Bool in
-//                        return s1.1 > s2.1
-//                    }
-//                    var wordArray = [String]()
-//                    print(total,lasted[0].value)
-//                    for lst in lasted {
-//                        if lst.value == 0 {
-//                            break;
-//                        }
-//                        wordArray.append(lst.key)
-//                    }
-//
-//                    print(wordArray)
-//                    var datas = [Photo]()
-//                    for word in wordArray {
-//                        var classify = [String]()
-//                        classify.append(word)
-//                        var locationChoice = [String]()
-//                        locationChoice.append(self.location)
-//                        let newAlbum = NewAlbum.init(name: "智能配图", classifyChoice: classify, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
-//                        if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlbum) {
-//                            // 这里处理获取的图片
-//                            datas.append(photo[0])
-//                        }
-//
-//                    }
-//                    var imgsData = [UIImage]()
-//                    // 配图失败处理
-//                    if datas.count == 0 {
-//
-//                            self.stopAnimating(nil)
-//                         ProgressHUD.showError("配图失败")
-//                    }else {
-//                        for data in datas {
-////                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
-//                            self.selectPhotoNum = datas.count
-//                            let img = SKPHAssetToImageTool.PHAssetToImage(asset: data.asset)
-//                            let up = self.uploadPic(image: img)
-//                        }
-//
-//
-//                        //self.photoCell.updateUILocal(imgsData.count, with: imgsData)
-//                    }
-//
-//                }
-//            }
-//
-//        }
-        
-        
-        
-             //   开始选择照片，最多允许选择4张
-                _ = self.presentHGImagePicker(maxSelected:3) { (assets) in
-                    //结果处理
-                    self.selectPhotoNum = assets.count
+      //  ProgressHUD.show("配图中")
+        let strs = "西湖的水很美，杭州的美食也不错，人也有点多噢，今日打卡西湖。"
+        let tvtext = writeTextView.text!
+
+        if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
+            ProgressHUD.showError("请写入内容")
+        }else{
+            if location == ""{
+                    ProgressHUD.showError("添加地点可以提高匹配精度哦")
+            }else {
+                if time == ""{
+                    ProgressHUD.showError("添加时间可以提高匹配精度哦")
+                }else {
                         let size = CGSize(width: 30, height: 30)
                     self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
 
-                    var seleimgs = [String]()
-                    for asset in assets {
-                        let img = SKPHAssetToImageTool.PHAssetToImage(asset: asset)
-                        seleimgs.append(self.uploadPic(image: img))
+                    var total = ["building":0,"food":0,"landscape":0,"animal":0,"night_scene":0,"face":0]
+
+                     for str in strs {
+                        for (key,value) in self.keyMap {
+                            if (self.keyMap[key]?.contains(String(str)))! {
+                                total[key]! += 1
+                            }else {
+
+                            }
+                        }
+                     }
+                    var strss = [Character]()
+                    for str in strs {
+                        strss.append(str)
                     }
-                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.photoCellClick))
-                    self.photoCell.addGestureRecognizer(tap)
+                    // 双词
+                    for i in 0 ..< strss.count - 1 {
+                        var  c = [Character]()
+                        c.append(strss[i])
+                        c.append(strss[i+1])
+                        for (key,value) in self.keyMap {
+                            if (self.keyMap[key]?.contains(String(c)))! {
+                                total[key]! += 1
+                            }else {
+
+                            }
+                        }
+                    }
+
+                    // 三词
+
+                    for i in 0 ..< strss.count - 2 {
+                        var  c = [Character]()
+                        c.append(strss[i])
+                        c.append(strss[i+1])
+                        c.append(strss[i+2])
+                        for (key,value) in self.keyMap {
+                            if (self.keyMap[key]?.contains(String(c)))! {
+                                total[key]! += 1
+                            }else {
+
+                            }
+                        }
+                    }
                     
+                    // 四词
+
+                    for i in 0 ..< strss.count - 3 {
+                        var  c = [Character]()
+                        c.append(strss[i])
+                        c.append(strss[i+1])
+                        c.append(strss[i+2])
+                        c.append(strss[i+3])
+                        for (key,value) in self.keyMap {
+                            if (self.keyMap[key]?.contains(String(c)))! {
+                                total[key]! += 1
+                            }else {
+
+                            }
+                        }
+                    }
+                    
+                    let lasted = total.sorted {(s1,s2) -> Bool in
+                        return s1.1 > s2.1
+                    }
+                    var wordArray = [String]()
+                    print(total,lasted[0].value)
+                    for lst in lasted {
+                        if lst.value == 0 {
+                            break;
+                        }
+                        wordArray.append(lst.key)
+                    }
+
+                    // 1类 一张图 2类 3张图, 三类 4张图 四类5张图 5类六张图 6类 六张图
+                    var imgCount = 0
+                    switch wordArray.count {
+                    case 1:
+                        imgCount = 2
+                    case 2:
+                        imgCount = 3
+                    case 3:
+                        imgCount = 3
+                    case 4:
+                        imgCount = 4
+                    case 5:
+                        imgCount = 5
+                    case 6:
+                        imgCount = 6
+                    default:
+                        imgCount = 0
+                    }
+                    
+                    print(wordArray)
+                    var datas = [Photo]()
+                    
+                    var locationChoice = [String]()
+                    locationChoice.append(self.location + "市")
+                    
+                    // 智能配图
+                    for word in wordArray {
+                        var classify = [String]()
+                        classify.append(word)
+
+                        let newAlbum = NewAlbum.init(name: "智能配图", classifyChoice: classify, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
+                        if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlbum) {
+                            let ps = photo.count
+                            let index = arc4random() % UInt32(ps)
+                            print(index,"ps",ps)
+                            datas.append(photo[Int(index)])
+                        }
+                    }
+                    if imgCount != datas.count
+                    {
+                    let newAlubm1 = NewAlbum.init(name: "智能配图", classifyChoice: nil, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
+                    if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlubm1) {
+                        
+                        var s = imgCount - datas.count
+                        
+                        for _ in 0 ..< s {
+                            let ps = photo.count
+                            let index = arc4random() % UInt32(ps)
+                            print(index,"ps",ps)
+                            
+                            var flag = 0
+                            for data in datas {
+                                if photo[Int(index)].asset == data.asset {
+
+                                    flag = 1
+                                    break;
+                                }
+                            }
+                            
+                            if flag == 1 {
+                                s += 1
+                            }else {
+                                datas.append(photo[Int(index)])
+                            }
+
+                            }
+                        }
+                    }
+                    
+                    var imgsData = [UIImage]()
+                    // 配图失败处理
+                    if datas.count == 0 {
+
+                        self.stopAnimating(nil)
+                         ProgressHUD.showError("配图失败")
+                    }else {
+                        for data in datas {
+//                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
+                            
+                            self.selectPhotoNum = datas.count
+                            let size = CGSize(width: 30, height: 30)
+                            self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
+                            
+                            let img = SKPHAssetToImageTool.PHAssetToImage(asset: data.asset)
+                            let up = self.uploadPic(image: img)
+                            let tap = UITapGestureRecognizer(target: self, action: #selector(self.photoCellClick))
+                            self.photoCell.addGestureRecognizer(tap)
+                        }
+
+
+                        //self.photoCell.updateUILocal(imgsData.count, with: imgsData)
+                    }
+
+                }
+            }
+
         }
+        
+        
+        
+//             //   开始选择照片，最多允许选择4张
+//                _ = self.presentHGImagePicker(maxSelected:4) { (assets) in
+//                    //结果处理
+//                    self.selectPhotoNum = assets.count
+//                        let size = CGSize(width: 30, height: 30)
+//                    self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
+//
+//                    var seleimgs = [String]()
+//                    for asset in assets {
+//                        let img = SKPHAssetToImageTool.PHAssetToImage(asset: asset)
+//                        seleimgs.append(self.uploadPic(image: img))
+//                    }
+//                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.photoCellClick))
+//                    self.photoCell.addGestureRecognizer(tap)
+//
+//        }
 
                     
 //                    self.photoCell.removeFromSuperview()
@@ -770,8 +906,9 @@ extension NoteController :UIImagePickerControllerDelegate,UINavigationController
 
 extension NoteController: LocationDelegate {
     func passBookData(with name: String, id: Int) {
-        self.location = name
-        self.locationBtn.setTitle( name, for: .normal)
+        let local = name.substring(to: 2)
+        self.location = local
+        self.locationBtn.setTitle( local, for: .normal)
     }
     
     func uploadPic(image:UIImage) -> String{
@@ -814,8 +951,8 @@ extension NoteController: LocationDelegate {
             case .failure(_):
                 print("上传失败")
             }
-
         }
+        
        // waitingRequestEnd()
        // self.requestEndFlag = false
         print("图片上传完成")

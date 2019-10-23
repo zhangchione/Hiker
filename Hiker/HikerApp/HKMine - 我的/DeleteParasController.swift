@@ -1,10 +1,11 @@
 //
-//  ParasController.swift
+//  DeleteParasController.swift
 //  Hiker
 //
-//  Created by 张驰 on 2019/10/22.
+//  Created by 张驰 on 2019/10/23.
 //  Copyright © 2019 张驰. All rights reserved.
 //
+
 
 
 import UIKit
@@ -15,7 +16,7 @@ import NVActivityIndicatorView
 
 import Lightbox
 
-class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
+class DeleteParasController: ExpandingViewController1,NVActivityIndicatorViewable {
 
     
     public var data:NotesModel?
@@ -73,10 +74,7 @@ class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
         label.font = UIFont.init(name: "PingFangSC-Regular", size: 14)
         label.backgroundColor = UIColor.init(r: 46, g: 46, b: 46)
         label.textAlignment = .center
-        
         label.layer.cornerRadius = 15
-        label.clipsToBounds = true
-
         return label
     }()
     
@@ -287,8 +285,11 @@ class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
             let storyVC = StoryViewController(model: self.data!)
             self.navigationController?.pushViewController(storyVC, animated: true)
          }
-        let alertC = UIAlertAction.init(title: "举报", style: .destructive) { (yes) in
-            ProgressHUD.showSuccess("举报成功")
+        let alertC = UIAlertAction.init(title: "删除", style: .destructive) { (yes) in
+
+            self.deleteNote(noteId: self.data!.id)
+            
+            
         }
         let alertN = UIAlertAction.init(title: "取消", style: .cancel) { (no) in
              print("取消")
@@ -314,11 +315,13 @@ class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
         self.navigationController?.pushViewController(userVC, animated: true)
     }
     
+    
+    
 }
 
 // MARK: UIScrollViewDelegate
 
-extension ParasController {
+extension DeleteParasController {
     
     func scrollViewDidScroll(_: UIScrollView) {
 
@@ -328,7 +331,7 @@ extension ParasController {
     }
 }
 
-extension ParasController {
+extension DeleteParasController {
     
     fileprivate func registerCell() {
         
@@ -348,7 +351,7 @@ extension ParasController {
     }
 }
 
-extension ParasController {
+extension DeleteParasController {
 //    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 //        super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
 //        guard let cell = cell as? NotesCell else { return }
@@ -361,7 +364,7 @@ extension ParasController {
 //        //cell.btn.addTarget(self, action: #selector(add), for: .touchUpInside)
 //    }
 }
-extension ParasController {
+extension DeleteParasController {
     
     override func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return (data?.noteParas!.count)!
@@ -375,12 +378,9 @@ extension ParasController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyVC = StoryViewController(model: self.data!)
-        self.navigationController?.pushViewController(storyVC, animated: true)
-        
-//        if let para = data?.noteParas {
-//            showPhoto(data: para[indexPath.row])
-//        }
+        if let para = data?.noteParas {
+            showPhoto(data: para[indexPath.row])
+        }
     }
 //    //最小 item 间距
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -388,15 +388,8 @@ extension ParasController {
 //    }
 }
 
-extension ParasController {
-    @objc func photo(){
-        
-    }
+extension DeleteParasController {
     func configCell(_ cell:NotesCell,with data:NoteParas) {
-        
-//        let  tap = UITapGestureRecognizer(target: self, action: #selector(self.showPhoto(_:)))
-//        cell.photoCell.addGestureRecognizer(tap)
-        cell.backBtn.addTarget(self, action: #selector(showPhoto(_:)), for: .touchUpInside)
         cell.time.text = data.date
         cell.location.setTitle("#" + data.place, for: .normal)
         cell.location.addTarget(self, action: #selector(city(_:)), for: .touchUpInside)
@@ -482,16 +475,13 @@ extension ParasController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     // 图片点击
-    @objc func showPhoto(_ sender:UIButton){
-        let btn = sender
-        let cell = btn.superView(of: NotesCell.self)!
-        let indexPath = collectionView!.indexPath(for: cell)
-        let datas = data?.noteParas![indexPath!.row]
-        let pics = datas!.pics.components(separatedBy: ",")
+    func showPhoto(data:NoteParas){
+        
+        let pics = data.pics.components(separatedBy: ",")
         var imgs = [LightboxImage]()
         for pic in pics {
             
-            let img = LightboxImage(imageURL: URL(string: pic)!, text: datas!.content)
+            let img = LightboxImage(imageURL: URL(string: pic)!, text: data.content)
             imgs.append(img)
         }
 
@@ -505,7 +495,7 @@ extension ParasController {
 
 
 // 收藏 点赞 评论 按钮事件
-extension ParasController {
+extension DeleteParasController {
     
     @objc func comment(){
         let vc = CommentViewController(data: data!.comments!,noteId:data!.id)
@@ -587,4 +577,19 @@ extension ParasController {
     
     }
     
+    func deleteNote(noteId:Int) {
+        let dic = ["noteId":noteId]
+        Alamofire.request(getDeleteNoteAPI(), method: .delete, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("收藏网络请求错误"); return
+            }
+            
+            if let value = response.result.value {
+                let json = JSON(value)
+                ProgressHUD.showSuccess("删除成功")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
 }

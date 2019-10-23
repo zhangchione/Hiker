@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TracksViewController: UIViewController ,DataToEasyDelegate {
+class TracksViewController:  SubClassBaseViewController, DataToEasyDelegate {
         let keyMap = ["building":["塔","高楼","小洋房","别墅","学校"],
                       "food":["美食","食品","小吃","面","汤包"],
                       "landscape":["美景","山","水","湖","湖泊","江","白云"],
@@ -34,6 +34,7 @@ class TracksViewController: UIViewController ,DataToEasyDelegate {
         self.photoDataManager.dataToEasyDelegate = self
         }
     
+        r
         required  init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         }
@@ -48,14 +49,5 @@ class TracksViewController: UIViewController ,DataToEasyDelegate {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.removeObject(forKey: "time")
         UserDefaults.standard.removeObject(forKey: "pic")
         UserDefaults.standard.removeObject(forKey: "location")
+        UserDefaults.standard.removeObject(forKey: "tags")
         //UserDefaults.standard.removeObject(forKey: "token")
         if getToken() != nil {
             let mainTabVar = mainTabBar()

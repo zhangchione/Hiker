@@ -1,8 +1,8 @@
 //
-//  ConcernController.swift
+//  GuoQingViewController.swift
 //  Hiker
 //
-//  Created by 张驰 on 2019/10/21.
+//  Created by 张驰 on 2019/10/23.
 //  Copyright © 2019 张驰. All rights reserved.
 //
 
@@ -20,12 +20,16 @@ private let HKRecommendCityID = "RecommendCityView"
 private let HKStoryID = "StoryView"
 private let HeaderViewID = "HomeHeaderReusableView"
 
-class ConcernController: UIViewController {
+class GuoQingViewController: UIViewController {
+       
+    var page = 1
     private var data = [NotesModel]()
-    var concernData:[User]?
-    var storyData:[StoryModel]?
-    var userStory: [HKStory]?
-    var usersData =  [HKUser]()
+    private var word = ""
+
+    convenience init(word:String) {
+        self.init()
+        self.word = word
+    }
     
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout.init()
@@ -48,30 +52,19 @@ class ConcernController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configUI()
+        configNav()
         reftreshData()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-                configConcernData()
-    }
-         func reftreshData()  {
-            
-            collectionView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
-                    print("上拉加载更多数据")
-    //                self!.page += 1
-    //                self?.configData(page: self!.page)
-                    self?.collectionView.mj_footer.endRefreshing()
-            }
-            collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
 
-                    print("下拉刷新 --- 1")
-    //                self!.data.removeAll()
-    //                self!.configData(page: 1)
-    //                self!.collectionView.reloadData()
-                self?.collectionView.mj_header.endRefreshing()
-            }
-        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.configData()
+    }
+    
+    func configNav(){
+    }
+    
     func configUI(){
         view.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints { (make) in
@@ -83,70 +76,52 @@ class ConcernController: UIViewController {
         glt_scrollView?.showsVerticalScrollIndicator = false
     }
     
-    func configConcernData() {
-          Alamofire.request(getAttentionAPI(userId: getUserId()!)).responseJSON { (response) in
-              guard response.result.isSuccess else {
-                  ProgressHUD.showError("网络请求错误"); return
-              }
-              if let value = response.result.value {
-                  let json = JSON(value)
-                  if let obj = JSONDeserializer<ConcernsModel>.deserializeFrom(json: json.debugDescription){
-                      if let data = obj.data {
-                              self.concernData = data
-                             // self.requestEndFlag = true
-                          print(data,2)
-                        for ues in data {
-                            self.configData(user: ues)
-                        }
-                      }
-                        
-                  }
-              }
-          }
-    }
-    
-    func configData(user: User) {
-        Alamofire.request(getMyBookAPI(userId:user.id)).responseJSON { (response) in
+    /// 网络加载数据
+    func configData() {
+        
+        Alamofire.request(getSearchAPI(word: self.word)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }
             if let value = response.result.value {
                 let json = JSON(value)
-                if let obj = JSONDeserializer<HKStory>.deserializeFrom(json: json.debugDescription){
-                    self.storyData = obj.data
-                    self.userStory?.append(obj)
+                if let obj = JSONDeserializer<HomeModel>.deserializeFrom(json: json.debugDescription){
+                    for data in obj.data! {
+                        self.data.append(data)
                     }
-                var das = [NotesModel]()
-                if let datas = self.storyData {
-                      for data in datas {
-                         for s in data.story! {
-                            das.append(s)
-                         }
-                     }
-                    var us = HKUser()
-                    us.user = user
-                    us.data = das
-                    self.usersData.append(us)
                     self.collectionView.reloadData()
                 }
-                
-
             }
         }
     }
+    
+          func reftreshData()  {
+             
+             collectionView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
+                     print("上拉加载更多数据")
+     //                self!.page += 1
+     //                self?.configData(page: self!.page)
+                     self?.collectionView.mj_footer.endRefreshing()
+             }
+             collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
 
+                     print("下拉刷新 --- 1")
+     //                self!.data.removeAll()
+     //                self!.configData(page: 1)
+     //                self!.collectionView.reloadData()
+                 self?.collectionView.mj_header.endRefreshing()
+             }
+         }
 }
-extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
+
+extension GuoQingViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        return usersData.count
-
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return usersData[section].data!.count
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -155,9 +130,8 @@ extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionVie
             self.collectionView.register(StoryView.self, forCellWithReuseIdentifier: identifier)
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! StoryView
-        let da = usersData[indexPath.section].data![indexPath.row]
-            print(da)
-            config(cell, with: da)
+            
+            config(cell, with: data[indexPath.row])
             return cell
         
     }
@@ -166,7 +140,12 @@ extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionVie
     
     //每个分区的内边距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
+        if section == 0 {
+            return  UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
+        }
+        if section == 1 {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
         return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
     //最小行间距
@@ -186,7 +165,7 @@ extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionVie
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewID, for: indexPath) as? HomeHeaderReusableView else {
             return UICollectionReusableView()
         }
-        headerView.titleLabel.text = "有\(usersData[indexPath.section].data!.count)个关于“\(self.usersData[indexPath.section].user?.nickName ??  "")”的故事。"
+       headerView.titleLabel.text = "有\(data.count)个关于“金秋之旅”的故事。"
         headerView.titleLabel.textColor = UIColor.init(r: 146, g: 146, b: 146)
         headerView.titleLabel.font = UIFont.init(name: "PingFangSC-Regular", size: 16)
         
@@ -197,17 +176,16 @@ extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let model = usersData[indexPath.section].data![indexPath.row]
-        let vc = ParasController(data: model)
-        self.navigationController?.pushViewController(vc, animated: true)
+           let model = data[indexPath.row]
+              let vc = ParasController(data: model)
+                                  self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
 
-
 // MARK - 配置cell
 
-extension ConcernController {
+extension GuoQingViewController {
     func config(_ cell:StoryView,with data:NotesModel) {
           let pics = data.noteParas![0].pics.components(separatedBy: ",")
           cell.photoCell.imgDatas = pics
@@ -267,7 +245,7 @@ extension ConcernController {
     
     
 }
-extension ConcernController {
+extension GuoQingViewController {
     @objc func collected(_ sender:UIButton){
         
         let btn = sender

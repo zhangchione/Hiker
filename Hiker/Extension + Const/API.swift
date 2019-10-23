@@ -127,6 +127,20 @@ func getMyCollectionsAPI() -> String {
     let api  = basicURL + "/note/collected?token=" + getToken()!
     return api
 }
+
+// tags
+func getTagsAPI() -> String {
+    let api = basicURL + "/note/tag?token=" + getToken()!
+    return api
+}
+
+// Delete游记
+
+func getDeleteNoteAPI() -> String {
+    let api = basicURL + "/note/?token=" + getToken()!
+    return api
+}
+
 /*
  
  Mine token:

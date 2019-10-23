@@ -29,6 +29,21 @@ class HKHomeController: UIViewController {
     // 定位管理
     var locationManager = CLLocationManager()
     
+        var myBookData = [StoryModel]()
+    var local = "杭州"
+    // 左边返回按钮
+     private lazy var leftBarButton: UIButton = {
+         let button = UIButton.init(type: .custom)
+         button.frame = CGRect(x:10, y:0, width:50, height: 30)
+//         button.setImage(UIImage(named: "home_detail_location"), for: .normal)
+        button.titleLabel?.font = UIFont.init(name: "PingFangSC-Semibold", size: 14)
+        button.setTitleColor(UIColor.init(r: 56, g: 56, b: 56), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//         button.addTarget(self, action: #selector(back), for: .touchUpInside)
+         return button
+     }()
+    
     /// 右边功能按钮
     private lazy var rightBarButton:UIButton = {
         let button = UIButton.init(type: .custom)
@@ -40,7 +55,7 @@ class HKHomeController: UIViewController {
     }()
     private lazy var layout: LTLayout = {
         let layout = LTLayout()
-        layout.isAverage = true
+        layout.isAverage = false
         layout.titleViewBgColor = backColor
         layout.titleSelectColor = UIColor.init(r: 0, g: 0, b: 0)
         layout.bottomLineColor = UIColor.init(r: 64, g: 223, b: 238)
@@ -62,7 +77,7 @@ class HKHomeController: UIViewController {
         return CGRect(x: 0, y: statusBarH, width: view.bounds.width, height: H)
     }
     private  var viewControllers = [UIViewController]()
-    private  var titles = ["推荐故事","同城附近","关注达人","大家在看"]
+    private  var titles = ["推荐故事","同城附近","关注达人","金秋之行","红色之旅"]
     
     lazy var headerView:HKHomeHeaderView = {
         let headerView = HKHomeHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 480))
@@ -95,6 +110,7 @@ class HKHomeController: UIViewController {
         advancedManagerConfig()
         view.backgroundColor = backColor
                 configLocation()
+        configHKStoryData()
     }
     // 定位
     func configLocation(){
@@ -106,9 +122,44 @@ class HKHomeController: UIViewController {
     }
     @objc func tip(){
 
+        
         let tipsVC = TipsViewController()
         navigationController?.pushViewController(tipsVC, animated: true)
     }
+      func configHKStoryData(){
+          self.myBookData.removeAll()
+          
+          UserDefaults.standard.removeObject(forKey: "bookname")
+          UserDefaults.standard.removeObject(forKey: "bookid")
+          UserDefaults.standard.removeObject(forKey: "booknum")
+    
+          Alamofire.request(getMyBookAPI(userId: getUserId()!)).responseJSON { (response) in
+              guard response.result.isSuccess else {
+                  ProgressHUD.showError("网络请求错误"); return
+              }
+              if let value = response.result.value {
+                  let json = JSON(value)
+                  if let obj = JSONDeserializer<HKStory>.deserializeFrom(json: json.debugDescription){
+                      for data in obj.data! {
+                          self.myBookData.append(data)
+                      }
+                      var bookname = [String]()
+                      var bookid = [Int]()
+                      var booknum = [Int]()
+                      for data in self.myBookData {
+                          bookname.append(data.bookName)
+                          bookid.append(data.id)
+                          booknum.append(data.story!.count)
+                      }
+                      print("bookname",bookname)
+                      saveBookId(bookname: bookid)
+                      saveBookName(bookname: bookname)
+                      saveBookNum(bookname: booknum)
+                  }
+              }
+          }
+      }
+    
 }
 
 extension HKHomeController {
@@ -117,7 +168,9 @@ extension HKHomeController {
         let vc = HomeController()
         let cityVC = CityController(word: "杭州")
         let concernVC = ConcernController()
-        viewControllers = [vc,cityVC,concernVC,vc]
+        let gqVC = GuoQingViewController(word:"2019-10")
+        let hsVC = HongseViewController(words: ["北京","湘潭"])
+        viewControllers = [vc,cityVC,concernVC,gqVC,hsVC]
 
         let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in
             guard let strongSelf = self else { return UIView() }
@@ -153,6 +206,7 @@ extension HKHomeController {
 //                self.navigation.bar.frame.origin.y = 20
 //        }
         self.navigation.item.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
+        self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)
     }
 }
 extension HKHomeController: LTAdvancedScrollViewDelegate {
@@ -173,6 +227,13 @@ extension HKHomeController: LTAdvancedScrollViewDelegate {
             self.navigation.bar.alpha = 1
             self.navigation.item.title = "发现"
             self.rightBarButton.setImage(UIImage(named: "home_icon_tip"), for: .normal)
+            if offsetY >= 88 {
+                self.leftBarButton.setImage(UIImage(named: "home_detail_location"), for: .normal)
+                self.leftBarButton.setTitle(self.local, for: .normal)
+            }else {
+                self.leftBarButton.setImage(UIImage(), for: .normal)
+                self.leftBarButton.setTitle("", for: .normal)
+            }
         }
         else {
             self.navigation.bar.alpha = 0
@@ -253,7 +314,7 @@ extension HKHomeController: CLLocationManagerDelegate{
                 print("定位:",CountryCode,country,city,SubLocality,FormattedAddressLines,Name)
                 let location = (city as NSString).substring(to: 2)
                 self.headerView.location.text = location
-
+                self.local = location
                 //如果需要去掉“市”和“省”字眼
                 
                 //                State = State.stringByReplacingOccurrencesOfString("省", withString: "")

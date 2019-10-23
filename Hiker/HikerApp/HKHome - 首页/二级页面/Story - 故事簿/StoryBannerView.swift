@@ -21,16 +21,16 @@ class StoryBannerView: UIView {
         return iv
     }()
     
-    private lazy var nameLabel : UILabel = {
-       let label = UILabel()
+    lazy var nameLabel : UILabel = {
+        let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.init(name: "苹方-简 常规体", size: 14)
+        label.font = UIFont.init(name: "PingFangSC-Regular", size: 16)
         return label
     }()
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
          label.textColor = .white
-         label.font = UIFont.init(name: "苹方-简 中粗体", size: 30)
+         label.font = UIFont.init(name: "PingFangSC-Semibold", size: 30)
          return label
     }()
     
@@ -55,7 +55,7 @@ class StoryBannerView: UIView {
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.image = UIImage(named: "home_story_back")
-        iv.layer.cornerRadius = 20
+        iv.layer.cornerRadius = 25
         return iv
     }()
     
@@ -89,7 +89,23 @@ class StoryBannerView: UIView {
         let imgUrl2 = URL(string: pics![0])
         self.backgroundImageView.kf.setImage(with: imgUrl2)
         
+        var locations = [String]()
+        for note in (viewModel.model?.noteParas!)! {
+            locations.append(note.place)
+        }
+        let place = locations.joined(separator: "-")
+        
+        locationsLabel.text =  place
     }
+    lazy var locationsLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.init(name: "PingFangSC-Regular", size: 14)
+        label.backgroundColor = UIColor.init(r: 46, g: 46, b: 46)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 15
+        return label
+    }()
     
     func configUI(){
         addSubview(backgroundImageView)
@@ -98,26 +114,33 @@ class StoryBannerView: UIView {
         addSubview(titleLabel)
         addSubview(favButton)
         addSubview(userButton)
-        
+        addSubview(locationsLabel)
         backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().inset(16)
-            make.left.right.equalToSuperview().inset(20)
-            make.height.equalTo(20)
+            make.bottom.equalToSuperview().inset(25)
+            make.left.equalToSuperview().inset(20)
+            make.width.equalTo(TKWidth/2)
+            make.height.equalTo(30)
+        }
+        locationsLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(titleLabel.snp.centerY)
+            make.right.equalToSuperview().inset(20)
+            make.width.equalTo(130)
+            make.height.equalTo(30)
         }
         userIcon.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
-            make.bottom.equalTo(titleLabel.snp.top).offset(-15)
-            make.height.equalTo(40)
-            make.width.equalTo(40)
+            make.bottom.equalTo(titleLabel.snp.top).offset(-20)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
         }
         userButton.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
-            make.bottom.equalTo(titleLabel.snp.top).offset(-15)
-            make.height.equalTo(40)
-            make.width.equalTo(40)
+            make.bottom.equalTo(titleLabel.snp.top).offset(-20)
+            make.height.equalTo(50)
+            make.width.equalTo(50)
         }
         nameLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(userIcon.snp.centerY)

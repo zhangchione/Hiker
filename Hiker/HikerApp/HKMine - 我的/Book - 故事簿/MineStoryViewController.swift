@@ -90,7 +90,7 @@ extension MineStoryViewController: UITableViewDelegate,UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         print("111")
         let model = datas![indexPath.row]
-        let vc = ParasController(data: model)
+        let vc = DeleteParasController(data: model)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

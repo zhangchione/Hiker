@@ -283,15 +283,6 @@ extension SearchViewController {
         let layout = FlowLayout(spacing: 10,justifyContent: .end)
         provider.layout = layout
         provider.tapHandler = { context -> Void in
-//            let warning = MessageView.viewFromNib(layout: .cardView)
-//             warning.configureTheme(.warning)
-//             warning.configureDropShadow()
-//             let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
-//             warning.configureContent(title: "不好意思啦", body: "系统目前暂时没有用户推荐噢~", iconText: iconText)
-//             warning.button?.isHidden = true
-//             var warningConfig = SwiftMessages.defaultConfig
-//             warningConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
-//             SwiftMessages.show(config: warningConfig, view: warning)
             let userVC = HKUserViewController(data: context.data)
             self.navigationController?.pushViewController(userVC, animated: true)
         }
@@ -306,7 +297,7 @@ extension SearchViewController {
         let user2 = User(id: "20883ba0-2d47-4be0-afe1-82ed9ea626fd", username: "zc123", password: "123456", headPic: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568805954241&di=92427105ce91bac17ca2ef9fa75e1326&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180909%2Ffcc86038b8c0410f87aee5229aa092c3.jpeg", sgin: "爱旅行,爱旅拍", notes: 0, fans: 2, concern: 1, nickName: "旅中人", bgPic: "https://uploadfiles.nowcoder.com/files/20190814/6658561_1565778336259_120x120.png")
         
         let user3 = User(id: "75f03a3c-2398-4607-ae0c-be1224f54c56", username: "cone", password: "zc123...", headPic: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568805954241&di=92427105ce91bac17ca2ef9fa75e1326&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180909%2Ffcc86038b8c0410f87aee5229aa092c3.jpeg", sgin: "爱旅行的小张同学", notes: 1, fans: 0, concern: 1, nickName: "Cone噢", bgPic: "https://uploadfiles.nowcoder.com/files/20190814/6658561_1565778336259_120x120.png")
-        
+        self.dataSource.data.removeAll()
         self.dataSource.data.append(user1)
         self.dataSource.data.append(user2)
         self.dataSource.data.append(user3)

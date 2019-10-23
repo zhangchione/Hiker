@@ -202,9 +202,8 @@ class PhotoCell: UIView {
                     let imgUrl4 = URL(string: data[3])
                     self.img4.kf.setImage(with: imgUrl4)
                 }
-//
-
             }
+            
             img1.snp.makeConstraints { (make) in
                 make.top.equalTo(self)
                 make.left.equalTo(self)
@@ -220,14 +219,72 @@ class PhotoCell: UIView {
                 make.bottom.equalTo(self)
                 make.left.equalTo(self.snp.centerX).offset(2.5)
                 make.top.equalTo(img1.snp.centerY).offset(2.5)
-                make.right.equalTo(img2.snp.centerX).offset(-2.5)
+                make.right.equalTo(img2.snp.centerX).offset(0)
             }
             img4.snp.makeConstraints { (make) in
                 make.bottom.equalTo(self)
                 make.left.equalTo(img2.snp.centerX).offset(2.5)
-                make.top.equalTo(img1.snp.centerY).offset(5)
+                make.top.equalTo(img1.snp.centerY).offset(2.5)
                 make.right.equalTo(self)
             }
+            
+            case 5:
+                        DispatchQueue.main.async {
+                            self.img1.corner(byRoundingCorners: .topLeft, radii: 10)
+                            self.img3.corner(byRoundingCorners: .topRight, radii: 10)
+                            
+
+                            if self.isLocalImage {
+                                self.img1.image = UIImage(contentsOfFile: data[0])
+                                self.img2.image = UIImage(contentsOfFile: data[1])
+                                self.img3.image = UIImage(contentsOfFile: data[2])
+                                self.img4.image = UIImage(contentsOfFile: data[3])
+                                self.img5.image = UIImage(contentsOfFile: data[4])
+                            }else {
+                                let imgUrl = URL(string: data[0])
+                                self.img1.kf.setImage(with: imgUrl)
+                                let imgUrl2 = URL(string: data[1])
+                                self.img2.kf.setImage(with: imgUrl2)
+                                let imgUrl3 = URL(string: data[2])
+                                self.img3.kf.setImage(with: imgUrl3)
+                                let imgUrl4 = URL(string: data[3])
+                                self.img4.kf.setImage(with: imgUrl4)
+                                let imgUrl5 = URL(string: data[4])
+                                self.img5.kf.setImage(with: imgUrl5)
+                            }
+            //
+
+                        }
+                        img1.snp.makeConstraints { (make) in
+                            make.top.equalTo(self)
+                            make.left.equalTo(self)
+                            make.bottom.equalTo(self)
+                            make.right.equalTo(self.snp.centerX).offset(-2.5)
+                        }
+                        img2.snp.makeConstraints { (make) in
+                            make.top.equalTo(self)
+                            make.left.equalTo(self.snp.centerX).offset(2.5)
+                            make.width.equalTo((self.width - 10)/4)
+                            make.height.equalTo((self.height - 5)/2)
+                        }
+                        img3.snp.makeConstraints { (make) in
+                            make.top.equalTo(self)
+                            make.right.equalTo(self).offset(0)
+                            make.width.equalTo((self.width - 10)/4)
+                            make.height.equalTo((self.height - 5)/2)
+                        }
+                        img4.snp.makeConstraints { (make) in
+                            make.bottom.equalTo(self)
+                            make.left.equalTo(img2.snp.centerX).offset(2.5)
+                            make.width.equalTo((self.width - 10)/4)
+                            make.height.equalTo((self.height - 5)/2)
+                        }
+                        img4.snp.makeConstraints { (make) in
+                            make.bottom.equalTo(self)
+                            make.right.equalTo(self).offset(0)
+                            make.width.equalTo((self.width - 10)/4)
+                            make.height.equalTo((self.height - 5)/2)
+                }
             
         default:
             DispatchQueue.main.async {

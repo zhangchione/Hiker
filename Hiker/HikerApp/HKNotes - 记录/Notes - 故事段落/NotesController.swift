@@ -23,6 +23,7 @@ class NotesController: ExpandingViewController,NVActivityIndicatorViewable {
     var bookId = 0
     var requestEndFlag = false
     
+    var paraId = 0
     
     convenience init(data:NotesModel) {
         self.init()
@@ -235,7 +236,7 @@ extension NotesController {
         if indexPath.row ==  (data?.noteParas!.count)! {
            // self.navigationController?.popToRootViewController(animated: true)
                 var app = AppContext()
-            let noteVC = NoteController()
+            let noteVC = NoteController(app.photoDataManager)
             //let noteVC = NoteController()
             self.navigationController?.pushViewController(noteVC, animated: true)
         }
@@ -249,7 +250,7 @@ extension NotesController {
 extension NotesController {
     func configCell(_ cell:NotesCell,with data:NoteParas) {
         cell.time.text = data.date
-        cell.location.text = data.place
+        cell.location.setTitle("#" + data.place, for: .normal)
         cell.content.text = data.content
         print(data.pics)
         let pics = data.pics.components(separatedBy: ",")
@@ -270,21 +271,21 @@ extension NotesController {
         if let tag = data.tags {
         
         if tag.count == 1{
-            cell.tag1.setTitle(tag[0], for: .normal)
+            cell.tag1.setTitle(tag[0].name, for: .normal)
             cell.tag1.isHidden = false
         }else if tag.count == 2{
-            cell.tag1.setTitle(tag[0], for: .normal)
-            cell.tag2.setTitle(tag[2], for: .normal)
+            cell.tag1.setTitle(tag[0].name, for: .normal)
+            cell.tag2.setTitle(tag[1].name, for: .normal)
                         cell.tag1.isHidden = false
                         cell.tag2.isHidden = false
         }else if tag.count == 3{
-            cell.tag1.setTitle(tag[0], for: .normal)
-            cell.tag2.setTitle(tag[1], for: .normal)
-            cell.tag3.setTitle(tag[2], for: .normal)
+            cell.tag1.setTitle(tag[0].name, for: .normal)
+            cell.tag2.setTitle(tag[1].name, for: .normal)
+            cell.tag3.setTitle(tag[2].name, for: .normal)
                         cell.tag1.isHidden = false
                         cell.tag2.isHidden = false
                         cell.tag3.isHidden = false
-        }
+            }
         }
         
         
@@ -350,6 +351,8 @@ extension NotesController {
             }
             if let value = response.result.value {
                 let json = JSON(value)
+                self.paraId = json["data"]["noteParas"]["id"].intValue
+                print("paraId",self.paraId)
                 self.requestEndFlag = true
             }
         }
@@ -395,6 +398,24 @@ extension NotesController {
         print("收录成功")
     }
     
+    // 增加标签
+    func postTags(name:String){
+        let dic = ["paraId":self.paraId,"name":name] as [String : Any]
+        
+        Alamofire.request(getTagsAPI(), method: .post, parameters: dic, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            guard response.result.isSuccess else {
+                ProgressHUD.showError("发布游记网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                self.requestEndFlag = true
+                
+            }
+        }
+        waitingRequestEnd()
+        self.requestEndFlag =  false
+        print("标签添加成功")
+    }
     
     /// 异步数据请求同步化
     func waitingRequestEnd() {
@@ -415,7 +436,7 @@ extension NotesController {
         UserDefaults.standard.removeObject(forKey: "time")
         UserDefaults.standard.removeObject(forKey: "pic")
         UserDefaults.standard.removeObject(forKey: "location")
-        
+        UserDefaults.standard.removeObject(forKey: "tags")
     }
     
 }
@@ -453,6 +474,11 @@ extension NotesController: selectBookDelegate {
              self.note = self.data?.noteParas![index]
 
             postNotes(note: self.note!, pic: imgs!)
+            if let tags = data?.noteParas![index].tags {
+                for tag in tags {
+                    postTags(name: tag.name)
+                }
+            }
          }
          removeUserDeault()
         NVActivityIndicatorPresenter.sharedInstance.setMessage("发布完成...")

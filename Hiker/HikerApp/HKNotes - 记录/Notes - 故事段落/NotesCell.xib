@@ -38,13 +38,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="上海" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDT-hS-GxJ">
-                                <rect key="frame" x="263" y="218" width="103" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGE-un-r8A">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="208"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.24313725489999999" green="0.40000000000000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="下了飞机第一件事是去地铁的人工窗口办一张三日卡，只需要45元，72小时内可以无限制乘坐地铁，能大大节约每次购票的时间和金钱，非常划算，毕竟，上海绝大部分地方，都是可以通过地铁达到的。另外，推荐下载“上海地铁”APP，能够方便查询线路等信息，便于高效换乘。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFZ-E5-oqO">
                                 <rect key="frame" x="8" y="304" width="358" height="159"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -74,6 +71,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HIg-Sl-aDo">
+                                <rect key="frame" x="286" y="218" width="80" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -92,17 +94,18 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="371" height="577"/>
             <connections>
+                <outlet property="backBtn" destination="QGE-un-r8A" id="LGr-Mp-Zx2"/>
                 <outlet property="backContainerView" destination="7wn-tB-5fx" id="2Di-xw-NZj"/>
                 <outlet property="content" destination="oFZ-E5-oqO" id="qnG-vz-ak1"/>
                 <outlet property="frontContainerView" destination="1SQ-lj-Qbf" id="OhM-SL-I8R"/>
-                <outlet property="location" destination="HDT-hS-GxJ" id="re1-zo-zCx"/>
+                <outlet property="location" destination="HIg-Sl-aDo" id="EHi-sB-pIa"/>
                 <outlet property="photoView" destination="TKR-kI-g0s" id="VvF-Ne-sHD"/>
                 <outlet property="tag1" destination="GV1-Tc-HdZ" id="8GO-Ot-5AN"/>
                 <outlet property="tag2" destination="xi0-Bb-cs6" id="Lom-uv-E01"/>
                 <outlet property="tag3" destination="EZ7-mH-7T6" id="WT5-dF-VXa"/>
                 <outlet property="time" destination="Hxj-fL-PJT" id="Ire-zb-f4A"/>
             </connections>
-            <point key="canvasLocation" x="115.94202898550725" y="-30.803571428571427"/>
+            <point key="canvasLocation" x="-333" y="-20"/>
         </collectionViewCell>
     </objects>
 </document>

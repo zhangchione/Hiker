@@ -97,19 +97,20 @@ class CityController: UIViewController {
     
      func reftreshData()  {
         
-//        collectionView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
-//                print("上拉加载更多数据")
-////                self!.page += 1
-////                self?.configData(page: self!.page)
-////                self?.collectionView.mj_footer.endRefreshing()
-//        }
-//        collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
-//
-//                print("下拉刷新 --- 1")
-////                self!.data.removeAll()
-////                self!.configData(page: 1)
-////                self!.collectionView.reloadData()
-//        }
+        collectionView.mj_footer = MJRefreshBackNormalFooter {[weak self] in
+                print("上拉加载更多数据")
+//                self!.page += 1
+//                self?.configData(page: self!.page)
+                self?.collectionView.mj_footer.endRefreshing()
+        }
+        collectionView.mj_header = MJRefreshNormalHeader {[weak self] in
+
+                print("下拉刷新 --- 1")
+//                self!.data.removeAll()
+//                self!.configData(page: 1)
+//                self!.collectionView.reloadData()
+            self?.collectionView.mj_header.endRefreshing()
+        }
     }
 }
 

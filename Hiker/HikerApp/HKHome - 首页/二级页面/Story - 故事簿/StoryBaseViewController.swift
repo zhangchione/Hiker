@@ -123,7 +123,8 @@ extension StoryBaseViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var cellHeight =  CGFloat(self.getTextHeigh(textStr: str, font: UIFont.boldSystemFont(ofSize: 15), width: 374))
+        let cellHeight =  CGFloat(self.getTextHeigh(textStr: paras![indexPath.row].content, font: UIFont.boldSystemFont(ofSize: 15), width: 374))
+        print(cellHeight)
         return cellHeight + 290
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

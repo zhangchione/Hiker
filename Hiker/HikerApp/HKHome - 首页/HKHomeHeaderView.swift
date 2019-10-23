@@ -156,7 +156,7 @@ class HKHomeHeaderView: UIView {
             make.centerY.equalTo(locationIcon.snp.centerY)
         }
         weather.snp.makeConstraints { (make) in
-            make.width.equalTo(70)
+            make.width.equalTo(150)
             make.height.equalTo(20)
             make.left.equalTo(weatherIcon.snp.right).offset(5)
             make.centerY.equalTo(locationIcon.snp.centerY)

@@ -10,9 +10,10 @@ import UIKit
 
 class NotesCell: BasePageCollectionCell {
     @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var location: UIButton!
     
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var content: UILabel!
-    @IBOutlet weak var location: UILabel!
     @IBOutlet weak var tag1: UIButton!
     @IBOutlet weak var tag2: UIButton!
     @IBOutlet weak var tag3: UIButton!

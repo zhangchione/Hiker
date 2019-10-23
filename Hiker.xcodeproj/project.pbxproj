@@ -65,6 +65,13 @@
 		F5625E61235D944900574DFD /* CityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E60235D944900574DFD /* CityController.swift */; };
 		F5625E63235D97D600574DFD /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E62235D97D600574DFD /* WeatherDataModel.swift */; };
 		F5625E65235DAF8000574DFD /* ConcernController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E64235DAF8000574DFD /* ConcernController.swift */; };
+		F563A24F235FF9C500AA928B /* WRProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A213235FF9C400AA928B /* WRProxy.swift */; };
+		F563A250235FF9C500AA928B /* WRPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A214235FF9C400AA928B /* WRPageControl.swift */; };
+		F563A251235FF9C500AA928B /* WRCycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A215235FF9C400AA928B /* WRCycleScrollView.swift */; };
+		F563A27F235FF9C500AA928B /* WRCycleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A24E235FF9C400AA928B /* WRCycleCell.swift */; };
+		F563A2812360204E00AA928B /* GuoQingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2802360204E00AA928B /* GuoQingViewController.swift */; };
+		F563A2832360340400AA928B /* HongseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2822360340400AA928B /* HongseViewController.swift */; };
+		F563A2852360465900AA928B /* DeleteParasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563A2842360465900AA928B /* DeleteParasController.swift */; };
 		F5667C5923554DA3009EDF05 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5823554DA3009EDF05 /* UserHeaderView.swift */; };
 		F5667C5B23554DF4009EDF05 /* HKUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5A23554DF4009EDF05 /* HKUserViewController.swift */; };
 		F5667C5D23557C16009EDF05 /* MyCollectionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5667C5C23557C16009EDF05 /* MyCollectionsController.swift */; };
@@ -225,6 +232,13 @@
 		F5625E60235D944900574DFD /* CityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityController.swift; sourceTree = "<group>"; };
 		F5625E62235D97D600574DFD /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
 		F5625E64235DAF8000574DFD /* ConcernController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcernController.swift; sourceTree = "<group>"; };
+		F563A213235FF9C400AA928B /* WRProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRProxy.swift; sourceTree = "<group>"; };
+		F563A214235FF9C400AA928B /* WRPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRPageControl.swift; sourceTree = "<group>"; };
+		F563A215235FF9C400AA928B /* WRCycleScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRCycleScrollView.swift; sourceTree = "<group>"; };
+		F563A24E235FF9C400AA928B /* WRCycleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRCycleCell.swift; sourceTree = "<group>"; };
+		F563A2802360204E00AA928B /* GuoQingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuoQingViewController.swift; sourceTree = "<group>"; };
+		F563A2822360340400AA928B /* HongseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HongseViewController.swift; sourceTree = "<group>"; };
+		F563A2842360465900AA928B /* DeleteParasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteParasController.swift; sourceTree = "<group>"; };
 		F5667C5823554DA3009EDF05 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
 		F5667C5A23554DF4009EDF05 /* HKUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKUserViewController.swift; sourceTree = "<group>"; };
 		F5667C5C23557C16009EDF05 /* MyCollectionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionsController.swift; sourceTree = "<group>"; };
@@ -563,6 +577,17 @@
 			path = DateUi;
 			sourceTree = "<group>";
 		};
+		F563A212235FF9C400AA928B /* WRCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				F563A213235FF9C400AA928B /* WRProxy.swift */,
+				F563A214235FF9C400AA928B /* WRPageControl.swift */,
+				F563A215235FF9C400AA928B /* WRCycleScrollView.swift */,
+				F563A24E235FF9C400AA928B /* WRCycleCell.swift */,
+			);
+			path = WRCycleScrollView;
+			sourceTree = "<group>";
+		};
 		F5667C5723554D71009EDF05 /* HKUser - 用户类 */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,6 +706,7 @@
 		F58017D72325E3340014E3C3 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				F563A212235FF9C400AA928B /* WRCycleScrollView */,
 				F5667C722355E392009EDF05 /* HGImage */,
 				F5598262234D863400802220 /* DateUi */,
 				F558F640233A030D0013EBAC /* Source */,
@@ -709,6 +735,8 @@
 				F5625E60235D944900574DFD /* CityController.swift */,
 				F5625E64235DAF8000574DFD /* ConcernController.swift */,
 				F5625E62235D97D600574DFD /* WeatherDataModel.swift */,
+				F563A2802360204E00AA928B /* GuoQingViewController.swift */,
+				F563A2822360340400AA928B /* HongseViewController.swift */,
 			);
 			path = "HKHome - 首页";
 			sourceTree = "<group>";
@@ -733,6 +761,7 @@
 				F5C872572332037B0094DD7A /* Story - 游记 */,
 				F50155FD232799BE00FD201C /* Set - 设置 */,
 				F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */,
+				F563A2842360465900AA928B /* DeleteParasController.swift */,
 			);
 			path = "HKMine - 我的";
 			sourceTree = "<group>";
@@ -1172,6 +1201,7 @@
 				F559826B234D863500802220 /* QDatePicker.swift in Sources */,
 				F5667C7B2355E3A4009EDF05 /* HGImageCollectionViewCell.swift in Sources */,
 				F50155F5232774AC00FD201C /* SubClassBaseViewController.swift in Sources */,
+				F563A2812360204E00AA928B /* GuoQingViewController.swift in Sources */,
 				F5D8DD652329E58400B7EADF /* WriteCell.swift in Sources */,
 				F5AED6632330C8AA00B5B824 /* ThingIndexTable.swift in Sources */,
 				F5EC431F23262E5700107F66 /* StoryView.swift in Sources */,
@@ -1188,6 +1218,8 @@
 				F57C320A23349F1600B6E7A0 /* UserDefaults.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
 				F5EC4322232633FA00107F66 /* HomeHeaderReusableView.swift in Sources */,
+				F563A251235FF9C500AA928B /* WRCycleScrollView.swift in Sources */,
+				F563A24F235FF9C500AA928B /* WRProxy.swift in Sources */,
 				F5C8725B233203CF0094DD7A /* FanViewController.swift in Sources */,
 				F558F65D233A030D0013EBAC /* ExpandingTableViewController.swift in Sources */,
 				F53B544C23588D7A0049F5C2 /* DataSingle.swift in Sources */,
@@ -1203,6 +1235,7 @@
 				F558F660233A030D0013EBAC /* SubviewsForEach.swift in Sources */,
 				F58017C42325E0560014E3C3 /* MainViewController.swift in Sources */,
 				F5EC431B23262E2100107F66 /* HomeSearchView.swift in Sources */,
+				F563A2832360340400AA928B /* HongseViewController.swift in Sources */,
 				F5598269234D863500802220 /* Extension_UIColor.swift in Sources */,
 				F558F66C233A032F0013EBAC /* Rotatable.swift in Sources */,
 				F5625E63235D97D600574DFD /* WeatherDataModel.swift in Sources */,
@@ -1236,6 +1269,7 @@
 				F5667C7E2355E3A4009EDF05 /* HGImageCollectionViewController.swift in Sources */,
 				F50155FA2327842F00FD201C /* MineHeaderView.swift in Sources */,
 				F5625E65235DAF8000574DFD /* ConcernController.swift in Sources */,
+				F563A250235FF9C500AA928B /* WRPageControl.swift in Sources */,
 				F558F63A2339DA350013EBAC /* WriteNextNotesCell.swift in Sources */,
 				F5667C5F235581D8009EDF05 /* FaceBookViewController.swift in Sources */,
 				F50155E52327445C00FD201C /* StoryBannerViewModel.swift in Sources */,
@@ -1262,6 +1296,7 @@
 				F5667C5923554DA3009EDF05 /* UserHeaderView.swift in Sources */,
 				F558F6312339D9150013EBAC /* NotesController.swift in Sources */,
 				F5D2C3D32328C85D00DE60D2 /* MineStoryViewController.swift in Sources */,
+				F563A2852360465900AA928B /* DeleteParasController.swift in Sources */,
 				F5D2C3DA2328D0A200DE60D2 /* CustomTransitionViewController.swift in Sources */,
 				F5667C712355D684009EDF05 /* TeamViewController.swift in Sources */,
 				F5D8DD682329FDED00B7EADF /* WriteHeaderReusableView.swift in Sources */,
@@ -1290,6 +1325,7 @@
 				F5A72C5623531C5900F0322E /* BookCell.swift in Sources */,
 				F5625E5D235D7A3900574DFD /* HKHomeHeaderView.swift in Sources */,
 				F558F663233A030D0013EBAC /* TransitionDriver.swift in Sources */,
+				F563A27F235FF9C500AA928B /* WRCycleCell.swift in Sources */,
 				F50155E223273CC500FD201C /* StoryViewController.swift in Sources */,
 				F558F65C233A030D0013EBAC /* ExpandingViewController.swift in Sources */,
 				F5625E61235D944900574DFD /* CityController.swift in Sources */,

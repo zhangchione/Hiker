@@ -79,7 +79,7 @@ class StorySementCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateUI(){
+    func updateUI(with data:NoteParas){
         
     }
     
@@ -124,7 +124,7 @@ class StorySementCell: UITableViewCell {
         }
         photoCell.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(20)
-            make.bottom.equalTo(self).offset(-20)
+            make.bottom.equalTo(self).offset(-11)
             make.width.equalTo(374)
             make.height.equalTo(190)
         }
