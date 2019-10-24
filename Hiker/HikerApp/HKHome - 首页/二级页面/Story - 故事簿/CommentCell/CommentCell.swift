@@ -51,7 +51,7 @@ class CommentCell: UITableViewCell {
        let btn = UIButton()
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.setImage(UIImage(named: "home_icon_zan"), for: .normal)
-        btn.setTitle("0", for: .normal)
+        btn.setTitle("", for: .normal)
         btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -8)

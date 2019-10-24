@@ -292,11 +292,11 @@ extension SearchViewController {
     }
     
     func configData(){
-        let user1 = User(id: "263e68dd-1078-4f87-9427-64a63d58e125", username: "zhangchione", password: "zc123...", headPic: "https://www.hut-idea.top/images/20191014/cIt7MVKFLwK186wjWeCj.png", sgin: "喜欢远方", notes: 6, fans: 1, concern: 0, nickName: "小张同学", bgPic: "https://uploadfiles.nowcoder.com/files/20190814/6658561_1565778336259_120x120.png")
+        let user1 = User(id: "263e68dd-1078-4f87-9427-64a63d58e125", username: "zhangchione", password: "zc123...", headPic: "https://www.hut-idea.top/images/20191021/09Hjz08IpmuD7bEvfywF.jpg", sgin: "做一个向往光和远方到程序员！", notes: 16, fans: 2, concern: 0, nickName: "小张同学", bgPic: "https://www.hut-idea.top/images/20191024/KCaLpDfeB3WeBhbmwvWw.jpg")
         
-        let user2 = User(id: "20883ba0-2d47-4be0-afe1-82ed9ea626fd", username: "zc123", password: "123456", headPic: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568805954241&di=92427105ce91bac17ca2ef9fa75e1326&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180909%2Ffcc86038b8c0410f87aee5229aa092c3.jpeg", sgin: "爱旅行,爱旅拍", notes: 0, fans: 2, concern: 1, nickName: "旅中人", bgPic: "https://uploadfiles.nowcoder.com/files/20190814/6658561_1565778336259_120x120.png")
+        let user2 = User(id: "7fd2061b-a4d7-490a-8ef1-5469256e5f72", username: "zhangchi3", password: "zc123", headPic: "https://www.hut-idea.top/images/20191024/WbYMIqkW0zudQgUEHtof.jpg", sgin: "行走在冬夜的冷风中～", notes: 11, fans: 2, concern: 1, nickName: "颜忆曦曦", bgPic: "https://www.hut-idea.top/images/20191024/mqX4Si7EKlr60I5XyKIc.jpg")
         
-        let user3 = User(id: "75f03a3c-2398-4607-ae0c-be1224f54c56", username: "cone", password: "zc123...", headPic: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568805954241&di=92427105ce91bac17ca2ef9fa75e1326&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180909%2Ffcc86038b8c0410f87aee5229aa092c3.jpeg", sgin: "爱旅行的小张同学", notes: 1, fans: 0, concern: 1, nickName: "Cone噢", bgPic: "https://uploadfiles.nowcoder.com/files/20190814/6658561_1565778336259_120x120.png")
+        let user3 = User(id: "b29440d4-3c89-4a20-9ccd-4d1545e38578", username: "zhangchi2", password: "zc123", headPic: "https://www.hut-idea.top/images/20191024/5XBBH8GdM9wjPu1x9pC3.jpg", sgin: "总得钟情点什么，比如对旅行的热爱。", notes: 13, fans: 0, concern: 1, nickName: "细微晨光", bgPic: "https://www.hut-idea.top/images/20191024/jCZrrEeqIFvHR90P7Cai.jpg")
         self.dataSource.data.removeAll()
         self.dataSource.data.append(user1)
         self.dataSource.data.append(user2)

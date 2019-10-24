@@ -196,6 +196,8 @@ extension CityController {
           for note in data.noteParas! {
               locations.append(note.place)
           }
+        let se = Set(locations)
+        locations = Array(se)
           let place = locations.joined(separator: "、")
           cell.trackLocation.text = "#" + place
         

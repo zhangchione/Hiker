@@ -18,26 +18,31 @@ class PhotoBannerView: UIView {
         iv.contentMode = .scaleAspectFill
         iv.backgroundColor = .gray
         iv.clipsToBounds = true
-
+        let cover = UIImageView()
+        cover.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        iv.addSubview(cover)
+        cover.snp.makeConstraints({ (make) in
+            make.edges.equalToSuperview()
+        })
         return iv
     }()
     lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setImageForAllStates(UIImage(named: "Ar2")!)
-        button.centerTextAndImage(spacing: 6)
+//        button.setImageForAllStates(UIImage(named: "Ar2")!)
+//        button.centerTextAndImage(spacing: 6)
         
         button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         return button
     }()
      lazy var nameLabel : UILabel = {
        let l = UILabel()
-        l.font = UIFont(name: "PingFangSC-Medium", size: 12)
+        l.font = UIFont(name: "PingFangSC-Semibold", size: 24)
         l.textColor = UIColor.white
         return l
     }()
     private lazy var describeLabel : UILabel =  {
         let l = UILabel()
-        l.font = UIFont(name: "PingFangSC-Semibold", size: 24)
+        l.font = UIFont(name: "PingFangSC-Medium", size: 16)
         l.textColor = UIColor.white
         return l
     }()
@@ -75,11 +80,18 @@ class PhotoBannerView: UIView {
         let attr: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 21, weight: .bold), .foregroundColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1), .shadow: shadow]
         nameAttrString.addAttributes(attr, range: NSRange(location: 0, length: nameAttrString.length))
         nameLabel.attributedText = nameAttrString
-        
+        // nameLabel
+
+        // describeLabel
+        let describeAttrString = NSMutableAttributedString(string: viewModel.bannerDescribeText())
+        describeLabel.numberOfLines = 0
+        let describeAttr: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 12), .foregroundColor: UIColor(red: 1, green: 1, blue: 1, alpha: 1)]
+        describeAttrString.addAttributes(describeAttr, range: NSRange(location: 0, length: describeAttrString.length))
+        describeLabel.attributedText = describeAttrString
         // describeLabel
         let cityName = viewModel.album.name
         let citeKey = cityName.substring(to: 2) + "之回忆"
-        describeLabel.text = citeKey
+        nameLabel.text = citeKey
         removeButton.isHidden = (viewModel.album.type != .custom)
     }
 
@@ -100,7 +112,13 @@ class PhotoBannerView: UIView {
         addSubview(describeLabel)
         //addSubview(backButton)
         addSubview(removeButton)
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        backgroundImageView.addSubview(blurView)
         backgroundImageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        blurView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         describeLabel.snp.makeConstraints { (make) in

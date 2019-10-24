@@ -121,14 +121,14 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
         
     }
     @IBAction func myLove(_ sender: Any) {
-        let bookVC = BookViewController()
-        self.navigationController?.pushViewController(bookVC, animated: true)
+        let apptext = AppContext()
+         let vc = TracksViewController(apptext.photoDataManager)
+         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func myCollected(_ sender: Any) {
-       let apptext = AppContext()
-        let vc = TracksViewController(apptext.photoDataManager)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let bookVC = MyCollectionsController()
+        self.navigationController?.pushViewController(bookVC, animated: true)
     }
     
     

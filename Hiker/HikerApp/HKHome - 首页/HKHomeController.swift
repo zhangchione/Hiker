@@ -77,7 +77,7 @@ class HKHomeController: UIViewController {
         return CGRect(x: 0, y: statusBarH, width: view.bounds.width, height: H)
     }
     private  var viewControllers = [UIViewController]()
-    private  var titles = ["推荐故事","同城附近","关注达人","金秋之行","红色之旅"]
+    private  var titles = ["推荐故事","同城附近","关注达人","末夏体验","金秋之行","红色之旅"]
     
     lazy var headerView:HKHomeHeaderView = {
         let headerView = HKHomeHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 480))
@@ -168,9 +168,11 @@ extension HKHomeController {
         let vc = HomeController()
         let cityVC = CityController(word: "杭州")
         let concernVC = ConcernController()
-        let gqVC = GuoQingViewController(word:"2019-10")
+        let mxVC = MoXiaViewController(word:"2019-08")
+        let gqVC = GuoQingViewController(word:"2019-09")
         let hsVC = HongseViewController(words: ["北京","湘潭"])
-        viewControllers = [vc,cityVC,concernVC,gqVC,hsVC]
+        
+        viewControllers = [vc,cityVC,concernVC,mxVC,gqVC,hsVC]
 
         let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in
             guard let strongSelf = self else { return UIView() }

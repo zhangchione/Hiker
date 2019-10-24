@@ -117,7 +117,7 @@ func getAlterUserInfoAPI() -> String {
     return api
 }
 
-
+// 查询某人全部游记
 func getUserNotesAPI(userId:String) -> String {
     return basicURL + "/note/other?token=" + getToken()! + "&userId=" + userId
 }
@@ -140,6 +140,9 @@ func getDeleteNoteAPI() -> String {
     let api = basicURL + "/note/?token=" + getToken()!
     return api
 }
+
+
+
 
 /*
  

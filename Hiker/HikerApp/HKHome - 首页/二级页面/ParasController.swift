@@ -70,8 +70,8 @@ class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
     lazy var locationsLabel : UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.init(name: "PingFangSC-Regular", size: 14)
-        label.backgroundColor = UIColor.init(r: 46, g: 46, b: 46)
+        label.font = UIFont.init(name: "PingFangSC-Regular", size: 13)
+        label.backgroundColor = UIColor.init(r: 46, g: 46, b: 46,alpha: 0.5)
         label.textAlignment = .center
         
         label.layer.cornerRadius = 15
@@ -84,6 +84,7 @@ class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
         let label = UILabel()
          label.textColor = .white
          label.font = UIFont.init(name: "PingFangSC-Semibold", size: 30)
+        label.numberOfLines = 0
          return label
     }()
     
@@ -132,7 +133,7 @@ class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
     private lazy var leftBarButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x:10, y:0, width:30, height: 30)
-        button.setImage(UIImage(named: "home_icon_back"), for: .normal)
+        button.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
         button.addTarget(self, action: #selector(back), for: .touchUpInside)
         return button
     }()
@@ -187,6 +188,8 @@ class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
             for note in (data?.noteParas!)! {
                 locations.append(note.place)
             }
+            let se = Set(locations)
+            locations = Array(se)
             let place = locations.joined(separator: "-")
             
             locationsLabel.text =  place
@@ -208,10 +211,10 @@ class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
             make.left.right.equalTo(view)
         }
         titleLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(backgroundImageView.snp.bottom).offset(-25)
+            make.bottom.equalTo(backgroundImageView.snp.bottom).offset(-10)
             make.left.equalToSuperview().inset(20)
             make.width.equalTo(TKWidth/2)
-            make.height.equalTo(30)
+            make.height.equalTo(45)
         }
         locationsLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(titleLabel.snp.centerY)
@@ -294,7 +297,7 @@ class ParasController: ExpandingViewController1,NVActivityIndicatorViewable {
              print("取消")
          }
          
-         action.addAction(alertY)
+        // action.addAction(alertY)
          action.addAction(alertC)
          action.addAction(alertN)
          
@@ -425,7 +428,7 @@ extension ParasController {
             cell.tag1.isHidden = false
         }else if tag.count == 2{
             cell.tag1.setTitle(tag[0].name, for: .normal)
-            cell.tag2.setTitle(tag[2].name, for: .normal)
+            cell.tag2.setTitle(tag[1].name, for: .normal)
                         cell.tag1.addTarget(self, action: #selector(tag1(_:)), for: .touchUpInside)
                         cell.tag2.addTarget(self, action: #selector(tag2(_:)), for: .touchUpInside)
                         cell.tag1.isHidden = false

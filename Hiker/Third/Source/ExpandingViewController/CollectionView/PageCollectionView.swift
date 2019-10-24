@@ -34,10 +34,10 @@ extension PageCollectionView {
         //collectionView.frame = CGRect(x: 0, y: 250, width: 414, height: 550)
         collectionView.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
-            make.bottom.equalTo(view).offset(22)
+            make.bottom.equalTo(view).offset(0)
             make.height.equalTo(644)
         }
-        collectionView.backgroundColor = .red
+        //collectionView.backgroundColor = .red
        
 //        // add constraints
 //        collectionView >>>- {

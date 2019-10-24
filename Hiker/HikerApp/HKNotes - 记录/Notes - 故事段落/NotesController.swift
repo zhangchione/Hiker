@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import ProgressHUD
 import NVActivityIndicatorView
-
+import Lightbox
 
 class NotesController: ExpandingViewController,NVActivityIndicatorViewable {
 
@@ -34,7 +34,7 @@ class NotesController: ExpandingViewController,NVActivityIndicatorViewable {
     // 标题
     lazy var storyTitle: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 24)
+        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 30)
         label.text = "魔都上海两日"
         label.textColor = UIColor.black
         //label.backgroundColor = .cyan
@@ -64,7 +64,7 @@ class NotesController: ExpandingViewController,NVActivityIndicatorViewable {
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x:-10, y:0, width:30, height: 30)
         button.setTitle("完成", for: .normal)
-        button.setTitleColor(UIColor.red, for: .normal)
+        button.setTitleColor(UIColor.init(r: 64, g: 102, b: 214), for: .normal)
         button.addTarget(self, action: #selector(achieve), for: .touchUpInside)
         return button
     }()
@@ -160,7 +160,30 @@ extension NotesController {
         if currentIndex == (data?.noteParas!.count)! {
              self.navigation.item.title = "开启下一段故事"
         } else {
-             self.navigation.item.title = "第" + "\(currentIndex + 1)" + "段故事"
+             var num = ""
+            switch currentIndex + 1 {
+            case 1:
+                num = "一"
+            case 2:
+                num = "二"
+            case 3:
+                    num = "三"
+            case 4:
+                    num = "四"
+            case 5:
+                    num = "五"
+            case 6:
+                    num = "六"
+            case 7:
+                    num = "七"
+            case 8:
+                    num = "八"
+            case 9:
+                    num = "九"
+            default:
+                num = ""
+            }
+             self.navigation.item.title = "第" + num + "段故事"
         }
         
        
@@ -182,12 +205,12 @@ extension NotesController {
         storyTitle.snp.makeConstraints { (make) in
             make.left.equalTo(view).offset(20)
             if TKWidth >= 812 {
-            make.top.equalTo(self.navigation.bar.snp.bottom).offset(30)
+            make.top.equalTo(self.navigation.bar.snp.bottom).offset(50)
             }else {
                         make.top.equalTo(self.navigation.bar.snp.bottom).offset(0)
             }
             make.height.equalTo(100)
-            make.width.equalTo(200)
+            make.width.equalTo(300)
         }
         storyTitle.text = getTitle()!
 
@@ -249,6 +272,7 @@ extension NotesController {
 
 extension NotesController {
     func configCell(_ cell:NotesCell,with data:NoteParas) {
+        cell.backBtn.addTarget(self, action: #selector(showPhoto(_:)), for: .touchUpInside)
         cell.time.text = data.date
         cell.location.setTitle("#" + data.place, for: .normal)
         cell.content.text = data.content
@@ -287,9 +311,27 @@ extension NotesController {
                         cell.tag3.isHidden = false
             }
         }
-        
-        
     }
+    // 图片点击
+    @objc func showPhoto(_ sender:UIButton){
+        let btn = sender
+        let cell = btn.superView(of: NotesCell.self)!
+        let indexPath = collectionView!.indexPath(for: cell)
+        let datas = data?.noteParas![indexPath!.row]
+        let pics = datas!.pics.components(separatedBy: ",")
+        var imgs = [LightboxImage]()
+        for pic in pics {
+            
+            let img = LightboxImage(imageURL: URL(string: pic)!, text: datas!.content)
+            imgs.append(img)
+        }
+
+        let controller = LightboxController(images: imgs)
+        controller.dynamicBackground = true
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
+    }
+    
 }
 
 extension NotesController {

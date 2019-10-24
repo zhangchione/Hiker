@@ -11,8 +11,8 @@ import UIKit
 class TeamViewController: SubClassBaseViewController {
 
     
-    var leftList = ["指导老师","产品","算法","后端","iOS端","界面设计","其他"]
-    var rightList = ["邓晓军、刘强","张驰、李隽丰","张驰","张驰","张驰","李隽丰","游子欣"]
+    var leftList = ["指导老师","产品","算法","程序设计","界面设计","其他"]
+    var rightList = ["邓晓军、刘强","张驰、李隽丰","张驰","张驰","李隽丰","游子欣"]
     private lazy var tableview: UITableView = {
         let tableview = UITableView()
         tableview.delegate = self

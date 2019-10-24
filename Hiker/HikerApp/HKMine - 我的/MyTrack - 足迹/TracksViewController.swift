@@ -99,10 +99,11 @@ class TracksViewController:  SubClassBaseViewController, DataToEasyDelegate {
         view.backgroundColor = backColor
         view.addSubview(tipLabel)
         tipLabel.numberOfLines = 0
+        tipLabel.font = UIFont.systemFont(ofSize: 14)
         tipLabel.snp.makeConstraints { (make) in
             make.bottom.equalTo(view).offset(-10)
             make.centerX.equalTo(view.snp.centerX)
-            make.width.equalTo(200)
+            make.width.equalTo(300)
         }
     }
 }
@@ -184,7 +185,8 @@ extension TracksViewController {
         let key = album.key
         let photos = album.photos
         _ = 0
-        cell.titleLabel.text = "#" + album.name + "#"
+                let local = album.name.substring(to: 2)
+        cell.titleLabel.text = "#" + local + "#"
         
         load(photos: photos, in: cell)
     }

@@ -48,6 +48,8 @@ class StoryBaseViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(StorySementCell.self, forCellReuseIdentifier: StorySementCellID)
         tableView.separatorStyle = .none
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.showsVerticalScrollIndicator = false
 
         return tableView
     }()
@@ -68,7 +70,7 @@ class StoryBaseViewController: UIViewController {
         self.tableView.snp.makeConstraints { (make) in
             make.top.left.equalTo(view)
             make.width.equalTo(TKWidth)
-            make.height.equalTo(TKHeight)
+            make.height.equalTo(TKHeight + 130 )
         }
         view.addSubview(commentBtn)
         view.addSubview(loveBtn)

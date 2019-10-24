@@ -46,7 +46,11 @@ class TrackCell: UICollectionViewCell {
     lazy var moreBtn:UIButton = {
         let btn = UIButton()
         btn.setTitle("更多", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        btn.setTitleColor(.gray, for: .normal)
+        btn.setImage(UIImage(named: "mine_set_head"), for: .normal)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
+        btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+        
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         return btn
     }()

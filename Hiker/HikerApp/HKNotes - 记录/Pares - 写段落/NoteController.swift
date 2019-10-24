@@ -88,7 +88,7 @@ class NoteController: UIViewController,NVActivityIndicatorViewable,DataToEasyDel
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x:-10, y:0, width:30, height: 30)
         button.setTitle("完成", for: .normal)
-        button.setTitleColor(UIColor.red, for: .normal)
+        button.setTitleColor(UIColor.init(r: 64, g: 102, b: 214), for: .normal)
         button.addTarget(self, action: #selector(save), for: .touchUpInside)
         return button
     }()
@@ -176,6 +176,7 @@ class NoteController: UIViewController,NVActivityIndicatorViewable,DataToEasyDel
         label.textColor = UIColor.init(r: 146, g: 146, b: 146)
         label.backgroundColor = UIColor.init(r: 238, g: 243, b: 249)
         label.layer.cornerRadius = 14
+        label.clipsToBounds = true
         label.textAlignment = .center
         return label
     }()
@@ -187,6 +188,7 @@ class NoteController: UIViewController,NVActivityIndicatorViewable,DataToEasyDel
         label.backgroundColor = UIColor.init(r: 238, g: 243, b: 249)
                 label.layer.cornerRadius = 14
         label.textAlignment = .center
+                label.clipsToBounds = true
         return label
     }()
     lazy var tag3: UILabel = {
@@ -196,6 +198,7 @@ class NoteController: UIViewController,NVActivityIndicatorViewable,DataToEasyDel
         label.backgroundColor = UIColor.init(r: 238, g: 243, b: 249)
         label.textColor = UIColor.init(r: 146, g: 146, b: 146)
         label.layer.cornerRadius = 14
+                label.clipsToBounds = true
         label.textAlignment = .center
         return label
     }()
@@ -507,6 +510,7 @@ extension NoteController {
                                 }
                                  para.tags = tag
                                 }
+                                print(para)
                                  paras.append(para)
                              }
                              datas.noteParas = paras
@@ -582,7 +586,7 @@ extension NoteController {
         self.selectPhotoNum = 0
         self.images  = [String]()
 
-        
+
       //  ProgressHUD.show("配图中")
         let strs = writeTextView.text! //"西湖的水很美，杭州的美食也不错，人也有点多噢，今日打卡西湖。"
         let tvtext = writeTextView.text!
@@ -643,7 +647,7 @@ extension NoteController {
                             }
                         }
                     }
-                    
+
                     // 四词
 
                     for i in 0 ..< strss.count - 3 {
@@ -660,7 +664,7 @@ extension NoteController {
                             }
                         }
                     }
-                    
+
                     let lasted = total.sorted {(s1,s2) -> Bool in
                         return s1.1 > s2.1
                     }
@@ -689,15 +693,15 @@ extension NoteController {
                     case 6:
                         imgCount = 6
                     default:
-                        imgCount = 0
+                        imgCount = 2
                     }
-                    
+
                     print(wordArray)
                     var datas = [Photo]()
-                    
+
                     var locationChoice = [String]()
                     locationChoice.append(self.location + "市")
-                    
+
                     // 智能配图
                     for word in wordArray {
                         var classify = [String]()
@@ -715,14 +719,14 @@ extension NoteController {
                     {
                     let newAlubm1 = NewAlbum.init(name: "智能配图", classifyChoice: nil, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
                     if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlubm1) {
-                        
+
                         var s = imgCount - datas.count
-                        
+
                         for _ in 0 ..< s {
                             let ps = photo.count
                             let index = arc4random() % UInt32(ps)
                             print(index,"ps",ps)
-                            
+
                             var flag = 0
                             for data in datas {
                                 if photo[Int(index)].asset == data.asset {
@@ -731,7 +735,7 @@ extension NoteController {
                                     break;
                                 }
                             }
-                            
+
                             if flag == 1 {
                                 s += 1
                             }else {
@@ -741,7 +745,38 @@ extension NoteController {
                             }
                         }
                     }
-                    
+                    if imgCount != datas.count
+                    {
+                        self.endDate = nil
+                    let newAlubm1 = NewAlbum.init(name: "智能配图", classifyChoice: nil, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
+                    if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlubm1) {
+
+                        var s = imgCount - datas.count
+
+                        for _ in 0 ..< s {
+                            let ps = photo.count
+                            let index = arc4random() % UInt32(ps)
+                            print(index,"ps",ps)
+
+                            var flag = 0
+                            for data in datas {
+                                if photo[Int(index)].asset == data.asset {
+
+                                    flag = 1
+                                    break;
+                                }
+                            }
+
+                            if flag == 1 {
+                                s += 1
+                            }else {
+                                datas.append(photo[Int(index)])
+                            }
+
+                            }
+                        }
+                    }
+
                     var imgsData = [UIImage]()
                     // 配图失败处理
                     if datas.count == 0 {
@@ -751,11 +786,11 @@ extension NoteController {
                     }else {
                         for data in datas {
 //                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
-                            
+
                             self.selectPhotoNum = datas.count
                             let size = CGSize(width: 30, height: 30)
-                            self.startAnimating(size, message: "智能配图加载中", type: .ballClipRotate, fadeInAnimation: nil)
-                            
+                            self.startAnimating(size, message: "智能配图中...", type: .ballClipRotate, fadeInAnimation: nil)
+
                             let img = SKPHAssetToImageTool.PHAssetToImage(asset: data.asset)
                             let up = self.uploadPic(image: img)
                             let tap = UITapGestureRecognizer(target: self, action: #selector(self.photoCellClick))

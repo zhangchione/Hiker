@@ -93,6 +93,8 @@ class StoryBannerView: UIView {
         for note in (viewModel.model?.noteParas!)! {
             locations.append(note.place)
         }
+        let se = Set(locations)
+        locations = Array(se)
         let place = locations.joined(separator: "-")
         
         locationsLabel.text =  place
@@ -101,9 +103,10 @@ class StoryBannerView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont.init(name: "PingFangSC-Regular", size: 14)
-        label.backgroundColor = UIColor.init(r: 46, g: 46, b: 46)
+        label.backgroundColor = UIColor.init(r: 46, g: 46, b: 46,alpha: 0.5)
         label.textAlignment = .center
         label.layer.cornerRadius = 15
+        label.clipsToBounds = true
         return label
     }()
     

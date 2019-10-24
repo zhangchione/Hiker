@@ -165,7 +165,7 @@ extension GuoQingViewController: UICollectionViewDelegateFlowLayout, UICollectio
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewID, for: indexPath) as? HomeHeaderReusableView else {
             return UICollectionReusableView()
         }
-       headerView.titleLabel.text = "有\(data.count)个关于“金秋之旅”的故事。"
+       headerView.titleLabel.text = "有\(data.count)个关于金秋之行的故事。"
         headerView.titleLabel.textColor = UIColor.init(r: 146, g: 146, b: 146)
         headerView.titleLabel.font = UIFont.init(name: "PingFangSC-Regular", size: 16)
         
@@ -196,6 +196,8 @@ extension GuoQingViewController {
           for note in data.noteParas! {
               locations.append(note.place)
           }
+        let se = Set(locations)
+        locations = Array(se)
           let place = locations.joined(separator: "、")
           cell.trackLocation.text = "#" + place
         

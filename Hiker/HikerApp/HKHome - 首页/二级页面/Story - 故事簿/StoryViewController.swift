@@ -19,7 +19,7 @@ class StoryViewController: StoryBaseViewController {
     
     let storyBannerView: StoryBannerView
     let storyBannerViewModel:StoryBannerViewModel
-    let bannerHeight: CGFloat = 86+44+UIScreen().titleY
+    let bannerHeight: CGFloat = 86+UIScreen().titleY
     
     init(model:NotesModel) {
         storyBannerViewModel = StoryBannerViewModel(with: model)
@@ -48,6 +48,7 @@ class StoryViewController: StoryBaseViewController {
         tableView.contentInset =
             UIEdgeInsets(top: bannerHeight, left: 0, bottom: 0, right: 0)
         self.tableView.addSubview(storyBannerView)
+        print(bannerHeight,"bannner")
     }
     
     
@@ -139,9 +140,9 @@ class StoryViewController: StoryBaseViewController {
                 self.imagesArray.append(imageToShare1!)
                 self.imagesArray.append(imageToShare2!)
               //  let items = createActivityItems()
+    let d = notesData.title
                 
-                
-                let activityVC = UIActivityViewController.init(activityItems: ["上海之旅",img], applicationActivities: nil)
+    let activityVC = UIActivityViewController.init(activityItems: [d,img], applicationActivities: nil)
 
         //
         //        writeImageToAlbum(image: img)
@@ -305,14 +306,16 @@ extension StoryViewController{
 //                                          height: imageViewHeight - offset)
 //        }
  
-        if offset > 90 {
+        if offset > 56 {
             self.navigation.bar.alpha = 1
             navigation.item.title = notesData.title
             leftBarButton.setImage(UIImage(named: "home_icon_back"), for: .normal)
+            rightBarButton.setImage(UIImage(named: "more_diandian"), for: .normal)
         }else {
             self.navigation.bar.alpha = 0
             navigation.item.title = ""
             leftBarButton.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
+            rightBarButton.setImage(UIImage(named: "home_stroy_setmore"), for: .normal)
         }
 
     }

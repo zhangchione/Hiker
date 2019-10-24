@@ -130,12 +130,17 @@ extension CommentViewController :UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:identifier , for: indexPath) as! CommentCell
         cell.updateUI(with: datas[indexPath.row])
+        cell.favBtn.addTarget(self, action: #selector(zan(_:)), for: .touchUpInside)
         cell.selectionStyle = .none
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let height = 65 + getTextHeigh(textStr: datas[indexPath.row].content, font: UIFont.systemFont(ofSize: 15), width: TKWidth-140)
         return height
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let userVC = HKUserViewController(data: datas[indexPath.row].user!)
+//        self.navigationController?.pushViewController(userVC, animated: true)
     }
     
 }
@@ -151,6 +156,18 @@ extension CommentViewController {
 }
 
 extension CommentViewController:  CommentDelegate{
+    
+    @objc func zan(_ sender:UIButton){
+        let btn = sender
+        let cell = btn.superView(of: CommentCell.self)!
+        let indexPath = tableview.indexPath(for: cell)
+        
+        //cell.favBtn.setTitle(<#T##title: String?##String?#>, for: <#T##UIControl.State#>)
+        cell.favBtn.setImage(UIImage(named: "home_icon_dianzan"), for: .normal)
+       // cell.favBtn.setTitle("\(Int(cell.favLabel.text!)! + 1)", for: ) =
+    }
+    
+    
     func passBookName(with comment: Comments) {
         self.datas.append(comment)
         self.tableview.reloadData()

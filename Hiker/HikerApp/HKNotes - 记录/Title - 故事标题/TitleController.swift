@@ -17,7 +17,7 @@ class TitleController: UIViewController {
     private lazy var leftBarButton: UIButton = {
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x:10, y:0, width:30, height: 30)
-        button.setImage(UIImage(named: "home_icon_back"), for: .normal)
+        button.setImage(UIImage(named: "track_icon_back"), for: .normal)
         button.addTarget(self, action: #selector(back), for: .touchUpInside)
         return button
     }()

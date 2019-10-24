@@ -32,7 +32,7 @@ class HKUserViewController: UIViewController {
     var storyData:[StoryModel]?
     var concernData:[User]?
     var fansData: [User]?
-    
+    var allStory: [NotesModel]?
     var mydata = [String]()
     
     var requestEndFlag = false
@@ -100,11 +100,11 @@ class HKUserViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
             configFansData()
-        
+            configUserData()
     }
     
     func getMyConcernUser() {
-        Alamofire.request(getAttentionAPI(userId: self.userData!.id)).responseJSON { (response) in
+        Alamofire.request(getAttentionAPI(userId: getUserId()!)).responseJSON { (response) in
             guard response.result.isSuccess else {
                 ProgressHUD.showError("网络请求错误"); return
             }
@@ -229,7 +229,21 @@ class HKUserViewController: UIViewController {
          }
      }
     
-    
+    func configUserData() {
+        Alamofire.request(getUserNotesAPI(userId: userData!.id)).responseJSON { (response) in
+             guard response.result.isSuccess else {
+                ProgressHUD.showError("网络请求错误"); return
+            }
+            if let value = response.result.value {
+                let json = JSON(value)
+                if let obj = JSONDeserializer<HomeModel>.deserializeFrom(json: json.debugDescription){
+                    self.allStory = obj.data
+                      self.headerView.storyLabel.text = "\(obj.data?.count ?? 0)"
+                   
+                }
+            }
+        }
+    }
     func configUI(){
         if #available(iOS 11.0, *) {
             self.navigation.bar.prefersLargeTitles = false
@@ -251,6 +265,8 @@ class HKUserViewController: UIViewController {
         self.headerView.storyLabel.text = "\(self.userData?.notes ?? 0)"
         let imgUrl = URL(string: self.userData!.headPic)
         self.headerView.userImg.kf.setImage(with: imgUrl)
+        let backImgUrl = URL(string:self.userData!.bgPic)
+        self.headerView.backgroundImageView.kf.setImage(with: backImgUrl)
         
         if userData?.id == getUserId()! {
             self.headerView.alterBtn.isHidden = true
@@ -318,36 +334,6 @@ extension HKUserViewController: LTAdvancedScrollViewDelegate {
 // - MARK: 事件
 extension HKUserViewController {
     @objc func alterBackImg() {
-        print("改背景")
-        
-        let feedback = UIImpactFeedbackGenerator(style: .medium)
-        feedback.prepare()
-        feedback.impactOccurred()
-        
-        let action = UIAlertController.init(title: "修改背景", message: "您是否确定要修改背景图片？", preferredStyle: .actionSheet)
-        let alertY = UIAlertAction.init(title: "修改", style: .destructive) { (yes) in
-            print("确定修改")
-            self.imgPricker = UIImagePickerController()
-            self.imgPricker.delegate = self
-            self.imgPricker.allowsEditing = true
-            self.imgPricker.sourceType = .photoLibrary
-            
-            self.imgPricker.navigationBar.barTintColor = UIColor.gray
-            self.imgPricker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
-            
-            self.imgPricker.navigationBar.tintColor = UIColor.white
-            
-            self.present(self.imgPricker, animated: true, completion: nil)
-            
-        }
-        let alertN = UIAlertAction.init(title: "取消", style: .cancel) { (no) in
-            print("取消")
-        }
-        
-        action.addAction(alertY)
-        action.addAction(alertN)
-        
-        self.present(action,animated: true,completion: nil)
 
     }
     @objc func unAttention() {
@@ -364,7 +350,10 @@ extension HKUserViewController {
         self.headerView.alterBtn.addTarget(self, action: #selector(unAttention), for: .touchUpInside)
     }
     @objc func story() {
-        
+        let userVC = UserStoryController()
+        userVC.datas = allStory
+        userVC.word = userData!.nickName
+        self.navigationController?.pushViewController(userVC, animated:     true)
         print("我的游记")
     }
     @objc func fan() {

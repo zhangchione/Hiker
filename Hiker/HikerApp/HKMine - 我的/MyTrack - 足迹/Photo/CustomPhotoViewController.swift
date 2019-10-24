@@ -139,7 +139,15 @@ class CustomPhotoViewController: TKPhotoBaseViewController {
         navigationController?.navigationBar.barStyle = .default
         navigationController?.navigationBar.isHidden = true
     }
-
+    // 左边返回按钮
+    private lazy var leftBarButton: UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x:10, y:0, width:30, height: 30)
+        button.setImage(UIImage(named: "home_icon_backwhite"), for: .normal)
+        button.addTarget(self, action: #selector(back), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
@@ -203,6 +211,7 @@ class CustomPhotoViewController: TKPhotoBaseViewController {
     }
 
     override func configNav() {
+        self.navigation.item.leftBarButtonItem = UIBarButtonItem.init(customView: leftBarButton)
         navigationController?.navigationBar.prefersLargeTitles = true
         let cityName =  photoBannerViewModel.album.name
         let citeKey = cityName.substring(to: 2) + "之回忆"
