@@ -72,7 +72,7 @@ extension FaceBookViewController: UITableViewDataSource,UITableViewDelegate {
         case 1:
             url = URL(string: "sinaweibo://userinfo?uid=6360764560")
         case 2:
-             url = URL(string: "mailto:17408002037@stu.hut.edu.cn")
+             url = URL(string: "mailto:zc@zhangchione.cc")
         case 3:
              url = URL(string: "sms:1525163730@qq.com")
         case 4:
