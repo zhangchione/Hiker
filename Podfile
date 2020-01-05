@@ -1,6 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
-
+source 'https://github.com/CocoaPods/Specs.git'
 target 'Hiker' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
@@ -33,6 +33,7 @@ target 'Hiker' do
   pod 'SwiftyUserDefaults', '~> 4.0'
   
   # 网络请求json
+  pod 'Moya'
   pod 'SwiftyJSON'
   pod 'Alamofire'
   pod 'HandyJSON', :git => 'https://github.com/alibaba/HandyJSON.git', :branch => 'dev_for_swift5.0'

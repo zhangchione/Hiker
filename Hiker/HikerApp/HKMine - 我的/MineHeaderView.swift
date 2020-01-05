@@ -54,13 +54,13 @@ class MineHeaderView: UIView {
        let label = UILabel()
        // label.backgroundColor = .red
         label.text = "17"
-        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
+        label.font = BoldFontSize(20)//UIFont.init(name: "PingFangSC-Semibold", size: 20)
         return label
     }()
     lazy var storyBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("游记", for: .normal)
-        btn.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
+        btn.titleLabel?.font = FontSize(15)//UIFont.init(name: "PingFangSC-Regular", size: 15)
         btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         return btn
     }()
@@ -68,13 +68,13 @@ class MineHeaderView: UIView {
     lazy var fanLabel: UILabel = {
         let label = UILabel()
         label.text = "2"
-        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
+        label.font = BoldFontSize(20)//UIFont.init(name: "PingFangSC-Semibold", size: 20)
         return label
     }()
     lazy var fanBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("粉丝", for: .normal)
-        btn.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
+        btn.titleLabel?.font = FontSize(15)//UIFont.init(name: "PingFangSC-Regular", size: 15)
         btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         return btn
     }()
@@ -82,13 +82,13 @@ class MineHeaderView: UIView {
     lazy var concernLabel: UILabel = {
         let label = UILabel()
         label.text = "17"
-        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
+        label.font = BoldFontSize(20)//UIFont.init(name: "PingFangSC-Semibold", size: 20)
         return label
     }()
     lazy var concernBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("关注", for: .normal)
-                btn.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
+                btn.titleLabel?.font = FontSize(15)//UIFont.init(name: "PingFangSC-Regular", size: 15)
                 btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         return btn
     }()
@@ -167,7 +167,7 @@ class MineHeaderView: UIView {
             make.left.equalTo(storyLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(30)
+            make.width.equalTo(AdaptW(35))
         }
         fanLabel.snp.makeConstraints { (make) in
             make.left.equalTo(storyBtn.snp.right).offset(30)
@@ -199,7 +199,7 @@ class MineHeaderView: UIView {
             make.left.equalTo(concernLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(AdaptW(30))
+            make.width.equalTo(AdaptW(35))
         }
         
         

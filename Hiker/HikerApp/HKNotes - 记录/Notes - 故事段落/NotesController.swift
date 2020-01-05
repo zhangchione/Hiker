@@ -209,7 +209,8 @@ extension NotesController {
             }else {
                         make.top.equalTo(self.navigation.bar.snp.bottom).offset(0)
             }
-            make.height.equalTo(100)
+            let height1 = isIphoneX ? 100 : 65
+            make.height.equalTo(height1)
             make.width.equalTo(300)
         }
         storyTitle.text = getTitle()!
@@ -259,8 +260,8 @@ extension NotesController {
         if indexPath.row ==  (data?.noteParas!.count)! {
            // self.navigationController?.popToRootViewController(animated: true)
                 var app = AppContext()
-            let noteVC = NoteController(app.photoDataManager)
-            //let noteVC = NoteController()
+            //let noteVC = NoteController(app.photoDataManager)
+            let noteVC = NoteController()
             self.navigationController?.pushViewController(noteVC, animated: true)
         }
     }

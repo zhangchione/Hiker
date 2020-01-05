@@ -71,13 +71,13 @@ class HKHomeController: UIViewController {
     
     private func managerReact() -> CGRect {
         let statusBarH = UIApplication.shared.statusBarFrame.size.height
-        print(statusBarH)
+        //print(statusBarH)
         let Y: CGFloat = statusBarH + 88
-        let H: CGFloat = glt_iphoneX ? (view.bounds.height - Y ) : view.bounds.height - Y
+        let H: CGFloat = glt_iphoneX ? (view.bounds.height - Y ) : view.bounds.height - Y + 44
         return CGRect(x: 0, y: statusBarH, width: view.bounds.width, height: H)
     }
     private  var viewControllers = [UIViewController]()
-    private  var titles = ["推荐故事","同城附近","关注达人","末夏体验","金秋之行","红色之旅"]
+    private  var titles = ["推荐故事","关注达人","末夏体验","金秋之行","红色之旅"]
     
     lazy var headerView:HKHomeHeaderView = {
         let headerView = HKHomeHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 480))
@@ -172,7 +172,7 @@ extension HKHomeController {
         let gqVC = GuoQingViewController(word:"2019-09")
         let hsVC = HongseViewController(words: ["北京","湘潭"])
         
-        viewControllers = [vc,cityVC,concernVC,mxVC,gqVC,hsVC]
+        viewControllers = [vc,concernVC,mxVC,gqVC,hsVC]
 
         let advancedManager = LTAdvancedManager(frame: managerReact(), viewControllers: viewControllers, titles: titles, currentViewController: self, layout: layout, headerViewHandle: {[weak self] in
             guard let strongSelf = self else { return UIView() }
@@ -362,6 +362,6 @@ extension HKHomeController {
     }
     func updateUIWithWeatherData() {
         self.headerView.weather.text =             weatherDataModel.weatherDescribe + " \(weatherDataModel.temperature)" + "°C"
-        self.headerView.weatherIcon.image = UIImage(named: weatherDataModel.updateWeatherIcon(condition: 800))
+        self.headerView.weatherIcon.image = UIImage(named: weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition))
     }
 }

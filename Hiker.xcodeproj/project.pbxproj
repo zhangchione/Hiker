@@ -22,6 +22,8 @@
 		F50155FC2327865300FD201C /* LTAdvancedTestOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */; };
 		F5015600232799D900FD201C /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50155FE232799D900FD201C /* SetViewController.swift */; };
 		F5015601232799D900FD201C /* SetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F50155FF232799D900FD201C /* SetViewController.xib */; };
+		F50D930723C0B9E600A9EAD8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D930623C0B9E600A9EAD8 /* LoginViewController.swift */; };
+		F50D930923C0BF6100A9EAD8 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D930823C0BF6100A9EAD8 /* LoginAPI.swift */; };
 		F53B544723588D7A0049F5C2 /* PhotoDataManager+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53B544023588D790049F5C2 /* PhotoDataManager+Custom.swift */; };
 		F53B544823588D7A0049F5C2 /* PhotoDataManager+Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53B544123588D790049F5C2 /* PhotoDataManager+Recognize.swift */; };
 		F53B544923588D7A0049F5C2 /* PhotoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53B544223588D790049F5C2 /* PhotoDataManager.swift */; };
@@ -64,7 +66,6 @@
 		F55E3F98236146E100FD0FC2 /* UserStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E3F97236146E100FD0FC2 /* UserStoryController.swift */; };
 		F55E3F9A2361743600FD0FC2 /* MoXiaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55E3F992361743600FD0FC2 /* MoXiaViewController.swift */; };
 		F55E3F9C236174A200FD0FC2 /* 123.gif in Resources */ = {isa = PBXBuildFile; fileRef = F55E3F9B236174A200FD0FC2 /* 123.gif */; };
-		F5625E59235D6FBC00574DFD /* apple-app-site-association.json in Resources */ = {isa = PBXBuildFile; fileRef = F5625E58235D6FBC00574DFD /* apple-app-site-association.json */; };
 		F5625E5B235D7A1800574DFD /* HKHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E5A235D7A1800574DFD /* HKHomeController.swift */; };
 		F5625E5D235D7A3900574DFD /* HKHomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E5C235D7A3900574DFD /* HKHomeHeaderView.swift */; };
 		F5625E5F235D7B6300574DFD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5625E5E235D7B6300574DFD /* HomeController.swift */; };
@@ -229,6 +230,8 @@
 		F50155FB2327865300FD201C /* LTAdvancedTestOneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTAdvancedTestOneVC.swift; sourceTree = "<group>"; };
 		F50155FE232799D900FD201C /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
 		F50155FF232799D900FD201C /* SetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetViewController.xib; sourceTree = "<group>"; };
+		F50D930623C0B9E600A9EAD8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F50D930823C0BF6100A9EAD8 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
 		F53B544023588D790049F5C2 /* PhotoDataManager+Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhotoDataManager+Custom.swift"; sourceTree = "<group>"; };
 		F53B544123588D790049F5C2 /* PhotoDataManager+Recognize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhotoDataManager+Recognize.swift"; sourceTree = "<group>"; };
 		F53B544223588D790049F5C2 /* PhotoDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDataManager.swift; sourceTree = "<group>"; };
@@ -272,8 +275,6 @@
 		F55E3F97236146E100FD0FC2 /* UserStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStoryController.swift; sourceTree = "<group>"; };
 		F55E3F992361743600FD0FC2 /* MoXiaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoXiaViewController.swift; sourceTree = "<group>"; };
 		F55E3F9B236174A200FD0FC2 /* 123.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 123.gif; sourceTree = "<group>"; };
-		F5625E57235D6E9400574DFD /* HikerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HikerRelease.entitlements; sourceTree = "<group>"; };
-		F5625E58235D6FBC00574DFD /* apple-app-site-association.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apple-app-site-association.json"; sourceTree = "<group>"; };
 		F5625E5A235D7A1800574DFD /* HKHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHomeController.swift; sourceTree = "<group>"; };
 		F5625E5C235D7A3900574DFD /* HKHomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKHomeHeaderView.swift; sourceTree = "<group>"; };
 		F5625E5E235D7B6300574DFD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -518,6 +519,17 @@
 				F50155FF232799D900FD201C /* SetViewController.xib */,
 			);
 			path = "Set - 设置";
+			sourceTree = "<group>";
+		};
+		F50D930523C0B9C400A9EAD8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */,
+				F58017C32325E0560014E3C3 /* MainViewController.swift */,
+				F50D930623C0B9E600A9EAD8 /* LoginViewController.swift */,
+				F50D930823C0BF6100A9EAD8 /* LoginAPI.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		F558F640233A030D0013EBAC /* Source */ = {
@@ -792,8 +804,6 @@
 			isa = PBXGroup;
 			children = (
 				F55E3F9B236174A200FD0FC2 /* 123.gif */,
-				F5625E58235D6FBC00574DFD /* apple-app-site-association.json */,
-				F5625E57235D6E9400574DFD /* HikerRelease.entitlements */,
 				F58017C12325E0560014E3C3 /* AppDelegate.swift */,
 				F55E3F94236131D200FD0FC2 /* version01.gif */,
 				F55E3F96236132DA00FD0FC2 /* 12343.mp4 */,
@@ -827,9 +837,8 @@
 		F58017D52325E3220014E3C3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F50D930523C0B9C400A9EAD8 /* Login */,
 				F5AED6482330C3EB00B5B824 /* PhotoManage */,
-				F58017C32325E0560014E3C3 /* MainViewController.swift */,
-				F5D2C3CE232892AD00DE60D2 /* RegisterViewController.swift */,
 				F58017C52325E0560014E3C3 /* Main.storyboard */,
 				F5EC431123261D7A00107F66 /* MainNavigationController.swift */,
 				F5D2C3D02328C45D00DE60D2 /* TabBarItem.swift */,
@@ -1287,7 +1296,6 @@
 				F5D2C3D72328C97700DE60D2 /* MineSotryCell.xib in Resources */,
 				F58017C92325E0570014E3C3 /* Assets.xcassets in Resources */,
 				F5667C6923559C4F009EDF05 /* AboutViewController.xib in Resources */,
-				F5625E59235D6FBC00574DFD /* apple-app-site-association.json in Resources */,
 				F5C27E1D233C4BB700B5131F /* HKCityjson.json in Resources */,
 				F58017C72325E0560014E3C3 /* Main.storyboard in Resources */,
 				F563A2F52360826100AA928B /* Localizable.strings in Resources */,
@@ -1372,6 +1380,7 @@
 				F563A2E523607B8400AA928B /* PhotoBannerViewModel.swift in Sources */,
 				F5AED6522330C7FB00B5B824 /* DataBase.swift in Sources */,
 				F563A2EF2360815C00AA928B /* AlbumShowCell.swift in Sources */,
+				F50D930723C0B9E600A9EAD8 /* LoginViewController.swift in Sources */,
 				F57C320A23349F1600B6E7A0 /* UserDefaults.swift in Sources */,
 				F563A2CA2360790400AA928B /* BottomPopupViewController.swift in Sources */,
 				F58017DC2325F9B70014E3C3 /* HKHomeViewController.swift in Sources */,
@@ -1385,6 +1394,7 @@
 				F5A72C5A23532B3900F0322E /* AddBookView.swift in Sources */,
 				F571ECAE235985E000419671 /* LocationView.swift in Sources */,
 				F5EBB5572338976A006DAAC8 /* PhotoCell.swift in Sources */,
+				F50D930923C0BF6100A9EAD8 /* LoginAPI.swift in Sources */,
 				F55E3F922361313100FD0FC2 /* UIImage+GIF.swift in Sources */,
 				F57C320C2334A90500B6E7A0 /* NoteViewController.swift in Sources */,
 				F5015600232799D900FD201C /* SetViewController.swift in Sources */,
@@ -1678,14 +1688,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20191024;
+				CURRENT_PROJECT_VERSION = 20191104;
 				DEVELOPMENT_TEAM = YAJ74PJU3F;
 				INFOPLIST_FILE = Hiker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = cone.cc.Hiker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hiker/Hiker-Bridging-Header.h";
@@ -1703,14 +1713,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Hiker/HikerRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20191024;
+				CURRENT_PROJECT_VERSION = 20191104;
 				DEVELOPMENT_TEAM = YAJ74PJU3F;
 				INFOPLIST_FILE = Hiker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = cone.cc.Hiker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hiker/Hiker-Bridging-Header.h";

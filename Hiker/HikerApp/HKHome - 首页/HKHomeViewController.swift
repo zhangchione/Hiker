@@ -142,10 +142,13 @@ extension HKHomeViewController {
     func configUI(){
         view.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints { (make) in
-            make.width.height.equalToSuperview()
-            make.center.equalToSuperview()
+            make.width.equalTo(TKWidth)
+            make.height.equalTo(TKHeight)
+            make.left.equalTo(view)
+            make.bottom.equalTo(view)
         }
         view.backgroundColor = backColor
+        print("d11111断电")
     }
     
     func configNav(){

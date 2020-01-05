@@ -149,14 +149,15 @@ class LocationView: UIView {
             make.height.equalTo(Adapt(1))
             make.top.equalTo(titleLab.snp.bottom).offset(5)
         })
-        
+        let height2 = isIphoneX ? 240 : 120
         self.bgView.addSubview(tableview)
         tableview.snp.makeConstraints { (make) in
             make.left.equalTo(30)
             make.right.equalTo(-10)
             make.top.equalTo(line1.snp.bottom).offset(10)
-            make.height.equalTo(240)
+            make.height.equalTo(height2)
         }
+        
         self.closeBtn = UIButton.tk_createButton(title: "", titleStatu: .normal, imageName: "track_icon_back", imageStatu: .normal, supView: self.bgView, closure: { (make) in
             make.top.equalTo(bgView.snp.top).offset(Adapt(10))
             make.right.equalTo(bgView.snp.right).offset(Adapt(-10))

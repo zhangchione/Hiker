@@ -24,8 +24,6 @@ class HKUserViewController: UIViewController {
     convenience init(data:User) {
         self.init()
         self.userData = data
-        
-        
     }
     
     var userData:User?

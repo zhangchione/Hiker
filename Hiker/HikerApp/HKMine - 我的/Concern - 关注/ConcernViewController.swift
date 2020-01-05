@@ -96,5 +96,18 @@ extension ConcernViewController: UITableViewDelegate,UITableViewDataSource {
         let vc = HKUserViewController(data: data[indexPath.row])
         self.navigationController?.pushViewController(vc, animated: true)
     }
+        func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+            //删除
+            let deleteRowAction = UIContextualAction(style: .destructive, title: "delete", handler: { action, sourceView, completionHandler in
+    //                self.titleArr.remove(at: indexPath.row)
+                completionHandler(true)
+                    self.tableview.reloadData()
+                })
+            deleteRowAction.image = UIImage(named: "删除")
+            deleteRowAction.backgroundColor = UIColor.red
+
+            let config = UISwipeActionsConfiguration(actions: [deleteRowAction])
+            return config
+        }
     
 }

@@ -22,7 +22,7 @@ let kBlue        = UIColor.blue
 
 
 // iphone X
-let isIphoneX = TKHeight == 812 ? true : false
+let isIphoneX = TKHeight >= 812 ? true : false
 // navigationBarHeight
 let navigationBarHeight : CGFloat = isIphoneX ? 88 : 64
 // tabBarHeight

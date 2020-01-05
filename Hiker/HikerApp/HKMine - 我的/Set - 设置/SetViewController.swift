@@ -122,7 +122,7 @@ class SetViewController: SubClassBaseViewController,NVActivityIndicatorViewable 
     }
     @IBAction func myLove(_ sender: Any) {
         let apptext = AppContext()
-         let vc = TracksViewController(apptext.photoDataManager)
+         let vc = MyCollectionsController()//TracksViewController(apptext.photoDataManager)
          self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -28,34 +28,34 @@ class WeatherDataModel {
             return "tstorm1"
             
         case 301...500 :
-            return "light_rain"
+            return "001lighticons-37"
             
         case 501...600 :
-            return "shower3"
+            return "001lighticons-36"
             
         case 601...700 :
-            return "snow4"
+            return "001lighticons-37"
             
         case 701...771 :
-            return "fog"
+            return "001lighticons-36"
             
         case 772...799 :
-            return "tstorm3"
+            return "sun1"
             
         case 800 :
             return "sun1"
             
         case 801...804 :
-            return "cloudy2"
+            return "Cloudy-Fill-Light"
             
         case 900...903, 905...1000  :
             return "tstorm3"
             
         case 903 :
-            return "snow5"
+            return "001lighticons-37"
             
         case 904 :
-            return "sunny"
+            return "sun1"
             
         default :
             return "dunno"

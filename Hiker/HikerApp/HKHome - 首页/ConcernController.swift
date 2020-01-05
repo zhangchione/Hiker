@@ -178,7 +178,7 @@ extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionVie
     //item 的尺寸
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-            return CGSize(width: 374, height: 350)
+            return CGSize(width: AdaptW(374), height: 350)
     }
     
     // 头部
@@ -198,7 +198,7 @@ extension ConcernController: UICollectionViewDelegateFlowLayout, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = usersData[indexPath.section].data![indexPath.row]
-        let vc = ParasController(data: model)
+        let vc = StoryViewController(model: model)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

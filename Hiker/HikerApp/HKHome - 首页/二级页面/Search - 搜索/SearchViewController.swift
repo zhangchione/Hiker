@@ -223,10 +223,10 @@ extension SearchViewController {
             make.height.equalTo(150)
         }
 
-        
+        let height1 = isIphoneX ? -376 : -300
         tfBackView.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
-            make.centerY.equalTo(view.snp.bottom).offset(-376)
+            make.centerY.equalTo(view.snp.bottom).offset(height1)
             make.height.equalTo(60)
         }
         
@@ -271,7 +271,7 @@ extension SearchViewController {
             })
         
         let sizeSource = {(index:Int,data:User,collectionSize:CGSize) ->CGSize in
-            return CGSize(width: 120, height: 150)
+            return CGSize(width: AdaptW(120), height: AdaptH(150))
             }
               
         let provider = BasicProvider(

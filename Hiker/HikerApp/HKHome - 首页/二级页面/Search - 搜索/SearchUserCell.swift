@@ -15,7 +15,7 @@ class SearchUserCell: UIView {
     lazy var userIcon: UIImageView = {
             let imageView = UIImageView()
     //        imageView.backgroundColor = .red
-            imageView.layer.cornerRadius = 30
+            imageView.layer.cornerRadius = AdaptH(30)
             imageView.clipsToBounds = true
             imageView.image = UIImage(named: "椭圆形")
             return imageView
@@ -23,7 +23,7 @@ class SearchUserCell: UIView {
     
     lazy var nickName: UILabel = {
        let label = UILabel()
-        label.font = UIFont.init(name: "苹方-简 常规体", size: 12)
+        label.font = FontSize(16)// UIFont.init(name: "苹方-简 常规体", size: )
         label.textColor = UIColor.init(r: 56, g: 56, b: 56)
         label.textAlignment = .center
         return label
@@ -31,7 +31,7 @@ class SearchUserCell: UIView {
     
     lazy var detial: UILabel = {
        let label = UILabel()
-        label.font = UIFont.init(name: "苹方-简 常规体", size: 8)
+        label.font = FontSize(12) //UIFont.init(name: "苹方-简 常规体", size: )
         label.textColor = UIColor.init(r: 146, g: 146, b: 146)
         label.textAlignment = .center
         return label
@@ -61,20 +61,20 @@ class SearchUserCell: UIView {
         addSubview(nickName)
         addSubview(detial)
         userIcon.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(10)
+            make.top.equalTo(self).offset(AdaptH(10))
             make.centerX.equalTo(self)
-            make.height.width.equalTo(60)
+            make.height.width.equalTo(AdaptH(60))
         }
         nickName.snp.makeConstraints { (make) in
-            make.top.equalTo(userIcon.snp.bottom).offset(15)
+            make.top.equalTo(userIcon.snp.bottom).offset(AdaptH(15))
             make.centerX.equalTo(self)
-            make.height.equalTo(20)
+            make.height.equalTo(AdaptH(20))
             make.width.equalTo(self)
         }
         detial.snp.makeConstraints { (make) in
-            make.top.equalTo(nickName.snp.bottom).offset(15)
+            make.top.equalTo(nickName.snp.bottom).offset(AdaptH(15))
             make.centerX.equalTo(self)
-            make.height.equalTo(15)
+            make.height.equalTo(AdaptH(15))
             make.width.equalTo(self)
         }
     }

@@ -44,19 +44,19 @@ class NoteController: UIViewController,NVActivityIndicatorViewable,DataToEasyDel
             self.isReloading = false
         }
     }
-    var photoDataManager: PhotoDataManager
+    var photoDataManager = PhotoDataManager()
     var finishLoad = false
     var isReloading =  false
 
-    init(_ photoDataManager: PhotoDataManager) {
-    self.photoDataManager = photoDataManager
-    super.init(nibName: nil, bundle: nil)
-    self.photoDataManager.dataToEasyDelegate = self
-    }
-
-    required  init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-    }
+//    init(_ photoDataManager: PhotoDataManager) {
+//    self.photoDataManager = photoDataManager
+//    super.init(nibName: nil, bundle: nil)
+//    self.photoDataManager.dataToEasyDelegate = self
+//    }
+//
+//    required  init?(coder aDecoder: NSCoder) {
+//    fatalError("init(coder:) has not been implemented")
+//    }
     /// 照片选择
     var imgPricker:UIImagePickerController!
     var imgs: String = ""
@@ -205,7 +205,7 @@ class NoteController: UIViewController,NVActivityIndicatorViewable,DataToEasyDel
     lazy var addPhotoBtn:UIButton = {
         let btn = UIButton()
         btn.setTitleColor(UIColor.white, for: .normal)
-        btn.setTitle("智能配图", for: .normal)
+        btn.setTitle("添加图片", for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         btn.backgroundColor = UIColor.init(r: 64, g: 102, b: 214)
         
@@ -587,243 +587,243 @@ extension NoteController {
         self.images  = [String]()
 
 
-      //  ProgressHUD.show("配图中")
-        let strs = writeTextView.text! //"西湖的水很美，杭州的美食也不错，人也有点多噢，今日打卡西湖。"
-        let tvtext = writeTextView.text!
-
-        if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
-            ProgressHUD.showError("请写入内容")
-        }else{
-            if location == ""{
-                    ProgressHUD.showError("添加地点可以提高匹配精度哦")
-            }else {
-                if time == ""{
-                    ProgressHUD.showError("添加时间可以提高匹配精度哦")
-                }else {
-                        let size = CGSize(width: 30, height: 30)
-                    self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
-
-                    var total = ["building":0,"food":0,"landscape":0,"animal":0,"night_scene":0,"face":0]
-
-                     for str in strs {
-                        for (key,value) in self.keyMap {
-                            if (self.keyMap[key]?.contains(String(str)))! {
-                                total[key]! += 1
-                            }else {
-
-                            }
-                        }
-                     }
-                    var strss = [Character]()
-                    for str in strs {
-                        strss.append(str)
-                    }
-                    // 双词
-                    for i in 0 ..< strss.count - 1 {
-                        var  c = [Character]()
-                        c.append(strss[i])
-                        c.append(strss[i+1])
-                        for (key,value) in self.keyMap {
-                            if (self.keyMap[key]?.contains(String(c)))! {
-                                total[key]! += 1
-                            }else {
-
-                            }
-                        }
-                    }
-
-                    // 三词
-
-                    for i in 0 ..< strss.count - 2 {
-                        var  c = [Character]()
-                        c.append(strss[i])
-                        c.append(strss[i+1])
-                        c.append(strss[i+2])
-                        for (key,value) in self.keyMap {
-                            if (self.keyMap[key]?.contains(String(c)))! {
-                                total[key]! += 1
-                            }else {
-
-                            }
-                        }
-                    }
-
-                    // 四词
-
-                    for i in 0 ..< strss.count - 3 {
-                        var  c = [Character]()
-                        c.append(strss[i])
-                        c.append(strss[i+1])
-                        c.append(strss[i+2])
-                        c.append(strss[i+3])
-                        for (key,value) in self.keyMap {
-                            if (self.keyMap[key]?.contains(String(c)))! {
-                                total[key]! += 1
-                            }else {
-
-                            }
-                        }
-                    }
-
-                    let lasted = total.sorted {(s1,s2) -> Bool in
-                        return s1.1 > s2.1
-                    }
-                    var wordArray = [String]()
-                    print(total,lasted[0].value)
-                    for lst in lasted {
-                        if lst.value == 0 {
-                            break;
-                        }
-                        wordArray.append(lst.key)
-                    }
-
-                    // 1类 一张图 2类 3张图, 三类 4张图 四类5张图 5类六张图 6类 六张图
-                    var imgCount = 0
-                    switch wordArray.count {
-                    case 1:
-                        imgCount = 2
-                    case 2:
-                        imgCount = 3
-                    case 3:
-                        imgCount = 3
-                    case 4:
-                        imgCount = 4
-                    case 5:
-                        imgCount = 5
-                    case 6:
-                        imgCount = 6
-                    default:
-                        imgCount = 2
-                    }
-
-                    print(wordArray)
-                    var datas = [Photo]()
-
-                    var locationChoice = [String]()
-                    locationChoice.append(self.location + "市")
-
-                    // 智能配图
-                    for word in wordArray {
-                        var classify = [String]()
-                        classify.append(word)
-
-                        let newAlbum = NewAlbum.init(name: "智能配图", classifyChoice: classify, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
-                        if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlbum) {
-                            let ps = photo.count
-                            let index = arc4random() % UInt32(ps)
-                            print(index,"ps",ps)
-                            datas.append(photo[Int(index)])
-                        }
-                    }
-                    if imgCount != datas.count
-                    {
-                    let newAlubm1 = NewAlbum.init(name: "智能配图", classifyChoice: nil, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
-                    if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlubm1) {
-
-                        var s = imgCount - datas.count
-
-                        for _ in 0 ..< s {
-                            let ps = photo.count
-                            let index = arc4random() % UInt32(ps)
-                            print(index,"ps",ps)
-
-                            var flag = 0
-                            for data in datas {
-                                if photo[Int(index)].asset == data.asset {
-
-                                    flag = 1
-                                    break;
-                                }
-                            }
-
-                            if flag == 1 {
-                                s += 1
-                            }else {
-                                datas.append(photo[Int(index)])
-                            }
-
-                            }
-                        }
-                    }
-                    if imgCount != datas.count
-                    {
-                        self.endDate = nil
-                    let newAlubm1 = NewAlbum.init(name: "智能配图", classifyChoice: nil, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
-                    if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlubm1) {
-
-                        var s = imgCount - datas.count
-
-                        for _ in 0 ..< s {
-                            let ps = photo.count
-                            let index = arc4random() % UInt32(ps)
-                            print(index,"ps",ps)
-
-                            var flag = 0
-                            for data in datas {
-                                if photo[Int(index)].asset == data.asset {
-
-                                    flag = 1
-                                    break;
-                                }
-                            }
-
-                            if flag == 1 {
-                                s += 1
-                            }else {
-                                datas.append(photo[Int(index)])
-                            }
-
-                            }
-                        }
-                    }
-
-                    var imgsData = [UIImage]()
-                    // 配图失败处理
-                    if datas.count == 0 {
-
-                        self.stopAnimating(nil)
-                         ProgressHUD.showError("配图失败")
-                    }else {
-                        for data in datas {
-//                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
-
-                            self.selectPhotoNum = datas.count
-                            let size = CGSize(width: 30, height: 30)
-                            self.startAnimating(size, message: "智能配图中...", type: .ballClipRotate, fadeInAnimation: nil)
-
-                            let img = SKPHAssetToImageTool.PHAssetToImage(asset: data.asset)
-                            let up = self.uploadPic(image: img)
-                            let tap = UITapGestureRecognizer(target: self, action: #selector(self.photoCellClick))
-                            self.photoCell.addGestureRecognizer(tap)
-                        }
-
-
-                        //self.photoCell.updateUILocal(imgsData.count, with: imgsData)
-                    }
-
-                }
-            }
-
-        }
-        
-        
-        
-//             //   开始选择照片，最多允许选择4张
-//                _ = self.presentHGImagePicker(maxSelected:4) { (assets) in
-//                    //结果处理
-//                    self.selectPhotoNum = assets.count
+//      //  ProgressHUD.show("配图中")
+//        let strs = writeTextView.text! //"西湖的水很美，杭州的美食也不错，人也有点多噢，今日打卡西湖。"
+//        let tvtext = writeTextView.text!
+//
+//        if tvtext == "以段落的形式分享您旅途中印象深刻的故事、有趣的体验吧~" || tvtext == ""{
+//            ProgressHUD.showError("请写入内容")
+//        }else{
+//            if location == ""{
+//                    ProgressHUD.showError("添加地点可以提高匹配精度哦")
+//            }else {
+//                if time == ""{
+//                    ProgressHUD.showError("添加时间可以提高匹配精度哦")
+//                }else {
 //                        let size = CGSize(width: 30, height: 30)
 //                    self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
 //
-//                    var seleimgs = [String]()
-//                    for asset in assets {
-//                        let img = SKPHAssetToImageTool.PHAssetToImage(asset: asset)
-//                        seleimgs.append(self.uploadPic(image: img))
+//                    var total = ["building":0,"food":0,"landscape":0,"animal":0,"night_scene":0,"face":0]
+//
+//                     for str in strs {
+//                        for (key,value) in self.keyMap {
+//                            if (self.keyMap[key]?.contains(String(str)))! {
+//                                total[key]! += 1
+//                            }else {
+//
+//                            }
+//                        }
+//                     }
+//                    var strss = [Character]()
+//                    for str in strs {
+//                        strss.append(str)
 //                    }
-//                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.photoCellClick))
-//                    self.photoCell.addGestureRecognizer(tap)
+//                    // 双词
+//                    for i in 0 ..< strss.count - 1 {
+//                        var  c = [Character]()
+//                        c.append(strss[i])
+//                        c.append(strss[i+1])
+//                        for (key,value) in self.keyMap {
+//                            if (self.keyMap[key]?.contains(String(c)))! {
+//                                total[key]! += 1
+//                            }else {
+//
+//                            }
+//                        }
+//                    }
+//
+//                    // 三词
+//
+//                    for i in 0 ..< strss.count - 2 {
+//                        var  c = [Character]()
+//                        c.append(strss[i])
+//                        c.append(strss[i+1])
+//                        c.append(strss[i+2])
+//                        for (key,value) in self.keyMap {
+//                            if (self.keyMap[key]?.contains(String(c)))! {
+//                                total[key]! += 1
+//                            }else {
+//
+//                            }
+//                        }
+//                    }
+//
+//                    // 四词
+//
+//                    for i in 0 ..< strss.count - 3 {
+//                        var  c = [Character]()
+//                        c.append(strss[i])
+//                        c.append(strss[i+1])
+//                        c.append(strss[i+2])
+//                        c.append(strss[i+3])
+//                        for (key,value) in self.keyMap {
+//                            if (self.keyMap[key]?.contains(String(c)))! {
+//                                total[key]! += 1
+//                            }else {
+//
+//                            }
+//                        }
+//                    }
+//
+//                    let lasted = total.sorted {(s1,s2) -> Bool in
+//                        return s1.1 > s2.1
+//                    }
+//                    var wordArray = [String]()
+//                    print(total,lasted[0].value)
+//                    for lst in lasted {
+//                        if lst.value == 0 {
+//                            break;
+//                        }
+//                        wordArray.append(lst.key)
+//                    }
+//
+//                    // 1类 一张图 2类 3张图, 三类 4张图 四类5张图 5类六张图 6类 六张图
+//                    var imgCount = 0
+//                    switch wordArray.count {
+//                    case 1:
+//                        imgCount = 2
+//                    case 2:
+//                        imgCount = 3
+//                    case 3:
+//                        imgCount = 3
+//                    case 4:
+//                        imgCount = 4
+//                    case 5:
+//                        imgCount = 5
+//                    case 6:
+//                        imgCount = 6
+//                    default:
+//                        imgCount = 2
+//                    }
+//
+//                    print(wordArray)
+//                    var datas = [Photo]()
+//
+//                    var locationChoice = [String]()
+//                    locationChoice.append(self.location + "市")
+//
+//                    // 智能配图
+//                    for word in wordArray {
+//                        var classify = [String]()
+//                        classify.append(word)
+//
+//                        let newAlbum = NewAlbum.init(name: "智能配图", classifyChoice: classify, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
+//                        if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlbum) {
+//                            let ps = photo.count
+//                            let index = arc4random() % UInt32(ps)
+//                            print(index,"ps",ps)
+//                            datas.append(photo[Int(index)])
+//                        }
+//                    }
+//                    if imgCount != datas.count
+//                    {
+//                    let newAlubm1 = NewAlbum.init(name: "智能配图", classifyChoice: nil, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
+//                    if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlubm1) {
+//
+//                        var s = imgCount - datas.count
+//
+//                        for _ in 0 ..< s {
+//                            let ps = photo.count
+//                            let index = arc4random() % UInt32(ps)
+//                            print(index,"ps",ps)
+//
+//                            var flag = 0
+//                            for data in datas {
+//                                if photo[Int(index)].asset == data.asset {
+//
+//                                    flag = 1
+//                                    break;
+//                                }
+//                            }
+//
+//                            if flag == 1 {
+//                                s += 1
+//                            }else {
+//                                datas.append(photo[Int(index)])
+//                            }
+//
+//                            }
+//                        }
+//                    }
+//                    if imgCount != datas.count
+//                    {
+//                        self.endDate = nil
+//                    let newAlubm1 = NewAlbum.init(name: "智能配图", classifyChoice: nil, locationChoice: locationChoice, beginTime: self.startDate, endTime: self.endDate)
+//                    if let photo =  self.photoDataManager.addCustomAlbum(condition: newAlubm1) {
+//
+//                        var s = imgCount - datas.count
+//
+//                        for _ in 0 ..< s {
+//                            let ps = photo.count
+//                            let index = arc4random() % UInt32(ps)
+//                            print(index,"ps",ps)
+//
+//                            var flag = 0
+//                            for data in datas {
+//                                if photo[Int(index)].asset == data.asset {
+//
+//                                    flag = 1
+//                                    break;
+//                                }
+//                            }
+//
+//                            if flag == 1 {
+//                                s += 1
+//                            }else {
+//                                datas.append(photo[Int(index)])
+//                            }
+//
+//                            }
+//                        }
+//                    }
+//
+//                    var imgsData = [UIImage]()
+//                    // 配图失败处理
+//                    if datas.count == 0 {
+//
+//                        self.stopAnimating(nil)
+//                         ProgressHUD.showError("配图失败")
+//                    }else {
+//                        for data in datas {
+////                            imgsData.append(SKPHAssetToImageTool.PHAssetToImage(asset: data.asset))
+//
+//                            self.selectPhotoNum = datas.count
+//                            let size = CGSize(width: 30, height: 30)
+//                            self.startAnimating(size, message: "智能配图中...", type: .ballClipRotate, fadeInAnimation: nil)
+//
+//                            let img = SKPHAssetToImageTool.PHAssetToImage(asset: data.asset)
+//                            let up = self.uploadPic(image: img)
+//                            let tap = UITapGestureRecognizer(target: self, action: #selector(self.photoCellClick))
+//                            self.photoCell.addGestureRecognizer(tap)
+//                        }
+//
+//
+//                        //self.photoCell.updateUILocal(imgsData.count, with: imgsData)
+//                    }
+//
+//                }
+//            }
 //
 //        }
+        
+        
+        
+             //   开始选择照片，最多允许选择4张
+                _ = self.presentHGImagePicker(maxSelected:6) { (assets) in
+                    //结果处理
+                    self.selectPhotoNum = assets.count
+                        let size = CGSize(width: 30, height: 30)
+                    self.startAnimating(size, message: "本地图片加载中", type: .ballClipRotate, fadeInAnimation: nil)
+
+                    var seleimgs = [String]()
+                    for asset in assets {
+                        let img = SKPHAssetToImageTool.PHAssetToImage(asset: asset)
+                        seleimgs.append(self.uploadPic(image: img))
+                    }
+                    let tap = UITapGestureRecognizer(target: self, action: #selector(self.photoCellClick))
+                    self.photoCell.addGestureRecognizer(tap)
+        }
+        
 
                     
 //                    self.photoCell.removeFromSuperview()
