@@ -28,13 +28,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>行迹需要访问您的相机</string>
+	<string>行迹需要访问您的相机拍摄游记或头像照片</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Tracks需要你的定位信息</string>
+	<string>行迹需要您的定位信息用来获取天气状态</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Tracks需要你的定位信息</string>
+	<string>行迹需要你的定位信息用来获取天气状态</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>行迹需要访问您的相册</string>
+	<string>行迹需要访问您的相册用来添加游记图片</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

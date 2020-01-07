@@ -54,17 +54,17 @@ class UserHeaderView: UIView {
         return btn
     }()
     
-    lazy var storyLabel: UILabel = {
+        lazy var storyLabel: UILabel = {
        let label = UILabel()
        // label.backgroundColor = .red
         label.text = "17"
-        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
+        label.font = BoldFontSize(20)//UIFont.init(name: "PingFangSC-Semibold", size: 20)
         return label
     }()
     lazy var storyBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("游记", for: .normal)
-        btn.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
+        btn.titleLabel?.font = FontSize(15)//UIFont.init(name: "PingFangSC-Regular", size: 15)
         btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         return btn
     }()
@@ -72,13 +72,13 @@ class UserHeaderView: UIView {
     lazy var fanLabel: UILabel = {
         let label = UILabel()
         label.text = "2"
-        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
+        label.font = BoldFontSize(20)//UIFont.init(name: "PingFangSC-Semibold", size: 20)
         return label
     }()
     lazy var fanBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("粉丝", for: .normal)
-        btn.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
+        btn.titleLabel?.font = FontSize(15)//UIFont.init(name: "PingFangSC-Regular", size: 15)
         btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         return btn
     }()
@@ -86,13 +86,13 @@ class UserHeaderView: UIView {
     lazy var concernLabel: UILabel = {
         let label = UILabel()
         label.text = "17"
-        label.font = UIFont.init(name: "PingFangSC-Semibold", size: 20)
+        label.font = BoldFontSize(20)//UIFont.init(name: "PingFangSC-Semibold", size: 20)
         return label
     }()
     lazy var concernBtn: UIButton = {
         let btn = UIButton()
         btn.setTitle("关注", for: .normal)
-                btn.titleLabel?.font = UIFont.init(name: "PingFangSC-Regular", size: 15)
+                btn.titleLabel?.font = FontSize(15)//UIFont.init(name: "PingFangSC-Regular", size: 15)
                 btn.setTitleColor(UIColor.init(r: 146, g: 146, b: 146), for: .normal)
         return btn
     }()
@@ -154,7 +154,7 @@ class UserHeaderView: UIView {
             make.left.equalTo(self).offset(AdaptW(16))
             make.top.equalTo(userName.snp.bottom).offset(AdaptH(6))
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(AdaptW(260))
+            make.width.equalTo(AdaptW(300))
         }
 
         
@@ -163,37 +163,50 @@ class UserHeaderView: UIView {
             make.left.equalTo(self).offset(16)
             make.top.equalTo(userSign.snp.bottom).offset(Adapt(28))
             make.height.equalTo(AdaptH(20))
-            make.width.equalTo(AdaptW(30))
+            if TKWidth >= 812 {
+                make.width.equalTo(AdaptW(30))
+            }else {
+                make.width.equalTo(35)
+            }
+
         }
         storyBtn.snp.makeConstraints { (make) in
             make.left.equalTo(storyLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(AdaptW(30))
+            make.width.equalTo(AdaptW(35))
         }
         fanLabel.snp.makeConstraints { (make) in
             make.left.equalTo(storyBtn.snp.right).offset(30)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(20))
-            make.width.equalTo(AdaptW(30))
+            if TKWidth >= 812 {
+                make.width.equalTo(AdaptW(20))
+            }else {
+                make.width.equalTo(35)
+            }
         }
         fanBtn.snp.makeConstraints { (make) in
             make.left.equalTo(fanLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(AdaptW(30))
+            make.width.equalTo(AdaptW(35))
         }
         concernLabel.snp.makeConstraints { (make) in
             make.left.equalTo(fanBtn.snp.right).offset(30)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(20))
-            make.width.equalTo(AdaptW(30))
+            if TKWidth >= 812 {
+                make.width.equalTo(AdaptW(20))
+            }else {
+                make.width.equalTo(35)
+            }
         }
         concernBtn.snp.makeConstraints { (make) in
             make.left.equalTo(concernLabel.snp.right).offset(0)
             make.centerY.equalTo(storyLabel.snp.centerY)
             make.height.equalTo(AdaptH(25))
-            make.width.equalTo(AdaptW(30))
+            make.width.equalTo(AdaptW(35))
         }
         
         

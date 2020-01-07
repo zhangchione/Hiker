@@ -78,6 +78,10 @@ class StoryBannerView: UIView {
         print("更新UI")
         nameLabel.text = viewModel.model?.user?.nickName
         titleLabel.text = viewModel.model?.title
+        if (viewModel.model?.title.count)! > 5 {
+            titleLabel.font = UIFont.init(name: "PingFangSC-Semibold", size: 24)
+            titleLabel.numberOfLines = 0
+        }
 //        userButton.setImage(UIImage(named: (viewModel.model?.user!.headPic)!), for: .normal)
         
         let imgUrl = URL(string: (viewModel.model?.user!.headPic)!)
