@@ -153,15 +153,31 @@ class StoryViewController: StoryBaseViewController {
         //        let activityVC = UIActivityViewController( activityItems: items, applicationActivities: nil)
         //
                 activityVC.completionWithItemsHandler = {activity, success, items, error in
-                    
                     print(activity)
                     print(success)
                     print(items)
                     print(error)
-                    
                 }
+    
+                let action = UIAlertController.init(title: "选项", message: "请选择您的操作", preferredStyle: .actionSheet)
+                 let alertY = UIAlertAction.init(title: "分享", style: .default) { (yes) in
+//                    let storyVC = StoryViewController(model: self.data!)
+                    self.present(activityVC, animated: true, completion: nil)
+                 }
+                let alertC = UIAlertAction.init(title: "举报", style: .destructive) { (yes) in
+                    ProgressHUD.showSuccess("举报成功")
+                }
+                let alertN = UIAlertAction.init(title: "取消", style: .cancel) { (no) in
+                     print("取消")
+                 }
+                 
+                 action.addAction(alertY)
+                 action.addAction(alertC)
+                 action.addAction(alertN)
+                 
+                 self.present(action,animated: true,completion: nil)
+    
                 
-                self.present(activityVC, animated: true, completion: nil)
     }
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any? {
         return it.image

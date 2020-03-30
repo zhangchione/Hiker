@@ -17,7 +17,7 @@ protocol AlterSginDelegate : class {
 class AlterSginView: UIView {
 
     weak var delegate : AlterSginDelegate?
-    
+
     private lazy var bgView = UIView()
      lazy var titleLab = UILabel()
     private lazy var line1 = UIView()
